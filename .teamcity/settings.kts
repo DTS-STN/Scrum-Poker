@@ -32,7 +32,7 @@ project {
 }
 
 object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_release"
+    name = "https://github.com/DTS-STN/scrum-poker/tree/_release"
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
@@ -43,7 +43,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease : GitVcsRoot({
 })
 
 object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_dynamic"
+    name = "https://github.com/DTS-STN/scrum-poker/tree/_dynamic"
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
@@ -54,7 +54,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic : GitVcsRoot({
 })
 
 object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance : GitVcsRoot({
-    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_performance"
+    name = "https://github.com/DTS-STN/scrum-poker/tree/_performance"
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
@@ -72,7 +72,7 @@ object Build_Release: BuildType({
     description = "Continuous integration"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "Scrum-Poker")
+        param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -131,7 +131,7 @@ object Build_Dynamic: BuildType({
     description = "Dynamic branching; builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "Scrum-Poker")
+        param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -190,7 +190,7 @@ object Build_Performance: BuildType({
     description = "Continuous integration"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "Scrum-Poker")
+        param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
