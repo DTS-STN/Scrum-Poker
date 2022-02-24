@@ -28,7 +28,7 @@ export default function main() {
         },
       }
     )
-    response = http.get('https://next-template-perf.bdm-dev.dts-stn.com/', {
+    response = http.get('https://Scrum-Poker-perf.bdm-dev.dts-stn.com/', {
       headers: {
         'upgrade-insecure-requests': '1',
         'sec-ch-ua':
@@ -52,7 +52,7 @@ export default function main() {
       'https://fonts.gstatic.com/s/lato/v22/S6uyw4BMUTPHjx4wXg.woff2',
       {
         headers: {
-          'origin': 'https://next-template-perf.bdm-dev.dts-stn.com',
+          'origin': 'https://Scrum-Poker-perf.bdm-dev.dts-stn.com',
           'sec-ch-ua':
             '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
           'sec-ch-ua-mobile': '?0',
@@ -64,7 +64,7 @@ export default function main() {
       'https://fonts.gstatic.com/s/notosans/v25/o-0IIpQlx3QUlC5A4PNr5TRA.woff2',
       {
         headers: {
-          'origin': 'https://next-template-perf.bdm-dev.dts-stn.com',
+          'origin': 'https://Scrum-Poker-perf.bdm-dev.dts-stn.com',
           'sec-ch-ua':
             '" Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"',
           'sec-ch-ua-mobile': '?0',
