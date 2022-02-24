@@ -23,17 +23,17 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.2"
 
 project {
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
-    vcsRoot(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplatePerformance)
+    vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
+    vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
+    vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance)
     buildType(Build_Performance)
     buildType(Build_Release)
     buildType(Build_Dynamic)
 }
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_release"
-    url = "git@github.com:DTS-STN/next-template.git"
+object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease : GitVcsRoot({
+    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_release"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -42,9 +42,9 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease : GitVcsRoot({
     }
 })
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_dynamic"
-    url = "git@github.com:DTS-STN/next-template.git"
+object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic : GitVcsRoot({
+    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_dynamic"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/*"
     authMethod = uploadedKey {
@@ -53,9 +53,9 @@ object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic : GitVcsRoot({
     }
 })
 
-object Dev_NextTemplate_HttpsGithubComDtsStnnextTemplatePerformance : GitVcsRoot({
-    name = "https://github.com/DTS-STN/next-template/tree/_performance"
-    url = "git@github.com:DTS-STN/next-template.git"
+object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance : GitVcsRoot({
+    name = "https://github.com/DTS-STN/Scrum-Poker/tree/_performance"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = "+:refs/heads/main"
     authMethod = uploadedKey {
@@ -72,7 +72,7 @@ object Build_Release: BuildType({
     description = "Continuous integration"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "Scrum-Poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -81,7 +81,7 @@ object Build_Release: BuildType({
         param("env.BRANCH", "main")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
     }
    
     steps {
@@ -131,7 +131,7 @@ object Build_Dynamic: BuildType({
     description = "Dynamic branching; builds and deploys every branch"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "Scrum-Poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -140,7 +140,7 @@ object Build_Dynamic: BuildType({
         param("env.BRANCH", "%teamcity.build.branch%")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateDynamic)
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
     }
    
     steps {
@@ -190,7 +190,7 @@ object Build_Performance: BuildType({
     description = "Continuous integration"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
-        param("env.PROJECT", "next-template")
+        param("env.PROJECT", "Scrum-Poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
         param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
@@ -199,7 +199,7 @@ object Build_Performance: BuildType({
         param("env.BRANCH", "perf")
     }
     vcs {
-        root(Dev_NextTemplate_HttpsGithubComDtsStnnextTemplateRelease)
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
     }
    
     steps {
