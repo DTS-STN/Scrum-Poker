@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1645819927532" clover="3.2.0">
+  <project timestamp="1645819927532" name="All files">
+    <metrics statements="39" coveredstatements="32" conditionals="30" coveredconditionals="30" methods="20" coveredmethods="17" elements="89" coveredelements="79" complexity="0" loc="39" ncloc="39" packages="4" files="13" classes="13"/>
+    <package name="components">
+      <metrics statements="18" coveredstatements="18" conditionals="26" coveredconditionals="26" methods="8" coveredmethods="8"/>
+      <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
+      <file name="DateModified.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/DateModified.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="11" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+      </file>
+      <file name="Footer.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Footer.js">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="9" count="9" type="stmt"/>
+        <line num="27" count="66" type="stmt"/>
+        <line num="53" count="40" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
+      </file>
+      <file name="Header.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Header.js">
+        <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="20" methods="1" coveredmethods="1"/>
+        <line num="5" count="10" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+      </file>
+      <file name="Layout.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Layout.js">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="101" count="2" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+      </file>
+      <file name="MetaData.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/MetaData.js">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="5" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="9" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages">
+      <metrics statements="14" coveredstatements="14" conditionals="4" coveredconditionals="4" methods="9" coveredmethods="9"/>
+      <file name="404.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/404.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+      </file>
+      <file name="_app.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/_app.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      </file>
+      <file name="_error.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/_error.js">
+        <metrics statements="1" coveredstatements="1" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+      <file name="home.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/home.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+      </file>
+      <file name="index.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/index.js">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages.api">
+      <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="metrics.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/api/metrics.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+    <package name="pages.room">
+      <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="[id].js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/room/[id].js">
+        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
