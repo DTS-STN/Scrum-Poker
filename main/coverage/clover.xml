@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646059480497" clover="3.2.0">
-  <project timestamp="1646059480497" name="All files">
-    <metrics statements="34" coveredstatements="29" conditionals="30" coveredconditionals="30" methods="18" coveredmethods="16" elements="82" coveredelements="75" complexity="0" loc="34" ncloc="34" packages="4" files="12" classes="12"/>
+<coverage generated="1646062859193" clover="3.2.0">
+  <project timestamp="1646062859193" name="All files">
+    <metrics statements="39" coveredstatements="32" conditionals="30" coveredconditionals="30" methods="20" coveredmethods="17" elements="89" coveredelements="79" complexity="0" loc="39" ncloc="39" packages="4" files="13" classes="13"/>
     <package name="components">
-      <metrics statements="15" coveredstatements="15" conditionals="26" coveredconditionals="26" methods="7" coveredmethods="7"/>
+      <metrics statements="18" coveredstatements="18" conditionals="26" coveredconditionals="26" methods="8" coveredmethods="8"/>
+      <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+      </file>
       <file name="DateModified.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/DateModified.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="7" count="11" type="stmt"/>
@@ -74,14 +80,16 @@
       </file>
     </package>
     <package name="pages.room">
-      <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="[id].js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/room/[id].js">
-        <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="4" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="32" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
+        <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
       </file>
     </package>
   </project>
