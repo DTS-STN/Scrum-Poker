@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 import Card from '../../components/Card'
 
 export default function Room(props) {
@@ -12,20 +13,35 @@ export default function Room(props) {
     { id: 'card-7', src: '/king_of_spades.svg', alt: 'Card image', value: 20 },
     { id: 'card-8', src: '/king_of_spades.svg', alt: 'Card image', value: -1 },
   ]
-
+  const [selectedCard, setSelectedCard] = useState(null)
   return (
     <div
       id="roomContent"
       className="container mx-auto px-6 mt-5 bg-slate-300 p-8"
     >
       <h1>Room {props.roomId}</h1>
+      {!selectedCard ? (
+        <h2>Select a card...</h2>
+      ) : (
+        <h2>
+          Value selected:{' '}
+          <span className="font-bold">{selectedCard.value}</span>
+        </h2>
+      )}
       <div
         id="homeContent"
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-2"
       >
         {cards.map((card) => {
           return (
-            <Card src={card.src} id={card.id} key={card.id} alt={card.alt} />
+            <Card
+              src={card.src}
+              id={card.id}
+              key={card.id}
+              alt={card.alt}
+              onClick={() => setSelectedCard(card)}
+              selected={card.id == selectedCard}
+            />
           )
         })}
       </div>

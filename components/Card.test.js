@@ -15,6 +15,8 @@ describe('Card', () => {
         id={fakeCard.id}
         key={fakeCard.id}
         alt={fakeCard.alt}
+        selected
+        onClick={() => {}}
       />
     )
     expect(primary).toBeTruthy()
@@ -27,6 +29,8 @@ describe('Card', () => {
         id={fakeCard.id}
         key={fakeCard.id}
         alt={fakeCard.alt}
+        selected
+        onClick={() => {}}
       />
     )
     const results = await axe(container)

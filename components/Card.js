@@ -5,7 +5,12 @@ import Image from 'next/image'
  */
 export default function Card(props) {
   return (
-    <div className="h-auto w-48 mx-auto md:w-44">
+    <div
+      className={`h-auto w-48 mx-auto md:w-44 ${
+        props.selected ? `border border-red-500` : ``
+      }`}
+      onClick={props.onClick}
+    >
       <Image
         id={props.id}
         src={props.src}
@@ -39,4 +44,10 @@ Card.propTypes = {
 
   // style for the card
   className: propTypes.string,
+
+  // if card is selected
+  selected: propTypes.bool,
+
+  // onClick function of the card
+  onClick: propTypes.func,
 }
