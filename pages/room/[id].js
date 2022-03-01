@@ -40,7 +40,7 @@ export default function Room(props) {
               key={card.id}
               alt={card.alt}
               onClick={() => setSelectedCard(card)}
-              selected={card.id == selectedCard}
+              selected={card.id === selectedCard.id}
             />
           )
         })}
