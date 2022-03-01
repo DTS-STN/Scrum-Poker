@@ -4,7 +4,6 @@ import Image from 'next/image'
  * Simple Card component
  */
 export default function Card(props) {
-  console.log(props.selected)
   return (
     <div
       className={`h-auto w-48 mx-auto md:w-44 ${
