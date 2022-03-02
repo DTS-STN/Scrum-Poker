@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646164767771" clover="3.2.0">
-  <project timestamp="1646164767771" name="All files">
-    <metrics statements="41" coveredstatements="32" conditionals="34" coveredconditionals="31" methods="21" coveredmethods="17" elements="96" coveredelements="80" complexity="0" loc="41" ncloc="41" packages="4" files="13" classes="13"/>
+<coverage generated="1646232684100" clover="3.2.0">
+  <project timestamp="1646232684100" name="All files">
+    <metrics statements="43" coveredstatements="32" conditionals="38" coveredconditionals="31" methods="21" coveredmethods="17" elements="102" coveredelements="80" complexity="0" loc="43" ncloc="43" packages="4" files="13" classes="13"/>
     <package name="components">
       <metrics statements="18" coveredstatements="18" conditionals="28" coveredconditionals="27" methods="8" coveredmethods="8"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
@@ -80,18 +80,20 @@
       </file>
     </package>
     <package name="pages.room">
-      <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="11" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="[id].js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/room/[id].js">
-        <metrics statements="9" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="77" count="0" type="stmt"/>
+        <metrics statements="11" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
       </file>
     </package>
   </project>
