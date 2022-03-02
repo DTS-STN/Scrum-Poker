@@ -53,40 +53,16 @@ export default function Layout(props) {
         ]}
         footerBoxLinks={[
           {
-            footerBoxlink: t.footerContactUsURL,
-            footerBoxLinkText: t.footerContactUs,
+            footerBoxlink: t.footerContributeURL,
+            footerBoxLinkText: t.footerContribute,
           },
           {
-            footerBoxlink: t.footerNewsURL,
-            footerBoxLinkText: t.footerNews,
+            footerBoxlink: t.footerReportIssueURL,
+            footerBoxLinkText: t.footerReportIssue,
           },
           {
-            footerBoxlink: t.footerPmURL,
-            footerBoxLinkText: t.footerPm,
-          },
-          {
-            footerBoxlink: t.footerDepartmentAgenciesURL,
-            footerBoxLinkText: t.footerDepartmentAgencies,
-          },
-          {
-            footerBoxlink: t.footerTreatiesURL,
-            footerBoxLinkText: t.footerTreaties,
-          },
-          {
-            footerBoxlink: t.footerHowGovWorksURL,
-            footerBoxLinkText: t.footerHowGovWorks,
-          },
-          {
-            footerBoxlink: t.footerPublicServiceURL,
-            footerBoxLinkText: t.footerPublicService,
-          },
-          {
-            footerBoxlink: t.footerGovReportingURL,
-            footerBoxLinkText: t.footerGovReporting,
-          },
-          {
-            footerBoxlink: t.footerOpenGovURL,
-            footerBoxLinkText: t.footerOpenGov,
+            footerBoxlink: t.footerSuggestionURL,
+            footerBoxLinkText: t.footerSuggestion,
           },
         ]}
       />

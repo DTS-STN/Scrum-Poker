@@ -31,38 +31,19 @@ export default {
   //
   // Footer
   //
-  reportProblem: 'Report a problem',
   dateModified: 'Date Modified: ',
   // Landscape Links
 
-  footerContactUsURL: 'https://www.canada.ca/en/contact.html',
-  footerContactUs: 'Contact information',
+  footerContributeURL: 'https://github.com/DTS-STN/Scrum-Poker',
+  footerContribute: 'Contribute to this project',
 
-  footerNewsURL: 'https://www.canada.ca/en/news.html',
-  footerNews: 'News',
+  footerReportIssueURL:
+    'https://github.com/DTS-STN/Scrum-Poker/issues/new?title=Problem%20with%20site%3A%0A',
+  footerReportIssue: 'Report issues on this project',
 
-  footerPmURL: 'https://www.pm.gc.ca/en',
-  footerPm: 'Prime Minister',
-
-  footerDepartmentAgenciesURL: 'https://www.canada.ca/en/government/dept.html',
-  footerDepartmentAgencies: 'Department and agencies',
-
-  footerTreatiesURL: 'https://www.canada.ca/en/government/system/laws.html',
-  footerTreaties: 'Treaties, laws and regulations',
-
-  footerHowGovWorksURL:
-    'https://www.canada.ca/en/government/system/how-government-works.html',
-  footerHowGovWorks: 'How government works',
-
-  footerPublicServiceURL:
-    'https://www.canada.ca/en/government/publicservice.html',
-  footerPublicService: 'Public service and military',
-
-  footerGovReportingURL: 'https://www.canada.ca/en/transparency/reporting.html',
-  footerGovReporting: 'Government-wide reporting',
-
-  footerOpenGovURL: 'http://open.canada.ca/en',
-  footerOpenGov: 'Open government',
+  footerSuggestionURL:
+    'https://github.com/DTS-STN/Scrum-Poker/issues/new?title=Suggestion%3A%0A',
+  footerSuggestion: 'Suggest a change on this project',
 
   aboutgovernmentLink: 'https://www.canada.ca/en/government/system.html',
   aboutgovernmentText: 'About government',
