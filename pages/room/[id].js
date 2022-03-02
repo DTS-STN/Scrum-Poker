@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
+import en from '../../locales/en'
+import fr from '../../locales/fr'
 
 export default function Room(props) {
+  const t = props.locale === 'en' ? en : fr
   const cards = [
     { id: 'card-1', src: '/king_of_spades.svg', value: 1 },
     { id: 'card-2', src: '/king_of_spades.svg', alt: 'Card image', value: 2 },
@@ -49,7 +52,12 @@ export default function Room(props) {
   )
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, locale }) {
+  const roomId = params.id
+
+  const langToggleLink =
+    locale === 'en' ? '/fr/room/' + params.id : '/room/' + params.id
+
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -59,18 +67,17 @@ export async function getServerSideProps({ params }) {
       keywords: '',
     },
     data_fr: {
-      title: 'Accueil - Scrum Poker',
+      title: 'Salle - Scrum Poker',
       desc: 'Français',
       author: 'DTS',
       keywords: '',
     },
   }
 
-  const roomId = params.id
   //TODO: fetch room data from roomId
 
   return {
-    props: { roomId, meta },
+    props: { roomId, meta, locale, langToggleLink },
   }
 }
 
