@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import { Button } from '@dts-stn/decd-design-system'
+import Link from 'next/link'
 
 import { fetchContent } from '../lib/cms'
 
@@ -14,6 +16,9 @@ export default function Home(props) {
     >
       <h1>{props.content.header}</h1>
       <p>{props.content.paragraph}</p>
+      <Link href="/room/85723">
+        <Button text="Enter room 85723" styling="primary" />
+      </Link>
     </div>
   )
 }
