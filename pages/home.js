@@ -33,7 +33,7 @@ export default function Home(props) {
     <div
       data-testid="homeContent"
       id="homeContent"
-      className="container grid grid-cols-1 gap-y-5 sm:flex sm:justify-around mx-auto"
+      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-around"
     >
       <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
         <form

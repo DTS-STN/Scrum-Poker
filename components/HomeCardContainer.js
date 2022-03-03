@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
  */
 export default function HomeCardContainer(props) {
   return (
-    <div className="rounded overflow-hidden border border-gray-400 text-center p-4 flex flex-col md:w-96">
+    <div className="rounded border border-gray-400 text-center p-4 flex flex-col md:w-96">
       <div>
         <h1 className="text-opacity-75 text-black font-bold text-2xl">
           {props.title}
