@@ -14,7 +14,7 @@ export default function TextInput(props) {
         id={props.id}
         name={props.id}
         placeholder={props.placeholder}
-        className="appearance-none border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="appearance-none border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
       />
     </div>
   )
