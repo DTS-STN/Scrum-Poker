@@ -20,7 +20,7 @@ export default function Room(props) {
   return (
     <div
       id="roomContent"
-      className="container mx-auto px-12 mt-5 rounded-lg bg-slate-300 p-8"
+      className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
       <h1>Room {props.roomId}</h1>
       {!selectedCard ? (
