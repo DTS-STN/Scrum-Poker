@@ -5,8 +5,21 @@ export default {
   english: 'English',
   francais: 'Français',
 
-  // Welcome
-  welcome: 'Bienvenue a',
+  // Home
+  createRoomTitle: 'Créer une pièce',
+  createRoomDesc:
+    'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
+  createRoomLabel: 'Entrez votre nom',
+  createRoomPlaceholder: 'Votre nom',
+  createRoomButton: 'Créer une pièce',
+  joinRoomTitle: 'Rejoindre une salle',
+  joinRoomDesc:
+    'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
+  joinRoomNumberLabel: 'Entrez le code de la chambre',
+  joinRoomNumberPlaceholder: 'Code de la chambre',
+  joinRoomNameLabel: 'Entrez votre nom',
+  joinRoomNamePlaceholder: 'Votre nom',
+  joinRoomButton: 'Rejoignez la salle',
   //
   // Header
   title: 'accueil',

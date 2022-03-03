@@ -5,8 +5,19 @@ export default {
   english: 'English',
   francais: 'Français',
 
-  // Welcome
-  welcome: 'Welcome to',
+  // Home
+  createRoomTitle: 'Create a Room',
+  createRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
+  createRoomLabel: 'Enter your name',
+  createRoomPlaceholder: 'Your name',
+  createRoomButton: 'Create Room',
+  joinRoomTitle: 'Join a Room',
+  joinRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
+  joinRoomNumberLabel: 'Enter room code',
+  joinRoomNumberPlaceholder: 'Room code',
+  joinRoomNameLabel: 'Enter your name',
+  joinRoomNamePlaceholder: 'Your name',
+  joinRoomButton: 'Join Room',
   //
   // Header
   title: 'home',
