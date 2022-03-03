@@ -27,38 +27,19 @@ export default {
   //
   // Footer
   //
-  reportProblem: '(FR) Report a problem',
   dateModified: 'Date de modification : ',
   // Landscape Links
 
-  footerContactUsURL: 'https://www.canada.ca/fr/contact.html',
-  footerContactUs: 'Contactez-nous',
+  footerContributeURL: 'https://github.com/DTS-STN/Scrum-Poker',
+  footerContribute: 'Contribuer à ce projet',
 
-  footerNewsURL: 'https://www.canada.ca/fr/nouvelles.html',
-  footerNews: 'Nouvelles',
+  footerReportIssueURL:
+    'https://github.com/DTS-STN/Scrum-Poker/issues/new?title=Problem%20with%20site%3A%0A',
+  footerReportIssue: 'Signaler un problème',
 
-  footerPmURL: 'https://www.pm.gc.ca/fr',
-  footerPm: 'Premier ministre',
-
-  footerDepartmentAgenciesURL: 'https://www.canada.ca/fr/gouvernement/min.html',
-  footerDepartmentAgencies: 'Ministères et organismes',
-
-  footerTreatiesURL: 'https://www.canada.ca/fr/gouvernement/systeme/lois.html',
-  footerTreaties: 'Traités, lois et règlements',
-
-  footerHowGovWorksURL:
-    'https://www.canada.ca/fr/gouvernement/systeme/comment-gouvernement-fonctionne.html',
-  footerHowGovWorks: 'Comment le gouvernement fonctionne',
-
-  footerPublicServiceURL:
-    'https://www.canada.ca/fr/gouvernement/fonctionpublique.html',
-  footerPublicService: 'Service public et militaire',
-
-  footerGovReportingURL: 'https://www.canada.ca/fr/transparence/rapports.html',
-  footerGovReporting: "Rapports à l'échelle du gouvernement",
-
-  footerOpenGovURL: 'http://ouvert.canada.ca/',
-  footerOpenGov: 'Gouvernement ouvert',
+  footerSuggestionURL:
+    'https://github.com/DTS-STN/Scrum-Poker/issues/new?title=Suggestion%3A%0A',
+  footerSuggestion: 'Suggérer un changement',
 
   aboutgovernmentLink: 'https://www.canada.ca/fr/gouvernement/systeme.html',
   aboutgovernmentText: 'À propos du gouvernement',
