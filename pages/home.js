@@ -32,6 +32,7 @@ export default function Home(props) {
   return (
     <div
       data-testid="homeContent"
+      id="homeContent"
       className="container grid grid-cols-1 gap-y-5 sm:flex sm:justify-around mx-auto"
     >
       <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
@@ -46,7 +47,7 @@ export default function Home(props) {
           />
           <button
             type="submit"
-            className="bg-green-600 grow hover:bg-green-700 text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
+            className="bg-black text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
           >
             {t.createRoomButton}
           </button>
@@ -63,13 +64,13 @@ export default function Home(props) {
             placeholder={t.joinRoomNumberPlaceholder}
           />
           <TextInput
-            id="roomCode"
+            id="newRoomName"
             label={t.joinRoomNameLabel}
             placeholder={t.joinRoomNamePlaceholder}
           />
           <button
             type="submit"
-            className="bg-green-600 grow hover:bg-green-700 text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
+            className="bg-black text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
           >
             {t.joinRoomButton}
           </button>
