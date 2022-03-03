@@ -5,8 +5,8 @@ FNF:1
 FNH:1
 FNDA:3,Card
 DA:7,3
-DA:28,1
-DA:35,1
+DA:29,1
+DA:36,1
 LF:3
 LH:3
 BRDA:10,0,0,2
@@ -136,7 +136,7 @@ FNH:1
 FNDA:3,TextInput
 DA:4,3
 DA:23,1
-DA:31,1
+DA:29,1
 LF:3
 LH:3
 BRF:0
