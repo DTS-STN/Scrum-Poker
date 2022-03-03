@@ -48,6 +48,16 @@ module.exports = {
     NEXT_PUBLIC_BUILD_DATE: builddate,
   },
   reactStrictMode: true,
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    //GraphQL loader for .graphql files
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader',
+    })
+
+    return config
+  },
   //
   // i18n setup
   //

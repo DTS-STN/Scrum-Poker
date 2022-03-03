@@ -1,5 +1,6 @@
 import '../styles/globals.css'
-
+import { ApolloProvider } from '@apollo/client'
+import client from '../graphql/client'
 import Layout from '../components/Layout'
 
 function MyApp({ Component, pageProps }) {
@@ -10,13 +11,15 @@ function MyApp({ Component, pageProps }) {
 
   /* istanbul ignore next */
   return (
-    <Layout
-      locale={pageProps.locale}
-      meta={pageProps.meta}
-      langToggleLink={pageProps.langToggleLink}
-    >
-      <Component {...pageProps} />
-    </Layout>
+    <ApolloProvider client={client}>
+      <Layout
+        locale={pageProps.locale}
+        meta={pageProps.meta}
+        langToggleLink={pageProps.langToggleLink}
+      >
+        <Component {...pageProps} />
+      </Layout>
+    </ApolloProvider>
   )
 }
 
