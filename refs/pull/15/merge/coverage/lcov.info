@@ -190,7 +190,7 @@ SF:pages/home.js
 FN:10,Home
 FN:16,(anonymous_1)
 FN:28,(anonymous_2)
-FN:82,getStaticProps
+FN:83,getStaticProps
 FNF:4
 FNH:2
 FNDA:1,Home
@@ -204,10 +204,10 @@ DA:18,0
 DA:28,1
 DA:29,0
 DA:32,1
-DA:83,1
-DA:89,1
-DA:104,1
-DA:109,1
+DA:84,1
+DA:90,1
+DA:105,1
+DA:110,1
 LF:11
 LH:8
 BRF:0
