@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646232684100" clover="3.2.0">
-  <project timestamp="1646232684100" name="All files">
+<coverage generated="1646318047930" clover="3.2.0">
+  <project timestamp="1646318047931" name="All files">
     <metrics statements="43" coveredstatements="32" conditionals="38" coveredconditionals="31" methods="21" coveredmethods="17" elements="102" coveredelements="80" complexity="0" loc="43" ncloc="43" packages="4" files="13" classes="13"/>
     <package name="components">
       <metrics statements="18" coveredstatements="18" conditionals="28" coveredconditionals="27" methods="8" coveredmethods="8"/>
@@ -19,9 +19,9 @@
       <file name="Footer.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Footer.js">
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
         <line num="9" count="9" type="stmt"/>
-        <line num="27" count="66" type="stmt"/>
-        <line num="53" count="40" type="stmt"/>
-        <line num="88" count="3" type="stmt"/>
+        <line num="26" count="24" type="stmt"/>
+        <line num="61" count="40" type="stmt"/>
+        <line num="96" count="3" type="stmt"/>
       </file>
       <file name="Header.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Header.js">
         <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="20" methods="1" coveredmethods="1"/>
@@ -32,8 +32,8 @@
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="10" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="12" count="7" type="stmt"/>
-        <line num="101" count="2" type="stmt"/>
-        <line num="105" count="2" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
       </file>
       <file name="MetaData.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/MetaData.js">
         <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
