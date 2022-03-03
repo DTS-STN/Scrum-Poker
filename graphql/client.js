@@ -1,7 +1,11 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import fetch from 'cross-fetch'
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'https://scrum-poker-server-main.bdm-dev.dts-stn.com/graphql',
+  link: new HttpLink({
+    uri: 'https://scrum-poker-server-main.bdm-dev.dts-stn.com/graphql',
+    fetch,
+  }),
   cache: new InMemoryCache(),
 })
 

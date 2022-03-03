@@ -2,10 +2,6 @@ import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
 
-//Import GraphQL Client and Queries
-import client from '../graphql/client'
-import getBooks from '../graphql/queries/example.graphql'
-
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
@@ -18,24 +14,11 @@ export default function Home(props) {
     >
       <h1>{props.content.header}</h1>
       <p>{props.content.paragraph}</p>
-
-      {props.books.map((book) => (
-        <div key={book.id}>
-          <p>
-            {book.id} - {book.title}
-          </p>
-        </div>
-      ))}
     </div>
   )
 }
 
 export async function getStaticProps({ locale }) {
-  //Proof of Concept GraphQL Query
-  const { data } = await client.query({
-    query: getBooks,
-  })
-
   const content = await fetchContent()
 
   /* istanbul ignore next */
@@ -58,7 +41,7 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { locale, langToggleLink, content, meta, books: data.books },
+    props: { locale, langToggleLink, content, meta },
   }
 }
 
