@@ -6,8 +6,10 @@ import Image from 'next/image'
 export default function Card(props) {
   return (
     <div
-      className={`h-auto w-48 mx-auto md:w-44 ${
-        props.selected ? `border border-red-500` : `border border-slate-300`
+      className={`h-auto w-48 mx-auto md:w-44 block ${
+        props.selected
+          ? `border-4 border-canadaBlue rounded-lg`
+          : `border border-slate-300`
       }`}
       onClick={props.onClick}
     >
@@ -15,10 +17,9 @@ export default function Card(props) {
         id={props.id}
         src={props.src}
         alt={props.alt}
-        width={100}
-        height={100}
+        width={74}
+        height={102}
         layout="responsive"
-        objectFit="scale-down"
         className={props.className}
       ></Image>
     </div>
