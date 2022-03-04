@@ -133,10 +133,10 @@ SF:components/TextInput.js
 FN:3,TextInput
 FNF:1
 FNH:1
-FNDA:3,TextInput
-DA:4,3
-DA:23,1
-DA:29,1
+FNDA:5,TextInput
+DA:4,5
+DA:23,2
+DA:29,2
 LF:3
 LH:3
 BRF:0
