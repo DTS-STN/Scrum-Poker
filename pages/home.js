@@ -3,15 +3,12 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import HomeCardContainer from '../components/HomeCardContainer'
 import TextInput from '../components/TextInput'
-import { useRouter } from 'next/router'
 
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const router = useRouter()
 
   const handleCreateSubmit = (e) => {
     e.preventDefault()
