@@ -30,12 +30,12 @@ export default function Home(props) {
     <div
       data-testid="homeContent"
       id="homeContent"
-      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-around"
+      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
       <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
         <form
           onSubmit={handleCreateSubmit}
-          className="flex flex-col justify-between h-full"
+          className="flex flex-col justify-between h-full items-center"
         >
           <TextInput
             id="owner"
@@ -44,7 +44,7 @@ export default function Home(props) {
           />
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 font-bold py-2 px-4 rounded max-h-10 mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           >
             {t.createRoomButton}
           </button>
@@ -53,7 +53,7 @@ export default function Home(props) {
       <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
         <form
           onSubmit={handleJoinSubmit}
-          className="flex flex-col justify-between h-full"
+          className="flex flex-col justify-between h-full items-center"
         >
           <TextInput
             id="roomCode"
@@ -67,7 +67,7 @@ export default function Home(props) {
           />
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 font-bold py-2 px-4 rounded max-h-10 mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           >
             {t.joinRoomButton}
           </button>

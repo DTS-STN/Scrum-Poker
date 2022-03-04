@@ -2,7 +2,7 @@ import propTypes from 'prop-types'
 
 export default function TextInput(props) {
   return (
-    <div className="mt-6">
+    <div className="mt-6 w-full">
       <label
         htmlFor={props.id}
         className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
