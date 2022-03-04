@@ -4,6 +4,9 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/home'
+import GET_BOOKS_QUERY from '../../graphql/queries/example.graphql'
+import { MockedProvider } from '@apollo/client/testing'
+
 import { getStaticProps } from '../../pages/home'
 
 import { useRouter } from 'next/router'

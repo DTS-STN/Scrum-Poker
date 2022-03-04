@@ -4,9 +4,20 @@ import fr from '../locales/fr'
 
 import { fetchContent } from '../lib/cms'
 
+import { gql, useQuery } from '@apollo/client'
+import GET_BOOKS_QUERY from '../graphql/queries/example.graphql'
+import client from '../graphql/client'
+
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  //Load GraphQL Data
+  const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
+
+  if (loading) return <p>loading....</p>
+  if (error) return <p>{error.message}</p>
+
   return (
     <div
       id="homeContent"
@@ -14,6 +25,13 @@ export default function Home(props) {
     >
       <h1>{props.content.header}</h1>
       <p>{props.content.paragraph}</p>
+      {data?.books.map((book) => (
+        <div key={book.id}>
+          <p>
+            {book.id} - {book.title}
+          </p>
+        </div>
+      ))}
     </div>
   )
 }
