@@ -47,7 +47,7 @@ export default function Home(props) {
           />
           <button
             type="submit"
-            className="bg-black text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
+            className="bg-green-500 hover:bg-green-600 font-bold py-2 px-4 rounded max-h-10 mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600"
           >
             {t.createRoomButton}
           </button>
@@ -70,7 +70,7 @@ export default function Home(props) {
           />
           <button
             type="submit"
-            className="bg-black text-white font-bold py-2 px-4 rounded max-h-10 mt-12"
+            className="bg-green-500 hover:bg-green-600 font-bold py-2 px-4 rounded max-h-10 mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600"
           >
             {t.joinRoomButton}
           </button>
