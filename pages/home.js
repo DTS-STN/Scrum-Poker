@@ -15,12 +15,13 @@ export default function Home(props) {
   //Load GraphQL Data
   const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
 
-  if (loading) return <p>loading....</p>
-  if (error) return <p>{error.message}</p>
-
+  if (loading) return <p data-testid="loadingState">loading....</p>
+  if (error) return <p data-testid="errorState">{error.message}</p>
+  console.log(data)
   return (
     <div
       id="homeContent"
+      data-testid="homeContent"
       className="container mx-auto px-6 mt-5 bg-slate-300 p-8"
     >
       <h1>{props.content.header}</h1>

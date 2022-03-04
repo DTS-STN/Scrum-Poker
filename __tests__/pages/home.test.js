@@ -29,6 +29,29 @@ describe('Home page', () => {
     paragraph: 'paragraph',
   }
 
+  const mockRoomData = {
+    request: {
+      query: GET_BOOKS_QUERY,
+    },
+    result: {
+      data: {
+        books: [
+          {
+            id: '1',
+            title: 'The Awakening',
+          },
+        ],
+      },
+    },
+  }
+
+  const mockErrorData = {
+    request: {
+      query: GET_BOOKS_QUERY,
+    },
+    error: new Error('Network Error'),
+  }
+
   beforeEach(() => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
@@ -36,9 +59,38 @@ describe('Home page', () => {
     }))
   })
 
-  it('should render the page', () => {
-    render(<Home locale="en" content={content} />)
-    const heading = screen.getByRole('heading')
+  it('should render the page successfully', async () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockRoomData]}>
+        <Home locale="en" content={content} />
+      </MockedProvider>
+    )
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('homeContent')
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should render the page in error state', async () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockErrorData]}>
+        <Home locale="en" content={content} />
+      </MockedProvider>
+    )
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('errorState')
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should render the page in loading state', () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockRoomData]}>
+        <Home locale="en" content={content} />
+      </MockedProvider>
+    )
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('loadingState')
     expect(heading).toBeInTheDocument()
   })
 
