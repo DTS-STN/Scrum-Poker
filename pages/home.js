@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import HomeCardContainer from '../components/HomeCardContainer'
+import TextInput from '../components/TextInput'
 
 import { fetchContent } from '../lib/cms'
 
@@ -17,15 +19,70 @@ export default function Home(props) {
 
   if (loading) return <p data-testid="loadingState">loading....</p>
   if (error) return <p data-testid="errorState">{error.message}</p>
-  console.log(data)
+
+  const handleCreateSubmit = (e) => {
+    e.preventDefault()
+    console.log(e.target.owner.value)
+
+    //TODO: Make call to back end to get random room id.
+    //TODO: Redirect user to that room id.
+    //  router.push({
+    //    pathname: "/room/1",
+    //    query: {q: "test"},
+    //  })
+  }
+
+  const handleJoinSubmit = (e) => {
+    e.preventDefault()
+  }
+
   return (
     <div
-      id="homeContent"
       data-testid="homeContent"
-      className="container mx-auto px-6 mt-5 bg-slate-300 p-8"
+      id="homeContent"
+      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
-      <h1>{props.content.header}</h1>
-      <p>{props.content.paragraph}</p>
+      <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
+        <form
+          onSubmit={handleCreateSubmit}
+          className="flex flex-col justify-between h-full items-center"
+        >
+          <TextInput
+            id="owner"
+            label={t.createRoomLabel}
+            placeholder={t.createRoomPlaceholder}
+          />
+          <button
+            type="submit"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+          >
+            {t.createRoomButton}
+          </button>
+        </form>
+      </HomeCardContainer>
+      <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
+        <form
+          onSubmit={handleJoinSubmit}
+          className="flex flex-col justify-between h-full items-center"
+        >
+          <TextInput
+            id="roomCode"
+            label={t.joinRoomNumberLabel}
+            placeholder={t.joinRoomNumberPlaceholder}
+          />
+          <TextInput
+            id="newRoomName"
+            label={t.joinRoomNameLabel}
+            placeholder={t.joinRoomNamePlaceholder}
+          />
+          <button
+            type="submit"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+          >
+            {t.joinRoomButton}
+          </button>
+        </form>
+      </HomeCardContainer>
       {data?.books.map((book) => (
         <div key={book.id}>
           <p>

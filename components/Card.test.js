@@ -5,7 +5,7 @@ import Card from './Card'
 
 expect.extend(toHaveNoViolations)
 
-const fakeCard = { id: 'card-1', src: '/king_of_spades.svg', value: 1 }
+const fakeCard = { id: 'card-1', src: '/Card_1.svg', value: 1 }
 
 describe('Card', () => {
   it('renders Card', () => {

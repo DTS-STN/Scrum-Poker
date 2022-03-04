@@ -44,6 +44,9 @@ const securityHeaders = [
 ]
 
 module.exports = {
+  images: {
+    dangerouslyAllowSVG: true,
+  },
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
   },
