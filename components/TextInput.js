@@ -2,10 +2,10 @@ import propTypes from 'prop-types'
 
 export default function TextInput(props) {
   return (
-    <div className="mt-6">
+    <div className="mt-6 w-full">
       <label
         htmlFor={props.id}
-        className="block rounded-t-lg overflow-hidden border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300 justify-center text-gray-500"
+        className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
       >
         {props.label}
       </label>
@@ -14,7 +14,7 @@ export default function TextInput(props) {
         id={props.id}
         name={props.id}
         placeholder={props.placeholder}
-        className="appearance-none border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="appearance-none border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
       />
     </div>
   )
@@ -22,10 +22,8 @@ export default function TextInput(props) {
 
 TextInput.defaultProps = {
   id: 'input',
-  desc: 'Description',
   label: 'Label',
   placeholder: 'Placeholder',
-  buttonText: 'Button Text',
 }
 
 TextInput.propTypes = {

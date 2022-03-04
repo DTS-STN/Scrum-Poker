@@ -3,15 +3,12 @@ import en from '../locales/en'
 import fr from '../locales/fr'
 import HomeCardContainer from '../components/HomeCardContainer'
 import TextInput from '../components/TextInput'
-import { useRouter } from 'next/router'
 
 import { fetchContent } from '../lib/cms'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const router = useRouter()
 
   const handleCreateSubmit = (e) => {
     e.preventDefault()
@@ -31,41 +28,48 @@ export default function Home(props) {
 
   return (
     <div
+      data-testid="homeContent"
       id="homeContent"
-      className="container grid grid-cols-1 gap-y-5 sm:flex sm:justify-around "
+      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
-      <HomeCardContainer>
-        <form onSubmit={handleCreateSubmit} className="form-horizontal">
+      <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
+        <form
+          onSubmit={handleCreateSubmit}
+          className="flex flex-col justify-between h-full items-center"
+        >
           <TextInput
             id="owner"
-            label="Enter Your Name"
-            placeholder="Your Name"
+            label={t.createRoomLabel}
+            placeholder={t.createRoomPlaceholder}
           />
           <button
             type="submit"
-            className="mt-16 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           >
-            Create Room
+            {t.createRoomButton}
           </button>
         </form>
       </HomeCardContainer>
-      <HomeCardContainer>
-        <form onSubmit={handleJoinSubmit} className="form-horizontal">
+      <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
+        <form
+          onSubmit={handleJoinSubmit}
+          className="flex flex-col justify-between h-full items-center"
+        >
           <TextInput
             id="roomCode"
-            label="Enter Room Code"
-            placeholder="Room Code"
+            label={t.joinRoomNumberLabel}
+            placeholder={t.joinRoomNumberPlaceholder}
           />
           <TextInput
-            id="newName"
-            label="Enter Your Name"
-            placeholder="Your Name"
+            id="newRoomName"
+            label={t.joinRoomNameLabel}
+            placeholder={t.joinRoomNamePlaceholder}
           />
           <button
             type="submit"
-            className="mt-16 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           >
-            Join Room
+            {t.joinRoomButton}
           </button>
         </form>
       </HomeCardContainer>
