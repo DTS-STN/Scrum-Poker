@@ -17,8 +17,18 @@ export default function Home(props) {
   //Load GraphQL Data
   const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
 
-  if (loading) return <p data-testid="loadingState">loading....</p>
-  if (error) return <p data-testid="errorState">{error.message}</p>
+  if (loading)
+    return (
+      <h1 data-testid="loadingState" id="homeContent">
+        loading....
+      </h1>
+    )
+  if (error)
+    return (
+      <h1 data-testid="errorState" id="homeContent">
+        {error.message}
+      </h1>
+    )
 
   const handleCreateSubmit = (e) => {
     e.preventDefault()
@@ -75,12 +85,12 @@ export default function Home(props) {
             label={t.joinRoomNameLabel}
             placeholder={t.joinRoomNamePlaceholder}
           />
-          <button
+          {/* <button
             type="submit"
             className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           >
             {t.joinRoomButton}
-          </button>
+          </button> */}
         </form>
       </HomeCardContainer>
       {data?.books.map((book) => (
