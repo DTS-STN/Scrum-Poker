@@ -64,7 +64,9 @@ describe('Layout with default text', () => {
 
   it('Layout contains footer with Prime Minister link', () => {
     render(<Layout locale="en" meta={meta} />)
-    expect(screen.getByText('Prime Minister')).toBeInTheDocument()
+    expect(
+      screen.getByText('Report issues on this project')
+    ).toBeInTheDocument()
   })
 
   it('Layout contains Canada Wordmark', () => {
