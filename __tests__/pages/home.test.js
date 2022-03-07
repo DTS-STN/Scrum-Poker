@@ -24,11 +24,6 @@ jest.mock('../../lib/cms', () => ({
 }))
 
 describe('Home page', () => {
-  const content = {
-    header: 'header',
-    paragraph: 'paragraph',
-  }
-
   const mockRoomData = {
     request: {
       query: GET_BOOKS_QUERY,
@@ -62,7 +57,7 @@ describe('Home page', () => {
   it('should render the page successfully', async () => {
     render(
       <MockedProvider addTypename={false} mocks={[mockRoomData]}>
-        <Home locale="en" content={content} />
+        <Home locale="en" />
       </MockedProvider>
     )
     await new Promise((resolve) => setTimeout(resolve, 0))
@@ -74,7 +69,7 @@ describe('Home page', () => {
   it('should render the page in error state', async () => {
     render(
       <MockedProvider addTypename={false} mocks={[mockErrorData]}>
-        <Home locale="en" content={content} />
+        <Home locale="en" />
       </MockedProvider>
     )
     await new Promise((resolve) => setTimeout(resolve, 0))
@@ -86,7 +81,7 @@ describe('Home page', () => {
   it('should render the page in loading state', () => {
     render(
       <MockedProvider addTypename={false} mocks={[mockRoomData]}>
-        <Home locale="en" content={content} />
+        <Home locale="en" />
       </MockedProvider>
     )
     expect(screen).toBeTruthy()
