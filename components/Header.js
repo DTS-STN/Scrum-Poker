@@ -77,7 +77,11 @@ export default function Header(props) {
         </div>
 
         {/* Border */}
-        <div className="mb-2 border-t pb-2 mt-4"></div>
+        <div className="h-14 bg-canadaDarkBlue mt-6 mb-11 w-full ">
+          <h1 className="text-white h-full font-bold text-2xl container mx-auto px-6 leading pt-3">
+            Scrum Poker
+          </h1>
+        </div>
 
         {/* <Menu
           loginText={props.t.login}
