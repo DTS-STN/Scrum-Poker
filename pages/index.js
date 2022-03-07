@@ -78,6 +78,7 @@ export default function Index(props) {
   )
 }
 
+// Wondering what this line is supposed to do ???
 Index.getLayout = function PageLayout(page) {
   return <>{page}</>
 }
