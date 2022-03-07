@@ -8,16 +8,17 @@ expect.extend(toHaveNoViolations)
 describe('HomeCardContainer', () => {
   it('renders HomeCardContainer', () => {
     const primary = render(
-      <HomeCardContainer title="title" desh="short desc">
+      <HomeCardContainer>
         <p>test</p>
       </HomeCardContainer>
     )
-    expect(primary).toBeTruthy()
+    const footerLink = primary.getByText('test')
+    expect(footerLink).toBeInTheDocument()
   })
 
   it('has no a11y violations', async () => {
     const { container } = render(
-      <HomeCardContainer title="title" desh="short desc">
+      <HomeCardContainer>
         <p>test</p>
       </HomeCardContainer>
     )
