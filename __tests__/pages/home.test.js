@@ -4,6 +4,9 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/home'
+import GET_BOOKS_QUERY from '../../graphql/queries/example.graphql'
+import { MockedProvider } from '@apollo/client/testing'
+
 import { getStaticProps } from '../../pages/home'
 
 import { useRouter } from 'next/router'
@@ -21,9 +24,27 @@ jest.mock('../../lib/cms', () => ({
 }))
 
 describe('Home page', () => {
-  const content = {
-    header: 'header',
-    paragraph: 'paragraph',
+  const mockRoomData = {
+    request: {
+      query: GET_BOOKS_QUERY,
+    },
+    result: {
+      data: {
+        books: [
+          {
+            id: '1',
+            title: 'The Awakening',
+          },
+        ],
+      },
+    },
+  }
+
+  const mockErrorData = {
+    request: {
+      query: GET_BOOKS_QUERY,
+    },
+    error: new Error('Network Error'),
   }
 
   beforeEach(() => {
@@ -33,9 +54,38 @@ describe('Home page', () => {
     }))
   })
 
-  it('should render the page', () => {
-    render(<Home locale="en" content={content} />)
+  it('should render the page successfully', async () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockRoomData]}>
+        <Home locale="en" />
+      </MockedProvider>
+    )
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(screen).toBeTruthy()
     const heading = screen.getByTestId('homeContent')
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should render the page in error state', async () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockErrorData]}>
+        <Home locale="en" />
+      </MockedProvider>
+    )
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('errorState')
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should render the page in loading state', () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockRoomData]}>
+        <Home locale="en" />
+      </MockedProvider>
+    )
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('loadingState')
     expect(heading).toBeInTheDocument()
   })
 
