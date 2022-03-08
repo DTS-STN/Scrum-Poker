@@ -5,7 +5,9 @@ import propTypes from 'prop-types'
  */
 export default function Container(props) {
   return (
-    <div className={`rounded border border-gray-400 ${props.style}`}>
+    <div
+      className={`rounded border border-gray-400 shadow-md shadow-gray-900/50 ${props.style}`}
+    >
       {props.children}
     </div>
   )
