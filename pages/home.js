@@ -33,12 +33,12 @@ export default function Home(props) {
       className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
       <HomeCardContainer>
-        <h1 className="text-opacity-75 text-black font-bold text-2xl">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
           {t.createRoomTitle}
-        </h1>
-        <h2 className="text-opacity-75 text-black text-xl">
-          {t.createRoomDesc}
         </h2>
+        <h3 className="text-opacity-75 text-black text-xl">
+          {t.createRoomDesc}
+        </h3>
 
         <form
           onSubmit={handleCreateSubmit}
@@ -58,10 +58,10 @@ export default function Home(props) {
         </form>
       </HomeCardContainer>
       <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
-        <h1 className="text-opacity-75 text-black font-bold text-2xl">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
           {t.joinRoomTitle}
-        </h1>
-        <h2 className="text-opacity-75 text-black text-xl">{t.joinRoomDesc}</h2>
+        </h2>
+        <h3 className="text-opacity-75 text-black text-xl">{t.joinRoomDesc}</h3>
         <form
           onSubmit={handleJoinSubmit}
           className="flex flex-col justify-between h-full items-center"
