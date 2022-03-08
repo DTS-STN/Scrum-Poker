@@ -6,14 +6,33 @@ import TextInput from '../components/TextInput'
 
 import { fetchContent } from '../lib/cms'
 
+import { gql, useQuery } from '@apollo/client'
+import GET_BOOKS_QUERY from '../graphql/queries/example.graphql'
+import client from '../graphql/client'
+
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  //Load GraphQL Data
+  const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
+
+  if (loading)
+    return (
+      <h1 data-testid="loadingState" id="homeContent">
+        loading....
+      </h1>
+    )
+  if (error)
+    return (
+      <h1 data-testid="errorState" id="homeContent">
+        {error.message}
+      </h1>
+    )
+
   const handleCreateSubmit = (e) => {
     e.preventDefault()
     console.log(e.target.owner.value)
-
     //TODO: Make call to back end to get random room id.
     //TODO: Redirect user to that room id.
     //  router.push({
@@ -21,11 +40,9 @@ export default function Home(props) {
     //    query: {q: "test"},
     //  })
   }
-
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
-
   return (
     <div
       data-testid="homeContent"
@@ -87,13 +104,10 @@ export default function Home(props) {
     </div>
   )
 }
-
 export async function getStaticProps({ locale }) {
   const content = await fetchContent()
-
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -109,18 +123,15 @@ export async function getStaticProps({ locale }) {
       keywords: '',
     },
   }
-
   return {
     props: { locale, langToggleLink, content, meta },
   }
 }
-
 Home.propTypes = {
   /**
    * current locale in the address
    */
   locale: PropTypes.string,
-
   /*
    * Meta Tags
    */
