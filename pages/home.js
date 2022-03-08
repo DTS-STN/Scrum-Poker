@@ -6,17 +6,20 @@ import TextInput from '../components/TextInput'
 
 import { fetchContent } from '../lib/cms'
 
-import { gql, useQuery } from '@apollo/client'
-import GET_BOOKS_QUERY from '../graphql/queries/example.graphql'
-import client from '../graphql/client'
+import { useQuery, useMutation } from '@apollo/client'
+import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
+import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
+import { useRouter } from 'next/router'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  //Load GraphQL Data
-  const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
+  const router = useRouter()
 
+  //Load GraphQL Data
+  const { data, error, loading } = useQuery(GET_ROOMS_QUERY)
+  const [addRoom] = useMutation(ADD_ROOM_QUERY)
   if (loading)
     return (
       <h1 data-testid="loadingState" id="homeContent">
@@ -29,17 +32,6 @@ export default function Home(props) {
         {error.message}
       </h1>
     )
-
-  const handleCreateSubmit = (e) => {
-    e.preventDefault()
-    console.log(e.target.owner.value)
-    //TODO: Make call to back end to get random room id.
-    //TODO: Redirect user to that room id.
-    //  router.push({
-    //    pathname: "/room/1",
-    //    query: {q: "test"},
-    //  })
-  }
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
@@ -51,7 +43,15 @@ export default function Home(props) {
     >
       <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
         <form
-          onSubmit={handleCreateSubmit}
+          data-testid="createRoomForm"
+          onSubmit={(e) => {
+            e.preventDefault()
+            addRoom({ variables: { name: e.target.owner.value } }).then((res) =>
+              router.push({
+                pathname: `/room/${res.data.addRoom.id}`,
+              })
+            )
+          }}
           className="flex flex-col justify-between h-full items-center"
         >
           <TextInput
@@ -90,13 +90,6 @@ export default function Home(props) {
           </button>
         </form>
       </HomeCardContainer>
-      {data?.books.map((book) => (
-        <div key={book.id}>
-          <p>
-            {book.id} - {book.title}
-          </p>
-        </div>
-      ))}
     </div>
   )
 }
