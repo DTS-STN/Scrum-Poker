@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
+import User from '../../components/Player'
+import UserList from '../../components/UserList'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -17,6 +19,18 @@ export default function Room(props) {
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
   const [selectedCard, setSelectedCard] = useState(null)
+  const SOME_USERS = [
+    {
+      id: 'u1',
+      playerName: 'Numpty Numpty',
+      playerCard: '1',
+    },
+    {
+      id: 'u2',
+      playerName: 'Blether',
+      playerCard: '2',
+    },
+  ]
   return (
     <div
       id="roomContent"
@@ -47,6 +61,10 @@ export default function Room(props) {
             />
           )
         })}
+      </div>
+      {/* User list */}
+      <div className="mt-8">
+        <UserList userList={SOME_USERS} />
       </div>
     </div>
   )
