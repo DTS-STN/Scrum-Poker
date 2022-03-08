@@ -14,6 +14,22 @@ module.exports = {
         current: 'currentColor',
         canadaBlue: '#1C578A',
       },
+      keyframes: {
+        'pulsate-fwd': {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '50%': {
+            transform: 'scale(1.02)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          },
+        },
+      },
+      animation: {
+        'pulsate-fwd': 'pulsate-fwd 1s ease-in-out infinite both',
+      },
       backgroundImage: () => ({
         'footer-parliament-image': 'url(../public/landscape.png)',
         // 'splash-page': 'url(../public/sp-bg-1.jpg)',
