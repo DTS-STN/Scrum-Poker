@@ -17,6 +17,7 @@ export default function Room(props) {
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
   const [selectedCard, setSelectedCard] = useState(null)
+
   return (
     <div
       id="roomContent"
@@ -43,7 +44,13 @@ export default function Room(props) {
               key={card.id}
               alt={card.alt}
               onClick={() => setSelectedCard(card)}
+              onKeyDown={(e) => {
+                if (e.keyCode === 32 || e.keyCode === 13) {
+                  setSelectedCard(card)
+                }
+              }}
               selected={card.id === selectedCard?.id}
+              className="hover:animate-pulsate-fwd"
             />
           )
         })}

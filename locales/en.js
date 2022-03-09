@@ -25,6 +25,7 @@ export default {
   clearCards: 'Clear',
   // Header
   title: 'home',
+  scrumPoker: 'Scrum Poker',
   //
 
   // Nav
