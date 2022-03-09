@@ -78,7 +78,7 @@ export default function Header(props) {
 
         <div className="h-14 bg-canadaDarkBlue mt-6 mb-11 w-full ">
           <h1 className="text-white h-full font-bold text-2xl container mx-auto px-6 leading pt-3">
-            Scrum Poker
+            {props.t.scrumPoker}
           </h1>
         </div>
 
