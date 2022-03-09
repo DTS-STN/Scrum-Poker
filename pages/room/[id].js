@@ -64,7 +64,11 @@ export default function Room(props) {
       </div>
       {/* User list */}
       <div className="mt-8">
-        <UserList userList={SOME_USERS} />
+        <UserList
+          users={t.users}
+          card={t.card}
+          userList={SOME_USERS}
+        ></UserList>
       </div>
     </div>
   )

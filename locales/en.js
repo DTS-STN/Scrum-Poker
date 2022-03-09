@@ -19,6 +19,10 @@ export default {
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
   //
+  // Room
+  users: 'Users',
+  card: 'Card',
+
   // Header
   title: 'home',
   //

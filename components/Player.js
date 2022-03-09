@@ -6,10 +6,17 @@ import propTypes from 'prop-types'
 export default function Player(props) {
   return (
     <div className="flex md:flex-col justify-between rounded border border-slate-300 my-2 p-2">
-      <div className=" flex justify-between bg-amber-100">
+      <div className=" flex w-full justify-between bg-amber-100">
         <div className="flex">
-          <p className="rounded-full p-4 m-2 bg-slate-300">N</p>
-          <p className="px-2 my-auto text-lg font-body font-semibold text-slate-700">
+          <div
+            className={`flex items-center justify-center rounded-b-lg p-2  ${props.bgColor}`}
+          >
+            <span className="   bg-slate-300 rounded-full h-14 w-14 ">
+              {props.letter}
+            </span>
+          </div>
+
+          <p className="px-2 my-auto text-body font-body font-semibold text-slate-700">
             {props.playerName}
           </p>
         </div>
@@ -27,6 +34,12 @@ Player.propTypes = {
 
   // card selected
   playerCard: propTypes.string,
+
+  // letter
+  letter: propTypes.string,
+
+  // background colour of the circle if it needs to be changed
+  bgColour: propTypes.string,
 
   // id of the element for testing if needed
   id: propTypes.string,

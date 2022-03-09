@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types'
 import Player from './Player'
 
+import en from './../locales/en'
+import fr from './../locales/fr'
+
 /**
  * Simple HomeCardContainer component
  */
 export default function UserList(props) {
+  const t = props.locale === 'en' ? en : fr
+
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.key}>
       <Player playerName={player.playerName} playerCard={player.playerCard} />
@@ -12,9 +17,9 @@ export default function UserList(props) {
   ))
   return (
     <div className="rounded border p-2 flex flex-col bg-white">
-      <div className="flex justify-between border-b-2 border-slate-300 p-2">
-        <p className="px-2">User</p>
-        <p className="px-2">Card</p>
+      <div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
+        <p className="px-2">{props.users}</p>
+        <p className="px-2">{props.card}</p>
       </div>
       <ul className="flex flex-col " data-testid="cardList">
         {props.userList ? displayPlayers : ''}
@@ -31,14 +36,22 @@ UserList.propTypes = {
   userList: PropTypes.arrayOf(
     PropTypes.shape({
       /**
-       * Title for the card
+       * name for the list
        */
       playerName: PropTypes.string,
 
       /**
-       * Text for the card
+       * Text for the list
        */
       playerCard: PropTypes.string,
+      /**
+       * user text for the list
+       */
+      users: PropTypes.string,
+      /**
+       * card ext for the list
+       */
+      card: PropTypes.string,
     })
   ),
 }
