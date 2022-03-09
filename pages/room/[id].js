@@ -50,22 +50,22 @@ export default function Room(props) {
       </div>
       <div className="flex justify-center">
         <button
-          type="submit"
+          type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
         >
-          {t.showButton}
+          {t.showCards}
         </button>
         <button
-          type="submit"
+          type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
         >
-          {t.hideButton}
+          {t.hideCards}
         </button>
         <button
-          type="submit"
+          type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
         >
-          {t.clearButton}
+          {t.clearCards}
         </button>
       </div>
     </div>

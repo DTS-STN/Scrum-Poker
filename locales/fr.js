@@ -22,9 +22,9 @@ export default {
   joinRoomButton: 'Rejoignez la salle',
   //
   //Room
-  showButton: 'Voir',
-  hideButton: 'Cacher',
-  clearButton: 'Clair',
+  showCards: 'Dévoiler',
+  hideCards: 'Cacher',
+  clearCards: 'Effacer',
   // Header
   title: 'accueil',
   //

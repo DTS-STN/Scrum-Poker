@@ -20,9 +20,9 @@ export default {
   joinRoomButton: 'Join Room',
   //
   //Room
-  showButton: 'Show',
-  hideButton: 'Hide',
-  clearButton: 'Clear',
+  showCards: 'Show',
+  hideCards: 'Hide',
+  clearCards: 'Clear',
 
   // Header
   title: 'home',
