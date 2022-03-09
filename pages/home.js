@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import HomeCardContainer from '../components/HomeCardContainer'
+import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
 import { fetchContent } from '../lib/cms'
@@ -41,7 +41,13 @@ export default function Home(props) {
       id="homeContent"
       className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
-      <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
+      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.createRoomTitle}
+        </h2>
+        <h3 className="text-opacity-75 text-black text-xl">
+          {t.createRoomDesc}
+        </h3>
         <form
           data-testid="createRoomForm"
           onSubmit={(e) => {
@@ -66,8 +72,12 @@ export default function Home(props) {
             {t.createRoomButton}
           </button>
         </form>
-      </HomeCardContainer>
-      <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
+      </Container>
+      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.joinRoomTitle}
+        </h2>
+        <h3 className="text-opacity-75 text-black text-xl">{t.joinRoomDesc}</h3>
         <form
           onSubmit={handleJoinSubmit}
           className="flex flex-col justify-between h-full items-center"
@@ -89,7 +99,7 @@ export default function Home(props) {
             {t.joinRoomButton}
           </button>
         </form>
-      </HomeCardContainer>
+      </Container>
     </div>
   )
 }
