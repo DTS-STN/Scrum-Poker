@@ -1,19 +1,38 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
-import HomeCardContainer from '../components/HomeCardContainer'
+import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
 import { fetchContent } from '../lib/cms'
+
+import { gql, useQuery } from '@apollo/client'
+import GET_BOOKS_QUERY from '../graphql/queries/example.graphql'
+import client from '../graphql/client'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
+  //Load GraphQL Data
+  const { data, error, loading } = useQuery(GET_BOOKS_QUERY)
+
+  if (loading)
+    return (
+      <h1 data-testid="loadingState" id="homeContent">
+        loading....
+      </h1>
+    )
+  if (error)
+    return (
+      <h1 data-testid="errorState" id="homeContent">
+        {error.message}
+      </h1>
+    )
+
   const handleCreateSubmit = (e) => {
     e.preventDefault()
     console.log(e.target.owner.value)
-
     //TODO: Make call to back end to get random room id.
     //TODO: Redirect user to that room id.
     //  router.push({
@@ -21,18 +40,22 @@ export default function Home(props) {
     //    query: {q: "test"},
     //  })
   }
-
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
-
   return (
     <div
       data-testid="homeContent"
       id="homeContent"
       className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
     >
-      <HomeCardContainer title={t.createRoomTitle} desc={t.createRoomDesc}>
+      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.createRoomTitle}
+        </h2>
+        <h3 className="text-opacity-75 text-black text-xl">
+          {t.createRoomDesc}
+        </h3>
         <form
           onSubmit={handleCreateSubmit}
           className="flex flex-col justify-between h-full items-center"
@@ -49,8 +72,12 @@ export default function Home(props) {
             {t.createRoomButton}
           </button>
         </form>
-      </HomeCardContainer>
-      <HomeCardContainer title={t.joinRoomTitle} desc={t.joinRoomDesc}>
+      </Container>
+      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.joinRoomTitle}
+        </h2>
+        <h3 className="text-opacity-75 text-black text-xl">{t.joinRoomDesc}</h3>
         <form
           onSubmit={handleJoinSubmit}
           className="flex flex-col justify-between h-full items-center"
@@ -72,17 +99,14 @@ export default function Home(props) {
             {t.joinRoomButton}
           </button>
         </form>
-      </HomeCardContainer>
+      </Container>
     </div>
   )
 }
-
 export async function getStaticProps({ locale }) {
   const content = await fetchContent()
-
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
-
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
@@ -98,18 +122,15 @@ export async function getStaticProps({ locale }) {
       keywords: '',
     },
   }
-
   return {
     props: { locale, langToggleLink, content, meta },
   }
 }
-
 Home.propTypes = {
   /**
    * current locale in the address
    */
   locale: PropTypes.string,
-
   /*
    * Meta Tags
    */

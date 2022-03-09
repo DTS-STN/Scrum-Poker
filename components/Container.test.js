@@ -1,25 +1,25 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
-import HomeCardContainer from './HomeCardContainer'
+import Container from './Container'
 
 expect.extend(toHaveNoViolations)
 
-describe('HomeCardContainer', () => {
-  it('renders HomeCardContainer', () => {
+describe('Container', () => {
+  it('renders Container', () => {
     const primary = render(
-      <HomeCardContainer title="title" desh="short desc">
+      <Container title="title" desh="short desc">
         <p>test</p>
-      </HomeCardContainer>
+      </Container>
     )
     expect(primary).toBeTruthy()
   })
 
   it('has no a11y violations', async () => {
     const { container } = render(
-      <HomeCardContainer title="title" desh="short desc">
+      <Container title="title" desh="short desc">
         <p>test</p>
-      </HomeCardContainer>
+      </Container>
     )
     const results = await axe(container)
     expect(results).toHaveNoViolations()
