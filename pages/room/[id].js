@@ -55,7 +55,7 @@ export default function Room(props) {
         </h2>
       )}
       <div
-        id="roomContent"
+        id="cards"
         className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
       >
         {cards.map((card) => {
