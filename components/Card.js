@@ -10,7 +10,7 @@ export default function Card(props) {
         props.selected
           ? `border-4 border-canadaBlue rounded-lg focus:ring-0`
           : `border border-slate-300 `
-      } ${props.className ? props.className : ``}`}
+      } ${props.className}`}
       onClick={props.onClick}
       onKeyDown={props.onKeyDown}
       tabIndex="0"
