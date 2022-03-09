@@ -24,8 +24,12 @@ export default {
   // Room
   users: '(FR)Users',
   card: '(FR)Card',
+  showCards: 'Dévoiler',
+  hideCards: 'Cacher',
+  clearCards: 'Effacer',
   // Header
   title: 'accueil',
+  scrumPoker: 'Scrum Poker',
   //
 
   // Nav

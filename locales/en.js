@@ -22,9 +22,12 @@ export default {
   // Room
   users: 'Users',
   card: 'Card',
-
+  showCards: 'Show',
+  hideCards: 'Hide',
+  clearCards: 'Clear',
   // Header
   title: 'home',
+  scrumPoker: 'Scrum Poker',
   //
 
   // Nav
