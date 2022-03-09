@@ -8,18 +8,26 @@ import fr from './../locales/fr'
  * Simple HomeCardContainer component
  */
 export default function UserList(props) {
-  const t = props.locale === 'en' ? en : fr
-
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.key}>
-      <Player playerName={player.playerName} playerCard={player.playerCard} />
+      {props.currPlayer.id === player.id ? (
+        // Current player.
+        <Player
+          playerName={player.playerName}
+          playerCard={player.playerCard}
+          selectedCard={props.selectedCard}
+        />
+      ) : (
+        // Other players.
+        <Player playerName={player.playerName} playerCard={player.playerCard} />
+      )}
     </li>
   ))
   return (
     <div className="rounded border p-2 flex flex-col bg-white">
       <div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
-        <p className="px-2">{props.users}</p>
-        <p className="px-2">{props.card}</p>
+        <p className="px-2">{props.t.users}</p>
+        <p className="px-2">{props.t.card}</p>
       </div>
       <ul className="flex flex-col " data-testid="cardList">
         {props.userList ? displayPlayers : ''}

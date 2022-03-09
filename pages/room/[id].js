@@ -19,7 +19,9 @@ export default function Room(props) {
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
   const [selectedCard, setSelectedCard] = useState(null)
-  const SOME_USERS = [
+
+  // Here we can call the back end on load to get the list of all users in the connected websocket.
+  const [users, setUsers] = useState([
     {
       id: 'u1',
       playerName: 'Numpty Numpty',
@@ -30,7 +32,15 @@ export default function Room(props) {
       playerName: 'Blether',
       playerCard: '2',
     },
-  ]
+  ])
+
+  // Here we can call the back end on load to get the current session user id and setCurrPlayer.
+  const [currPlayer, setCurrPlayer] = useState({
+    id: 'u1',
+    playerName: 'Numpty Numpty',
+    playerCard: '1',
+  })
+
   return (
     <div
       id="roomContent"
@@ -65,9 +75,10 @@ export default function Room(props) {
       {/* User list */}
       <div className="mt-8">
         <UserList
-          users={t.users}
-          card={t.card}
-          userList={SOME_USERS}
+          t={t}
+          userList={users}
+          selectedCard={selectedCard}
+          currPlayer={currPlayer}
         ></UserList>
       </div>
     </div>

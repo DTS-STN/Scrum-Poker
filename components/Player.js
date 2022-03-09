@@ -1,4 +1,5 @@
 import propTypes from 'prop-types'
+import Card from './Card'
 
 /**
  * Simple Card component
@@ -21,7 +22,19 @@ export default function Player(props) {
           </p>
         </div>
 
-        <p className="px-6 my-auto">{props.playerCard}</p>
+        {/* <p className="px-6 my-auto">{props.playerCard}</p> */}
+
+        {props.selectedCard ? (
+          <Card
+            src={props.selectedCard.src}
+            id={props.selectedCard.id}
+            key={props.selectedCard.id}
+            alt={props.selectedCard.alt}
+          />
+        ) : (
+          ''
+        )}
+        {/*We can pass the back of the card image in the else statement above. (where the two single quotes are)*/}
       </div>
       {props.children}
     </div>
