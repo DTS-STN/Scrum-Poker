@@ -21,6 +21,7 @@ export default {
   //
   // Header
   title: 'home',
+  scrumPoker: 'Scrum Poker',
   //
 
   // Nav
