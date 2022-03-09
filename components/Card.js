@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function Card(props) {
   return (
     <div
-      className={`h-auto w-auto ${
+      className={`hover:cursor-pointer h-auto w-auto ${
         props.selected
           ? `border-4 border-canadaBlue rounded-lg  block`
           : props.className
