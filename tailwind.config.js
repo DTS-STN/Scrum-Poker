@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         current: 'currentColor',
         canadaBlue: '#1C578A',
+        canadaDarkBlue: '#26374A',
       },
       backgroundImage: () => ({
         'footer-parliament-image': 'url(../public/landscape.png)',
