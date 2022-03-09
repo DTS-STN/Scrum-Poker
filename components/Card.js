@@ -6,10 +6,12 @@ import Image from 'next/image'
 export default function Card(props) {
   return (
     <div
-      className={`h-auto w-48 mx-auto md:w-44 block ${
+      className={`h-auto w-auto ${
         props.selected
-          ? `border-4 border-canadaBlue rounded-lg`
-          : `border border-slate-300`
+          ? `border-4 border-canadaBlue rounded-lg  block`
+          : props.className
+          ? `h-auto w-20 p-2`
+          : `border border-slate-300 block`
       }`}
       onClick={props.onClick}
     >

@@ -2,15 +2,15 @@ import propTypes from 'prop-types'
 import Card from './Card'
 
 /**
- * Simple Card component
+ * Player list component
  */
 export default function Player(props) {
   return (
-    <div className="flex md:flex-col justify-between rounded border border-slate-300 my-2 p-2">
-      <div className=" flex w-full justify-between bg-amber-100">
-        <div className="flex">
+    <div className="flex md:flex-col rounded border border-slate-300 my-2">
+      <div className=" flex w-full justify-between">
+        <div className="flex ">
           <div
-            className={`flex items-center justify-center rounded-b-lg p-2  ${props.bgColor}`}
+            className={`flex items-center justify-center rounded-lg p-2  ${props.bgColor}`}
           >
             <span className="   bg-slate-300 rounded-full h-14 w-14 ">
               {props.letter}
@@ -30,9 +30,10 @@ export default function Player(props) {
             id={props.selectedCard.id}
             key={props.selectedCard.id}
             alt={props.selectedCard.alt}
+            className=" "
           />
         ) : (
-          ''
+          'other peoples cards here'
         )}
         {/*We can pass the back of the card image in the else statement above. (where the two single quotes are)*/}
       </div>

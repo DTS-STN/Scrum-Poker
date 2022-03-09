@@ -5,7 +5,7 @@ import en from './../locales/en'
 import fr from './../locales/fr'
 
 /**
- * Simple HomeCardContainer component
+ * List of players component
  */
 export default function UserList(props) {
   const displayPlayers = props.userList.map((player) => (
@@ -16,10 +16,15 @@ export default function UserList(props) {
           playerName={player.playerName}
           playerCard={player.playerCard}
           selectedCard={props.selectedCard}
+          key={props.selectedCard}
         />
       ) : (
         // Other players.
-        <Player playerName={player.playerName} playerCard={player.playerCard} />
+        <Player
+          playerName={player.playerName}
+          playerCard={player.playerCard}
+          key={props.selectedCard}
+        />
       )}
     </li>
   ))
