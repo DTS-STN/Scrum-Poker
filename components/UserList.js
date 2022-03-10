@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types'
 import Player from './Player'
 
-import en from './../locales/en'
-import fr from './../locales/fr'
-
 /**
  * List of players component
  */
 export default function UserList(props) {
   const displayPlayers = props.userList.map((player) => (
-    <li className="w-full" key={player.key}>
+    <li className="w-full" key={player.id}>
       {props.currPlayer.id === player.id ? (
         // Current player.
         <Player
