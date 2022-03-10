@@ -10,10 +10,10 @@ export default function Player(props) {
     <div className="flex md:flex-col rounded border border-slate-300 my-2">
       <div className=" flex w-full justify-between">
         <div className="flex ">
-          <div
-            className={`flex items-center justify-center rounded-lg p-2  ${props.bgColor}`}
-          >
-            <span className="   bg-slate-300 rounded-full h-14 w-14 relative">
+          <div className={`flex items-center justify-center rounded-lg p-2`}>
+            <span
+              className={`   bg-slate-300 rounded-full h-14 w-14 relative ${props.bgColor}`}
+            >
               <span className="left-5 top-3 font-bold text-xl font-body absolute">
                 {props.playerName.charAt(0).toUpperCase()}
               </span>
@@ -24,8 +24,6 @@ export default function Player(props) {
             {props.playerName}
           </p>
         </div>
-
-        {/* <p className="px-6 my-auto">{props.playerCard}</p> */}
 
         {props.selectedCard ? (
           <Card
@@ -57,7 +55,7 @@ Player.propTypes = {
   playerName: propTypes.string,
 
   // card selected
-  playerCard: propTypes.string,
+  selectedCard: propTypes.string,
 
   // letter
   letter: propTypes.string,

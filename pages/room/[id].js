@@ -98,14 +98,12 @@ export default function Room(props) {
         </button>
       </div>
       {/* User list */}
-      <div className="mt-2">
-        <UserList
-          t={t}
-          userList={users}
-          selectedCard={selectedCard}
-          currPlayer={currPlayer}
-        ></UserList>
-      </div>
+      <UserList
+        t={t}
+        userList={users}
+        selectedCard={selectedCard}
+        currPlayer={currPlayer}
+      ></UserList>
     </div>
   )
 }
