@@ -5,7 +5,7 @@ import Image from 'next/image'
  */
 export default function Card(props) {
   return (
-    <div
+    <li
       className={`hover:cursor-pointer h-auto w-48 mx-auto md:w-44 focus:rounded-lg focus:ring focus:ring-gray-600  ${
         props.selected
           ? `border-4 border-canadaBlue rounded-lg focus:ring-0`
@@ -23,7 +23,7 @@ export default function Card(props) {
         height={102}
         layout="responsive"
       ></Image>
-    </div>
+    </li>
   )
 }
 

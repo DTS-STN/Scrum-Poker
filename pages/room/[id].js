@@ -32,7 +32,7 @@ export default function Room(props) {
           <span className="font-bold">{selectedCard.value}</span>
         </h2>
       )}
-      <div
+      <ul
         id="roomContent"
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
       >
@@ -54,7 +54,7 @@ export default function Room(props) {
             />
           )
         })}
-      </div>
+      </ul>
       <div className="flex justify-center">
         <button
           type="button"
