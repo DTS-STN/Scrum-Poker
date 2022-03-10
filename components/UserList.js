@@ -56,11 +56,11 @@ UserList.propTypes = {
       /**
        * Text for the list
        */
-      selectedCard: PropTypes.object,
+      playerCard: PropTypes.string,
       /**
        * selected card for the list
        */
-      selectedCard: PropTypes.string,
+      selectedCard: PropTypes.object,
       /**
        * user text for the list
        */
