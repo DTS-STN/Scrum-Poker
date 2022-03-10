@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646942143317" clover="3.2.0">
-  <project timestamp="1646942143317" name="All files">
+<coverage generated="1646943120533" clover="3.2.0">
+  <project timestamp="1646943120533" name="All files">
     <metrics statements="69" coveredstatements="45" conditionals="54" coveredconditionals="35" methods="29" coveredmethods="19" elements="152" coveredelements="99" complexity="0" loc="69" ncloc="69" packages="4" files="17" classes="17"/>
     <package name="components">
       <metrics statements="30" coveredstatements="24" conditionals="36" coveredconditionals="27" methods="13" coveredmethods="10"/>
@@ -49,7 +49,7 @@
       <file name="Player.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Player.js">
         <metrics statements="2" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
       </file>
       <file name="TextInput.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/TextInput.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -127,11 +127,11 @@
         <line num="68" count="0" type="stmt"/>
         <line num="70" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="71" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="117" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
+        <line num="112" count="0" type="stmt"/>
+        <line num="115" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="135" count="0" type="stmt"/>
+        <line num="140" count="0" type="stmt"/>
       </file>
     </package>
   </project>
