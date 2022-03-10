@@ -18,12 +18,32 @@ export default function Room(props) {
   ]
   const [selectedCard, setSelectedCard] = useState(null)
 
+  function copyToClipboard() {
+    navigator.clipboard.writeText(props.roomId).then(
+      function () {
+        console.log('room id', props.roomId, ' copied to clipboard')
+      },
+      function () {
+        console.log("didn't worked")
+      }
+    )
+  }
+
   return (
     <div
       id="roomContent"
       className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
       <h1>Room {props.roomId}</h1>
+      <button
+        type="button"
+        // onClick={() => { navigator.clipboard.writeText("this is the text copied") }}
+        onClick={() => copyToClipboard()}
+        className="w-16 m-1 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-0.5 px-0.5 rounded border border-[#091C2D] text-[16px] leading-8"
+      >
+        copy
+      </button>
+
       {!selectedCard ? (
         <h2>Select a card...</h2>
       ) : (
