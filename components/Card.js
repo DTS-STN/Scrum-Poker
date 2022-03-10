@@ -6,10 +6,10 @@ import Image from 'next/image'
 export default function Card(props) {
   return (
     <div
-      className={`hover:cursor-pointer h-auto w-48 mx-auto md:w-44 focus:rounded-lg focus:ring focus:ring-gray-600  ${
+      className={`hover:cursor-pointer h-auto w-40 mx-auto md:w-36 focus:rounded-lg focus:ring focus:ring-gray-600  ${
         props.selected
           ? `border-4 border-canadaBlue rounded-lg focus:ring-0`
-          : `border border-slate-300 `
+          : ``
       } ${props.className}`}
       onClick={props.onClick}
       onKeyDown={props.onKeyDown}

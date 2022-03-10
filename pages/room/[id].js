@@ -1,6 +1,8 @@
+import { Container } from 'postcss'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
+import ContainerCard from '../../components/Container'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -19,10 +21,7 @@ export default function Room(props) {
   const [selectedCard, setSelectedCard] = useState(null)
 
   return (
-    <div
-      id="roomContent"
-      className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
-    >
+    <ContainerCard style="mx-10 w-auto">
       <h1>Room {props.roomId}</h1>
       {!selectedCard ? (
         <h2>Select a card...</h2>
@@ -32,10 +31,7 @@ export default function Room(props) {
           <span className="font-bold">{selectedCard.value}</span>
         </h2>
       )}
-      <div
-        id="roomContent"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
-      >
+      <ContainerCard style="p-5 mx-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2">
         {cards.map((card) => {
           return (
             <Card
@@ -54,7 +50,7 @@ export default function Room(props) {
             />
           )
         })}
-      </div>
+      </ContainerCard>
       <div className="flex justify-center">
         <button
           type="button"
@@ -75,7 +71,7 @@ export default function Room(props) {
           {t.clearCards}
         </button>
       </div>
-    </div>
+    </ContainerCard>
   )
 }
 
