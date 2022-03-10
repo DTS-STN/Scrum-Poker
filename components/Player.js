@@ -13,8 +13,10 @@ export default function Player(props) {
           <div
             className={`flex items-center justify-center rounded-lg p-2  ${props.bgColor}`}
           >
-            <span className="   bg-slate-300 rounded-full h-14 w-14 ">
-              {props.letter}
+            <span className="   bg-slate-300 rounded-full h-14 w-14 relative">
+              <span className="left-5 top-3 font-bold text-xl font-body absolute">
+                {props.playerName.charAt(0).toUpperCase()}
+              </span>
             </span>
           </div>
 
@@ -44,7 +46,6 @@ export default function Player(props) {
             />
           </div>
         )}
-        {/*We can pass the back of the card image in the else statement above. (where the two single quotes are)*/}
       </div>
       {props.children}
     </div>

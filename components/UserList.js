@@ -13,7 +13,6 @@ export default function UserList(props) {
           playerName={player.playerName}
           playerCard={player.playerCard}
           selectedCard={props.selectedCard}
-          key={props.selectedCard}
           imgAlt="selectedCard"
         />
       ) : (
@@ -21,7 +20,6 @@ export default function UserList(props) {
         <Player
           playerName={player.playerName}
           playerCard={player.playerCard}
-          key={props.selectedCard}
           imgAlt="blankCard"
         />
       )}
