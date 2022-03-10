@@ -55,6 +55,26 @@ export default function Room(props) {
           )
         })}
       </div>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+        >
+          {t.showCards}
+        </button>
+        <button
+          type="button"
+          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+        >
+          {t.hideCards}
+        </button>
+        <button
+          type="button"
+          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+        >
+          {t.clearCards}
+        </button>
+      </div>
     </div>
   )
 }
