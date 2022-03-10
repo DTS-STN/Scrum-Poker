@@ -21,7 +21,7 @@ export default function Room(props) {
   function copyToClipboard() {
     navigator.clipboard.writeText(props.roomId).then(
       function () {
-        console.log('room id', props.roomId, ' copied to clipboard')
+        console.log('room id: ', props.roomId, ' copied to clipboard')
       },
       function () {
         console.log("didn't worked")
