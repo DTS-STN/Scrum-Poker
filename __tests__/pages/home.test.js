@@ -4,7 +4,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import Home from '../../pages/home'
-import GET_BOOKS_QUERY from '../../graphql/queries/example.graphql'
+import GET_ROOMS_QUERY from '../../graphql/queries/getRoom.graphql'
 import { MockedProvider } from '@apollo/client/testing'
 
 import { getStaticProps } from '../../pages/home'
@@ -26,14 +26,14 @@ jest.mock('../../lib/cms', () => ({
 describe('Home page', () => {
   const mockRoomData = {
     request: {
-      query: GET_BOOKS_QUERY,
+      query: GET_ROOMS_QUERY,
     },
     result: {
       data: {
-        books: [
+        rooms: [
           {
             id: '1',
-            title: 'The Awakening',
+            title: 'room test',
           },
         ],
       },
@@ -42,7 +42,7 @@ describe('Home page', () => {
 
   const mockErrorData = {
     request: {
-      query: GET_BOOKS_QUERY,
+      query: GET_ROOMS_QUERY,
     },
     error: new Error('Network Error'),
   }
@@ -86,6 +86,18 @@ describe('Home page', () => {
     )
     expect(screen).toBeTruthy()
     const heading = screen.getByTestId('loadingState')
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should render the page successfully', async () => {
+    render(
+      <MockedProvider addTypename={false} mocks={[mockRoomData]}>
+        <Home locale="en" />
+      </MockedProvider>
+    )
+    await new Promise((resolve) => setTimeout(resolve, 0))
+    expect(screen).toBeTruthy()
+    const heading = screen.getByTestId('homeContent')
     expect(heading).toBeInTheDocument()
   })
 
