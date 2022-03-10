@@ -49,11 +49,18 @@ UserList.propTypes = {
        * name for the list
        */
       playerName: PropTypes.string,
-
+      /**
+       * current player
+       */
+      currPlayer: PropTypes.string,
       /**
        * Text for the list
        */
       playerCard: PropTypes.string,
+      /**
+       * selected card for the list
+       */
+      selectedCard: PropTypes.string,
       /**
        * user text for the list
        */
@@ -62,6 +69,10 @@ UserList.propTypes = {
        * card ext for the list
        */
       card: PropTypes.string,
+      /**
+       * Translated text
+       */
+      t: PropTypes.object,
     })
   ),
 }
