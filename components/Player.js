@@ -1,5 +1,6 @@
 import propTypes from 'prop-types'
 import Card from './Card'
+import Image from 'next/image'
 
 /**
  * Player list component
@@ -33,7 +34,15 @@ export default function Player(props) {
             className=" "
           />
         ) : (
-          'other peoples cards here'
+          <div className=" h-auto w-20 p-2">
+            <Image
+              src="/EmptyCard.svg"
+              alt={props.imgAlt}
+              width={74}
+              height={102}
+              layout="responsive"
+            />
+          </div>
         )}
         {/*We can pass the back of the card image in the else statement above. (where the two single quotes are)*/}
       </div>
@@ -57,4 +66,7 @@ Player.propTypes = {
 
   // id of the element for testing if needed
   id: propTypes.string,
+
+  // Alt text of the image
+  imgAlt: propTypes.string,
 }
