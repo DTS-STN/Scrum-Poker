@@ -79,7 +79,7 @@ object Build_Release: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "main")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/digitalCentre!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumpoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
@@ -139,7 +139,7 @@ object Build_Dynamic: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "%teamcity.build.branch%")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/digitalCentre!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumpoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
@@ -199,7 +199,7 @@ object Build_Performance: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "perf")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/digitalCentre!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumpoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
