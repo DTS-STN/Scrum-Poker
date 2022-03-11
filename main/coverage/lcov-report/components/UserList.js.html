@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for pages/404.js</title>
+    <title>Code coverage report for components/UserList.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">pages</a> 404.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">components</a> UserList.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -140,14 +140,16 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,6 +168,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -179,6 +182,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -198,7 +202,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,86 +216,86 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Link from 'next/link'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import PropTypes from 'prop-types'
+import Player from './Player'
 &nbsp;
-export default function Custom404() {
-  return (
-    &lt;div className="grid md:grid-cols-2 sm:grid-cols-1 items-center justify-center overflow-visible md:h-96 sm:h-screen mx-2 my-2 px-20"&gt;
-      &lt;div className="error-404"&gt;
-        &lt;h1 className="text-2xl"&gt;{"We couldn't find that Web page"}&lt;/h1&gt;
-        &lt;h2&gt;An error 404 occured on server&lt;/h2&gt;
-        &lt;p&gt;
-          {
-            "We're sorry you ended up here. Sometimes a page gets moved or deleted, but hopefully we can help you find what you're looking for. What next?"
-          }
-        &lt;/p&gt;
-        &lt;ul&gt;
-          &lt;li&gt;
-            Return to the{' '}
-            &lt;Link href="/"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;home page&lt;/a&gt;
-            &lt;/Link&gt;
-            ;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link href="https://www.canada.ca/en/contact.html"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;Contact us&lt;/a&gt;
-            &lt;/Link&gt;
-            {" and we'll help you out."}
-          &lt;/li&gt;
-        &lt;/ul&gt;
+/**
+ * List of players component
+ */
+export default function <span class="fstat-no" title="function not covered" >UserList(</span>props) {
+  const displayPlayers = <span class="cstat-no" title="statement not covered" >props.userList.map(<span class="fstat-no" title="function not covered" >(p</span>layer) =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;li className="w-full" key={player.id}&gt;</span>
+      {props.currPlayer.id === player.id ? (
+        // Current player.
+        &lt;Player
+          playerName={player.playerName}
+          playerCard={player.playerCard}
+          selectedCard={props.selectedCard}
+          imgAlt="selectedCard"
+        /&gt;
+      ) : (
+        // Other players.
+        &lt;Player
+          playerName={player.playerName}
+          playerCard={player.playerCard}
+          imgAlt="blankCard"
+        /&gt;
+      )}
+    &lt;/li&gt;
+  ))
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;div className="rounded border p-2 flex flex-col bg-white mt-2"&gt;
+      &lt;div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide"&gt;
+        &lt;p className="px-2"&gt;{props.t.users}&lt;/p&gt;
+        &lt;p className="px-2"&gt;{props.t.card}&lt;/p&gt;
       &lt;/div&gt;
-      &lt;div className="error-404"&gt;
-        &lt;h1 className="text-2xl"&gt;Nous ne pouvons trouver cette page Web&lt;/h1&gt;
-        &lt;h2&gt;Erreur 404&lt;/h2&gt;
-        &lt;p&gt;
-          {
-            "Nous sommes désolés que vous ayez abouti ici. Il arrive parfois qu'une page ait été déplacée ou supprimée. Heureusement, nous pouvons vous aider à trouver ce que vous cherchez. Que faire?"
-          }
-        &lt;/p&gt;
-        &lt;ul&gt;
-          &lt;li&gt;
-            Retournez à la{' '}
-            &lt;Link href="/"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;page {"d'accueil;"}&lt;/a&gt;
-            &lt;/Link&gt;
-          &lt;/li&gt;
-          &lt;li&gt;
-            &lt;Link href="https://www.canada.ca/en/contact.html"&gt;
-              &lt;a className="text-cyan-600 underline"&gt;Communiquez avec nous&lt;/a&gt;
-            &lt;/Link&gt;
-            {" pour obtenir de l'aide."}
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
+      &lt;ul className="flex flex-col " data-testid="cardList"&gt;
+        {props.userList ? displayPlayers : ''}
+      &lt;/ul&gt;
+      {props.children}
     &lt;/div&gt;
   )
 }
 &nbsp;
-export async function getStaticProps({ locale }) {
-  /* Place-holder Meta Data Props */
-  const meta = {
-    data_en: {
-      title: 'Next Template - 404',
-      desc: 'English',
-      author: 'Service Canada',
-      keywords: '',
-    },
-    data_fr: {
-      title: 'Next Template - 404',
-      desc: 'Français',
-      author: 'Service Canada',
-      keywords: '',
-    },
-  }
-&nbsp;
-  return {
-    props: { locale, meta },
-  }
+<span class="cstat-no" title="statement not covered" >UserList.propTypes = {</span>
+  /**
+   * The card page that the card will display
+   */
+  userList: PropTypes.arrayOf(
+    PropTypes.shape({
+      /**
+       * name for the list
+       */
+      playerName: PropTypes.string,
+      /**
+       * current player
+       */
+      currPlayer: PropTypes.string,
+      /**
+       * Text for the list
+       */
+      playerCard: PropTypes.string,
+      /**
+       * selected card for the list
+       */
+      selectedCard: PropTypes.string,
+      /**
+       * user text for the list
+       */
+      users: PropTypes.string,
+      /**
+       * card ext for the list
+       */
+      card: PropTypes.string,
+      /**
+       * Translated text
+       */
+      t: PropTypes.object,
+    })
+  ),
 }
 &nbsp;</pre></td></tr></table></pre>
 
