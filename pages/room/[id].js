@@ -48,6 +48,7 @@ export default function Room(props) {
     >
       <RoomInfo
         id="rommid"
+        t={t}
         roomId={props.roomId}
         playerName="some name"
         playersOnline="99"

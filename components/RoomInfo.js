@@ -20,7 +20,7 @@ export default function RoomInfo(props) {
       id={props.id}
     >
       <div className="flex border-b-[#26374A] border-b p-1 text-left">
-        <div className="flex-initial w-48">Room Id:</div>
+        <div className="flex-initial w-48">{props.t.roomId}</div>
         <div className="flex-initial w-48 text-right">
           {props.roomId}
           <button
@@ -28,17 +28,17 @@ export default function RoomInfo(props) {
             onClick={() => copyToClipboard()}
             className="w-12 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
           >
-            Copy
+            {props.t.copy}
           </button>
         </div>
       </div>
 
       <div className="flex p-1">
-        <div className="flex-1 w-48">Player&apos;s Name:</div>
+        <div className="flex-1 w-48">{props.t.playerName}</div>
         <div className="flex-1 w-48 text-right">{props.playerName}</div>
       </div>
       <div className="flex p-1">
-        <div className="flex-1 w-48 ">Players online:</div>
+        <div className="flex-1 w-48 ">{props.t.playersOnline}</div>
         <div className="flex-1 w-48 text-right">{props.playersOnline}</div>
       </div>
     </div>
@@ -50,6 +50,12 @@ RoomInfo.defaultProps = {
   playerName: 'My Name',
   playersOnline: '3',
   roomId: '2f3h9',
+  t: {
+    roomId: 'Room Id:',
+    playerName: 'Player&apos;s Name:',
+    playersOnline: 'Players Online:',
+    copy: 'Copy',
+  },
 }
 
 RoomInfo.propTypes = {
@@ -64,4 +70,7 @@ RoomInfo.propTypes = {
 
   // roomId of the room
   roomId: propTypes.string,
+
+  // translations for labels
+  t: propTypes.object,
 }
