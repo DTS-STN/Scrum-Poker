@@ -18,7 +18,14 @@ export default function Room(props) {
     { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
+  const hiddenCard = {
+    id: 'card-hidden',
+    src: '/Card_Back.svg',
+    value: 'hidden',
+  }
+
   const [selectedCard, setSelectedCard] = useState(null)
+  const [isHidden, setHidden] = useState(false)
 
   // Here we can call the back end on load to get the list of all users in the connected websocket.
   const [users, setUsers] = useState([
@@ -88,18 +95,24 @@ export default function Room(props) {
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => setHidden(false)}
         >
           {t.showCards}
         </button>
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => (selectedCard ? setHidden(true) : null)}
         >
           {t.hideCards}
         </button>
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => {
+            setSelectedCard(null)
+            setHidden(false)
+          }}
         >
           {t.clearCards}
         </button>
@@ -108,7 +121,7 @@ export default function Room(props) {
       <UserList
         t={t}
         userList={users}
-        selectedCard={selectedCard}
+        selectedCard={isHidden ? hiddenCard : selectedCard}
         currPlayer={currPlayer}
       ></UserList>
     </div>
