@@ -18,11 +18,18 @@ export default {
   joinRoomNameLabel: 'Enter your name',
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
-  //
-  //Room
+
+  // Room
+  users: 'Users',
+  card: 'Card',
   showCards: 'Show',
   hideCards: 'Hide',
   clearCards: 'Clear',
+  roomId: 'Room Id:',
+  playerName: "Player's Name:",
+  playersOnline: 'Players Online:',
+  copy: 'Copy',
+
   // Header
   title: 'home',
   scrumPoker: 'Scrum Poker',

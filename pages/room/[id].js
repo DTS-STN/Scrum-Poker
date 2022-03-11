@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
+import RoomInfo from '../../components/RoomInfo'
+import UserList from '../../components/UserList'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -16,14 +18,49 @@ export default function Room(props) {
     { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
+  const hiddenCard = {
+    id: 'card-hidden',
+    src: '/Card_Back.svg',
+    value: 'hidden',
+  }
+
   const [selectedCard, setSelectedCard] = useState(null)
+  const [isHidden, setHidden] = useState(false)
+
+  // Here we can call the back end on load to get the list of all users in the connected websocket.
+  const [users, setUsers] = useState([
+    {
+      id: 'u1',
+      playerName: 'Numpty Numpty',
+      playerCard: '1',
+    },
+    {
+      id: 'u2',
+      playerName: 'Blether',
+      playerCard: '2',
+    },
+  ])
+
+  // Here we can call the back end on load to get the current session user id and setCurrPlayer.
+  const [currPlayer, setCurrPlayer] = useState({
+    id: 'u1',
+    playerName: 'Numpty Numpty',
+    playerCard: '1',
+  })
 
   return (
     <div
       id="roomContent"
       className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
-      <h1>Room {props.roomId}</h1>
+      <RoomInfo
+        id="rommid"
+        t={t}
+        roomId={props.roomId}
+        playerName="some name"
+        playersOnline="99"
+      />
+
       {!selectedCard ? (
         <h2>Select a card...</h2>
       ) : (
@@ -33,8 +70,8 @@ export default function Room(props) {
         </h2>
       )}
       <ul
-        id="roomContent"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+        id="cards"
+        className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
       >
         {cards.map((card) => {
           return (
@@ -50,7 +87,6 @@ export default function Room(props) {
                 }
               }}
               selected={card.id === selectedCard?.id}
-              className="hover:animate-pulsate-fwd"
             />
           )
         })}
@@ -59,22 +95,35 @@ export default function Room(props) {
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => setHidden(false)}
         >
           {t.showCards}
         </button>
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => (selectedCard ? setHidden(true) : null)}
         >
           {t.hideCards}
         </button>
         <button
           type="button"
           className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+          onClick={() => {
+            setSelectedCard(null)
+            setHidden(false)
+          }}
         >
           {t.clearCards}
         </button>
       </div>
+      {/* User list */}
+      <UserList
+        t={t}
+        userList={users}
+        selectedCard={isHidden ? hiddenCard : selectedCard}
+        currPlayer={currPlayer}
+      ></UserList>
     </div>
   )
 }

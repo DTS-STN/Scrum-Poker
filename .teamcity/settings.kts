@@ -3,6 +3,8 @@ import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.schedule
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.ScheduleTrigger
 /*
 The settings script is an entry point for defining a TeamCity
 project hierarchy. The script should contain a single call to the
@@ -74,11 +76,12 @@ object Build_Release: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "main")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
@@ -92,7 +95,7 @@ object Build_Release: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=cmsurl"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
@@ -133,11 +136,12 @@ object Build_Dynamic: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
-        param("env.BRANCH", "%teamcity.build.branch%")
+        param("env.BRANCH", "dyna-%teamcity.build.branch%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
@@ -151,7 +155,7 @@ object Build_Dynamic: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=cmsurl"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
@@ -192,11 +196,12 @@ object Build_Performance: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "perf")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
@@ -210,7 +215,7 @@ object Build_Performance: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=cmsurl"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
@@ -240,6 +245,49 @@ object Build_Performance: BuildType({
     triggers {
         vcs {
             branchFilter = "+:*"
+        }
+    }
+})
+
+object CleanUpWeekly: BuildType({
+    name = "CleanUpWeekly"
+    description = "Deletes deployments every saturday"
+    params {
+        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
+        param("env.PROJECT", "scrum-poker")
+        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
+        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
+        param("env.TARGET", "main")
+        param("env.BRANCH", "%teamcity.build.branch%")
+    }
+    vcs {
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
+    }
+    steps {
+        script {
+            name = "Login and Delete Deployment"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
+                az account set -s %env.SUBSCRIPTION%
+                echo %env.PROJECT%-branch
+                kubectl get namespace | awk '/^%env.PROJECT%-dyna/{system("kubectl delete namespace " $1)}'
+            """.trimIndent()
+        }
+    }
+    triggers {
+        schedule {
+            schedulingPolicy = weekly {
+                dayOfWeek = ScheduleTrigger.DAY.Saturday
+                hour = 15
+                minute = 15
+                timezone = "America/New_York"
+            }  
+            branchFilter = "+:main"
+            triggerBuild = always()
+            withPendingChangesOnly = false
+            triggerBuildOnAllCompatibleAgents = true
         }
     }
 })
