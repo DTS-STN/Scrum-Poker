@@ -1,6 +1,0 @@
-query GetBooks {
-  books {
-    id
-    title
-  }
-}
