@@ -55,7 +55,7 @@ Player.propTypes = {
   playerName: propTypes.string,
 
   // card selected
-  selectedCard: propTypes.string,
+  selectedCard: propTypes.object,
 
   // letter
   letter: propTypes.string,
