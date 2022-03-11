@@ -76,7 +76,6 @@ export default function Room(props) {
           )
         })}
       </div>
-
       <div className="flex justify-center">
         <button
           type="button"

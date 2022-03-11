@@ -43,13 +43,21 @@ const securityHeaders = [
   },
 ]
 
+// GraphQL end point
+const graphQLurl = process.env.NEXT_CONTENT_GRAPHQL
+  ? process.env.NEXT_CONTENT_GRAPHQL
+  : ''
+
 module.exports = {
   images: {
     dangerouslyAllowSVG: true,
   },
+
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
+    NEXT_CONTENT_GRAPHQL: graphQLurl,
   },
+
   reactStrictMode: true,
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     //GraphQL loader for .graphql files

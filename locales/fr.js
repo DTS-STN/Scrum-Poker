@@ -20,7 +20,6 @@ export default {
   joinRoomNameLabel: 'Entrez votre nom',
   joinRoomNamePlaceholder: 'Votre nom',
   joinRoomButton: 'Rejoignez la salle',
-  //
   // Room
   users: '(FR)Users',
   card: '(FR)Card',
