@@ -16,7 +16,7 @@ export default function RoomInfo(props) {
 
   return (
     <div
-      className={`h-auto w-72 my-4 rounded-lg border border-[#26374A]`}
+      className={`h-auto w-72 my-4 rounded-lg bg-white border border-[#26374A]`}
       id={props.id}
     >
       <div className="flex border-b-[#26374A] border-b p-1 text-left">
