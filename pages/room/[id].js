@@ -25,7 +25,6 @@ export default function Room(props) {
 
   const [selectedCard, setSelectedCard] = useState(null)
   const [isHidden, setHidden] = useState(false)
-  const [isClear, setClear] = useState(false)
 
   // Here we can call the back end on load to get the list of all users in the connected websocket.
   const [users, setUsers] = useState([
