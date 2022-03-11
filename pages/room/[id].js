@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
+import UserList from '../../components/UserList'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -18,6 +19,27 @@ export default function Room(props) {
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
   const [selectedCard, setSelectedCard] = useState(null)
+
+  // Here we can call the back end on load to get the list of all users in the connected websocket.
+  const [users, setUsers] = useState([
+    {
+      id: 'u1',
+      playerName: 'Numpty Numpty',
+      playerCard: '1',
+    },
+    {
+      id: 'u2',
+      playerName: 'Blether',
+      playerCard: '2',
+    },
+  ])
+
+  // Here we can call the back end on load to get the current session user id and setCurrPlayer.
+  const [currPlayer, setCurrPlayer] = useState({
+    id: 'u1',
+    playerName: 'Numpty Numpty',
+    playerCard: '1',
+  })
 
   return (
     <div
@@ -40,8 +62,8 @@ export default function Room(props) {
         </h2>
       )}
       <div
-        id="roomContent"
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+        id="cards"
+        className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
       >
         {cards.map((card) => {
           return (
@@ -57,11 +79,11 @@ export default function Room(props) {
                 }
               }}
               selected={card.id === selectedCard?.id}
-              className="hover:animate-pulsate-fwd"
             />
           )
         })}
       </div>
+
       <div className="flex justify-center">
         <button
           type="button"
@@ -82,6 +104,13 @@ export default function Room(props) {
           {t.clearCards}
         </button>
       </div>
+      {/* User list */}
+      <UserList
+        t={t}
+        userList={users}
+        selectedCard={selectedCard}
+        currPlayer={currPlayer}
+      ></UserList>
     </div>
   )
 }
