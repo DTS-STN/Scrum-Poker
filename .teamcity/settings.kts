@@ -138,7 +138,7 @@ object Build_Dynamic: BuildType({
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
-        param("env.BRANCH", "%teamcity.build.branch%")
+        param("env.BRANCH", "dyna-%teamcity.build.branch%")
         param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
@@ -243,6 +243,49 @@ object Build_Performance: BuildType({
     triggers {
         vcs {
             branchFilter = "+:*"
+        }
+    }
+})
+
+object CleanUpWeekly: BuildType({
+    name = "CleanUpWeekly"
+    description = "Deletes deployments every saturday"
+    params {
+        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
+        param("env.PROJECT", "scrum-poker")
+        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
+        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
+        param("env.TARGET", "main")
+        param("env.BRANCH", "%teamcity.build.branch%")
+    }
+    vcs {
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
+    }
+    steps {
+        script {
+            name = "Login and Delete Deployment"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
+                az account set -s %env.SUBSCRIPTION%
+                echo %env.PROJECT%-branch
+                kubectl get namespace | awk '/^%env.PROJECT%-dyna/{system("kubectl delete namespace " $1)}'
+            """.trimIndent()
+        }
+    }
+    triggers {
+        schedule {
+            schedulingPolicy = weekly {
+                dayOfWeek = ScheduleTrigger.DAY.Saturday
+                hour = 15
+                minute = 15
+                timezone = "America/New_York"
+            }  
+            branchFilter = "+:main"
+            triggerBuild = always()
+            withPendingChangesOnly = false
+            triggerBuildOnAllCompatibleAgents = true
         }
     }
 })
