@@ -57,8 +57,8 @@ export default function Room(props) {
         id="rommid"
         t={t}
         roomId={props.roomId}
-        playerName="some name"
-        playersOnline="99"
+        playerName={currPlayer.playerName}
+        playersOnline={users.length}
       />
 
       {!selectedCard ? (
