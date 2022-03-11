@@ -3,7 +3,7 @@ import propTypes from 'prop-types'
  * RoomInfo component
  */
 export default function RoomInfo(props) {
-  function copyToClipboard(props) {
+  function copyToClipboard() {
     navigator.clipboard.writeText(props.roomId).then(
       function () {
         console.log('room id: ', props.roomId, ' copied to clipboard')
