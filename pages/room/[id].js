@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Card from '../../components/Card'
+import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
@@ -45,7 +46,14 @@ export default function Room(props) {
       id="roomContent"
       className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
-      <h1>Room {props.roomId}</h1>
+      <RoomInfo
+        id="rommid"
+        t={t}
+        roomId={props.roomId}
+        playerName="some name"
+        playersOnline="99"
+      />
+
       {!selectedCard ? (
         <h2>Select a card...</h2>
       ) : (

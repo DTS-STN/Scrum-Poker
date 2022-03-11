@@ -26,6 +26,11 @@ export default {
   showCards: 'Dévoiler',
   hideCards: 'Cacher',
   clearCards: 'Effacer',
+  roomId: "Pièce d'identité :",
+  playerName: 'Nom du joueur :',
+  playersOnline: 'Joueurs en ligne :',
+  copy: 'Copier',
+
   // Header
   title: 'accueil',
   scrumPoker: 'Scrum Poker',
