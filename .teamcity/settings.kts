@@ -142,7 +142,7 @@ object Build_Dynamic: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "dyna-%teamcity.build.branch%")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL_PERF%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
