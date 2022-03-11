@@ -93,7 +93,7 @@ object Build_Release: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=%env.NEXT_CONTENT_GRAPHQL%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
@@ -153,7 +153,7 @@ object Build_Dynamic: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=%env.NEXT_CONTENT_GRAPHQL%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
@@ -213,7 +213,7 @@ object Build_Performance: BuildType({
                     path = "Dockerfile"
                 }
                 namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
-                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CMS_URL=%env.NEXT_CONTENT_GRAPHQL%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_CONTENT_GRAPHQL=%env.NEXT_CONTENT_GRAPHQL%"
             }
         }
         script {
