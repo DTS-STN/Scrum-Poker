@@ -31,6 +31,7 @@ project {
     buildType(Build_Performance)
     buildType(Build_Release)
     buildType(Build_Dynamic)
+    buildType(CleanUpWeekly)
 }
 
 object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease : GitVcsRoot({
