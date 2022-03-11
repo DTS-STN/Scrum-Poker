@@ -74,12 +74,12 @@ object Build_Release: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "main")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
@@ -134,12 +134,12 @@ object Build_Dynamic: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "%teamcity.build.branch%")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
@@ -194,12 +194,12 @@ object Build_Performance: BuildType({
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
         param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
-        param("env.SUBSCRIPTION", "%vault:dts-sre/azure!/decd-dev-subscription-id%")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "perf")
-        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
+        param("env.NEXT_CONTENT_GRAPHQL", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_CONTENT_GRAPHQL%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
