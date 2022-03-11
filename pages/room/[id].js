@@ -54,7 +54,7 @@ export default function Room(props) {
       className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
       <RoomInfo
-        id="rommid"
+        id="roomid"
         t={t}
         roomId={props.roomId}
         playerName={currPlayer.playerName}
