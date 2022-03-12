@@ -3,6 +3,10 @@ import propTypes from 'prop-types'
  * RoomInfo component
  */
 export default function RoomInfo(props) {
+  /**
+   * console.log('room propsId: ', props.roomId, ' name: ', props.playerName, ' online: ', props.playersOnline)
+   */
+
   function copyToClipboard() {
     navigator.clipboard.writeText(props.roomId).then(
       function () {
@@ -66,7 +70,7 @@ RoomInfo.propTypes = {
   playerName: propTypes.string,
 
   // numbers of players online
-  playersOnline: propTypes.string,
+  playersOnline: propTypes.number,
 
   // roomId of the room
   roomId: propTypes.string,
