@@ -3,9 +3,7 @@ import propTypes from 'prop-types'
  * RoomInfo component
  */
 export default function RoomInfo(props) {
-  /**
-   * console.log('room propsId: ', props.roomId, ' name: ', props.playerName, ' online: ', props.playersOnline)
-   */
+  //
 
   function copyToClipboard() {
     navigator.clipboard.writeText(props.roomId).then(
