@@ -75,19 +75,20 @@ export default function Room(props) {
       >
         {cards.map((card) => {
           return (
-            <Card
-              src={card.src}
-              id={card.id}
-              key={card.id}
-              alt={card.alt}
-              onClick={() => setSelectedCard(card)}
-              onKeyDown={(e) => {
-                if (e.keyCode === 32 || e.keyCode === 13) {
-                  setSelectedCard(card)
-                }
-              }}
-              selected={card.id === selectedCard?.id}
-            />
+            <li key={card.id}>
+              <Card
+                src={card.src}
+                id={card.id}
+                alt={card.alt}
+                onClick={() => setSelectedCard(card)}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 32 || e.keyCode === 13) {
+                    setSelectedCard(card)
+                  }
+                }}
+                selected={card.id === selectedCard?.id}
+              />
+            </li>
           )
         })}
       </ul>

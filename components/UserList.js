@@ -14,6 +14,7 @@ export default function UserList(props) {
           playerCard={player.playerCard}
           selectedCard={props.selectedCard}
           imgAlt="selectedCard"
+          data-testid="current-player"
         />
       ) : (
         // Other players.
@@ -21,6 +22,7 @@ export default function UserList(props) {
           playerName={player.playerName}
           playerCard={player.playerCard}
           imgAlt="blankCard"
+          data-testid="other-players"
         />
       )}
     </li>
