@@ -79,7 +79,6 @@ export default function Room(props) {
               <Card
                 src={card.src}
                 id={card.id}
-                key={card.id}
                 alt={card.alt}
                 onClick={() => setSelectedCard(card)}
                 onKeyDown={(e) => {
