@@ -52,19 +52,13 @@ export default function Player(props) {
 
 Player.propTypes = {
   // player name to be displayed
-  playerName: propTypes.string,
+  playerName: propTypes.string.isRequired,
 
   // card selected
   selectedCard: propTypes.object,
 
-  // letter
-  letter: propTypes.string,
-
   // background colour of the circle if it needs to be changed
   bgColour: propTypes.string,
-
-  // id of the element for testing if needed
-  id: propTypes.string,
 
   // Alt text of the image
   imgAlt: propTypes.string,
