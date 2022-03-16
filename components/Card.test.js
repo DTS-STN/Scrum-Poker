@@ -13,7 +13,6 @@ describe('Card', () => {
       <Card
         src={fakeCard.src}
         id={fakeCard.id}
-        key={fakeCard.id}
         alt={fakeCard.alt}
         selected
         onClick={() => {}}
@@ -27,7 +26,6 @@ describe('Card', () => {
       <Card
         src={fakeCard.src}
         id={fakeCard.id}
-        key={fakeCard.id}
         alt={fakeCard.alt}
         selected
         onClick={() => {}}
