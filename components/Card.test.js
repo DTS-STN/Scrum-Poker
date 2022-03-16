@@ -13,7 +13,6 @@ describe('Card', () => {
       <Card
         src={fakeCard.src}
         id={fakeCard.id}
-        key={fakeCard.id}
         alt={fakeCard.alt}
         selected
         onClick={() => {}}
@@ -23,19 +22,16 @@ describe('Card', () => {
   })
 
   it('has no a11y violations', async () => {
-    await act(async () => {
-      const { container } = render(
-        <Card
-          src={fakeCard.src}
-          id={fakeCard.id}
-          key={fakeCard.id}
-          alt={fakeCard.alt}
-          selected
-          onClick={() => {}}
-        />
-      )
-      const results = await axe(container)
-      expect(results).toHaveNoViolations()
-    })
+    const { container } = render(
+      <Card
+        src={fakeCard.src}
+        id={fakeCard.id}
+        alt={fakeCard.alt}
+        selected
+        onClick={() => {}}
+      />
+    )
+    const results = await axe(container)
+    expect(results).toHaveNoViolations()
   })
 })
