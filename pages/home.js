@@ -8,10 +8,13 @@ import { useQuery, useMutation } from '@apollo/client'
 import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import { useRouter } from 'next/router'
+import { ErrorLabel } from '../components/ErrorLabel'
+import { useState } from 'react'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [isValid, setValid] = useState(true)
 
   const router = useRouter()
 
@@ -33,6 +36,31 @@ export default function Home(props) {
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
+
+  let onCreateHandler = (e) => {
+    //prevent default behaviour of form
+    e.preventDefault()
+
+    //Check if name is empty
+    if (owner.value.trim() === '') {
+      setValid(false)
+    }
+    //Check if name contains special characters
+    else if (!/^[a-zA-Z0-9]+$/.test(owner.value)) {
+      setValid(false)
+    } else {
+      setValid(true)
+    }
+
+    //If name is valid, create new room
+    if (isValid) {
+      addRoom({ variables: { name: e.target.owner.value } }).then((res) =>
+        router.push({
+          pathname: `/room/${res.data.addRoom.id}`,
+        })
+      )
+    }
+  }
   return (
     <div
       data-testid="homeContent"
@@ -48,16 +76,12 @@ export default function Home(props) {
         </h3>
         <form
           data-testid="createRoomForm"
-          onSubmit={(e) => {
-            e.preventDefault()
-            addRoom({ variables: { name: e.target.owner.value } }).then((res) =>
-              router.push({
-                pathname: `/room/${res.data.addRoom.id}`,
-              })
-            )
-          }}
+          onSubmit={onCreateHandler}
           className="flex flex-col justify-between h-full items-center"
         >
+          {!isValid ? (
+            <ErrorLabel message={t.invalidNameError}></ErrorLabel>
+          ) : undefined}
           <TextInput
             id="owner"
             label={t.createRoomLabel}
