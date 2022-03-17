@@ -3,5 +3,6 @@ mutation addRoom($name: String!) {
     success
     message
     id
+    userID
   }
 }
