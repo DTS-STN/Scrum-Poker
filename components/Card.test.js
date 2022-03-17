@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Card from './Card'
@@ -22,16 +22,18 @@ describe('Card', () => {
   })
 
   it('has no a11y violations', async () => {
-    const { container } = render(
-      <Card
-        src={fakeCard.src}
-        id={fakeCard.id}
-        alt={fakeCard.alt}
-        selected
-        onClick={() => {}}
-      />
-    )
-    const results = await axe(container)
-    expect(results).toHaveNoViolations()
+    await act(async () => {
+      const { container } = render(
+        <Card
+          src={fakeCard.src}
+          id={fakeCard.id}
+          alt={fakeCard.alt}
+          selected
+          onClick={() => {}}
+        />
+      )
+      const results = await axe(container)
+      expect(results).toHaveNoViolations()
+    })
   })
 })

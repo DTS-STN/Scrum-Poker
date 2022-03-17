@@ -50,7 +50,7 @@ export default function Room(props) {
 
   return (
     <div
-      id="roomContent"
+      id="homeContent"
       className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
     >
       <RoomInfo

@@ -12,15 +12,21 @@ export default function Player(props) {
         <div className="flex ">
           <div className={`flex items-center justify-center rounded-lg p-2`}>
             <span
-              className={`   bg-slate-300 rounded-full h-14 w-14 relative ${props.bgColor}`}
+              className={` bg-slate-300 rounded-full h-14 w-14 relative ${props.bgColor}`}
             >
-              <span className="left-5 top-3 font-bold text-xl font-body absolute">
+              <span
+                className="left-5 top-3 font-bold text-xl font-body absolute"
+                data-testid="first-letter"
+              >
                 {props.playerName.charAt(0).toUpperCase()}
               </span>
             </span>
           </div>
 
-          <p className="px-2 my-auto text-body font-body font-semibold text-slate-700">
+          <p
+            className="px-2 my-auto text-body font-body font-semibold text-slate-700"
+            data-testid="player-name"
+          >
             {props.playerName}
           </p>
         </div>
@@ -32,6 +38,7 @@ export default function Player(props) {
             key={props.selectedCard.id}
             alt={props.selectedCard.alt}
             className=" "
+            data-testid="selected-card-img"
           />
         ) : (
           <div className=" h-auto w-20 p-2">
@@ -41,6 +48,7 @@ export default function Player(props) {
               width={74}
               height={102}
               layout="responsive"
+              data-testid="blank-card-img"
             />
           </div>
         )}
