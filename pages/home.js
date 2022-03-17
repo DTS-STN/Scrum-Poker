@@ -5,6 +5,7 @@ import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
 import { useQuery, useMutation } from '@apollo/client'
+import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import { useRouter } from 'next/router'
 
@@ -15,8 +16,20 @@ export default function Home(props) {
   const router = useRouter()
 
   //Load GraphQL Data
+  const { data, error, loading } = useQuery(GET_ROOMS_QUERY)
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
-
+  if (loading)
+    return (
+      <h1 data-testid="loadingState" id="homeContent">
+        loading....
+      </h1>
+    )
+  if (error)
+    return (
+      <h1 data-testid="errorState" id="homeContent">
+        {error.message}
+      </h1>
+    )
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
