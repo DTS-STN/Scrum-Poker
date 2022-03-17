@@ -4,8 +4,6 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
-import { fetchContent } from '../lib/cms'
-
 import { useQuery, useMutation } from '@apollo/client'
 import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
@@ -104,7 +102,6 @@ export default function Home(props) {
   )
 }
 export async function getStaticProps({ locale }) {
-  const content = await fetchContent()
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
   /* Place-holder Meta Data Props */
@@ -123,7 +120,7 @@ export async function getStaticProps({ locale }) {
     },
   }
   return {
-    props: { locale, langToggleLink, content, meta },
+    props: { locale, langToggleLink, meta },
   }
 }
 Home.propTypes = {

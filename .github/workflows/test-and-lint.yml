@@ -32,7 +32,6 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_CMS_URL: ${{ secrets.NEXT_CMS_URL }}
           NEXT_CONTENT_GRAPHQL: ${{ secrets.NEXT_CONTENT_GRAPHQL }}
           CI: true
 

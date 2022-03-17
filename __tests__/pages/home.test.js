@@ -16,13 +16,6 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
 
-//
-jest.mock('../../lib/cms', () => ({
-  fetchContent: () => {
-    return {}
-  },
-}))
-
 describe('Home page', () => {
   const mockRoomData = {
     request: {
@@ -106,7 +99,6 @@ describe('Home page', () => {
 
     expect(props).toEqual({
       props: {
-        content: {},
         langToggleLink: '/fr/home',
         locale: 'en',
         meta: {
