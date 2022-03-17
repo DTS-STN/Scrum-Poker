@@ -104,7 +104,6 @@ export default function Home(props) {
   )
 }
 export async function getStaticProps({ locale }) {
-  const content = await fetchContent()
   /* istanbul ignore next */
   const langToggleLink = locale === 'en' ? '/fr/home' : '/home'
   /* Place-holder Meta Data Props */
@@ -123,7 +122,7 @@ export async function getStaticProps({ locale }) {
     },
   }
   return {
-    props: { locale, langToggleLink, content, meta },
+    props: { locale, langToggleLink, meta },
   }
 }
 Home.propTypes = {
