@@ -4,8 +4,6 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
-import { fetchContent } from '../lib/cms'
-
 import { useQuery, useMutation } from '@apollo/client'
 import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
