@@ -26,7 +26,7 @@ jobs:
           CI: true
 
       - name: Docker Build
-        run: docker build --build-arg NEXT_CMS_URL="${{ secrets.NEXT_CMS_URL }}" -t scrum-poker .
+        run: docker build --build-arg -t scrum-poker .
         env:
           CI: true
 
