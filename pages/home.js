@@ -40,7 +40,6 @@ export default function Home(props) {
           data-testid="createRoomForm"
           onSubmit={(e) => {
             e.preventDefault()
-
             // Create a User
             addUser({ variables: { name: e.target.owner.value } })
               .then((res) => {
