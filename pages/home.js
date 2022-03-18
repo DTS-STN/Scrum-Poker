@@ -4,9 +4,9 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
-import { useQuery, useMutation } from '@apollo/client'
-import GET_ROOMS_QUERY from '../graphql/queries/getRoom.graphql'
+import { useMutation } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
+import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import { useRouter } from 'next/router'
 
 export default function Home(props) {
@@ -16,20 +16,10 @@ export default function Home(props) {
   const router = useRouter()
 
   //Load GraphQL Data
-  const { data, error, loading } = useQuery(GET_ROOMS_QUERY)
+
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
-  if (loading)
-    return (
-      <h1 data-testid="loadingState" id="homeContent">
-        loading....
-      </h1>
-    )
-  if (error)
-    return (
-      <h1 data-testid="errorState" id="homeContent">
-        {error.message}
-      </h1>
-    )
+  const [addUser] = useMutation(ADD_USER_QUERY)
+
   const handleJoinSubmit = (e) => {
     e.preventDefault()
   }
@@ -50,11 +40,27 @@ export default function Home(props) {
           data-testid="createRoomForm"
           onSubmit={(e) => {
             e.preventDefault()
-            addRoom({ variables: { name: e.target.owner.value } }).then((res) =>
-              router.push({
-                pathname: `/room/${res.data.addRoom.id}`,
+            addUser({ variables: { name: e.target.owner.value } })
+              .then((res) => {
+                //create cookie with res.data.addUser.id
+                return res.data.addUser.id
               })
-            )
+              .then((userid) => {
+                console.log(userid)
+                addRoom({ variables: { userid: userid } })
+                  .then((res) =>
+                    router
+                      .push({
+                        pathname: `/room/${res.data.addRoom.id}`,
+                      })
+                      .catch((e) => {
+                        console.log(e)
+                      })
+                  )
+                  .catch((e) => {
+                    console.log(e)
+                  })
+              })
           }}
           className="flex flex-col justify-between h-full items-center"
         >
