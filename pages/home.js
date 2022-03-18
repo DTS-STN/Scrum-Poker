@@ -14,7 +14,7 @@ import { useState } from 'react'
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [isValid, setValid] = useState(true)
+  const [isValid, setValid] = useState('')
 
   const router = useRouter()
 
@@ -31,25 +31,46 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
 
+    let valid = true
+
     //Check if name is empty
     if (owner.value.trim() === '') {
-      setValid(false)
+      valid = false
     }
     //Check if name contains special characters
     else if (!/^[a-zA-Z0-9]+$/.test(owner.value)) {
-      setValid(false)
+      valid = false
     } else {
-      setValid(true)
+      valid = true
     }
 
     //If name is valid, create new room
-    if (isValid) {
-      addRoom({ variables: { name: e.target.owner.value } }).then((res) =>
-        router.push({
-          pathname: `/room/${res.data.addRoom.id}`,
+    if (valid) {
+      addUser({ variables: { name: e.target.owner.value } })
+        .then((res) => {
+          //create cookie with res.data.addUser.id
+          return res.data.addUser.id
         })
-      )
+        .then((userid) => {
+          console.log(userid)
+          addRoom({ variables: { userid: userid } })
+            .then((res) =>
+              router
+                .push({
+                  pathname: `/room/${res.data.addRoom.id}`,
+                })
+                .catch((e) => {
+                  console.log(e)
+                  setValid(false)
+                })
+            )
+            .catch((e) => {
+              console.log(e)
+              setValid(false)
+            })
+        })
     }
+    setValid(valid)
   }
   return (
     <div
@@ -69,7 +90,7 @@ export default function Home(props) {
           onSubmit={onCreateHandler}
           className="flex flex-col justify-between h-full items-center"
         >
-          {!isValid ? (
+          {isValid === false ? (
             <ErrorLabel message={t.invalidNameError}></ErrorLabel>
           ) : undefined}
           <TextInput
