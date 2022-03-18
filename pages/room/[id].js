@@ -48,6 +48,11 @@ export default function Room(props) {
     playerCard: '1',
   })
 
+  if (document.cookie.indexOf('userid=')) {
+    console.log(document.cookie.split('userid=')[1])
+    // Make call to get current player with the line above.
+  }
+
   return (
     <div
       id="homeContent"

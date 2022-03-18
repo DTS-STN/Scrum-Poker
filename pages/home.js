@@ -40,24 +40,31 @@ export default function Home(props) {
           data-testid="createRoomForm"
           onSubmit={(e) => {
             e.preventDefault()
+
+            // Create a User
             addUser({ variables: { name: e.target.owner.value } })
               .then((res) => {
-                //create cookie with res.data.addUser.id
+                // User has been created
+                // Store cookie with userid as key
+                document.cookie = `userid=${res.data.addUser.id}`
                 return res.data.addUser.id
               })
               .then((userid) => {
-                console.log(userid)
+                // Create room with current userid as owner of room.
                 addRoom({ variables: { userid: userid } })
                   .then((res) =>
+                    // Room created, redirecting to that room...
                     router
                       .push({
                         pathname: `/room/${res.data.addRoom.id}`,
                       })
                       .catch((e) => {
+                        // Room was not created.
                         console.log(e)
                       })
                   )
                   .catch((e) => {
+                    // User was not created.
                     console.log(e)
                   })
               })
