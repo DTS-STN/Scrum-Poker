@@ -18,6 +18,7 @@ export default {
   joinRoomNameLabel: 'Enter your name',
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
+  invalidNameError: 'Please enter a name (alphanumeric characters only)',
 
   // Room
   users: 'Users',

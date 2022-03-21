@@ -20,6 +20,8 @@ export default {
   joinRoomNameLabel: 'Entrez votre nom',
   joinRoomNamePlaceholder: 'Votre nom',
   joinRoomButton: 'Rejoignez la salle',
+  invalidNameError:
+    'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   // Room
   users: '(FR)Users',
   card: '(FR)Card',
