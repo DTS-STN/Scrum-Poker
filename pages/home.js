@@ -8,10 +8,13 @@ import { useMutation } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import { useRouter } from 'next/router'
+import { ErrorLabel } from '../components/ErrorLabel'
+import { useState } from 'react'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+  const [isValid, setValid] = useState('')
 
   const router = useRouter()
 
@@ -22,6 +25,53 @@ export default function Home(props) {
 
   const handleJoinSubmit = (e) => {
     e.preventDefault()
+  }
+
+  let onCreateHandler = (e) => {
+    //prevent default behaviour of form
+    e.preventDefault()
+
+    let valid = true
+
+    //Check if name is empty
+    if (owner.value.trim() === '') {
+      valid = false
+    }
+    //Check if name contains special characters
+    else if (!/^[a-zA-Z0-9]+$/.test(owner.value)) {
+      valid = false
+    } else {
+      valid = true
+    }
+
+    //If name is valid, create new room
+    if (valid) {
+      addUser({ variables: { name: e.target.owner.value } })
+        .then((res) => {
+          document.cookie = `userid=${res.data.addUser.id}`
+          document.cookie = `ownerid=${res.data.addUser.id}`
+          return res.data.addUser.id
+        })
+        .then((userid) => {
+          console.log(userid)
+          addRoom({ variables: { userid: userid } })
+            .then((res) =>
+              router
+                .push({
+                  pathname: `/room/${res.data.addRoom.id}`,
+                })
+                .catch((e) => {
+                  console.log(e)
+                  setValid(false)
+                })
+            )
+            .catch((e) => {
+              console.log(e)
+              setValid(false)
+            })
+        })
+    }
+    setValid(valid)
   }
   return (
     <div
@@ -38,34 +88,12 @@ export default function Home(props) {
         </h3>
         <form
           data-testid="createRoomForm"
-          onSubmit={(e) => {
-            e.preventDefault()
-            addUser({ variables: { name: e.target.owner.value } })
-              .then((res) => {
-                //create cookie with res.data.addUser.id
-                document.cookie = `userid=${res.data.addUser.id}`
-                document.cookie = `ownerid=${res.data.addUser.id}`
-                return res.data.addUser.id
-              })
-              .then((userid) => {
-                console.log(userid)
-                addRoom({ variables: { userid: userid } })
-                  .then((res) =>
-                    router
-                      .push({
-                        pathname: `/room/${res.data.addRoom.id}`,
-                      })
-                      .catch((e) => {
-                        console.log(e)
-                      })
-                  )
-                  .catch((e) => {
-                    console.log(e)
-                  })
-              })
-          }}
+          onSubmit={onCreateHandler}
           className="flex flex-col justify-between h-full items-center"
         >
+          {isValid === false ? (
+            <ErrorLabel message={t.invalidNameError}></ErrorLabel>
+          ) : undefined}
           <TextInput
             id="owner"
             label={t.createRoomLabel}
