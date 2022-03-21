@@ -7,6 +7,8 @@ import TextInput from '../components/TextInput'
 import { useMutation } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
+import ADD_USER_TO_ROOM_QUERY from '../graphql/queries/addUserToRoom.graphql'
+
 import { useRouter } from 'next/router'
 
 export default function Home(props) {
@@ -19,10 +21,41 @@ export default function Home(props) {
 
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
   const [addUser] = useMutation(ADD_USER_QUERY)
+  const [addUserToRoom] = useMutation(ADD_USER_TO_ROOM_QUERY)
 
   const handleJoinSubmit = (e) => {
     e.preventDefault()
+    // Create a User
+    addUser({ variables: { name: e.target.newRoomName.value } })
+      .then((res) => {
+        // User has been created
+        // Store cookie with userid as key
+        document.cookie = `userid=${res.data.addUser.id}`
+        return res.data.addUser.id
+      })
+      .then((userid) => {
+        // Create room with current userid as owner of room.
+        addUserToRoom({
+          variables: { userid: userid, roomid: e.target.roomCode.value },
+        })
+          .then((res) =>
+            // Room created, redirecting to that room...
+            router
+              .push({
+                pathname: `/room/${e.target.roomCode.value}`,
+              })
+              .catch((e) => {
+                // Room was not joined.
+                console.log(e)
+              })
+          )
+          .catch((e) => {
+            // User was not created.
+            console.log(e)
+          })
+      })
   }
+
   return (
     <div
       data-testid="homeContent"
@@ -40,24 +73,30 @@ export default function Home(props) {
           data-testid="createRoomForm"
           onSubmit={(e) => {
             e.preventDefault()
+            // Create a User
             addUser({ variables: { name: e.target.owner.value } })
               .then((res) => {
-                //create cookie with res.data.addUser.id
+                // User has been created
+                // Store cookie with userid as key
+                document.cookie = `userid=${res.data.addUser.id}`
                 return res.data.addUser.id
               })
               .then((userid) => {
-                console.log(userid)
+                // Create room with current userid as owner of room.
                 addRoom({ variables: { userid: userid } })
                   .then((res) =>
+                    // Room created, redirecting to that room...
                     router
                       .push({
                         pathname: `/room/${res.data.addRoom.id}`,
                       })
                       .catch((e) => {
+                        // Room was not created.
                         console.log(e)
                       })
                   )
                   .catch((e) => {
+                    // User was not created.
                     console.log(e)
                   })
               })
