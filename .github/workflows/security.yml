@@ -7,8 +7,6 @@ name: Security - ZAP
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 # We have many jobs
 jobs:
