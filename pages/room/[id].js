@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
+
+import { useQuery } from '@apollo/client'
+import GET_USERS_QUERY from '../../graphql/queries/getUsers.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -18,35 +21,56 @@ export default function Room(props) {
     { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
     { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
   ]
-  const hiddenCard = {
-    id: 'card-hidden',
-    src: '/Card_Back.svg',
-    value: 'hidden',
-  }
 
   const [selectedCard, setSelectedCard] = useState(null)
   const [isHidden, setHidden] = useState(false)
 
-  // Here we can call the back end on load to get the list of all users in the connected websocket.
+  // GET_USERS_QUERY will need to change according to the current room id.(Get users for current room)
+  const { loading, error, data } = useQuery(GET_USERS_QUERY)
+
   const [users, setUsers] = useState([
     {
       id: 'u1',
-      playerName: 'Numpty Numpty',
-      playerCard: '1',
+      name: 'Numpty Numpty',
+      card: '1',
     },
     {
       id: 'u2',
-      playerName: 'Blether',
-      playerCard: '2',
+      name: 'Blether',
+      card: '2',
     },
   ])
 
-  // Here we can call the back end on load to get the current session user id and setCurrPlayer.
   const [currPlayer, setCurrPlayer] = useState({
     id: 'u1',
-    playerName: 'Numpty Numpty',
-    playerCard: '1',
+    name: 'Numpty Numpty',
+    card: selectedCard,
   })
+
+  const [isOwner, setIsOwner] = useState(false)
+
+  useEffect(() => {
+    if (loading) return <p>Loading ...</p>
+    if (error) return <p>hello {JSON.stringify(errorUsers, null, 2)}</p>
+    if (data.users) {
+      //setUsers of the room
+      setUsers(data.users)
+
+      // Check if session has owner cookie
+      const ownerId = document.cookie.indexOf('ownerid=')
+      if (ownerId !== -1) setIsOwner(true)
+      else setIsOwner(false)
+
+      // Find current player and setCurrPlayer
+      users.forEach((user) => {
+        const userId =
+          document.cookie.split('userid=')[1].substring(0, 5) || null
+        if (user.id === userId) {
+          setCurrPlayer(user)
+        }
+      })
+    }
+  }, [data, error, loading, users])
 
   return (
     <div
@@ -57,7 +81,7 @@ export default function Room(props) {
         id="roomid"
         t={t}
         roomId={props.roomId}
-        playerName={currPlayer.playerName}
+        playerName={currPlayer.name}
         playersOnline={users.length}
       />
 
@@ -92,37 +116,40 @@ export default function Room(props) {
           )
         })}
       </ul>
-      <div className="flex justify-center">
-        <button
-          type="button"
-          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-          onClick={() => setHidden(false)}
-        >
-          {t.showCards}
-        </button>
-        <button
-          type="button"
-          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-          onClick={() => (selectedCard ? setHidden(true) : null)}
-        >
-          {t.hideCards}
-        </button>
-        <button
-          type="button"
-          className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-          onClick={() => {
-            setSelectedCard(null)
-            setHidden(false)
-          }}
-        >
-          {t.clearCards}
-        </button>
-      </div>
+      {isOwner ? (
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() => setHidden(false)}
+          >
+            {t.showCards}
+          </button>
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() => (selectedCard ? setHidden(true) : null)}
+          >
+            {t.hideCards}
+          </button>
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() => {
+              setSelectedCard(null)
+              setHidden(false)
+            }}
+          >
+            {t.clearCards}
+          </button>
+        </div>
+      ) : null}
       {/* User list */}
       <UserList
         t={t}
         userList={users}
-        selectedCard={isHidden ? hiddenCard : selectedCard}
+        selectedCard={selectedCard}
+        isHidden={isHidden}
         currPlayer={currPlayer}
       ></UserList>
     </div>
