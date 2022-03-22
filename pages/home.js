@@ -48,7 +48,8 @@ export default function Home(props) {
     if (valid) {
       addUser({ variables: { name: e.target.owner.value } })
         .then((res) => {
-          //create cookie with res.data.addUser.id
+          document.cookie = `userid=${res.data.addUser.id}`
+          document.cookie = `ownerid=${res.data.addUser.id}`
           return res.data.addUser.id
         })
         .then((userid) => {

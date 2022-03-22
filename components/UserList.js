@@ -5,22 +5,26 @@ import Player from './Player'
  * List of players component
  */
 export default function UserList(props) {
+  const hiddenCard = {
+    id: 'card-hidden',
+    src: '/Card_Back.svg',
+    value: 'hidden',
+  }
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.id}>
       {props.currPlayer.id === player.id ? (
         // Current player.
         <Player
-          playerName={player.playerName}
-          playerCard={player.playerCard}
-          selectedCard={props.selectedCard}
+          playerName={player.name}
+          selectedCard={props.isHidden ? hiddenCard : props.selectedCard}
           imgAlt="selectedCard"
           data-testid="current-player"
         />
       ) : (
         // Other players.
+        // We need to set the cards of others with subscriptions.
         <Player
-          playerName={player.playerName}
-          playerCard={player.playerCard}
+          playerName={player.name}
           imgAlt="blankCard"
           data-testid="other-players"
         />
@@ -47,34 +51,23 @@ UserList.propTypes = {
    */
   userList: PropTypes.arrayOf(
     PropTypes.shape({
-      /**
-       * name for the list
-       */
-      playerName: PropTypes.string,
-      /**
-       * current player
-       */
-      currPlayer: PropTypes.string,
-      /**
-       * Text for the list
-       */
-      playerCard: PropTypes.string,
-      /**
-       * selected card for the list
-       */
-      selectedCard: PropTypes.object,
-      /**
-       * user text for the list
-       */
-      users: PropTypes.string,
-      /**
-       * card ext for the list
-       */
-      card: PropTypes.string,
-      /**
-       * Translated text
-       */
-      t: PropTypes.object,
+      player: PropTypes.object,
     })
-  ),
+  ).isRequired,
+  /**
+   * current player
+   */
+  currPlayer: PropTypes.object,
+  /**
+   * selected card for the list
+   */
+  selectedCard: PropTypes.object,
+  /**
+   * Translated text
+   */
+  t: PropTypes.object,
+  /**
+   * If cards are hidden or not
+   */
+  isHidden: PropTypes.bool,
 }
