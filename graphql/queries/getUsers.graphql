@@ -1,7 +1,0 @@
-query Query {
-  users {
-    id
-    name
-    card
-  }
-}
