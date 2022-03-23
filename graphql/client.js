@@ -9,14 +9,14 @@ import { createClient } from 'graphql-ws'
 let isClient = typeof window !== 'undefined'
 
 const httpLink = new HttpLink({
-  uri: process.env.NEXT_CONTENT_GRAPHQL,
+  uri: 'http://' + process.env.NEXT_CONTENT_GRAPHQL,
   fetch,
 })
 
 let splitLink
 if (isClient) {
   const wsClient = createClient({
-    url: 'ws://localhost:4000/graphql',
+    url: 'ws://' + process.env.NEXT_CONTENT_GRAPHQL,
   })
 
   const wsLink = new GraphQLWsLink(wsClient)
