@@ -102,17 +102,18 @@ export default function Room(props) {
       //TODO: Handle error
     }
     if (userSubscription.data) {
-      if (users.some((e) => e.id === userSubscription.data.userModified.id)) {
-        const updatedUsers = users.map((user) => {
-          if (user.id === userSubscription.data.userModified.id) {
-            return userSubscription.data.userModified
-          }
-          return user
-        })
-        setUsers(updatedUsers)
-      } else {
-        setUsers((users) => [...users, userSubscription.data.userModified])
+      let userFound = false
+      let updatedUsers = users.map((user) => {
+        if (user.id === userSubscription.data.userModified.id) {
+          userFound = true
+          return userSubscription.data.userModified
+        }
+        return user
+      })
+      if (!userFound) {
+        updatedUsers = [...updatedUsers, userSubscription.data.userModified]
       }
+      setUsers(updatedUsers)
     }
   }, [userSubscription])
 
