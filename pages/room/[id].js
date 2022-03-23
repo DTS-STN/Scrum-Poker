@@ -102,7 +102,6 @@ export default function Room(props) {
       //TODO: Handle error
     }
     if (userSubscription.data) {
-      console.log('one render')
       if (users.some((e) => e.id === userSubscription.data.userModified.id)) {
         const updatedUsers = users.map((user) => {
           if (user.id === userSubscription.data.userModified.id) {

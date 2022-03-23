@@ -15,7 +15,6 @@ const httpLink = new HttpLink({
 
 let splitLink
 if (isClient) {
-  console.log('client')
   const wsClient = createClient({
     url: 'ws://localhost:4000/graphql',
   })
