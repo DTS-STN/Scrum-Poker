@@ -25,6 +25,30 @@ export default function Home(props) {
 
   const handleJoinSubmit = (e) => {
     e.preventDefault()
+    // Create a User
+    addUser({ variables: { name: e.target.newRoomName.value } })
+      .then((res) => {
+        // User has been created
+        // Store cookie with userid as key
+        document.cookie = `userid=${res.data.addUser.id}`
+        return res.data.addUser.id
+      })
+      .then((userid) => {
+        let roomCode = e.target.roomCode.value
+        // Update room with user added
+        router
+          .push({
+            pathname: `/room/${roomCode}`,
+          })
+          .catch((e) => {
+            // Room was not joined.
+            console.log(e)
+          })
+          .catch((e) => {
+            // User was not created.
+            console.log(e)
+          })
+      })
   }
 
   let onCreateHandler = (e) => {
