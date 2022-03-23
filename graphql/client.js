@@ -13,29 +13,35 @@ const httpLink = new HttpLink({
   fetch,
 })
 
-let splitLink
-if (isClient) {
-  const wsClient = createClient({
-    url: 'ws://' + process.env.NEXT_CONTENT_GRAPHQL,
-  })
+const link = isClient
+  ? (() => {
+      //return split ws and http link
+      const wsClient = createClient({
+        url: 'ws://' + process.env.NEXT_CONTENT_GRAPHQL,
+      })
 
-  const wsLink = new GraphQLWsLink(wsClient)
+      const wsLink = new GraphQLWsLink(wsClient)
 
-  splitLink = split(
-    ({ query }) => {
-      const definition = getMainDefinition(query)
-      return (
-        definition.kind === 'OperationDefinition' &&
-        definition.operation === 'subscription'
+      const splitLink = split(
+        ({ query }) => {
+          const definition = getMainDefinition(query)
+          return (
+            definition.kind === 'OperationDefinition' &&
+            definition.operation === 'subscription'
+          )
+        },
+        wsLink,
+        httpLink
       )
-    },
-    wsLink,
-    httpLink
-  )
-}
+      return splitLink
+    })()
+  : (() => {
+      //return only http link
+      return httpLink
+    })()
 
 const client = new ApolloClient({
-  link: isClient ? splitLink : httpLink,
+  link: link,
   cache: new InMemoryCache(),
 })
 
