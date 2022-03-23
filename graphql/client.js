@@ -13,32 +13,30 @@ const httpLink = new HttpLink({
   fetch,
 })
 
-let link = isClient
-  ? (() => {
-      const wsClient = createClient({
-        url: 'ws://localhost:4000/graphql',
-      })
+let splitLink
+if (isClient) {
+  console.log('client')
+  const wsClient = createClient({
+    url: 'ws://localhost:4000/graphql',
+  })
 
-      const wsLink = new GraphQLWsLink(wsClient)
+  const wsLink = new GraphQLWsLink(wsClient)
 
-      return split(
-        ({ query }) => {
-          const definition = getMainDefinition(query)
-          return (
-            definition.kind === 'OperationDefinition' &&
-            definition.operation === 'subscription'
-          )
-        },
-        wsLink,
-        httpLink
+  splitLink = split(
+    ({ query }) => {
+      const definition = getMainDefinition(query)
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
       )
-    })()
-  : () => {
-      return httpLink
-    }
+    },
+    wsLink,
+    httpLink
+  )
+}
 
 const client = new ApolloClient({
-  link: link,
+  link: isClient ? splitLink : httpLink,
   cache: new InMemoryCache(),
 })
 
