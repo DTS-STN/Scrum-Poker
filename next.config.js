@@ -48,11 +48,6 @@ const securityHeaders = [
   },
 ]
 
-// GraphQL end point
-const graphQLurl = process.env.NEXT_CONTENT_GRAPHQL
-  ? process.env.NEXT_CONTENT_GRAPHQL
-  : ''
-
 module.exports = {
   images: {
     dangerouslyAllowSVG: true,
@@ -60,7 +55,6 @@ module.exports = {
 
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
-    NEXT_CONTENT_GRAPHQL: graphQLurl,
   },
 
   reactStrictMode: true,
