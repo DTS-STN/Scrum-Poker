@@ -6,12 +6,9 @@ import UserList from '../../components/UserList'
 
 import { useQuery } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
-import UPDATE_ROOM_USER from '../../graphql/queries/updateRoomByID.graphql'
 
 import en from '../../locales/en'
 import fr from '../../locales/fr'
-
-import client from '../../graphql/client.js'
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
@@ -34,37 +31,6 @@ export default function Room(props) {
   const { loading, error, data } = useQuery(GET_ROOM_INFO, {
     variables: { roomsId: props.roomId },
   })
-
-  if (typeof window !== 'undefined') {
-    //Join Room (Add to user list if cookie exists)
-    const userId =
-      Number(document.cookie.split('userid=')[1].substring(0, 5)) || null
-    const roomId = props.roomId
-    // Check to see if user cookie exists
-    if (!userId) {
-      //Route user from room
-      alert('No user ID!')
-    } else {
-      if (data) {
-        //Populate existing user list
-        let userListID = []
-        data.rooms[0].users.forEach((user) => {
-          userListID.push(Number(user.id))
-        })
-
-        if (!userListID.includes(userId)) {
-          //Add user to user list
-          userListID.push(Number(userId))
-          client
-            .mutate({
-              mutation: UPDATE_ROOM_USER,
-              variables: { updateRoomId: roomId, updateRoomUsers: userListID },
-            })
-            .then((result) => {})
-        }
-      }
-    }
-  }
 
   const [users, setUsers] = useState([
     {
