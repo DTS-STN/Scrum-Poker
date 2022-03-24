@@ -7,8 +7,7 @@ import TextInput from '../components/TextInput'
 import { useMutation } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
-import GET_ROOM_QUERY from '../graphql/queries/getRoomByID.graphql'
-import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
+import ADD_USER_TO_ROOM from '../graphql/queries/addUserToRoom.graphql'
 
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
@@ -27,7 +26,6 @@ export default function Home(props) {
 
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
   const [addUser] = useMutation(ADD_USER_QUERY)
-  const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
 
   const handleJoinSubmit = (e) => {
     e.preventDefault()
@@ -42,37 +40,28 @@ export default function Home(props) {
       .then((userid) => {
         let roomCode = e.target.roomCode.value
         // Update room with user added
-        //Get current usersList from room id
+        // Get current usersList from room id
         client
-          .query({ query: GET_ROOM_QUERY, variables: { roomsId: roomCode } })
+          .mutate({
+            mutation: ADD_USER_TO_ROOM,
+            variables: { userid: userid, roomid: roomCode },
+          })
           .then((res) => {
-            let userListID = []
-            res.data.rooms[0].users.forEach((user) => {
-              userListID.push(Number(user.id))
-            })
-            userListID.push(Number(userid))
-            console.log(userListID)
-            updateRoom({
-              variables: {
-                updateRoomId: roomCode,
-                updateRoomUsers: userListID,
-              },
-            })
-              .then((res) =>
-                // Room created, redirecting to that room...
-                router
-                  .push({
-                    pathname: `/room/${roomCode}`,
-                  })
-                  .catch((e) => {
-                    // Room was not joined.
-                    console.log(e)
-                  })
-              )
-              .catch((e) => {
-                // User was not created.
-                console.log(e)
+            if (res.data.addUserToRoom.success)
+              router.push({
+                pathname: `/room/${roomCode}`,
               })
+            else {
+              // Response was a failure.
+            }
+          })
+          .catch((e) => {
+            // Room was not joined.
+            console.log(e)
+          })
+          .catch((e) => {
+            // User was not created.
+            console.log(e)
           })
       })
   }
