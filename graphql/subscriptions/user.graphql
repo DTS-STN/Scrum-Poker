@@ -1,0 +1,8 @@
+subscription UserSubscription($room: ID!) {
+  userModified(room: $room) {
+    id
+    name
+    card
+    room
+  }
+}

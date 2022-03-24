@@ -39,14 +39,14 @@ const securityHeaders = [
   {
     key: 'Content-Security-Policy',
     value:
-      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'; script-src-elem 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self' https://*.bdm-dev.dts-stn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:",
+      "default-src 'self'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'; script-src-elem 'self'; script-src 'self' 'unsafe-eval'; connect-src 'self' https://*.bdm-dev.dts-stn.com" +
+        process.env.NODE_ENV ===
+      'development'
+        ? ' http://localhost:4000/graphql'
+        : '' +
+          "; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:",
   },
 ]
-
-// GraphQL end point
-const graphQLurl = process.env.NEXT_CONTENT_GRAPHQL
-  ? process.env.NEXT_CONTENT_GRAPHQL
-  : ''
 
 module.exports = {
   images: {
@@ -55,7 +55,6 @@ module.exports = {
 
   env: {
     NEXT_PUBLIC_BUILD_DATE: builddate,
-    NEXT_CONTENT_GRAPHQL: graphQLurl,
   },
 
   reactStrictMode: true,
