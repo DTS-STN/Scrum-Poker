@@ -19,7 +19,9 @@ import client from '../graphql/client.js'
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [isValid, setValid] = useState('')
+
+  const [createRoomError, setCreateRoomError] = useState(undefined)
+  const [joinRoomError, setJoinRoomError] = useState(undefined)
 
   const router = useRouter()
 
@@ -76,50 +78,58 @@ export default function Home(props) {
       })
   }
 
-  let onCreateHandler = (e) => {
+  let onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
 
-    let valid = true
+    let error = undefined,
+      username = owner.value,
+      userid = document.cookie.split('userid=')[1].substring(0, 5) || undefined
+    try {
+      //Check if name is empty
+      if (owner.value.trim() === '') {
+        throw t.invalidNameError
+      }
+      //Check if name contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+        throw t.invalidNameError
+      }
 
-    //Check if name is empty
-    if (owner.value.trim() === '') {
-      valid = false
-    }
-    //Check if name contains special characters
-    else if (!/^[a-zA-Z0-9]+$/.test(owner.value)) {
-      valid = false
-    } else {
-      valid = true
-    }
-
-    //If name is valid, create new room
-    if (valid) {
-      addUser({ variables: { name: e.target.owner.value } })
-        .then((res) => {
-          document.cookie = `userid=${res.data.addUser.id}`
-          document.cookie = `ownerid=${res.data.addUser.id}`
-          return res.data.addUser.id
+      //If name is valid, create new room
+      if (!error) {
+        const addUserRes = await addUser().catch((e) => {
+          throw 'Oops! Something went wrong'
         })
-        .then((userid) => {
-          addRoom({ variables: { userid: userid } })
-            .then((res) =>
-              router
-                .push({
-                  pathname: `/room/${res.data.addRoom.id}`,
-                })
-                .catch((e) => {
-                  console.log(e)
-                  setValid(false)
-                })
-            )
-            .catch((e) => {
-              console.log(e)
-              setValid(false)
+
+        if (addUserRes.data.addUser.success) {
+          userid = addUserRes.data.addUser.id
+          document.cookie = `userid=${userid}`
+          document.cookie = `ownerid=${userid}`
+        } else {
+          throw 'Oops! Something went wrong'
+        }
+
+        const addRoomRes = await addRoom({
+          variables: { userid: userid },
+        }).catch((e) => {
+          throw 'Oops! Something went wrong'
+        })
+
+        if (addRoomRes.data.addRoom.success) {
+          router
+            .push({
+              pathname: `/room/${addRoomRes.data.addRoom.id}`,
             })
-        })
+            .catch((e) => {
+              throw 'Oops! Something went wrong'
+            })
+        } else {
+          throw 'Oops! Something went wrong'
+        }
+      }
+    } catch (e) {
+      setCreateRoomError(e)
     }
-    setValid(valid)
   }
   return (
     <div
@@ -139,8 +149,8 @@ export default function Home(props) {
           onSubmit={onCreateHandler}
           className="flex flex-col justify-between h-full items-center"
         >
-          {isValid === false ? (
-            <ErrorLabel message={t.invalidNameError}></ErrorLabel>
+          {createRoomError ? (
+            <ErrorLabel message={createRoomError}></ErrorLabel>
           ) : undefined}
           <TextInput
             id="owner"
@@ -164,6 +174,9 @@ export default function Home(props) {
           onSubmit={handleJoinSubmit}
           className="flex flex-col justify-between h-full items-center"
         >
+          {joinRoomError ? (
+            <ErrorLabel message={joinRoomError}></ErrorLabel>
+          ) : undefined}
           <TextInput
             id="roomCode"
             label={t.joinRoomNumberLabel}
