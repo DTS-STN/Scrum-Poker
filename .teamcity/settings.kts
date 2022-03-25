@@ -208,7 +208,7 @@ object Build_Performance: BuildType({
         param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS_PERF%")
     }
     vcs {
-        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance)
     }
    
     steps {
