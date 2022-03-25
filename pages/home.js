@@ -82,9 +82,9 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
 
-    let error = undefined,
-      username = owner.value,
+    let username = owner.value,
       userid = document.cookie.split('userid=')[1].substring(0, 5) || undefined
+
     try {
       //Check if name is empty
       if (owner.value.trim() === '') {
@@ -96,38 +96,36 @@ export default function Home(props) {
       }
 
       //If name is valid, create new room
-      if (!error) {
-        const addUserRes = await addUser({
-          variables: { name: username },
-        }).catch((e) => {
-          throw 'Oops! Something went wrong'
-        })
+      const addUserRes = await addUser({
+        variables: { name: username },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
 
-        if (addUserRes.data.addUser.success) {
-          userid = addUserRes.data.addUser.id
-          document.cookie = `userid=${userid}`
-          document.cookie = `ownerid=${userid}`
-        } else {
-          throw 'Oops! Something went wrong'
-        }
+      if (addUserRes.data.addUser.success) {
+        userid = addUserRes.data.addUser.id
+        document.cookie = `userid=${userid}`
+        document.cookie = `ownerid=${userid}`
+      } else {
+        throw 'Oops! Something went wrong'
+      }
 
-        const addRoomRes = await addRoom({
-          variables: { userid: userid },
-        }).catch((e) => {
-          throw 'Oops! Something went wrong'
-        })
+      const addRoomRes = await addRoom({
+        variables: { userid: userid },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
 
-        if (addRoomRes.data.addRoom.success) {
-          router
-            .push({
-              pathname: `/room/${addRoomRes.data.addRoom.id}`,
-            })
-            .catch((e) => {
-              throw 'Oops! Something went wrong'
-            })
-        } else {
-          throw 'Oops! Something went wrong'
-        }
+      if (addRoomRes.data.addRoom.success) {
+        router
+          .push({
+            pathname: `/room/${addRoomRes.data.addRoom.id}`,
+          })
+          .catch((e) => {
+            throw 'Oops! Something went wrong'
+          })
+      } else {
+        throw 'Oops! Something went wrong'
       }
     } catch (e) {
       setCreateRoomError(e)
