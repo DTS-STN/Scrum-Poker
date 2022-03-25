@@ -9,6 +9,7 @@ import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
 import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
+import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
@@ -29,6 +30,7 @@ export default function Home(props) {
 
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
   const [addUser] = useMutation(ADD_USER_QUERY)
+  const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
 
   const handleJoinSubmit = (e) => {
@@ -116,7 +118,22 @@ export default function Home(props) {
         throw 'Oops! Something went wrong'
       })
 
-      if (addRoomRes.data.addRoom.success) {
+      if (!addRoomRes.data.addRoom.success) throw 'Oops! Something went wrong'
+
+      const updateUserRes = await updatedUser({
+        variables: {
+          userInput: {
+            id: userid,
+            name: username,
+            card: undefined,
+            room: addRoomRes.data.addRoom.id,
+          },
+        },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (updateUserRes.data.updateUser.success) {
         router
           .push({
             pathname: `/room/${addRoomRes.data.addRoom.id}`,
