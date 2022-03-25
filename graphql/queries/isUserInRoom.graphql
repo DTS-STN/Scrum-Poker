@@ -1,0 +1,9 @@
+query isUserInRoom($roomsId: ID) {
+  rooms(id: $roomsId) {
+    users {
+      id
+      name
+      card
+    }
+  }
+}
