@@ -52,17 +52,14 @@ export default function Room(props) {
         //setUsers of the room
         setUsers(roomInfo.users)
 
-        // Check if session has owner cookie
-        const ownerId = document.cookie.indexOf('ownerid=')
-        if (ownerId !== -1) setIsOwner(true)
-        else setIsOwner(false)
-
         // Find current player and setCurrPlayer
-
         roomInfo.users.forEach((user) => {
           if (user.id === userId) {
             setCurrPlayer(user)
           }
+          if (user.id === roomInfo.host.id) {
+            setIsOwner(true)
+          } else setIsOwner(false)
         })
         setPageState(null)
       } else {
