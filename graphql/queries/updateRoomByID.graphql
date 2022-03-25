@@ -1,0 +1,6 @@
+mutation UpdateRoom($updateRoomId: ID!, $updateRoomUsers: [ID]) {
+  updateRoom(id: $updateRoomId, users: $updateRoomUsers) {
+    success
+    message
+  }
+}

@@ -27,68 +27,51 @@ export default function Room(props) {
   const [selectedCard, setSelectedCard] = useState(null)
   const [isHidden, setHidden] = useState(false)
 
-  // GET_USERS_QUERY will need to change according to the current room id.(Get users for current room)
-  const { loading, error, data } = useQuery(GET_ROOM_INFO, {
-    variables: { roomsId: props.roomId },
-  })
-
-  const [users, setUsers] = useState([
-    {
-      id: 'u1',
-      name: 'Numpty Numpty',
-      card: '1',
-    },
-    {
-      id: 'u2',
-      name: 'Blether',
-      card: '2',
-    },
-  ])
+  const [users, setUsers] = useState(null)
 
   const [currPlayer, setCurrPlayer] = useState({
-    id: 'u1',
-    name: 'Numpty Numpty',
+    id: null,
+    name: null,
     card: selectedCard,
   })
 
   const [isOwner, setIsOwner] = useState(false)
 
+  const roomQuery = useQuery(GET_ROOM_INFO, {
+    variables: { roomsId: props.roomId },
+  })
   useEffect(() => {
-    if (loading) setPageState('Loading...')
-    if (error) setPageState(JSON.stringify(errorUsers, null, 2))
-    if (data) {
+    if (roomQuery.loading) setPageState('Loading...')
+    if (roomQuery.error) setPageState('roomQuerry error')
+    if (roomQuery.data) {
       // Get room info
-      const roomInfo = data?.rooms[0]
-      if (!roomInfo) setPageState('No room exists with this id.')
-      // Room exists
-      else {
-        const userId =
-          document.cookie.split('userid=')[1].substring(0, 5) || null
-        // Check to see if user cookie exists
-        if (!userId) {
+      const roomInfo = roomQuery.data?.rooms[0]
+      const userId = document.cookie.split('userid=')[1].substring(0, 5) || null
+
+      if (roomInfo && userId) {
+        //setUsers of the room
+        setUsers(roomInfo.users)
+
+        // Check if session has owner cookie
+        const ownerId = document.cookie.indexOf('ownerid=')
+        if (ownerId !== -1) setIsOwner(true)
+        else setIsOwner(false)
+
+        // Find current player and setCurrPlayer
+
+        roomInfo.users.forEach((user) => {
+          if (user.id === userId) {
+            setCurrPlayer(user)
+          }
+        })
+        setPageState(null)
+      } else {
+        if (!userId)
           setPageState('No user was defined before joining the room.')
-        } else {
-          setPageState(null)
-
-          //setUsers of the room
-          setUsers(roomInfo.users)
-
-          // Check if session has owner cookie
-          const ownerId = document.cookie.indexOf('ownerid=')
-          if (ownerId !== -1) setIsOwner(true)
-          else setIsOwner(false)
-
-          // Find current player and setCurrPlayer
-
-          users.forEach((user) => {
-            if (user.id === userId) {
-              setCurrPlayer(user)
-            }
-          })
-        }
+        if (!roomInfo) setPageState('No room exists with this id.')
       }
     }
-  }, [data, error, loading])
+  }, [roomQuery])
 
   const userSubscription = useSubscription(USER_SUBSCRIPTION, {
     variables: { room: props.roomId },
@@ -117,7 +100,7 @@ export default function Room(props) {
     }
   }, [userSubscription])
 
-  if (!pageState) {
+  if (!pageState && users) {
     return (
       <div
         id="homeContent"
