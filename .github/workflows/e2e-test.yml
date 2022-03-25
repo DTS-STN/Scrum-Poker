@@ -32,8 +32,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          NEXT_CMS_URL: ${{ secrets.NEXT_CMS_URL }}
-          NEXT_CONTENT_GRAPHQL: ${{ secrets.NEXT_CONTENT_GRAPHQL }}
+          NEXT_PUBLIC_GRAPHQL_HTTP: ${{ secrets.NEXT_PUBLIC_GRAPHQL_HTTP }}
+          NEXT_PUBLIC_GRAPHQL_WS: ${{ secrets.NEXT_PUBLIC_GRAPHQL_WS }}
           CI: true
 
       - name: Cypress end-to-end 🧪

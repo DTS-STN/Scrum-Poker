@@ -4,9 +4,9 @@ import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
 
-import { useQuery } from '@apollo/client'
+import { useQuery, useSubscription } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
-
+import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -88,7 +88,34 @@ export default function Room(props) {
         }
       }
     }
-  }, [data, error, loading, users])
+  }, [data, error, loading])
+
+  const userSubscription = useSubscription(USER_SUBSCRIPTION, {
+    variables: { room: props.roomId },
+  })
+
+  useEffect(() => {
+    if (userSubscription.loading) {
+      //Do nothing
+    }
+    if (userSubscription.error) {
+      //TODO: Handle error
+    }
+    if (userSubscription.data) {
+      let userFound = false
+      let updatedUsers = users.map((user) => {
+        if (user.id === userSubscription.data.userModified.id) {
+          userFound = true
+          return userSubscription.data.userModified
+        }
+        return user
+      })
+      if (!userFound) {
+        updatedUsers = [...updatedUsers, userSubscription.data.userModified]
+      }
+      setUsers(updatedUsers)
+    }
+  }, [userSubscription])
 
   if (!pageState) {
     return (
