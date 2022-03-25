@@ -143,8 +143,8 @@ object Build_Dynamic: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "dyna-%teamcity.build.branch%")
-        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP_PERF%")
-        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS_PERF%")
+        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP%")
+        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
@@ -204,8 +204,8 @@ object Build_Performance: BuildType({
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "main")
         param("env.BRANCH", "perf")
-        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP%")
-        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS%")
+        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP_PERF%")
+        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS_PERF%")
     }
     vcs {
         root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
