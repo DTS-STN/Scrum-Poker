@@ -97,7 +97,9 @@ export default function Home(props) {
 
       //If name is valid, create new room
       if (!error) {
-        const addUserRes = await addUser().catch((e) => {
+        const addUserRes = await addUser({
+          variables: { name: username },
+        }).catch((e) => {
           throw 'Oops! Something went wrong'
         })
 
