@@ -59,7 +59,6 @@ export default function Room(props) {
     if (data) {
       // Get room info
       const roomInfo = data?.rooms[0]
-      console.log(roomInfo)
       if (!roomInfo) setPageState('No room exists with this id.')
       // Room exists
       else {

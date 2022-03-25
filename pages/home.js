@@ -102,7 +102,6 @@ export default function Home(props) {
           return res.data.addUser.id
         })
         .then((userid) => {
-          console.log(userid)
           addRoom({ variables: { userid: userid } })
             .then((res) =>
               router

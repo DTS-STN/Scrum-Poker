@@ -1,7 +1,0 @@
-mutation addUserToRoom($userid: ID!, $roomid: ID!) {
-  addUserToRoom(userid: $userid, roomid: $roomid) {
-    success
-    message
-    id
-  }
-}
