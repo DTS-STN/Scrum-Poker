@@ -7,7 +7,7 @@ import { useQuery, useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
-import SHOW_HIDE_ROOM_CARD from '../../graphql/queries/showHideRoomCard.graphql'
+import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -48,7 +48,6 @@ export default function Room(props) {
       // Get room info
       const roomInfo = roomQuery.data?.rooms[0]
       const userId = document.cookie.split('userid=')[1].substring(0, 5) || null
-
       if (roomInfo && userId) {
         //setUsers of the room
         setUsers(roomInfo.users)
@@ -59,7 +58,6 @@ export default function Room(props) {
         else setIsOwner(false)
 
         // Find current player and setCurrPlayer
-
         roomInfo.users.forEach((user) => {
           if (user.id === userId) {
             setCurrPlayer(user)
@@ -82,7 +80,8 @@ export default function Room(props) {
     variables: { room: props.roomId },
   })
 
-  const [showHideCard] = useMutation(SHOW_HIDE_ROOM_CARD)
+  //const [showHideCard] = useMutation(SHOW_HIDE_ROOM_CARD)
+  const [showHideCard] = useMutation(UPDATE_ROOM)
 
   useEffect(() => {
     if (userSubscription.loading) {
@@ -109,11 +108,16 @@ export default function Room(props) {
 
   useEffect(() => {
     if (roomSubscription.data) {
-      setHidden(!roomSubscription.data?.roomShowHideCardChanged.isShown)
+      setHidden(!roomSubscription.data.roomUpdated.isShown)
     }
   }, [roomSubscription])
 
   if (!pageState && users) {
+    const usersIDList = []
+    users.map((user) => {
+      usersIDList.push(Number(user.id))
+    })
+
     return (
       <div
         id="homeContent"
@@ -166,7 +170,12 @@ export default function Room(props) {
               onClick={() =>
                 selectedCard
                   ? showHideCard({
-                      variables: { roomId: props.roomId, isShown: true },
+                      //variables: { roomId: props.roomId,  isShown: true },
+                      variables: {
+                        updateRoomId: props.roomId,
+                        updateRoomUsers: usersIDList,
+                        isShown: true,
+                      },
                     })
                   : ''
               }
@@ -179,7 +188,11 @@ export default function Room(props) {
               onClick={() =>
                 selectedCard
                   ? showHideCard({
-                      variables: { roomId: props.roomId, isShown: false },
+                      variables: {
+                        updateRoomId: props.roomId,
+                        updateRoomUsers: usersIDList,
+                        isShown: false,
+                      },
                     })
                   : ''
               }
@@ -193,7 +206,11 @@ export default function Room(props) {
                 setSelectedCard(null)
                 //setHidden(false)
                 showHideCard({
-                  variables: { roomId: props.roomId, isShown: true },
+                  variables: {
+                    updateRoomId: props.roomId,
+                    updateRoomUsers: usersIDList,
+                    isShown: true,
+                  },
                 })
               }}
             >

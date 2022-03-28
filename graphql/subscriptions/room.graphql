@@ -1,6 +1,13 @@
-subscription Subscription($room: ID!) {
-  roomShowHideCardChanged(room: $room) {
+subscription RoomSubscription($room: ID!) {
+  roomUpdated(room: $room) {
     id
+    host {
+        id
+        name
+    }
+    users {
+        id
+    }
     isShown
   }
 }

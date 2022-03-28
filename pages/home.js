@@ -55,6 +55,7 @@ export default function Home(props) {
               variables: {
                 updateRoomId: roomCode,
                 updateRoomUsers: userListID,
+                isShown: true,
               },
             })
               .then((res) =>
@@ -70,7 +71,7 @@ export default function Home(props) {
               )
               .catch((e) => {
                 // User was not created.
-                console.log(e)
+                console.log('error', e)
               })
           })
       })
