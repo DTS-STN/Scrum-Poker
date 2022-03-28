@@ -1,0 +1,7 @@
+mutation ShowHideRoomCard($roomId: ID!, $isShown: Boolean!) {
+  showHideRoomCard(roomId: $roomId, isShown: $isShown) {
+    success
+    message
+    id
+  }
+}

@@ -3,10 +3,11 @@ import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
-
-import { useQuery, useSubscription } from '@apollo/client'
+import { useQuery, useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
+import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
+import SHOW_HIDE_ROOM_CARD from '../../graphql/queries/showHideRoomCard.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -77,6 +78,12 @@ export default function Room(props) {
     variables: { room: props.roomId },
   })
 
+  const roomSubscription = useSubscription(ROOM_SUBSCRIPTION, {
+    variables: { room: props.roomId },
+  })
+
+  const [showHideCard] = useMutation(SHOW_HIDE_ROOM_CARD)
+
   useEffect(() => {
     if (userSubscription.loading) {
       //Do nothing
@@ -99,6 +106,12 @@ export default function Room(props) {
       setUsers(updatedUsers)
     }
   }, [userSubscription])
+
+  useEffect(() => {
+    if (roomSubscription.data) {
+      setHidden(!roomSubscription.data?.roomShowHideCardChanged.isShown)
+    }
+  }, [roomSubscription])
 
   if (!pageState && users) {
     return (
@@ -150,14 +163,26 @@ export default function Room(props) {
             <button
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() => setHidden(false)}
+              onClick={() =>
+                selectedCard
+                  ? showHideCard({
+                      variables: { roomId: props.roomId, isShown: true },
+                    })
+                  : ''
+              }
             >
               {t.showCards}
             </button>
             <button
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() => (selectedCard ? setHidden(true) : null)}
+              onClick={() =>
+                selectedCard
+                  ? showHideCard({
+                      variables: { roomId: props.roomId, isShown: false },
+                    })
+                  : ''
+              }
             >
               {t.hideCards}
             </button>
@@ -166,7 +191,10 @@ export default function Room(props) {
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
               onClick={() => {
                 setSelectedCard(null)
-                setHidden(false)
+                //setHidden(false)
+                showHideCard({
+                  variables: { roomId: props.roomId, isShown: true },
+                })
               }}
             >
               {t.clearCards}
