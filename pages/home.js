@@ -85,7 +85,7 @@ export default function Home(props) {
     e.preventDefault()
 
     let username = owner.value,
-      userid = document.cookie.split('userid=')[1].substring(0, 5) || undefined
+      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
     try {
       //Check if name is empty
