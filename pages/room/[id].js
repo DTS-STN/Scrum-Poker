@@ -46,7 +46,8 @@ export default function Room(props) {
     if (roomQuery.data) {
       // Get room info
       const roomInfo = roomQuery.data?.rooms[0]
-      const userId = document.cookie.split('userid=')[1].substring(0, 5) || null
+      const userId =
+        document.cookie.split('userid=')[1]?.substring(0, 5) || null
 
       if (roomInfo && userId) {
         //setUsers of the room

@@ -9,6 +9,7 @@ import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
 import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
+import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
@@ -19,7 +20,9 @@ import client from '../graphql/client.js'
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [isValid, setValid] = useState('')
+
+  const [createRoomError, setCreateRoomError] = useState(undefined)
+  const [joinRoomError, setJoinRoomError] = useState(undefined)
 
   const router = useRouter()
 
@@ -27,6 +30,7 @@ export default function Home(props) {
 
   const [addRoom] = useMutation(ADD_ROOM_QUERY)
   const [addUser] = useMutation(ADD_USER_QUERY)
+  const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
 
   const handleJoinSubmit = (e) => {
@@ -76,49 +80,73 @@ export default function Home(props) {
       })
   }
 
-  let onCreateHandler = (e) => {
+  let onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
 
-    let valid = true
+    let username = owner.value,
+      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
-    //Check if name is empty
-    if (owner.value.trim() === '') {
-      valid = false
-    }
-    //Check if name contains special characters
-    else if (!/^[a-zA-Z0-9]+$/.test(owner.value)) {
-      valid = false
-    } else {
-      valid = true
-    }
+    try {
+      //Check if name is empty
+      if (owner.value.trim() === '') {
+        throw t.invalidNameError
+      }
+      //Check if name contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+        throw t.invalidNameError
+      }
 
-    //If name is valid, create new room
-    if (valid) {
-      addUser({ variables: { name: e.target.owner.value } })
-        .then((res) => {
-          document.cookie = `userid=${res.data.addUser.id}`
-          return res.data.addUser.id
-        })
-        .then((userid) => {
-          addRoom({ variables: { userid: userid } })
-            .then((res) =>
-              router
-                .push({
-                  pathname: `/room/${res.data.addRoom.id}`,
-                })
-                .catch((e) => {
-                  console.log(e)
-                  setValid(false)
-                })
-            )
-            .catch((e) => {
-              console.log(e)
-              setValid(false)
-            })
-        })
+      //If name is valid, create new room
+      const addUserRes = await addUser({
+        variables: { name: username },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (addUserRes.data.addUser.success) {
+        userid = addUserRes.data.addUser.id
+        document.cookie = `userid=${userid}`
+        document.cookie = `ownerid=${userid}`
+      } else {
+        throw 'Oops! Something went wrong'
+      }
+
+      const addRoomRes = await addRoom({
+        variables: { userid: userid },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (!addRoomRes.data.addRoom.success) throw 'Oops! Something went wrong'
+
+      const updateUserRes = await updatedUser({
+        variables: {
+          userInput: {
+            id: userid,
+            name: username,
+            card: undefined,
+            room: addRoomRes.data.addRoom.id,
+          },
+        },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (updateUserRes.data.updateUser.success) {
+        router
+          .push({
+            pathname: `/room/${addRoomRes.data.addRoom.id}`,
+          })
+          .catch((e) => {
+            throw 'Oops! Something went wrong'
+          })
+      } else {
+        throw 'Oops! Something went wrong'
+      }
+    } catch (e) {
+      setCreateRoomError(e)
     }
-    setValid(valid)
   }
   return (
     <div
@@ -138,8 +166,8 @@ export default function Home(props) {
           onSubmit={onCreateHandler}
           className="flex flex-col justify-between h-full items-center"
         >
-          {isValid === false ? (
-            <ErrorLabel message={t.invalidNameError}></ErrorLabel>
+          {createRoomError ? (
+            <ErrorLabel message={createRoomError}></ErrorLabel>
           ) : undefined}
           <TextInput
             id="owner"
@@ -163,6 +191,9 @@ export default function Home(props) {
           onSubmit={handleJoinSubmit}
           className="flex flex-col justify-between h-full items-center"
         >
+          {joinRoomError ? (
+            <ErrorLabel message={joinRoomError}></ErrorLabel>
+          ) : undefined}
           <TextInput
             id="roomCode"
             label={t.joinRoomNumberLabel}
