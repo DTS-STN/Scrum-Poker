@@ -1,0 +1,6 @@
+mutation Mutation($userInput: UserInput) {
+  updateUser(userInput: $userInput) {
+    success
+    message
+  }
+}
