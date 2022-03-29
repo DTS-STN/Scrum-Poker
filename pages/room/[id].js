@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
@@ -58,7 +58,7 @@ export default function Room(props) {
     }
   }
 
-  const [room, setRoom] = useState(null)
+  const room = useRef(null)
   const [users, setUsers] = useState(null)
   const [userId, setUserId] = useState(null)
 
@@ -76,7 +76,7 @@ export default function Room(props) {
 
       if (roomInfo && userIdCookie) {
         //setRoom based off query
-        let room = {
+        let queryRoom = {
           id: roomInfo.id,
           host: roomInfo.host.id,
           users: roomInfo.users.map((user) => {
@@ -84,7 +84,7 @@ export default function Room(props) {
           }),
           isShown: roomInfo.isShown,
         }
-        setRoom(room)
+        room.current = queryRoom
 
         //setUsers of the room
         setUsers(roomInfo.users)
@@ -142,7 +142,7 @@ export default function Room(props) {
 
   useEffect(() => {
     if (roomSubscription.data) {
-      setRoom(roomSubscription.data.roomUpdated)
+      room.current = roomSubscription.data.roomUpdated
     }
   }, [roomSubscription])
 
