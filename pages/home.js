@@ -88,6 +88,7 @@ export default function Home(props) {
         variables: {
           updateRoomId: roomCode.value,
           updateRoomUsers: userListID,
+          isShown: false,
         },
       }).catch((e) => {
         throw 'Oops! Something went wrong'
