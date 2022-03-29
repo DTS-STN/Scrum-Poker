@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
+//import GET_ROOM_BY_ID_QUERY from '../graphql/queries/getRoomByID/graphql'
 import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
 import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
@@ -54,12 +55,14 @@ export default function Home(props) {
             res.data.rooms[0].users.forEach((user) => {
               userListID.push(Number(user.id))
             })
+            //Get room's isShown value
+            const isShown = res.data.rooms[0].isShown
             userListID.push(userid)
             updateRoom({
               variables: {
                 updateRoomId: roomCode,
                 updateRoomUsers: userListID,
-                isShown: true,
+                isShown,
               },
             })
               .then((res) =>
