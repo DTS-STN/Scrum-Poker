@@ -27,9 +27,6 @@ export default function Room(props) {
   ]
 
   const [selectedCard, setSelectedCard] = useState(null)
-  const [isHidden, setHidden] = useState(false)
-
-  const [users, setUsers] = useState(null)
 
   const [currPlayer, setCurrPlayer] = useState({
     id: null,
@@ -37,8 +34,6 @@ export default function Room(props) {
     card: null,
     room: props.roomID,
   })
-
-  const [isOwner, setIsOwner] = useState(false)
 
   const [updatedUser] = useMutation(UPDATE_USER)
 
@@ -63,6 +58,10 @@ export default function Room(props) {
     }
   }
 
+  const [room, setRoom] = useState(null)
+  const [users, setUsers] = useState(null)
+  const [userId, setUserId] = useState(null)
+
   const roomQuery = useQuery(GET_ROOM_INFO, {
     variables: { roomsId: props.roomId },
   })
@@ -72,19 +71,32 @@ export default function Room(props) {
     if (roomQuery.data) {
       // Get room info
       const roomInfo = roomQuery.data?.rooms[0]
-      const userId =
+      const userIdCookie =
         document.cookie.split('userid=')[1]?.substring(0, 5) || null
-      if (roomInfo && userId) {
+
+      if (roomInfo && userIdCookie) {
+        //setRoom based off query
+        let room = {
+          id: roomInfo.id,
+          host: roomInfo.host.id,
+          users: roomInfo.users.map((user) => {
+            return user.id
+          }),
+          isShown: roomInfo.isShown,
+        }
+        setRoom(room)
+
         //setUsers of the room
         setUsers(roomInfo.users)
+
+        //Sets current user id based off cookie
+        setUserId(userIdCookie)
+
         // Find current player and setCurrPlayer
         roomInfo.users.forEach((user) => {
           if (user.id === userId) {
             setCurrPlayer(user)
           }
-          if (user.id === roomInfo.host.id) {
-            setIsOwner(true)
-          } else setIsOwner(false)
         })
         setPageState(null)
       } else {
@@ -103,8 +115,7 @@ export default function Room(props) {
     variables: { room: props.roomId },
   })
 
-  //const [showHideCard] = useMutation(SHOW_HIDE_ROOM_CARD)
-  const [showHideCard] = useMutation(UPDATE_ROOM)
+  const [updateRoom] = useMutation(UPDATE_ROOM)
 
   useEffect(() => {
     if (userSubscription.loading) {
@@ -131,16 +142,11 @@ export default function Room(props) {
 
   useEffect(() => {
     if (roomSubscription.data) {
-      setHidden(!roomSubscription.data.roomUpdated.isShown)
+      setRoom(roomSubscription.data.roomUpdated)
     }
   }, [roomSubscription])
 
   if (!pageState && users) {
-    const usersIDList = []
-    users.map((user) => {
-      usersIDList.push(Number(user.id))
-    })
-
     return (
       <div
         id="homeContent"
@@ -185,22 +191,19 @@ export default function Room(props) {
             )
           })}
         </ul>
-        {isOwner ? (
+        {userId == room.host ? (
           <div className="flex justify-center">
             <button
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
               onClick={() =>
-                selectedCard
-                  ? showHideCard({
-                      //variables: { roomId: props.roomId,  isShown: true },
-                      variables: {
-                        updateRoomId: props.roomId,
-                        updateRoomUsers: usersIDList,
-                        isShown: true,
-                      },
-                    })
-                  : ''
+                updateRoom({
+                  variables: {
+                    updateRoomId: room.id,
+                    updateRoomUsers: room.users,
+                    isShown: true,
+                  },
+                })
               }
             >
               {t.showCards}
@@ -209,15 +212,13 @@ export default function Room(props) {
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
               onClick={() =>
-                selectedCard
-                  ? showHideCard({
-                      variables: {
-                        updateRoomId: props.roomId,
-                        updateRoomUsers: usersIDList,
-                        isShown: false,
-                      },
-                    })
-                  : ''
+                updateRoom({
+                  variables: {
+                    updateRoomId: room.id,
+                    updateRoomUsers: room.users,
+                    isShown: false,
+                  },
+                })
               }
             >
               {t.hideCards}
@@ -227,11 +228,10 @@ export default function Room(props) {
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
               onClick={() => {
                 setSelectedCard(null)
-                //setHidden(false)
-                showHideCard({
+                updateRoom({
                   variables: {
-                    updateRoomId: props.roomId,
-                    updateRoomUsers: usersIDList,
+                    updateRoomId: room.id,
+                    updateRoomUsers: room.users,
                     isShown: true,
                   },
                 })
@@ -245,8 +245,7 @@ export default function Room(props) {
         <UserList
           t={t}
           userList={users}
-          selectedCard={selectedCard}
-          isHidden={isHidden}
+          isShown={room.isShown}
           currPlayer={currPlayer}
         ></UserList>
       </div>

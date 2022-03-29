@@ -16,7 +16,7 @@ export default function UserList(props) {
         // Current player.
         <Player
           playerName={player.name}
-          selectedCard={props.isHidden ? hiddenCard : props.selectedCard}
+          selectedCard={props.isShown ? player.card : hiddenCard}
           imgAlt="selectedCard"
           data-testid="current-player"
         />
@@ -69,5 +69,5 @@ UserList.propTypes = {
   /**
    * If cards are hidden or not
    */
-  isHidden: PropTypes.bool,
+  isShown: PropTypes.bool,
 }
