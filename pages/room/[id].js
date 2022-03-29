@@ -4,9 +4,11 @@ import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
 
-import { useQuery, useSubscription } from '@apollo/client'
+import { useQuery, useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
+import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
+
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
@@ -21,7 +23,7 @@ export default function Room(props) {
     { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
     { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
     { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-    { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: '∞' },
+    { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
   ]
 
   const [selectedCard, setSelectedCard] = useState(null)
@@ -32,10 +34,34 @@ export default function Room(props) {
   const [currPlayer, setCurrPlayer] = useState({
     id: null,
     name: null,
-    card: selectedCard,
+    card: null,
+    room: props.roomID,
   })
 
   const [isOwner, setIsOwner] = useState(false)
+
+  const [updatedUser] = useMutation(UPDATE_USER)
+
+  const onCardClickHandler = async (e, card) => {
+    setSelectedCard(card)
+    const updatedUserData = {
+      id: Number(currPlayer.id),
+      name: currPlayer.name,
+      card: card.value,
+      room: currPlayer.room,
+    }
+    try {
+      const updateUserRes = await updatedUser({
+        variables: {
+          userInput: updatedUserData,
+        },
+      }).catch((e) => {
+        throw e
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   const roomQuery = useQuery(GET_ROOM_INFO, {
     variables: { roomsId: props.roomId },
@@ -52,7 +78,6 @@ export default function Room(props) {
       if (roomInfo && userId) {
         //setUsers of the room
         setUsers(roomInfo.users)
-
         // Find current player and setCurrPlayer
         roomInfo.users.forEach((user) => {
           if (user.id === userId) {
@@ -131,10 +156,10 @@ export default function Room(props) {
                   src={card.src}
                   id={card.id}
                   alt={card.alt}
-                  onClick={() => setSelectedCard(card)}
+                  onClick={(e) => onCardClickHandler(e, card)}
                   onKeyDown={(e) => {
                     if (e.keyCode === 32 || e.keyCode === 13) {
-                      setSelectedCard(card)
+                      onCardClickHandler(e, card)
                     }
                   }}
                   selected={card.id === selectedCard?.id}
