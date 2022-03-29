@@ -23,13 +23,13 @@ describe('index page', () => {
 
   const meta = {
     data_en: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

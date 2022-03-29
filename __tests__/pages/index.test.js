@@ -17,13 +17,13 @@ describe('index page', () => {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',
@@ -54,13 +54,13 @@ describe('index page', () => {
             desc: 'English',
             author: 'Service Canada',
             keywords: '',
-            title: 'Next Template - Canada.ca',
+            title: 'Scrum Poker',
           },
           data_fr: {
             author: 'Service Canada',
             desc: 'Français',
             keywords: '',
-            title: 'Next Template - Canada.ca',
+            title: 'Scrum Poker',
           },
         },
       },
