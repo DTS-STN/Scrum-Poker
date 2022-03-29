@@ -42,9 +42,9 @@ export default function Room(props) {
 
   const [updatedUser] = useMutation(UPDATE_USER)
 
-  let onCardClickHandler = async (e, card) => {
+  const onCardClickHandler = async (e, card) => {
     setSelectedCard(card)
-    let updatedUserData = {
+    const updatedUserData = {
       id: Number(currPlayer.id),
       name: currPlayer.name,
       card: card.value,
@@ -159,7 +159,7 @@ export default function Room(props) {
                   onClick={(e) => onCardClickHandler(e, card)}
                   onKeyDown={(e) => {
                     if (e.keyCode === 32 || e.keyCode === 13) {
-                      setSelectedCard(card)
+                      onCardClickHandler(e, card)
                     }
                   }}
                   selected={card.id === selectedCard?.id}
