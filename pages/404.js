@@ -58,13 +58,13 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Next Template - 404',
+      title: 'Scrum Poker - 404',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - 404',
+      title: 'Scrum Poker - 404',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

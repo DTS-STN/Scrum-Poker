@@ -7,7 +7,7 @@ export default function Index(props) {
       <MetaData language={props.locale} data={props.meta}></MetaData>
       <div className="flex flex-col justify-center items-center m-auto">
         <div className="z-10 bg-white h-auto w-[18.75rem] xl:w-[31.25rem]">
-          <h1 className="sr-only">service.canada.ca-digital-center</h1>
+          <h1 className="sr-only">Scrum Poker</h1>
 
           <div className="h-auto w-64 mx-auto pt-6 xl:w-2/3 xl:mx-0 xl:px-6">
             <Image
@@ -89,13 +89,13 @@ export async function getStaticProps({ locale }) {
   /* Place-holder Meta Data Props */
   const meta = {
     data_en: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'English',
       author: 'Service Canada',
       keywords: '',
     },
     data_fr: {
-      title: 'Next Template - Canada.ca',
+      title: 'Scrum Poker',
       desc: 'Français',
       author: 'Service Canada',
       keywords: '',

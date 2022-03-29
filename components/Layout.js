@@ -75,7 +75,7 @@ export default function Layout(props) {
  */
 
 Layout.defaultProps = {
-  title: 'Next Template - Canada.ca',
+  title: 'Scrum Poker',
 }
 
 Layout.propTypes = {
