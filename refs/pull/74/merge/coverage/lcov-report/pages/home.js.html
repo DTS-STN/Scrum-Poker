@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.25% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/32</span>
+                <span class='fraction'>2/28</span>
             </div>
         
             
@@ -355,9 +355,7 @@
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
 <a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L293'></a><a href='#L293'>293</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -395,7 +393,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -487,7 +484,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -667,7 +663,7 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
-import { cookie } from 'js-cookie'
+import Cookies from 'js-cookie'
 &nbsp;
 export default function Home(props) {
   /* istanbul ignore next */
@@ -689,9 +685,8 @@ export default function Home(props) {
   const handleJoinSubmit = <span class="fstat-no" title="function not covered" >as</span>ync (e) =&gt; {
     //prevent default behaviour of form
 <span class="cstat-no" title="statement not covered" >    e.preventDefault()</span>
-&nbsp;
     let username = <span class="cstat-no" title="statement not covered" >newRoomName.value,</span>
-      userid = <span class="cstat-no" title="statement not covered" >cookie?.get('userid')?.split[1]?.substring(0, 5) || undefined</span>
+      userid = <span class="cstat-no" title="statement not covered" >Cookies.get('userid')</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
       //Check if name is empty
@@ -712,7 +707,7 @@ export default function Home(props) {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (addUserRes.data.addUser.success) {</span>
 <span class="cstat-no" title="statement not covered" >        userid = addUserRes.data.addUser.id</span>
-<span class="cstat-no" title="statement not covered" >        cookie?.set('userid', `${userid}`)</span>
+<span class="cstat-no" title="statement not covered" >        Cookies.set('userid', `${userid}`)</span>
       } else {
 <span class="cstat-no" title="statement not covered" >        throw 'Oops! Something went wrong'</span>
       }
@@ -781,9 +776,8 @@ export default function Home(props) {
   const onCreateHandler = <span class="fstat-no" title="function not covered" >as</span>ync (e) =&gt; {
     //prevent default behaviour of form
 <span class="cstat-no" title="statement not covered" >    e.preventDefault()</span>
-&nbsp;
     let username = <span class="cstat-no" title="statement not covered" >owner.value,</span>
-      userid = <span class="cstat-no" title="statement not covered" >cookie?.get('userid')?.split[1]?.substring(0, 5) || undefined</span>
+      userid = <span class="cstat-no" title="statement not covered" >Cookies.get('userid')</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
       //Check if name is empty
@@ -804,8 +798,8 @@ export default function Home(props) {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >      if (addUserRes.data.addUser.success) {</span>
 <span class="cstat-no" title="statement not covered" >        userid = addUserRes.data.addUser.id</span>
-<span class="cstat-no" title="statement not covered" >        cookie?.set('userid', `${userid}`)</span>
-<span class="cstat-no" title="statement not covered" >        cookie?.set('ownerid', `${userid}`)</span>
+<span class="cstat-no" title="statement not covered" >        Cookies.set('userid', `${userid}`)</span>
+<span class="cstat-no" title="statement not covered" >        Cookies.set('ownerid', `${userid}`)</span>
       } else {
 <span class="cstat-no" title="statement not covered" >        throw 'Oops! Something went wrong'</span>
       }
@@ -952,7 +946,7 @@ Home.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Mar 30 2022 15:45:16 GMT+0000 (Coordinated Universal Time)
+                at Wed Mar 30 2022 16:52:23 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
