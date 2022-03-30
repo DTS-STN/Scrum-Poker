@@ -41,10 +41,6 @@ export default function Room(props) {
   const handleClear = (e) => {
     e.preventDefault()
 
-    //Clear selection and show cards
-    setSelectedCard(null)
-    setHidden(false)
-
     //Loop through users in room and set their cards to null
     try {
       users.forEach((user) => {
