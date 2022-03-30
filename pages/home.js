@@ -14,6 +14,7 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
+import Cookies from 'js-cookie'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -35,9 +36,8 @@ export default function Home(props) {
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = newRoomName.value,
-      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -58,7 +58,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        document.cookie = `userid=${userid}`
+        Cookies.set('userid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }
@@ -127,9 +127,8 @@ export default function Home(props) {
   const onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = owner.value,
-      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -137,7 +136,7 @@ export default function Home(props) {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {
         throw t.invalidNameError
       }
 
@@ -150,8 +149,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        document.cookie = `userid=${userid}`
-        document.cookie = `ownerid=${userid}`
+        Cookies.set('userid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }

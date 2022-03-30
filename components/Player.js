@@ -10,12 +10,12 @@ export default function Player(props) {
     <div className="flex md:flex-col rounded border border-slate-300 my-2">
       <div className=" flex w-full justify-between">
         <div className="flex ">
-          <div className={`flex items-center justify-center rounded-lg p-2`}>
+          <div className={`flex items-center justify-center rounded-lg p-2 `}>
             <span
-              className={` bg-slate-300 rounded-full h-14 w-14 relative ${props.bgColor}`}
+              className={` bg-slate-300 flex justify-center rounded-full h-14 w-14  ${props.bgColor}`}
             >
               <span
-                className="left-5 top-3 font-bold text-xl font-body absolute"
+                className="m-auto font-bold text-xl font-body"
                 data-testid="first-letter"
               >
                 {props.playerName.charAt(0).toUpperCase()}
