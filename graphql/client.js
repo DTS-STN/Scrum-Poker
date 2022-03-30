@@ -8,6 +8,15 @@ import { createClient } from 'graphql-ws'
 //The server can't handle subscriptions nor should it
 let isClient = typeof window !== 'undefined'
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+  },
+}
+
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_HTTP,
   fetch,
@@ -43,6 +52,7 @@ const link = isClient
 const client = new ApolloClient({
   link: link,
   cache: new InMemoryCache(),
+  defaultOptions: defaultOptions,
 })
 
 export default client
