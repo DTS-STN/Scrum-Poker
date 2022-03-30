@@ -54,11 +54,14 @@ export default function Home(props) {
             res.data.rooms[0].users.forEach((user) => {
               userListID.push(Number(user.id))
             })
+            //Get room's isShown value
+            const isShown = res.data.rooms[0].isShown
             userListID.push(userid)
             updateRoom({
               variables: {
                 updateRoomId: roomCode,
                 updateRoomUsers: userListID,
+                isShown,
               },
             })
               .then((res) =>
@@ -74,7 +77,7 @@ export default function Home(props) {
               )
               .catch((e) => {
                 // User was not created.
-                console.log(e)
+                console.log('error', e)
               })
           })
       })

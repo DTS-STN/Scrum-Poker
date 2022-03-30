@@ -1,0 +1,13 @@
+subscription RoomSubscription($room: ID!) {
+  roomUpdated(room: $room) {
+    id
+    host {
+        id
+        name
+    }
+    users {
+        id
+    }
+    isShown
+  }
+}
