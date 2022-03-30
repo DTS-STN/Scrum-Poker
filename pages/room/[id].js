@@ -11,6 +11,7 @@ import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
 import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
+import client from '../../graphql/client.js'
 
 export const cards = [
   { id: 'card-1', src: '/Card_1.svg', value: 1 },
@@ -25,98 +26,26 @@ export const cards = [
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
-  const [pageState, setPageState] = useState(null)
-  const [selectedCard, setSelectedCard] = useState(null)
-
-  const [currPlayer, setCurrPlayer] = useState({
-    id: null,
-    name: null,
-    card: null,
-    room: props.roomID,
-  })
 
   const [updatedUser] = useMutation(UPDATE_USER)
-
-  const onCardClickHandler = async (e, card) => {
-    setSelectedCard(card)
-    const updatedUserData = {
-      id: Number(currPlayer.id),
-      name: currPlayer.name,
-      card: card.value,
-      room: currPlayer.room,
-    }
-    try {
-      const updateUserRes = await updatedUser({
-        variables: {
-          userInput: updatedUserData,
-        },
-      }).catch((e) => {
-        throw e
-      })
-    } catch (e) {
-      console.log(e)
-    }
+  const [updateRoom] = useMutation(UPDATE_ROOM)
+  const [room, setRoom] = useState(props.room)
+  const [users, setUsers] = useState(props.users)
+  const [userId, setUserId] = useState(null)
+  const getUserById = (userId) => {
+    return users.find((user) => {
+      return user.id === userId
+    })
   }
 
-  const room = useRef(null)
-  const [users, setUsers] = useState(null)
-  const [userId, setUserId] = useState(null)
-
-  const roomQuery = useQuery(GET_ROOM_INFO, {
-    variables: { roomsId: props.roomId },
-  })
   useEffect(() => {
-    if (roomQuery.loading) setPageState('Loading...')
-    if (roomQuery.error) setPageState('roomQuerry error')
-    if (roomQuery.data) {
-      // Get room info
-      const roomInfo = roomQuery.data?.rooms[0]
-      const userIdCookie =
-        document.cookie.split('userid=')[1]?.substring(0, 5) || null
+    setUserId(document.cookie.split('userid=')[1]?.substring(0, 5) || null)
+  }, [])
 
-      if (roomInfo && userIdCookie) {
-        //setRoom based off query
-        let queryRoom = {
-          id: roomInfo.id,
-          host: roomInfo.host.id,
-          userIds: roomInfo.users.map((user) => {
-            return user.id
-          }),
-          isShown: roomInfo.isShown,
-        }
-        room.current = queryRoom
-
-        //setUsers of the room
-        setUsers(roomInfo.users)
-
-        //Sets current user id based off cookie
-        setUserId(userIdCookie)
-
-        // Find current player and setCurrPlayer
-        roomInfo.users.forEach((user) => {
-          if (user.id === userId) {
-            setCurrPlayer(user)
-          }
-        })
-        setPageState(null)
-      } else {
-        if (!userId)
-          setPageState('No user was defined before joining the room.')
-        if (!roomInfo) setPageState('No room exists with this id.')
-      }
-    }
-  }, [roomQuery])
-
+  //User subscription and useEffect to update users
   const userSubscription = useSubscription(USER_SUBSCRIPTION, {
     variables: { room: props.roomId },
   })
-
-  const roomSubscription = useSubscription(ROOM_SUBSCRIPTION, {
-    variables: { room: props.roomId },
-  })
-
-  const [updateRoom] = useMutation(UPDATE_ROOM)
-
   useEffect(() => {
     if (userSubscription.loading) {
       //Do nothing
@@ -140,6 +69,10 @@ export default function Room(props) {
     }
   }, [userSubscription])
 
+  //Room subscription and useEffect to update room
+  const roomSubscription = useSubscription(ROOM_SUBSCRIPTION, {
+    variables: { room: props.roomId },
+  })
   useEffect(() => {
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
@@ -151,117 +84,131 @@ export default function Room(props) {
         }),
         isShown: roomUpdated.isShown,
       }
-      room.current = updatedRoomData
+      setRoom(updatedRoomData)
     }
   }, [roomSubscription])
 
-  if (!pageState && users) {
-    return (
-      <div
-        id="homeContent"
-        className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
-      >
-        <RoomInfo
-          id="roomid"
-          t={t}
-          roomId={props.roomId}
-          playerName={currPlayer.name}
-          playersOnline={users.length}
-        />
-
-        {!selectedCard ? (
-          <h2>Select a card...</h2>
-        ) : (
-          <h2>
-            Value selected:{' '}
-            <span className="font-bold">{selectedCard.value}</span>
-          </h2>
-        )}
-        <ul
-          id="cards"
-          className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
-        >
-          {cards.map((card) => {
-            return (
-              <li key={card.id}>
-                <Card
-                  src={card.src}
-                  id={card.id}
-                  alt={card.alt}
-                  onClick={(e) => onCardClickHandler(e, card)}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 32 || e.keyCode === 13) {
-                      onCardClickHandler(e, card)
-                    }
-                  }}
-                  selected={card.id === selectedCard?.id}
-                />
-              </li>
-            )
-          })}
-        </ul>
-        {userId == room.current.host ? (
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() =>
-                updateRoom({
-                  variables: {
-                    updateRoomId: room.current.id,
-                    updateRoomUsers: room.current.userIds,
-                    isShown: true,
-                  },
-                })
-              }
-            >
-              {t.showCards}
-            </button>
-            <button
-              type="button"
-              className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() =>
-                updateRoom({
-                  variables: {
-                    updateRoomId: room.current.id,
-                    updateRoomUsers: room.current.userIds,
-                    isShown: false,
-                  },
-                })
-              }
-            >
-              {t.hideCards}
-            </button>
-            <button
-              type="button"
-              className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() => {
-                setSelectedCard(null)
-                updateRoom({
-                  variables: {
-                    updateRoomId: room.current.id,
-                    updateRoomUsers: room.current.userIds,
-                    isShown: true,
-                  },
-                })
-              }}
-            >
-              {t.clearCards}
-            </button>
-          </div>
-        ) : null}
-        {/* User list */}
-        <UserList
-          t={t}
-          userList={users}
-          isShown={room.current.isShown}
-          currPlayer={currPlayer}
-        />
-      </div>
-    )
+  const onCardClickHandler = async (e, card) => {
+    const updatedUserData = {
+      id: Number(getUserById(userId).id),
+      name: getUserById(userId)?.name,
+      card: card.value,
+      room: getUserById(userId)?.room,
+    }
+    try {
+      const updateUserRes = await updatedUser({
+        variables: {
+          userInput: updatedUserData,
+        },
+      }).catch((e) => {
+        throw e
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
-  // pageState is not null, meaning its either loading, invalid roomid, no user cookie or theres an error with the request.
-  return <p>{pageState}</p>
+  return (
+    <div
+      id="homeContent"
+      className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
+    >
+      <RoomInfo
+        id="roomid"
+        t={t}
+        roomId={props.roomId}
+        playerName={getUserById(userId)?.name}
+        playersOnline={users.length}
+      />
+
+      {!getUserById(userId)?.card ? (
+        <h2>Select a card...</h2>
+      ) : (
+        <h2>
+          Value selected:{' '}
+          <span className="font-bold">{getUserById(userId)?.card}</span>
+        </h2>
+      )}
+      <ul
+        id="cards"
+        className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+      >
+        {cards.map((card) => {
+          return (
+            <li key={card.id}>
+              <Card
+                src={card.src}
+                id={card.id}
+                alt={card.alt}
+                onClick={(e) => onCardClickHandler(e, card)}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 32 || e.keyCode === 13) {
+                    onCardClickHandler(e, card)
+                  }
+                }}
+                selected={card.value === getUserById(userId)?.card}
+              />
+            </li>
+          )
+        })}
+      </ul>
+      {userId == room.host ? (
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() =>
+              updateRoom({
+                variables: {
+                  updateRoomId: room.id,
+                  updateRoomUsers: room.userIds,
+                  isShown: true,
+                },
+              })
+            }
+          >
+            {t.showCards}
+          </button>
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() =>
+              updateRoom({
+                variables: {
+                  updateRoomId: room.id,
+                  updateRoomUsers: room.userIds,
+                  isShown: false,
+                },
+              })
+            }
+          >
+            {t.hideCards}
+          </button>
+          <button
+            type="button"
+            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+            onClick={() => {
+              updateRoom({
+                variables: {
+                  updateRoomId: room.id,
+                  updateRoomUsers: room.userIds,
+                  isShown: true,
+                },
+              })
+            }}
+          >
+            {t.clearCards}
+          </button>
+        </div>
+      ) : null}
+      {/* User list */}
+      <UserList
+        t={t}
+        userList={users}
+        isShown={room.isShown}
+        currPlayer={getUserById(userId)}
+      />
+    </div>
+  )
 }
 
 export async function getServerSideProps({ params, locale }) {
@@ -287,9 +234,25 @@ export async function getServerSideProps({ params, locale }) {
   }
 
   //TODO: fetch room data from roomId
+  const queryResponse = await client.query({
+    query: GET_ROOM_INFO,
+    variables: { roomsId: roomId },
+  })
+  const roomInfo = queryResponse.data?.rooms[0]
+
+  const room = {
+    id: roomInfo.id,
+    host: roomInfo.host.id,
+    userIds: roomInfo.users.map((user) => {
+      return user.id
+    }),
+    isShown: roomInfo.isShown,
+  }
+
+  const users = roomInfo.users
 
   return {
-    props: { roomId, meta, locale, langToggleLink },
+    props: { roomId, meta, locale, langToggleLink, room, users },
   }
 }
 
