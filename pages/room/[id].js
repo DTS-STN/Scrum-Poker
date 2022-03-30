@@ -12,6 +12,7 @@ import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
+import Cookies from 'js-cookie'
 
 export const cards = [
   { id: 'card-1', src: '/Card_1.svg', value: 1 },
@@ -71,7 +72,7 @@ export default function Room(props) {
   }
 
   useEffect(() => {
-    setUserId(document.cookie.split('userid=')[1]?.substring(0, 5) || null)
+    setUserId(Cookies.get('userid'))
   }, [])
 
   //User subscription and useEffect to update users
