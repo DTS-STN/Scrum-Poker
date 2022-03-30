@@ -151,15 +151,11 @@ export default function Room(props) {
         }),
         isShown: roomUpdated.isShown,
       }
-
-      console.log('roomSubscription.data', updatedRoomData)
       room.current = updatedRoomData
     }
   }, [roomSubscription])
 
   if (!pageState && users) {
-    console.log('userId == room.host', userId, room.current.host, users)
-
     return (
       <div
         id="homeContent"
