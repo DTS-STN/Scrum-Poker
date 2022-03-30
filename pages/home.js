@@ -71,7 +71,7 @@ export default function Home(props) {
       })
 
       let userListID = []
-      if (getUserListRes.data) {
+      if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
           userListID.push(Number(user.id))
         })
@@ -151,7 +151,6 @@ export default function Home(props) {
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         document.cookie = `userid=${userid}`
-        document.cookie = `ownerid=${userid}`
       } else {
         throw 'Oops! Something went wrong'
       }
@@ -193,70 +192,84 @@ export default function Home(props) {
     }
   }
   return (
-    <div
-      data-testid="homeContent"
-      id="homeContent"
-      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
-    >
-      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.createRoomTitle}
-        </h2>
-        <h3 className="text-opacity-75 text-black text-xl">
-          {t.createRoomDesc}
-        </h3>
-        <form
-          data-testid="createRoomForm"
-          onSubmit={onCreateHandler}
-          className="flex flex-col justify-between h-full items-center"
-        >
-          {createRoomError ? (
-            <ErrorLabel message={createRoomError}></ErrorLabel>
-          ) : undefined}
-          <TextInput
-            id="owner"
-            label={t.createRoomLabel}
-            placeholder={t.createRoomPlaceholder}
-          />
-          <button
-            type="submit"
-            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+    <>
+      {router.query.error ? (
+        <ErrorLabel message={router.query.error}></ErrorLabel>
+      ) : undefined}
+      <div
+        data-testid="homeContent"
+        id="homeContent"
+        className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5  ${
+          router.query.error ? `sm:mt-6` : ``
+        }`}
+      ></div>
+      <div
+        data-testid="homeContent"
+        id="homeContent"
+        className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
+      >
+        <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+          <h2 className="text-opacity-75 text-black font-bold text-2xl">
+            {t.createRoomTitle}
+          </h2>
+          <h3 className="text-opacity-75 text-black text-xl">
+            {t.createRoomDesc}
+          </h3>
+          <form
+            data-testid="createRoomForm"
+            onSubmit={onCreateHandler}
+            className="flex flex-col justify-between h-full items-center"
           >
-            {t.createRoomButton}
-          </button>
-        </form>
-      </Container>
-      <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.joinRoomTitle}
-        </h2>
-        <h3 className="text-opacity-75 text-black text-xl">{t.joinRoomDesc}</h3>
-        <form
-          onSubmit={handleJoinSubmit}
-          className="flex flex-col justify-between h-full items-center"
-        >
-          {joinRoomError ? (
-            <ErrorLabel message={joinRoomError}></ErrorLabel>
-          ) : undefined}
-          <TextInput
-            id="roomCode"
-            label={t.joinRoomNumberLabel}
-            placeholder={t.joinRoomNumberPlaceholder}
-          />
-          <TextInput
-            id="newRoomName"
-            label={t.joinRoomNameLabel}
-            placeholder={t.joinRoomNamePlaceholder}
-          />
-          <button
-            type="submit"
-            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+            {createRoomError ? (
+              <ErrorLabel message={createRoomError}></ErrorLabel>
+            ) : undefined}
+            <TextInput
+              id="owner"
+              label={t.createRoomLabel}
+              placeholder={t.createRoomPlaceholder}
+            />
+            <button
+              type="submit"
+              className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+            >
+              {t.createRoomButton}
+            </button>
+          </form>
+        </Container>
+        <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+          <h2 className="text-opacity-75 text-black font-bold text-2xl">
+            {t.joinRoomTitle}
+          </h2>
+          <h3 className="text-opacity-75 text-black text-xl">
+            {t.joinRoomDesc}
+          </h3>
+          <form
+            onSubmit={handleJoinSubmit}
+            className="flex flex-col justify-between h-full items-center"
           >
-            {t.joinRoomButton}
-          </button>
-        </form>
-      </Container>
-    </div>
+            {joinRoomError ? (
+              <ErrorLabel message={joinRoomError}></ErrorLabel>
+            ) : undefined}
+            <TextInput
+              id="roomCode"
+              label={t.joinRoomNumberLabel}
+              placeholder={t.joinRoomNumberPlaceholder}
+            />
+            <TextInput
+              id="newRoomName"
+              label={t.joinRoomNameLabel}
+              placeholder={t.joinRoomNamePlaceholder}
+            />
+            <button
+              type="submit"
+              className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
+            >
+              {t.joinRoomButton}
+            </button>
+          </form>
+        </Container>
+      </div>
+    </>
   )
 }
 export async function getStaticProps({ locale }) {
