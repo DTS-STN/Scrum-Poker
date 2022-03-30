@@ -4,7 +4,7 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
-import { useMutation } from '@apollo/client'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
 import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
 import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
@@ -14,8 +14,6 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
-
-import client from '../graphql/client.js'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -32,58 +30,101 @@ export default function Home(props) {
   const [addUser] = useMutation(ADD_USER_QUERY)
   const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
+  const [getRoomUsers] = useLazyQuery(GET_ROOM_QUERY)
 
-  const handleJoinSubmit = (e) => {
+  const handleJoinSubmit = async (e) => {
+    //prevent default behaviour of form
     e.preventDefault()
-    // Create a User
-    addUser({ variables: { name: e.target.newRoomName.value } })
-      .then((res) => {
-        // User has been created
-        // Store cookie with userid as key
-        document.cookie = `userid=${res.data.addUser.id}`
-        return res.data.addUser.id
+
+    let username = newRoomName.value,
+      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
+
+    try {
+      //Check if name is empty
+      if (newRoomName.value.trim() === '') {
+        throw t.invalidNameError
+      }
+      //Check if name contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+        throw t.invalidNameError
+      }
+
+      //If name is valid, create new user
+      const addUserRes = await addUser({
+        variables: { name: username },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
       })
-      .then((userid) => {
-        let roomCode = e.target.roomCode.value
-        // Update room with user added
-        //Get current usersList from room id
-        client
-          .query({ query: GET_ROOM_QUERY, variables: { roomsId: roomCode } })
-          .then((res) => {
-            let userListID = []
-            res.data.rooms[0].users.forEach((user) => {
-              userListID.push(Number(user.id))
-            })
-            //Get room's isShown value
-            const isShown = res.data.rooms[0].isShown
-            userListID.push(userid)
-            updateRoom({
-              variables: {
-                updateRoomId: roomCode,
-                updateRoomUsers: userListID,
-                isShown,
-              },
-            })
-              .then((res) =>
-                // Room created, redirecting to that room...
-                router
-                  .push({
-                    pathname: `/room/${roomCode}`,
-                  })
-                  .catch((e) => {
-                    // Room was not joined.
-                    console.log(e)
-                  })
-              )
-              .catch((e) => {
-                // User was not created.
-                console.log('error', e)
-              })
+
+      if (addUserRes.data.addUser.success) {
+        userid = addUserRes.data.addUser.id
+        document.cookie = `userid=${userid}`
+      } else {
+        throw 'Oops! Something went wrong'
+      }
+
+      //Get List of Users
+      const getUserListRes = await getRoomUsers({
+        variables: { roomsId: roomCode.value },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      let userListID = []
+      if (getUserListRes.data) {
+        getUserListRes.data.rooms[0].users.forEach((user) => {
+          userListID.push(Number(user.id))
+        })
+        if (!userListID.includes(userid)) {
+          userListID.push(userid)
+        }
+      } else {
+        throw 'Oops! Something went wrong'
+      }
+
+      const updateRoomRes = await updateRoom({
+        variables: {
+          updateRoomId: roomCode.value,
+          updateRoomUsers: userListID,
+          isShown: false,
+        },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (!updateRoomRes.data.updateRoom.success)
+        throw 'Oops! Something went wrong'
+
+      const updateUserRes = await updatedUser({
+        variables: {
+          userInput: {
+            id: userid,
+            name: username,
+            card: undefined,
+            room: roomCode.value,
+          },
+        },
+      }).catch((e) => {
+        throw 'Oops! Something went wrong'
+      })
+
+      if (updateUserRes.data.updateUser.success) {
+        router
+          .push({
+            pathname: `/room/${roomCode.value}`,
           })
-      })
+          .catch((e) => {
+            throw 'Oops! Something went wrong'
+          })
+      } else {
+        throw 'Oops! Something went wrong'
+      }
+    } catch (e) {
+      setJoinRoomError(e)
+    }
   }
 
-  let onCreateHandler = async (e) => {
+  const onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
 
