@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
+import ChatRoom from '../../components/ChatRoom'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
@@ -37,6 +38,22 @@ export default function Room(props) {
       return user.id === userId
     })
   }
+
+  const exampleMessages = [
+    {
+      id: '1',
+      name: 'Yoda',
+      message: 'You must unlearn what you have learned',
+    },
+    {
+      id: '2',
+      name: getUserById(userId)?.name,
+      message: 'All right. I’ll give it a try',
+    },
+    { id: '3', name: 'Yoda', message: 'No. Try not.' },
+    { id: '4', name: 'Yoda', message: 'Do… or do not.' },
+    { id: '5', name: 'Yoda', message: 'There is no try' },
+  ]
 
   const handleClear = (e) => {
     e.preventDefault()
@@ -230,6 +247,13 @@ export default function Room(props) {
         userList={users}
         isShown={room.isShown}
         currPlayer={getUserById(userId)}
+      />
+
+      <ChatRoom
+        id="chat"
+        name={getUserById(userId)?.name}
+        messages={exampleMessages}
+        t={t}
       />
     </div>
   )

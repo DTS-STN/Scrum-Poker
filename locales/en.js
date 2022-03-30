@@ -31,6 +31,10 @@ export default {
   playersOnline: 'Players Online:',
   copy: 'Copy',
 
+  // Chat
+  placeholder: 'Write a message',
+  send: 'Send',
+
   // Header
   title: 'home',
   scrumPoker: 'Scrum Poker',

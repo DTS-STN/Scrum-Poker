@@ -33,6 +33,10 @@ export default {
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
 
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
+
   // Header
   title: 'accueil',
   scrumPoker: 'Scrum Poker',
