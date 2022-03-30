@@ -56,12 +56,12 @@ export default function Room(props) {
         })
       })
 
-      //Update the room so isShown is true
+      //Update the room so isShown is false
       updateRoom({
         variables: {
           updateRoomId: room.id,
           users: room.userIds,
-          isShown: true,
+          isShown: false,
         },
       })
     } catch (e) {
