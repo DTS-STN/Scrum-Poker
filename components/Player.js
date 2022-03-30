@@ -6,13 +6,14 @@ import Image from 'next/image'
  * Player list component
  */
 export default function Player(props) {
+  console.log(props.bgColor)
   return (
-    <div className="flex md:flex-col rounded border border-slate-300 my-2">
+    <div className="flex md:flex-col rounded border border-slate-300 my-2 ">
       <div className=" flex w-full justify-between">
         <div className="flex ">
-          <div className={`flex items-center justify-center rounded-lg p-2 `}>
+          <div className={`flex items-center justify-center rounded-lg p-2  `}>
             <span
-              className={` bg-slate-300 flex justify-center rounded-full h-14 w-14  ${props.bgColor}`}
+              className={` bg-slate-300 flex justify-center rounded-full h-12 w-12  ${props.bgColor}`}
             >
               <span
                 className="m-auto font-bold text-xl font-body"
@@ -41,7 +42,7 @@ export default function Player(props) {
             data-testid="selected-card-img"
           />
         ) : (
-          <div className=" h-auto w-20 p-2">
+          <div className=" h-auto w-14 p-2">
             <Image
               src="/EmptyCard.svg"
               alt={props.imgAlt}

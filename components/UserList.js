@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import Player from './Player'
 import { cards } from '../pages/room/[id]'
+
+import { useState } from 'react'
+
 /**
  * List of players component
  */
@@ -11,10 +14,40 @@ export default function UserList(props) {
     value: 'hidden',
   }
 
+  const colorArray = [
+    'bg-[#7ea9e1]',
+    'bg-[#ed004f]',
+    'bg-[#00fcf0]',
+    'bg-[#d2fc00]',
+    'bg-[#7bff00]',
+    'bg-[#fa6900]',
+  ]
+
+  const randomColor = colorArray[Math.floor(Math.random() * colorArray.length)]
+  const [userColor, setUserColor] = useState([
+    { id: 95296, color: 'bg-[#d2fc00]' },
+    { id: 29477, color: 'bg-yellow-500' },
+  ])
+
+  const getUserColorById = (userId) => {
+    return userColor.find((user) => {
+      return user.id == userId
+    })
+  }
+
+  props.userList.map((player) => {
+    const color = getUserColorById(player.id)
+    if (!color) {
+      setUserColor(...userColor, { id: player.id, color: 'bg-[#7bff00]' })
+    }
+  })
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.id}>
+      {console.log(userColor)}
+      {console.log(player.id)}
+
       {props.currPlayer?.id === player.id ? (
         // Current player.
         <Player
@@ -22,12 +55,14 @@ export default function UserList(props) {
           selectedCard={getSelectedCard(player.card)}
           imgAlt="selectedCard"
           data-testid="current-player"
+          bgColor={getUserColorById(player.id).color}
         />
       ) : (
         // Other players.
         // We need to set the cards of others with subscriptions.
         <Player
           playerName={player.name}
+          bgColor={getUserColorById(player.id).color}
           selectedCard={
             player.card
               ? props.isShown
