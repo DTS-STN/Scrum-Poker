@@ -93,7 +93,11 @@ export default function Home(props) {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (
+        /^([a-zA-Z]{2,}\s[a-zA-Z]{2,}[-\][a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)+$/.test(
+          username
+        )
+      ) {
         throw t.invalidNameError
       }
 
