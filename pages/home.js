@@ -202,11 +202,6 @@ export default function Home(props) {
         className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5  ${
           router.query.error ? `sm:mt-6` : ``
         }`}
-      ></div>
-      <div
-        data-testid="homeContent"
-        id="homeContent"
-        className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
       >
         <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
