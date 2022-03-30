@@ -42,7 +42,7 @@ export default function Player(props) {
             data-testid="selected-card-img"
           />
         ) : (
-          <div className=" h-auto w-14 p-2">
+          <div className=" h-auto w-14 p-1.5">
             <Image
               src="/EmptyCard.svg"
               alt={props.imgAlt}
