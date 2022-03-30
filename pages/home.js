@@ -34,11 +34,11 @@ export default function Home(props) {
   const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
   const [getRoomUsers] = useLazyQuery(GET_ROOM_QUERY)
 
-  let handleJoinSubmit = async (e) => {
+  const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
 
-    let username = newRoomName.value,
+    const username = newRoomName.value,
       userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
     try {
@@ -122,15 +122,15 @@ export default function Home(props) {
         throw 'Oops! Something went wrong'
       }
     } catch (e) {
-      console.log(e)
+      setJoinRoomError(e)
     }
   }
 
-  let onCreateHandler = async (e) => {
+  const onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
 
-    let username = owner.value,
+    const username = owner.value,
       userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
     try {
