@@ -150,7 +150,6 @@ export default function Home(props) {
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
-        Cookies.set('ownerid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }
