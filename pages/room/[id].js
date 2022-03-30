@@ -12,20 +12,20 @@ import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 
+export const cards = [
+  { id: 'card-1', src: '/Card_1.svg', value: 1 },
+  { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
+  { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
+  { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
+  { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
+  { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
+  { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
+  { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
+]
+
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
   const [pageState, setPageState] = useState(null)
-  const cards = [
-    { id: 'card-1', src: '/Card_1.svg', value: 1 },
-    { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
-    { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
-    { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
-    { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
-    { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
-    { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-    { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
-  ]
-
   const [selectedCard, setSelectedCard] = useState(null)
 
   const [currPlayer, setCurrPlayer] = useState({
@@ -79,7 +79,7 @@ export default function Room(props) {
         let queryRoom = {
           id: roomInfo.id,
           host: roomInfo.host.id,
-          users: roomInfo.users.map((user) => {
+          userIds: roomInfo.users.map((user) => {
             return user.id
           }),
           isShown: roomInfo.isShown,
@@ -142,11 +142,24 @@ export default function Room(props) {
 
   useEffect(() => {
     if (roomSubscription.data) {
-      room.current = roomSubscription.data.roomUpdated
+      const { roomUpdated } = roomSubscription.data
+      const updatedRoomData = {
+        id: roomUpdated.id,
+        host: roomUpdated.host.id,
+        userIds: roomUpdated.users.map((user) => {
+          return user.id
+        }),
+        isShown: roomUpdated.isShown,
+      }
+
+      console.log('roomSubscription.data', updatedRoomData)
+      room.current = updatedRoomData
     }
   }, [roomSubscription])
 
   if (!pageState && users) {
+    console.log('userId == room.host', userId, room.current.host, users)
+
     return (
       <div
         id="homeContent"
@@ -191,7 +204,7 @@ export default function Room(props) {
             )
           })}
         </ul>
-        {userId == room.host ? (
+        {userId == room.current.host ? (
           <div className="flex justify-center">
             <button
               type="button"
@@ -199,8 +212,8 @@ export default function Room(props) {
               onClick={() =>
                 updateRoom({
                   variables: {
-                    updateRoomId: room.id,
-                    updateRoomUsers: room.users,
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
                     isShown: true,
                   },
                 })
@@ -214,8 +227,8 @@ export default function Room(props) {
               onClick={() =>
                 updateRoom({
                   variables: {
-                    updateRoomId: room.id,
-                    updateRoomUsers: room.users,
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
                     isShown: false,
                   },
                 })
@@ -230,8 +243,8 @@ export default function Room(props) {
                 setSelectedCard(null)
                 updateRoom({
                   variables: {
-                    updateRoomId: room.id,
-                    updateRoomUsers: room.users,
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
                     isShown: true,
                   },
                 })
@@ -245,9 +258,9 @@ export default function Room(props) {
         <UserList
           t={t}
           userList={users}
-          isShown={room.isShown}
+          isShown={room.current.isShown}
           currPlayer={currPlayer}
-        ></UserList>
+        />
       </div>
     )
   }
