@@ -5,5 +5,6 @@ query isUserInRoom($roomsId: ID) {
       name
       card
     }
+    isShown
   }
 }

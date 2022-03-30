@@ -1,35 +1,32 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
-
 import { useQuery, useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
-
+import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
+import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
+
+export const cards = [
+  { id: 'card-1', src: '/Card_1.svg', value: 1 },
+  { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
+  { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
+  { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
+  { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
+  { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
+  { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
+  { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
+]
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
   const [pageState, setPageState] = useState(null)
-  const cards = [
-    { id: 'card-1', src: '/Card_1.svg', value: 1 },
-    { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
-    { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
-    { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
-    { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
-    { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
-    { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-    { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
-  ]
-
   const [selectedCard, setSelectedCard] = useState(null)
-  const [isHidden, setHidden] = useState(false)
-
-  const [users, setUsers] = useState(null)
 
   const [currPlayer, setCurrPlayer] = useState({
     id: null,
@@ -37,8 +34,6 @@ export default function Room(props) {
     card: null,
     room: props.roomID,
   })
-
-  const [isOwner, setIsOwner] = useState(false)
 
   const [updatedUser] = useMutation(UPDATE_USER)
 
@@ -63,6 +58,10 @@ export default function Room(props) {
     }
   }
 
+  const room = useRef(null)
+  const [users, setUsers] = useState(null)
+  const [userId, setUserId] = useState(null)
+
   const roomQuery = useQuery(GET_ROOM_INFO, {
     variables: { roomsId: props.roomId },
   })
@@ -72,20 +71,32 @@ export default function Room(props) {
     if (roomQuery.data) {
       // Get room info
       const roomInfo = roomQuery.data?.rooms[0]
-      const userId =
+      const userIdCookie =
         document.cookie.split('userid=')[1]?.substring(0, 5) || null
 
-      if (roomInfo && userId) {
+      if (roomInfo && userIdCookie) {
+        //setRoom based off query
+        let queryRoom = {
+          id: roomInfo.id,
+          host: roomInfo.host.id,
+          userIds: roomInfo.users.map((user) => {
+            return user.id
+          }),
+          isShown: roomInfo.isShown,
+        }
+        room.current = queryRoom
+
         //setUsers of the room
         setUsers(roomInfo.users)
+
+        //Sets current user id based off cookie
+        setUserId(userIdCookie)
+
         // Find current player and setCurrPlayer
         roomInfo.users.forEach((user) => {
           if (user.id === userId) {
             setCurrPlayer(user)
           }
-          if (user.id === roomInfo.host.id) {
-            setIsOwner(true)
-          } else setIsOwner(false)
         })
         setPageState(null)
       } else {
@@ -99,6 +110,12 @@ export default function Room(props) {
   const userSubscription = useSubscription(USER_SUBSCRIPTION, {
     variables: { room: props.roomId },
   })
+
+  const roomSubscription = useSubscription(ROOM_SUBSCRIPTION, {
+    variables: { room: props.roomId },
+  })
+
+  const [updateRoom] = useMutation(UPDATE_ROOM)
 
   useEffect(() => {
     if (userSubscription.loading) {
@@ -122,6 +139,21 @@ export default function Room(props) {
       setUsers(updatedUsers)
     }
   }, [userSubscription])
+
+  useEffect(() => {
+    if (roomSubscription.data) {
+      const { roomUpdated } = roomSubscription.data
+      const updatedRoomData = {
+        id: roomUpdated.id,
+        host: roomUpdated.host.id,
+        userIds: roomUpdated.users.map((user) => {
+          return user.id
+        }),
+        isShown: roomUpdated.isShown,
+      }
+      room.current = updatedRoomData
+    }
+  }, [roomSubscription])
 
   if (!pageState && users) {
     return (
@@ -168,19 +200,35 @@ export default function Room(props) {
             )
           })}
         </ul>
-        {isOwner ? (
+        {userId == room.current.host ? (
           <div className="flex justify-center">
             <button
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() => setHidden(false)}
+              onClick={() =>
+                updateRoom({
+                  variables: {
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
+                    isShown: true,
+                  },
+                })
+              }
             >
               {t.showCards}
             </button>
             <button
               type="button"
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-              onClick={() => (selectedCard ? setHidden(true) : null)}
+              onClick={() =>
+                updateRoom({
+                  variables: {
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
+                    isShown: false,
+                  },
+                })
+              }
             >
               {t.hideCards}
             </button>
@@ -189,7 +237,13 @@ export default function Room(props) {
               className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
               onClick={() => {
                 setSelectedCard(null)
-                setHidden(false)
+                updateRoom({
+                  variables: {
+                    updateRoomId: room.current.id,
+                    updateRoomUsers: room.current.userIds,
+                    isShown: true,
+                  },
+                })
               }}
             >
               {t.clearCards}
@@ -200,10 +254,9 @@ export default function Room(props) {
         <UserList
           t={t}
           userList={users}
-          selectedCard={selectedCard}
-          isHidden={isHidden}
+          isShown={room.current.isShown}
           currPlayer={currPlayer}
-        ></UserList>
+        />
       </div>
     )
   }
