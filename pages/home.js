@@ -15,8 +15,6 @@ import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
 
-import client from '../graphql/client.js'
-
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
@@ -38,7 +36,7 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
 
-    const username = newRoomName.value,
+    let username = newRoomName.value,
       userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
     try {
@@ -130,7 +128,7 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
 
-    const username = owner.value,
+    let username = owner.value,
       userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
 
     try {
