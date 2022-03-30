@@ -29,7 +29,11 @@ export default function UserList(props) {
         <Player
           playerName={player.name}
           selectedCard={
-            props.isShown ? getSelectedCard(player.card) : hiddenCard
+            player.card
+              ? props.isShown
+                ? getSelectedCard(player.card)
+                : hiddenCard
+              : null
           }
           imgAlt="blankCard"
           data-testid="other-players"
