@@ -39,6 +39,38 @@ export default function Room(props) {
     })
   }
 
+  const handleClear = (e) => {
+    e.preventDefault()
+
+    //Loop through users in room and set their cards to null
+    try {
+      users.forEach((user) => {
+        updatedUser({
+          variables: {
+            userInput: {
+              id: user.id,
+              name: user.name,
+              card: null,
+              room: user.room,
+            },
+          },
+        })
+      })
+
+      //Update the room so isShown is false
+      updateRoom({
+        variables: {
+          updateRoomId: room.id,
+          users: room.userIds,
+          isShown: false,
+        },
+      })
+    } catch (e) {
+      //Something went wrong
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     setUserId(Cookies.get('userid'))
   }, [])
@@ -187,15 +219,7 @@ export default function Room(props) {
           <button
             type="button"
             className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-            onClick={() => {
-              updateRoom({
-                variables: {
-                  updateRoomId: room.id,
-                  updateRoomUsers: room.userIds,
-                  isShown: true,
-                },
-              })
-            }}
+            onClick={handleClear}
           >
             {t.clearCards}
           </button>
