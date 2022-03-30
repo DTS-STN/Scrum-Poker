@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Player from './Player'
-
+import { cards } from '../pages/room/[id]'
 /**
  * List of players component
  */
@@ -10,13 +10,16 @@ export default function UserList(props) {
     src: '/Card_Back.svg',
     value: 'hidden',
   }
+
+  const getSelectedCard = (value) => cards.find((card) => card.value === value)
+
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.id}>
-      {props.currPlayer.id === player.id ? (
+      {props.currPlayer?.id === player.id ? (
         // Current player.
         <Player
           playerName={player.name}
-          selectedCard={props.isHidden ? hiddenCard : props.selectedCard}
+          selectedCard={getSelectedCard(player.card)}
           imgAlt="selectedCard"
           data-testid="current-player"
         />
@@ -25,6 +28,13 @@ export default function UserList(props) {
         // We need to set the cards of others with subscriptions.
         <Player
           playerName={player.name}
+          selectedCard={
+            player.card
+              ? props.isShown
+                ? getSelectedCard(player.card)
+                : hiddenCard
+              : null
+          }
           imgAlt="blankCard"
           data-testid="other-players"
         />
@@ -69,5 +79,5 @@ UserList.propTypes = {
   /**
    * If cards are hidden or not
    */
-  isHidden: PropTypes.bool,
+  isShown: PropTypes.bool,
 }
