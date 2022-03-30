@@ -14,7 +14,7 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
-import { cookie } from 'js-cookie'
+import Cookies from 'js-cookie'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -36,9 +36,8 @@ export default function Home(props) {
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = newRoomName.value,
-      userid = cookie?.get('userid')?.split[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -59,7 +58,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        cookie?.set('userid', `${userid}`)
+        Cookies.set('userid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }
@@ -128,9 +127,8 @@ export default function Home(props) {
   const onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = owner.value,
-      userid = cookie?.get('userid')?.split[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -151,8 +149,8 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        cookie?.set('userid', `${userid}`)
-        cookie?.set('ownerid', `${userid}`)
+        Cookies.set('userid', `${userid}`)
+        Cookies.set('ownerid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }
