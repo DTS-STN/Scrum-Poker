@@ -1,5 +1,17 @@
-query getRooms {
-  rooms {
+query getRoom($roomsId: ID) {
+  rooms(id: $roomsId) {
     id
+    host {
+      id
+      name
+      card
+    }
+    users {
+      id
+      name
+      card
+      room
+    }
+    isShown
   }
 }
