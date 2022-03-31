@@ -5,10 +5,10 @@ import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
-import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
-import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
-import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
-import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
+import ADD_ROOM from '../graphql/mutations/addRoom.graphql'
+import ADD_USER from '../graphql/mutations/addUser.graphql'
+import GET_ROOM from '../graphql/queries/getRoom.graphql'
+import UPDATE_ROOM from '../graphql/mutations/updateRoom.graphql'
 import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
@@ -27,11 +27,11 @@ export default function Home(props) {
 
   //Load GraphQL Data
 
-  const [addRoom] = useMutation(ADD_ROOM_QUERY)
-  const [addUser] = useMutation(ADD_USER_QUERY)
+  const [addRoom] = useMutation(ADD_ROOM)
+  const [addUser] = useMutation(ADD_USER)
   const [updatedUser] = useMutation(UPDATE_USER)
-  const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
-  const [getRoomUsers] = useLazyQuery(GET_ROOM_QUERY)
+  const [updateRoom] = useMutation(UPDATE_ROOM)
+  const [getRoomUsers] = useLazyQuery(GET_ROOM)
 
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
