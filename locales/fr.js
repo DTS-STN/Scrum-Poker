@@ -32,6 +32,7 @@ export default {
   playerName: 'Nom du joueur :',
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
+  copied: 'Copié !',
 
   // Header
   title: 'accueil',
