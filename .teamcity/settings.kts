@@ -200,10 +200,7 @@ object Build_Production: BuildType({
     }
     triggers {
         vcs {
-            branchFilter = """
-                    +:*
-                    -:<default>
-                 """.trimIndent()
+            branchFilter = "+:*"
         }
     }
 })
