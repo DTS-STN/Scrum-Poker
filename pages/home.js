@@ -5,15 +5,16 @@ import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
-import ADD_ROOM_QUERY from '../graphql/queries/addRoom.graphql'
-import ADD_USER_QUERY from '../graphql/queries/addUser.graphql'
-import GET_ROOM_QUERY from '../graphql/queries/isUserInRoom.graphql'
-import UPDATE_ROOM_QUERY from '../graphql/queries/updateRoomByID.graphql'
+import ADD_ROOM from '../graphql/mutations/addRoom.graphql'
+import ADD_USER from '../graphql/mutations/addUser.graphql'
+import GET_ROOM from '../graphql/queries/getRoom.graphql'
+import UPDATE_ROOM from '../graphql/mutations/updateRoom.graphql'
 import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState } from 'react'
+import Cookies from 'js-cookie'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -26,18 +27,17 @@ export default function Home(props) {
 
   //Load GraphQL Data
 
-  const [addRoom] = useMutation(ADD_ROOM_QUERY)
-  const [addUser] = useMutation(ADD_USER_QUERY)
+  const [addRoom] = useMutation(ADD_ROOM)
+  const [addUser] = useMutation(ADD_USER)
   const [updatedUser] = useMutation(UPDATE_USER)
-  const [updateRoom] = useMutation(UPDATE_ROOM_QUERY)
-  const [getRoomUsers] = useLazyQuery(GET_ROOM_QUERY)
+  const [updateRoom] = useMutation(UPDATE_ROOM)
+  const [getRoomUsers] = useLazyQuery(GET_ROOM)
 
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = newRoomName.value,
-      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -58,7 +58,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        document.cookie = `userid=${userid}`
+        Cookies.set('userid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }
@@ -127,9 +127,8 @@ export default function Home(props) {
   const onCreateHandler = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
-
     let username = owner.value,
-      userid = document.cookie.split('userid=')[1]?.substring(0, 5) || undefined
+      userid = Cookies.get('userid')
 
     try {
       //Check if name is empty
@@ -137,7 +136,7 @@ export default function Home(props) {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {
         throw t.invalidNameError
       }
 
@@ -150,7 +149,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        document.cookie = `userid=${userid}`
+        Cookies.set('userid', `${userid}`)
       } else {
         throw 'Oops! Something went wrong'
       }

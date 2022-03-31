@@ -1,6 +1,6 @@
 {
   "name": "scrum-poker",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -25,6 +25,7 @@
     "graphql": "^16.3.0",
     "graphql-ws": "^5.6.3",
     "jest-transform-graphql": "^2.1.0",
+    "js-cookie": "^3.0.1",
     "next": "^12.1.1",
     "prom-client": "^12.0.0",
     "prop-types": "^15.8.1",
