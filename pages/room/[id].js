@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
-// import RoomInfo from '../../components/RoomInfo'   for next sprint
+import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
-import ChatRoom from '../../components/ChatRoom'
+// import ChatRoom from '../../components/ChatRoom'   for next sprint
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
