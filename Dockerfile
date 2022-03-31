@@ -30,7 +30,6 @@ RUN adduser \
     --ingroup $group \
     $user
 
-USER $user
 ENV NODE_ENV=production
 WORKDIR $home
 COPY --from=build --chown=55:$group /build/next.config.js ./
@@ -38,5 +37,6 @@ COPY --from=build --chown=55:$group /build/package*.json ./
 COPY --from=build --chown=55:$group /build/.next ./.next
 COPY --from=build --chown=55:$group /build/public ./public
 RUN npm install next
+USER $user
 
 CMD npm run start
