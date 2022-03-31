@@ -1,4 +1,3 @@
-import { COOKIE_NAME_PRERENDER_BYPASS } from 'next/dist/server/api-utils'
 import propTypes from 'prop-types'
 
 /**
