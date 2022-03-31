@@ -33,6 +33,25 @@ export default function Home(props) {
   const [updateRoom] = useMutation(UPDATE_ROOM)
   const [getRoomUsers] = useLazyQuery(GET_ROOM)
 
+  // Check for queryErrorCode from a redirect.
+
+  const queryErrorCode = router.query.errorCode
+  let errorCodeMsg = ''
+  if (queryErrorCode)
+    switch (queryErrorCode) {
+      case '308':
+        errorCodeMsg = t.noRoomExists
+        break
+      case '309':
+        errorCodeMsg = t.noUserExists
+        break
+      case '310':
+        errorCodeMsg = t.notRoomMember
+        break
+      default:
+        errorCodeMsg = t.genericError
+    }
+
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
@@ -53,21 +72,21 @@ export default function Home(props) {
       const addUserRes = await addUser({
         variables: { name: username },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       }
 
       //Get List of Users
       const getUserListRes = await getRoomUsers({
         variables: { roomsId: roomCode.value },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
       let userListID = []
@@ -79,7 +98,7 @@ export default function Home(props) {
           userListID.push(userid)
         }
       } else {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       }
 
       const updateRoomRes = await updateRoom({
@@ -89,11 +108,10 @@ export default function Home(props) {
           isShown: false,
         },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
-      if (!updateRoomRes.data.updateRoom.success)
-        throw 'Oops! Something went wrong'
+      if (!updateRoomRes.data.updateRoom.success) throw t.genericError
 
       const updateUserRes = await updatedUser({
         variables: {
@@ -105,7 +123,7 @@ export default function Home(props) {
           },
         },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
       if (updateUserRes.data.updateUser.success) {
@@ -114,10 +132,10 @@ export default function Home(props) {
             pathname: `/room/${roomCode.value}`,
           })
           .catch((e) => {
-            throw 'Oops! Something went wrong'
+            throw t.genericError
           })
       } else {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       }
     } catch (e) {
       setJoinRoomError(e)
@@ -144,23 +162,23 @@ export default function Home(props) {
       const addUserRes = await addUser({
         variables: { name: username },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       }
 
       const addRoomRes = await addRoom({
         variables: { userid: userid },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
-      if (!addRoomRes.data.addRoom.success) throw 'Oops! Something went wrong'
+      if (!addRoomRes.data.addRoom.success) throw t.genericError
 
       const updateUserRes = await updatedUser({
         variables: {
@@ -172,7 +190,7 @@ export default function Home(props) {
           },
         },
       }).catch((e) => {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       })
 
       if (updateUserRes.data.updateUser.success) {
@@ -181,10 +199,10 @@ export default function Home(props) {
             pathname: `/room/${addRoomRes.data.addRoom.id}`,
           })
           .catch((e) => {
-            throw 'Oops! Something went wrong'
+            throw t.genericError
           })
       } else {
-        throw 'Oops! Something went wrong'
+        throw t.genericError
       }
     } catch (e) {
       setCreateRoomError(e)
@@ -192,14 +210,14 @@ export default function Home(props) {
   }
   return (
     <>
-      {router.query.error ? (
-        <ErrorLabel message={router.query.error}></ErrorLabel>
+      {queryErrorCode ? (
+        <ErrorLabel message={errorCodeMsg}></ErrorLabel>
       ) : undefined}
       <div
         data-testid="homeContent"
         id="homeContent"
         className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5  ${
-          router.query.error ? `sm:mt-6` : ``
+          queryErrorCode ? `sm:mt-6` : ``
         }`}
       >
         <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">

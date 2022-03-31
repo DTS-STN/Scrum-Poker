@@ -68,7 +68,7 @@ RoomInfo.propTypes = {
   playerName: propTypes.string,
 
   // numbers of players online
-  playersOnline: propTypes.string,
+  playersOnline: propTypes.number,
 
   // roomId of the room
   roomId: propTypes.string,

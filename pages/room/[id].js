@@ -73,12 +73,12 @@ export default function Room(props) {
   }
 
   useEffect(() => {
-    let currCookie = Cookies.get('userid')
+    const currCookie = Cookies.get('userid')
     // Check if browser has userid cookie.
     if (!currCookie) {
       router.push({
         pathname: `/home`,
-        query: `error=Create user before joining a room`,
+        query: `errorCode=309`,
       })
     } else {
       // Check if userID cookie is in the room.
@@ -86,7 +86,7 @@ export default function Room(props) {
       if (!userIsInRoom) {
         router.push({
           pathname: `/home`,
-          query: `error=You are not member of this room.`,
+          query: `errorCode=310`,
         })
       }
 
@@ -284,11 +284,12 @@ export async function getServerSideProps({ params, locale }) {
     variables: { roomsId: roomId },
   })
   const roomInfo = queryResponse.data?.rooms[0]
+  // Check if room exists
   if (!roomInfo) {
     return {
       redirect: {
         permanent: false,
-        destination: '/home?error=No Room exists with this id.',
+        destination: '/home?errorCode=308',
       },
     }
   }
