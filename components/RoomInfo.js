@@ -1,10 +1,18 @@
 import propTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 /**
  * RoomInfo component
  */
 export default function RoomInfo(props) {
+  //Since we are using SSR, the below code is necessary to make sure the component is mounted before showing the tooltip
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <div
       className={`h-auto w-72 my-4 rounded-lg bg-white border border-[#26374A]`}
@@ -23,19 +31,21 @@ export default function RoomInfo(props) {
           >
             <Image src="/copy.svg" alt={props.t.copy} width={11} height={11} />
           </button>
-          <ReactTooltip
-            id="copy"
-            effect="solid"
-            clickable
-            afterShow={() => {
-              navigator.clipboard.writeText(props.roomId)
-              setTimeout(() => ReactTooltip.hide(), 2000)
-            }}
-            data-place="top"
-            className="font-display font-bold text-xs !bg-[#1A2838] text-white"
-          >
-            <span>{props.t.copied}</span>
-          </ReactTooltip>
+          {isMounted && (
+            <ReactTooltip
+              id="copy"
+              effect="solid"
+              clickable
+              afterShow={() => {
+                navigator.clipboard.writeText(props.roomId)
+                setTimeout(() => ReactTooltip.hide(), 2000)
+              }}
+              data-place="top"
+              className="font-display font-bold text-xs !bg-[#1A2838] text-white"
+            >
+              <span>{props.t.copied}</span>
+            </ReactTooltip>
+          )}
         </div>
       </div>
 
