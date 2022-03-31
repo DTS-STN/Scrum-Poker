@@ -203,7 +203,7 @@ object Build_Production: BuildType({
             branchFilter = ""
                     +:*
                     -:<default>
-                 """.trimIndent(
+                 """.trimIndent()
         }
     }
 })
