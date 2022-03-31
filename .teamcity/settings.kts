@@ -268,7 +268,7 @@ object Build_Dynamic: BuildType({
             branchFilter = """
                     +:*
                     -:<default>
-                    -:*(gh-pages)*
+                    -:gh-pages
                  """.trimIndent()
         }
     }
