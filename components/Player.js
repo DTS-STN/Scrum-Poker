@@ -30,28 +30,39 @@ export default function Player(props) {
             {props.playerName}
           </p>
         </div>
-
-        {props.selectedCard ? (
-          <Card
-            src={props.selectedCard.src}
-            id={props.selectedCard.id}
-            key={props.selectedCard.id}
-            alt={props.selectedCard.alt}
-            className=" "
-            data-testid="selected-card-img"
-          />
-        ) : (
-          <div className=" h-auto w-20 p-2">
+        <div className="flex">
+          <button className="bg-red-500 text-white flex justify-center items-center rounded-full h-12 w-12 my-auto">
             <Image
-              src="/EmptyCard.svg"
+              src="/rubberBoot.svg"
               alt={props.imgAlt}
-              width={74}
+              width={100}
               height={102}
               layout="responsive"
               data-testid="blank-card-img"
             />
-          </div>
-        )}
+          </button>
+          {props.selectedCard ? (
+            <Card
+              src={props.selectedCard.src}
+              id={props.selectedCard.id}
+              key={props.selectedCard.id}
+              alt={props.selectedCard.alt}
+              className=" "
+              data-testid="selected-card-img"
+            />
+          ) : (
+            <div className=" h-auto w-20 p-2">
+              <Image
+                src="/EmptyCard.svg"
+                alt={props.imgAlt}
+                width={74}
+                height={102}
+                layout="responsive"
+                data-testid="blank-card-img"
+              />
+            </div>
+          )}
+        </div>
       </div>
       {props.children}
     </div>
