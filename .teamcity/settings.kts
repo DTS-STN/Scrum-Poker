@@ -265,6 +265,7 @@ object Build_Dynamic: BuildType({
     triggers {
         vcs {
             branchFilter = """
+                    +:*
                     -:main
                     -:gh-pages
                  """.trimIndent()
