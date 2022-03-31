@@ -156,7 +156,7 @@ object Build_Production: BuildType({
         param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
         param("env.RG_DEV", "ESdCDPSBDMK8SDev")
         param("env.TARGET", "prod")
-        param("env.BRANCH", "main")
+        param("env.BRANCH", "prod")
         param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP_PROD%")
         param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS_PROD%")
     }
