@@ -73,10 +73,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction : GitVcsRoot({
     name = "https://github.com/DTS-STN/scrum-poker/tree/_production"
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
-    branchSpec = """
-                    +:refs/tags/*
-                    -:<default>
-                 """.trimIndent()
+    branchSpec = ""+:refs/tags/*"
     authMethod = uploadedKey {
         userName = "git"
         uploadedKey = "dtsrobot"
@@ -203,7 +200,10 @@ object Build_Production: BuildType({
     }
     triggers {
         vcs {
-            branchFilter = "+:*"
+            branchFilter = ""
+                    +:*
+                    -:<default>
+                 """.trimIndent(
         }
     }
 })
