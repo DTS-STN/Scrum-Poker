@@ -72,6 +72,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance : GitVcsRoot({
 object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction : GitVcsRoot({
     name = "https://github.com/DTS-STN/scrum-poker/tree/_production"
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    useTagsAsBranches = true
     branch = "refs/heads/main"
     branchSpec = "+:refs/tags/*"
     authMethod = uploadedKey {
