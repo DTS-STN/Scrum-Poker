@@ -202,8 +202,7 @@ object Build_Production: BuildType({
     triggers {
         vcs {
             branchFilter = """
-                    +:*
-                    -:<default>
+                    -:refs/heads/main
                  """.trimIndent()
         }
     }
@@ -266,8 +265,7 @@ object Build_Dynamic: BuildType({
     triggers {
         vcs {
             branchFilter = """
-                    +:*
-                    -:<default>
+                    -:refs/heads/main
                     -:gh-pages
                  """.trimIndent()
         }
