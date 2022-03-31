@@ -30,9 +30,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">12.5% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/32</span>
+                <span class='fraction'>2/28</span>
             </div>
         
             
@@ -354,16 +354,7 @@
 <a name='L289'></a><a href='#L289'>289</a>
 <a name='L290'></a><a href='#L290'>290</a>
 <a name='L291'></a><a href='#L291'>291</a>
-<a name='L292'></a><a href='#L292'>292</a>
-<a name='L293'></a><a href='#L293'>293</a>
-<a name='L294'></a><a href='#L294'>294</a>
-<a name='L295'></a><a href='#L295'>295</a>
-<a name='L296'></a><a href='#L296'>296</a>
-<a name='L297'></a><a href='#L297'>297</a>
-<a name='L298'></a><a href='#L298'>298</a>
-<a name='L299'></a><a href='#L299'>299</a>
-<a name='L300'></a><a href='#L300'>300</a>
-<a name='L301'></a><a href='#L301'>301</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L292'></a><a href='#L292'>292</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -556,15 +547,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -736,7 +718,7 @@ export default function Home(props) {
       })
 &nbsp;
       let userListID = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >      if (getUserListRes.data.rooms[0]) {</span>
+<span class="cstat-no" title="statement not covered" >      if (getUserListRes.data) {</span>
 <span class="cstat-no" title="statement not covered" >        getUserListRes.data.rooms[0].users.forEach(<span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >          userListID.push(Number(user.id))</span>
         })
@@ -856,79 +838,70 @@ export default function Home(props) {
     }
   }
   return (
-    &lt;&gt;
-      {router.query.error ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >        &lt;ErrorLabel message={router.query.error}&gt;&lt;/ErrorLabel&gt;</span>
-      ) : undefined}
-      &lt;div
-        data-testid="homeContent"
-        id="homeContent"
-        className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5  ${
-          router.query.error ? <span class="branch-0 cbranch-no" title="branch not covered" >`sm:mt-6` </span>: ``
-        }`}
-      &gt;
-        &lt;Container style="text-center p-4 flex flex-col drop-shadow md:w-96"&gt;
-          &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
-            {t.createRoomTitle}
-          &lt;/h2&gt;
-          &lt;h3 className="text-opacity-75 text-black text-xl"&gt;
-            {t.createRoomDesc}
-          &lt;/h3&gt;
-          &lt;form
-            data-testid="createRoomForm"
-            onSubmit={onCreateHandler}
-            className="flex flex-col justify-between h-full items-center"
+    &lt;div
+      data-testid="homeContent"
+      id="homeContent"
+      className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
+    &gt;
+      &lt;Container style="text-center p-4 flex flex-col drop-shadow md:w-96"&gt;
+        &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
+          {t.createRoomTitle}
+        &lt;/h2&gt;
+        &lt;h3 className="text-opacity-75 text-black text-xl"&gt;
+          {t.createRoomDesc}
+        &lt;/h3&gt;
+        &lt;form
+          data-testid="createRoomForm"
+          onSubmit={onCreateHandler}
+          className="flex flex-col justify-between h-full items-center"
+        &gt;
+          {createRoomError ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >            &lt;ErrorLabel message={createRoomError}&gt;&lt;/ErrorLabel&gt;</span>
+          ) : undefined}
+          &lt;TextInput
+            id="owner"
+            label={t.createRoomLabel}
+            placeholder={t.createRoomPlaceholder}
+          /&gt;
+          &lt;button
+            type="submit"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           &gt;
-            {createRoomError ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;ErrorLabel message={createRoomError}&gt;&lt;/ErrorLabel&gt;</span>
-            ) : undefined}
-            &lt;TextInput
-              id="owner"
-              label={t.createRoomLabel}
-              placeholder={t.createRoomPlaceholder}
-            /&gt;
-            &lt;button
-              type="submit"
-              className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
-            &gt;
-              {t.createRoomButton}
-            &lt;/button&gt;
-          &lt;/form&gt;
-        &lt;/Container&gt;
-        &lt;Container style="text-center p-4 flex flex-col drop-shadow md:w-96"&gt;
-          &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
-            {t.joinRoomTitle}
-          &lt;/h2&gt;
-          &lt;h3 className="text-opacity-75 text-black text-xl"&gt;
-            {t.joinRoomDesc}
-          &lt;/h3&gt;
-          &lt;form
-            onSubmit={handleJoinSubmit}
-            className="flex flex-col justify-between h-full items-center"
+            {t.createRoomButton}
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/Container&gt;
+      &lt;Container style="text-center p-4 flex flex-col drop-shadow md:w-96"&gt;
+        &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
+          {t.joinRoomTitle}
+        &lt;/h2&gt;
+        &lt;h3 className="text-opacity-75 text-black text-xl"&gt;{t.joinRoomDesc}&lt;/h3&gt;
+        &lt;form
+          onSubmit={handleJoinSubmit}
+          className="flex flex-col justify-between h-full items-center"
+        &gt;
+          {joinRoomError ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >            &lt;ErrorLabel message={joinRoomError}&gt;&lt;/ErrorLabel&gt;</span>
+          ) : undefined}
+          &lt;TextInput
+            id="roomCode"
+            label={t.joinRoomNumberLabel}
+            placeholder={t.joinRoomNumberPlaceholder}
+          /&gt;
+          &lt;TextInput
+            id="newRoomName"
+            label={t.joinRoomNameLabel}
+            placeholder={t.joinRoomNamePlaceholder}
+          /&gt;
+          &lt;button
+            type="submit"
+            className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
           &gt;
-            {joinRoomError ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;ErrorLabel message={joinRoomError}&gt;&lt;/ErrorLabel&gt;</span>
-            ) : undefined}
-            &lt;TextInput
-              id="roomCode"
-              label={t.joinRoomNumberLabel}
-              placeholder={t.joinRoomNumberPlaceholder}
-            /&gt;
-            &lt;TextInput
-              id="newRoomName"
-              label={t.joinRoomNameLabel}
-              placeholder={t.joinRoomNamePlaceholder}
-            /&gt;
-            &lt;button
-              type="submit"
-              className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
-            &gt;
-              {t.joinRoomButton}
-            &lt;/button&gt;
-          &lt;/form&gt;
-        &lt;/Container&gt;
-      &lt;/div&gt;
-    &lt;/&gt;
+            {t.joinRoomButton}
+          &lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/Container&gt;
+    &lt;/div&gt;
   )
 }
 export async function getStaticProps({ locale }) {
@@ -970,7 +943,7 @@ Home.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Mar 31 2022 14:19:19 GMT+0000 (Coordinated Universal Time)
+                at Thu Mar 31 2022 14:23:41 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
