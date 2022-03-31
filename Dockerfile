@@ -20,7 +20,7 @@ FROM node:current-alpine3.15 AS production
 SHELL ["/bin/sh", "-c"]
 RUN apk add --no-cache bash
 ARG user=joker
-ARG home=/home/$user
+ARG home=/home/node
 ARG group=thejokers
 RUN addgroup -S $group
 RUN adduser \
