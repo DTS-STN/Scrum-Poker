@@ -264,13 +264,16 @@ object Build_Dynamic: BuildType({
         }
     }
     triggers {
+        vcs {
             branchFilter = """
                     +:*
                     -:<default>
+                    -:*(gh-pages)*
                  """.trimIndent()
         }
     }
 })
+
 
 object Build_Performance: BuildType({
     name = "Build_Performance"
