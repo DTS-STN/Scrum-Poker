@@ -86,7 +86,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction : GitVcsRoot({
 /* helmfile directory should also match this value.                                        */
 object Build_Release: BuildType({
     name = "Build_Release"
-    description = "Continuous integration"
+    description = "Builds and deploys our main branch on update to main url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
@@ -275,7 +275,7 @@ object Build_Dynamic: BuildType({
 
 object Build_Performance: BuildType({
     name = "Build_Performance"
-    description = "Continuous integration"
+    description = "Builds and deploys our main branch on update to perf url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
