@@ -74,7 +74,7 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction : GitVcsRoot({
     url = "git@github.com:DTS-STN/Scrum-Poker.git"
     branch = "refs/heads/main"
     branchSpec = """
-                    +:refs/tags/*/heads
+                    +:refs/tags/*
                     -:<default>
                  """.trimIndent()
     authMethod = uploadedKey {
