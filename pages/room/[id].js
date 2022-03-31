@@ -4,11 +4,11 @@ import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
-import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
+import GET_ROOM from '../../graphql/queries/getRoom.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
-import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
-import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
+import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
+import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
@@ -259,7 +259,7 @@ export async function getServerSideProps({ params, locale }) {
 
   //TODO: fetch room data from roomId
   const queryResponse = await client.query({
-    query: GET_ROOM_INFO,
+    query: GET_ROOM,
     variables: { roomsId: roomId },
   })
   const roomInfo = queryResponse.data?.rooms[0]
