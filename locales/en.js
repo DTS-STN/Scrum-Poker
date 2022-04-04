@@ -31,6 +31,7 @@ export default {
   playersOnline: 'Players Online:',
   copy: 'Copy',
   copied: 'Copied!',
+  hostCrown: 'Room Owner',
 
   // Header
   title: 'home',

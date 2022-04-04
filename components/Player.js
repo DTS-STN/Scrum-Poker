@@ -42,11 +42,11 @@ export default function Player(props) {
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
-                alt="Room owner"
+                alt={props.t.hostCrown}
                 width={15}
                 height={10}
                 data-for="host"
-                data-tip="Room Owner"
+                data-tip={props.t.hostCrown}
                 aria-controls="host"
               />
               <ReactTooltip
@@ -104,4 +104,7 @@ Player.propTypes = {
 
   // Boolean for room host, shows crown next to name if true
   host: propTypes.bool,
+
+  //Translated text
+  t: propTypes.object,
 }

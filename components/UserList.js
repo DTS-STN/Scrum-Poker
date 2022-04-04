@@ -23,6 +23,7 @@ export default function UserList(props) {
           imgAlt="selectedCard"
           data-testid="current-player"
           host={player.id === props.host}
+          t={props.t}
         />
       ) : (
         // Other players.
