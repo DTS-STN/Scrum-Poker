@@ -211,7 +211,7 @@ export default function Home(props) {
   return (
     <>
       {queryErrorCode ? (
-        <ErrorLabel message={errorCodeMsg}></ErrorLabel>
+        <ErrorLabel message={errorCodeMsg} className="pb-4"></ErrorLabel>
       ) : undefined}
       <div
         data-testid="homeContent"
