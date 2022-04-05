@@ -81,8 +81,8 @@ RoomInfo.propTypes = {
   // player's name as entered on the main page
   playerName: propTypes.string,
 
-  // numbers of players online
-  playersOnline: propTypes.number,
+  // numbers of players online -- graphql returns a string
+  playersOnline: propTypes.string,
 
   // roomId of the room
   roomId: propTypes.string,
