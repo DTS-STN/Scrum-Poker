@@ -33,6 +33,7 @@ export default {
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
   copied: 'Copié !',
+  hostCrown: 'Propriétaire de la chambre',
 
   // Error messages
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",

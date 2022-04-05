@@ -22,6 +22,8 @@ export default function UserList(props) {
           selectedCard={getSelectedCard(player.card)}
           imgAlt="selectedCard"
           data-testid="current-player"
+          host={player.id === props.host}
+          t={props.t}
         />
       ) : (
         // Other players.
@@ -37,6 +39,7 @@ export default function UserList(props) {
           }
           imgAlt="blankCard"
           data-testid="other-players"
+          host={player.id === props.host}
         />
       )}
     </li>
@@ -80,4 +83,8 @@ UserList.propTypes = {
    * If cards are hidden or not
    */
   isShown: PropTypes.bool,
+  /**
+   * Identifier for room host
+   */
+  host: PropTypes.string,
 }

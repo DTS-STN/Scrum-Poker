@@ -251,6 +251,7 @@ export default function Room(props) {
         userList={users}
         isShown={room.isShown}
         currPlayer={getUserById(userId)}
+        host={room.host}
       />
     </div>
   )

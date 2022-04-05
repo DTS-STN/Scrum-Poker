@@ -31,6 +31,7 @@ export default {
   playersOnline: 'Players Online:',
   copy: 'Copy',
   copied: 'Copied!',
+  hostCrown: 'Room Owner',
 
   // Error Messages
   noRoomExists: 'No Room exists with this id.',
