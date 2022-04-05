@@ -19,6 +19,7 @@ export default {
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
   invalidNameError: 'Please enter a name (alphanumeric characters only)',
+  roomDoesNotExist: 'Room does not exist',
 
   // Room
   users: 'Users',
