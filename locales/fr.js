@@ -22,7 +22,7 @@ export default {
   joinRoomButton: 'Rejoignez la salle',
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
-  roomDoesNotExist: 'Room does not exist',
+  roomDoesNotExist: '(FR)Room does not exist',
 
   // Room
   users: '(FR)Users',
