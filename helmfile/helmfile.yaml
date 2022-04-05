@@ -3,6 +3,7 @@ environments:
   int:
   main:
   sprint:
+  prod:
   prod-blue:
   prod-green:
 

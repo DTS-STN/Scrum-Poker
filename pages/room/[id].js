@@ -4,14 +4,16 @@ import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
-import GET_ROOM_INFO from '../../graphql/queries/getRoomByID.graphql'
+import GET_ROOM from '../../graphql/queries/getRoom.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
-import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
-import UPDATE_ROOM from '../../graphql/queries/updateRoomByID.graphql'
+import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
+import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
+import { useRouter } from 'next/router'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
+import Cookies from 'js-cookie'
 
 export const cards = [
   { id: 'card-1', src: '/Card_1.svg', value: 1 },
@@ -26,7 +28,7 @@ export const cards = [
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
-
+  const router = useRouter()
   const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM)
   const [room, setRoom] = useState(props.room)
@@ -71,7 +73,26 @@ export default function Room(props) {
   }
 
   useEffect(() => {
-    setUserId(document.cookie.split('userid=')[1]?.substring(0, 5) || null)
+    const currCookie = Cookies.get('userid')
+    // Check if browser has userid cookie.
+    if (!currCookie) {
+      router.push({
+        pathname: `/home`,
+        query: `errorCode=309`,
+      })
+    } else {
+      // Check if userID cookie is in the room.
+      const userIsInRoom = getUserById(currCookie)
+      if (!userIsInRoom) {
+        router.push({
+          pathname: `/home`,
+          query: `errorCode=310`,
+        })
+      }
+
+      // User is in this room.
+      setUserId(currCookie)
+    }
   }, [])
 
   //User subscription and useEffect to update users
@@ -230,6 +251,7 @@ export default function Room(props) {
         userList={users}
         isShown={room.isShown}
         currPlayer={getUserById(userId)}
+        host={room.host}
       />
     </div>
   )
@@ -259,11 +281,19 @@ export async function getServerSideProps({ params, locale }) {
 
   //TODO: fetch room data from roomId
   const queryResponse = await client.query({
-    query: GET_ROOM_INFO,
+    query: GET_ROOM,
     variables: { roomsId: roomId },
   })
   const roomInfo = queryResponse.data?.rooms[0]
-
+  // Check if room exists
+  if (!roomInfo) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home?errorCode=308',
+      },
+    }
+  }
   const room = {
     id: roomInfo.id,
     host: roomInfo.host.id,

@@ -30,6 +30,14 @@ export default {
   playerName: "Player's Name:",
   playersOnline: 'Players Online:',
   copy: 'Copy',
+  copied: 'Copied!',
+  hostCrown: 'Room Owner',
+
+  // Error Messages
+  noRoomExists: 'No Room exists with this id.',
+  noUserExists: 'Create user before joining a room.',
+  notRoomMember: 'You are not member of this room.',
+  genericError: 'Oops! something went wrong.',
 
   // Header
   title: 'home',

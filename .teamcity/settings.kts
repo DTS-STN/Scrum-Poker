@@ -28,7 +28,9 @@ project {
     vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerRelease)
     vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerDynamic)
     vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance)
+    vcsRoot(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction)
     buildType(Build_Performance)
+    buildType(Build_Production)
     buildType(Build_Release)
     buildType(Build_Dynamic)
     buildType(CleanUpWeekly)
@@ -67,12 +69,24 @@ object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerPerformance : GitVcsRoot({
     }
 })
 
+object Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction : GitVcsRoot({
+    name = "https://github.com/DTS-STN/scrum-poker/tree/_production"
+    url = "git@github.com:DTS-STN/Scrum-Poker.git"
+    useTagsAsBranches = true
+    branch = "refs/heads/main"
+    branchSpec = "+:refs/tags/*"
+    authMethod = uploadedKey {
+        userName = "git"
+        uploadedKey = "dtsrobot"
+    }
+})
+
 /* Try and keep env.PROJECT value will be used throughout the helm scripts                 */
 /* to build urls, name the application and many other things.  folders and files in the    */
 /* helmfile directory should also match this value.                                        */
 object Build_Release: BuildType({
     name = "Build_Release"
-    description = "Continuous integration"
+    description = "Builds and deploys our main branch on update to main url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")
@@ -127,6 +141,70 @@ object Build_Release: BuildType({
     triggers {
         vcs {
             branchFilter = "+:*"
+        }
+    }
+})
+
+object Build_Production: BuildType({
+    name = "Build_Production"
+    description = "Pushes release tags as defacto production builds"
+    params {
+        param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
+        param("env.PROJECT", "scrum-poker")
+        param("env.BASE_DOMAIN","bdm-dev.dts-stn.com")
+        param("env.SUBSCRIPTION", "%vault:dts-sre/data/azure!/decd-dev-subscription-id%")
+        param("env.K8S_CLUSTER_NAME", "ESdCDPSBDMK8SDev-K8S")
+        param("env.RG_DEV", "ESdCDPSBDMK8SDev")
+        param("env.TARGET", "prod")
+        param("env.BRANCH", "prod")
+        param("env.NEXT_PUBLIC_GRAPHQL_HTTP", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_HTTP_PROD%")
+        param("env.NEXT_PUBLIC_GRAPHQL_WS", "%vault:dts-secrets-dev/data/scrumPoker!/NEXT_PUBLIC_GRAPHQL_WS_PROD%")
+    }
+    vcs {
+        root(Dev_ScrumPoker_HttpsGithubComDtsStnscrumPokerProduction)
+    }
+   
+    steps {
+        dockerCommand {
+            name = "Build & Tag Docker Image"
+            commandType = build {
+                source = file {
+                    path = "Dockerfile"
+                }
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+                commandArgs = "--pull --build-arg NEXT_BUILD_DATE=%system.build.start.date% --build-arg TC_BUILD=%build.number% --build-arg NEXT_PUBLIC_GRAPHQL_HTTP=%env.NEXT_PUBLIC_GRAPHQL_HTTP% --build-arg NEXT_PUBLIC_GRAPHQL_WS=%env.NEXT_PUBLIC_GRAPHQL_WS%"
+            }
+        }
+        script {
+            name = "Login to Azure and ACR"
+            scriptContent = """
+                az login --service-principal -u %TEAMCITY_USER% -p %TEAMCITY_PASS% --tenant %env.TENANT-ID%
+                az account set -s %env.SUBSCRIPTION%
+                az acr login -n MTSContainers
+            """.trimIndent()
+        }
+        dockerCommand {
+            name = "Push Image to ACR"
+            commandType = push {
+                namesAndTags = "%env.ACR_DOMAIN%/%env.PROJECT%:%env.DOCKER_TAG%"
+            }
+        }
+        script {
+            name = "Deploy w/ Helmfile"
+            scriptContent = """
+                cd ./helmfile
+                az account set -s %env.SUBSCRIPTION%
+                az aks get-credentials --overwrite-existing --admin --resource-group %env.RG_DEV% --name %env.K8S_CLUSTER_NAME%
+                helmfile -e %env.TARGET% apply
+            """.trimIndent()
+        }
+    }
+    triggers {
+        vcs {
+            branchFilter = """
+                    +:*
+                    -:refs/heads/main
+                 """.trimIndent()
         }
     }
 })
@@ -187,14 +265,19 @@ object Build_Dynamic: BuildType({
     }
     triggers {
         vcs {
-            branchFilter = "+:*"
+            branchFilter = """
+                    +:*
+                    -:main
+                    -:gh-pages
+                 """.trimIndent()
         }
     }
 })
 
+
 object Build_Performance: BuildType({
     name = "Build_Performance"
-    description = "Continuous integration"
+    description = "Builds and deploys our main branch on update to perf url"
     params {
         param("teamcity.vcsTrigger.runBuildInNewEmptyBranch", "true")
         param("env.PROJECT", "scrum-poker")

@@ -1,4 +1,4 @@
-mutation UpdateRoom($updateRoomId: ID!, $updateRoomUsers: [ID], $isShown: Boolean!) {
+mutation updateRoom($updateRoomId: ID!, $updateRoomUsers: [ID], $isShown: Boolean!) {
   updateRoom(id: $updateRoomId, users: $updateRoomUsers, isShown: $isShown) {
     success
     message

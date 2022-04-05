@@ -1,20 +1,17 @@
 import propTypes from 'prop-types'
+import ReactTooltip from 'react-tooltip'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 /**
  * RoomInfo component
  */
 export default function RoomInfo(props) {
-  //
+  //Since we are using SSR, the below code is necessary to make sure the component is mounted before showing the tooltip
+  const [isMounted, setIsMounted] = useState(false)
 
-  function copyToClipboard() {
-    navigator.clipboard.writeText(props.roomId).then(
-      function () {
-        console.log('room id: ', props.roomId, ' copied to clipboard')
-      },
-      function () {
-        console.log("didn't worked")
-      }
-    )
-  }
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   return (
     <div
@@ -26,12 +23,29 @@ export default function RoomInfo(props) {
         <div className="flex-initial w-48 text-right">
           {props.roomId}
           <button
+            data-tip
+            data-for="copy"
+            data-event="click"
             type="button"
-            onClick={() => copyToClipboard()}
-            className="w-12 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
+            className="w-auto px-2 pt-1 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
           >
-            {props.t.copy}
+            <Image src="/copy.svg" alt={props.t.copy} width={11} height={11} />
           </button>
+          {isMounted && (
+            <ReactTooltip
+              id="copy"
+              effect="solid"
+              clickable
+              afterShow={() => {
+                navigator.clipboard.writeText(props.roomId)
+                setTimeout(() => ReactTooltip.hide(), 2000)
+              }}
+              data-place="top"
+              className="font-display font-bold text-xs !bg-[#1A2838] text-white"
+            >
+              <span>{props.t.copied}</span>
+            </ReactTooltip>
+          )}
         </div>
       </div>
 

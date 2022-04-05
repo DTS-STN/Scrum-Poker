@@ -32,6 +32,14 @@ export default {
   playerName: 'Nom du joueur :',
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
+  copied: 'Copié !',
+  hostCrown: 'Propriétaire de la chambre',
+
+  // Error messages
+  noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
+  noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
+  notRoomMember: "Vous n'êtes pas membre de cette pièce",
+  genericError: 'Oups ! Quelque chose a mal tourné.',
 
   // Header
   title: 'accueil',
