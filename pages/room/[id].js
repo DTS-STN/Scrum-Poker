@@ -163,9 +163,9 @@ export default function Room(props) {
       className="container mx-auto pxx-6 mt-5 rounded-lg bg-slate-300XXX pxx-8"
     >
       {/* Main 'row' */}
-      <div className="flex w-full">
+      <div className="flex w-full flex-col md:flex-row px-2 mb-4">
         {/* Left Column */}
-        <div className="w-4/5 px-2 pb-2 mr-2 border-2 rounded-md ">
+        <div className="w-full md:w-4/5 px-2 pb-2 mr-2 border-2 rounded-md">
           {!getUserById(userId)?.card ? (
             <h2>Select a card...</h2>
           ) : (
@@ -254,7 +254,7 @@ export default function Room(props) {
         </div>
 
         {/* Right Col */}
-        <div className="w-1/5">
+        <div className="w-full pt-1 md:pt-0 md:w-1/5">
           <div>
             <RoomInfo
               id="roomid"
