@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import Player from './Player'
 import { cards } from '../pages/room/[id]'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 /**
  * List of players component
@@ -15,39 +15,63 @@ export default function UserList(props) {
   }
 
   const colorArray = [
-    'bg-[#7ea9e1]',
-    'bg-[#ed004f]',
-    'bg-[#00fcf0]',
-    'bg-[#d2fc00]',
-    'bg-[#7bff00]',
-    'bg-[#fa6900]',
+    'bg-[#8DD5F3]',
+    'bg-[#FFABAB]',
+    'bg-[#A7F5A6]',
+    'bg-[#FFC672]',
+    'bg-[#D197FF]',
+    'bg-[#D2FC00]',
   ]
 
-  const randomColor = colorArray[Math.floor(Math.random() * colorArray.length)]
-  const [userColor, setUserColor] = useState([
-    { id: 95296, color: 'bg-[#d2fc00]' },
-    { id: 29477, color: 'bg-yellow-500' },
-  ])
+  function randomColor() {
+    const idx = Math.floor(Math.random() * colorArray.length)
+    return colorArray[idx]
+  }
 
-  const getUserColorById = (userId) => {
-    return userColor.find((user) => {
-      return user.id == userId
+  const initialState = []
+
+  function setInitialState() {
+    props.userList.map((player) => {
+      if (props.currPlayer?.id !== player.id) {
+        initialState.push({ id: player.id, color: randomColor() })
+      }
     })
   }
 
-  props.userList.map((player) => {
-    const color = getUserColorById(player.id)
-    if (!color) {
-      setUserColor(...userColor, { id: player.id, color: 'bg-[#7bff00]' })
+  useEffect(() => {
+    if (userColor == undefined) {
+      setInitialState()
+      setUserColor(initialState)
     }
-  })
+  }, [props.userList])
+
+  const [userColor, setUserColor] = useState()
+
+  // Returns true if user is in the array otherwise undefined
+  function isUserInState(userId) {
+    if (userColor == undefined) {
+      return false
+    }
+    return userColor.find((user) => {
+      return user.id === userId
+    })
+  }
+
+  // returns user color or a randomColor is the user isn't on the state
+  function getUserColorById(userId) {
+    if (isUserInState(userId)) {
+      return userColor.find((user) => {
+        return user.id == userId
+      }).color
+    } else {
+      return randomColor()
+    }
+  }
+
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.id}>
-      {console.log(userColor)}
-      {console.log(player.id)}
-
       {props.currPlayer?.id === player.id ? (
         // Current player.
         <Player
@@ -55,14 +79,14 @@ export default function UserList(props) {
           selectedCard={getSelectedCard(player.card)}
           imgAlt="selectedCard"
           data-testid="current-player"
-          bgColor={getUserColorById(player.id).color}
+          bgColor="bg-pink-500" //default color for the current player
         />
       ) : (
         // Other players.
         // We need to set the cards of others with subscriptions.
         <Player
           playerName={player.name}
-          bgColor={getUserColorById(player.id).color}
+          bgColor={getUserColorById(player.id)}
           selectedCard={
             player.card
               ? props.isShown

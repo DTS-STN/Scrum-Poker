@@ -6,7 +6,7 @@ import Image from 'next/image'
  * Player list component
  */
 export default function Player(props) {
-  console.log(props.bgColor)
+  //
   return (
     <div className="flex md:flex-col rounded border border-slate-300 my-2 ">
       <div className=" flex w-full justify-between">
