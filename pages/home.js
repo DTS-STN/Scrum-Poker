@@ -71,7 +71,7 @@ export default function Home(props) {
       })
 
       let userListID = []
-      if (getUserListRes.data) {
+      if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
           userListID.push(Number(user.id))
         })
