@@ -33,6 +33,12 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
 
+  // Error Messages
+  noRoomExists: 'No Room exists with this id.',
+  noUserExists: 'Create user before joining a room.',
+  notRoomMember: 'You are not member of this room.',
+  genericError: 'Oops! something went wrong.',
+
   // Header
   title: 'home',
   scrumPoker: 'Scrum Poker',

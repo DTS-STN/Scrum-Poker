@@ -37,6 +37,7 @@ describe('Home page', () => {
     useRouter.mockImplementation(() => ({
       pathname: '/',
       asPath: '/',
+      query: 'error=test',
     }))
   })
 
