@@ -65,6 +65,7 @@ export default function ChatRoom(props) {
             type="button"
             id={`${props.id}-send`}
             onClick={() => submitMsg()}
+            aria-label={props.t.send}
             className="w-auto h-6 font-display my-2 text-white text-[12px]"
           >
             <svg
