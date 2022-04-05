@@ -54,12 +54,6 @@ export default function Room(props) {
     { id: '3', name: 'Yoda', message: 'No. Try not.' },
     { id: '4', name: 'Yoda', message: 'Do… or do not.' },
     { id: '5', name: 'Yoda', message: 'There is no try' },
-    { id: '6', name: 'Yoda', message: 'No. Try not. x 2' },
-    { id: '7', name: 'Yoda', message: 'Do… or do not. x 2' },
-    { id: '8', name: 'Yoda', message: 'There is no try x 2' },
-    { id: '9', name: 'Yoda', message: 'No. Try not. x 3' },
-    { id: '10', name: 'Yoda', message: 'Do… or do not. x 3' },
-    { id: '11', name: 'Yoda', message: 'There is no try x 3' },
   ]
 
   const handleClear = (e) => {
