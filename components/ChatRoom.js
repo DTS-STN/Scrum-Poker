@@ -60,7 +60,7 @@ export default function ChatRoom(props) {
             className="appearance-none rounded-md border-gray-400 border w-full my-2 p-1 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
           />
         </div>
-        <div className="flex w-1/12 pl-0.5 text-right">
+        <div className="flex w-1/12 text-right">
           <button
             type="button"
             id={`${props.id}-send`}
