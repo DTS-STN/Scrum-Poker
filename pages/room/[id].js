@@ -10,6 +10,7 @@ import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
+import { useRouter } from 'next/router'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
@@ -28,7 +29,7 @@ export const cards = [
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
-
+  const router = useRouter()
   const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM)
   const [room, setRoom] = useState(props.room)
@@ -89,7 +90,26 @@ export default function Room(props) {
   }
 
   useEffect(() => {
-    setUserId(Cookies.get('userid'))
+    const currCookie = Cookies.get('userid')
+    // Check if browser has userid cookie.
+    if (!currCookie) {
+      router.push({
+        pathname: `/home`,
+        query: `errorCode=309`,
+      })
+    } else {
+      // Check if userID cookie is in the room.
+      const userIsInRoom = getUserById(currCookie)
+      if (!userIsInRoom) {
+        router.push({
+          pathname: `/home`,
+          query: `errorCode=310`,
+        })
+      }
+
+      // User is in this room.
+      setUserId(currCookie)
+    }
   }, [])
 
   //User subscription and useEffect to update users
@@ -307,7 +327,15 @@ export async function getServerSideProps({ params, locale }) {
     variables: { roomsId: roomId },
   })
   const roomInfo = queryResponse.data?.rooms[0]
-
+  // Check if room exists
+  if (!roomInfo) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home?errorCode=308',
+      },
+    }
+  }
   const room = {
     id: roomInfo.id,
     host: roomInfo.host.id,

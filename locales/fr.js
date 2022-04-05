@@ -37,6 +37,12 @@ export default {
   placeholder: 'Écrire un message',
   send: 'Envoyer',
 
+  // Error messages
+  noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
+  noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
+  notRoomMember: "Vous n'êtes pas membre de cette pièce",
+  genericError: 'Oups ! Quelque chose a mal tourné.',
+
   // Header
   title: 'accueil',
   scrumPoker: 'Scrum Poker',
