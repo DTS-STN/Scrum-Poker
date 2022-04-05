@@ -1,11 +1,20 @@
 import propTypes from 'prop-types'
 import Card from './Card'
 import Image from 'next/image'
+import ReactTooltip from 'react-tooltip'
+import { useEffect, useState } from 'react'
 
 /**
  * Player list component
  */
 export default function Player(props) {
+  //Since we are using SSR, the below code is necessary to make sure the component is mounted before showing the tooltip
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <div className="flex md:flex-col rounded border border-slate-300 my-2">
       <div className=" flex w-full justify-between">
@@ -29,6 +38,28 @@ export default function Player(props) {
           >
             {props.playerName}
           </p>
+          {isMounted && props.host ? (
+            <div className="inline-flex">
+              <Image
+                src="/Host_Crown.svg"
+                alt={props.t.hostCrown}
+                width={15}
+                height={10}
+                data-for="host"
+                data-tip={props.t.hostCrown}
+                aria-controls="host"
+              />
+              <ReactTooltip
+                id="host"
+                effect="solid"
+                place="right"
+                className="font-display font-bold text-xs !bg-[#1A2838] text-white"
+                role="status"
+              />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
 
         {props.selectedCard ? (
@@ -70,4 +101,10 @@ Player.propTypes = {
 
   // Alt text of the image
   imgAlt: propTypes.string,
+
+  // Boolean for room host, shows crown next to name if true
+  host: propTypes.bool,
+
+  //Translated text
+  t: propTypes.object,
 }

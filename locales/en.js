@@ -30,6 +30,8 @@ export default {
   playerName: "Player's Name:",
   playersOnline: 'Players Online:',
   copy: 'Copy',
+  copied: 'Copied!',
+  hostCrown: 'Room Owner',
 
   // Chat
   placeholder: 'Write a message',

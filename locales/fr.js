@@ -32,6 +32,8 @@ export default {
   playerName: 'Nom du joueur :',
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
+  copied: 'Copié !',
+  hostCrown: 'Propriétaire de la chambre',
 
   // Chat
   placeholder: 'Écrire un message',
