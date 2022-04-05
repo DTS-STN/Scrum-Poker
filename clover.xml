@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649175003709" clover="3.2.0">
-  <project timestamp="1649175003709" name="All files">
-    <metrics statements="208" coveredstatements="63" conditionals="118" coveredconditionals="42" methods="61" coveredmethods="24" elements="387" coveredelements="129" complexity="0" loc="208" ncloc="208" packages="4" files="19" classes="19"/>
+<coverage generated="1649196316705" clover="3.2.0">
+  <project timestamp="1649196316705" name="All files">
+    <metrics statements="228" coveredstatements="63" conditionals="126" coveredconditionals="42" methods="69" coveredmethods="24" elements="423" coveredelements="129" complexity="0" loc="228" ncloc="228" packages="4" files="19" classes="19"/>
     <package name="components">
-      <metrics statements="45" coveredstatements="37" conditionals="46" coveredconditionals="33" methods="21" coveredmethods="15"/>
+      <metrics statements="65" coveredstatements="37" conditionals="54" coveredconditionals="33" methods="29" coveredmethods="15"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
         <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="7" count="2" type="stmt"/>
@@ -61,7 +61,7 @@
       </file>
       <file name="RoomInfo.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/RoomInfo.js">
         <metrics statements="8" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="2"/>
-        <line num="10" count="6" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
         <line num="12" count="4" type="stmt"/>
         <line num="13" count="2" type="stmt"/>
         <line num="16" count="4" type="stmt"/>
@@ -77,13 +77,33 @@
         <line num="29" count="2" type="stmt"/>
       </file>
       <file name="UserList.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/UserList.js">
-        <metrics statements="6" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <metrics statements="26" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <line num="11" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="107" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages">
