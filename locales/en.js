@@ -30,7 +30,10 @@ export default {
   playerName: "Player's Name:",
   playersOnline: 'Players Online:',
   copy: 'Copy',
-  copied: 'Copied!',
+
+  // Chat
+  placeholder: 'Write a message',
+  send: 'Send',
 
   // Header
   title: 'home',

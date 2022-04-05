@@ -32,7 +32,10 @@ export default {
   playerName: 'Nom du joueur :',
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
-  copied: 'Copié !',
+
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
 
   // Header
   title: 'accueil',
