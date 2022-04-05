@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
+import ChatRoom from '../../components/ChatRoom'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
@@ -38,6 +39,28 @@ export default function Room(props) {
       return user.id === userId
     })
   }
+
+  const exampleMessages = [
+    {
+      id: '1',
+      name: 'Yoda',
+      message: 'You must unlearn what you have learned',
+    },
+    {
+      id: '2',
+      name: getUserById(userId)?.name,
+      message: 'All right. I’ll give it a try',
+    },
+    { id: '3', name: 'Yoda', message: 'No. Try not.' },
+    { id: '4', name: 'Yoda', message: 'Do… or do not.' },
+    { id: '5', name: 'Yoda', message: 'There is no try' },
+    { id: '6', name: 'Yoda', message: 'No. Try not. x 2' },
+    { id: '7', name: 'Yoda', message: 'Do… or do not. x 2' },
+    { id: '8', name: 'Yoda', message: 'There is no try x 2' },
+    { id: '9', name: 'Yoda', message: 'No. Try not. x 3' },
+    { id: '10', name: 'Yoda', message: 'Do… or do not. x 3' },
+    { id: '11', name: 'Yoda', message: 'There is no try x 3' },
+  ]
 
   const handleClear = (e) => {
     e.preventDefault()
@@ -248,13 +271,12 @@ export default function Room(props) {
             />
           </div>
 
-          <div className="mt-6">
-            <RoomInfo
-              id="roomid"
+          <div>
+            <ChatRoom
+              id="chat"
+              name={getUserById(userId)?.name}
+              messages={exampleMessages}
               t={t}
-              roomId={props.roomId}
-              playerName={getUserById(userId)?.name}
-              playersOnline={users.length}
             />
           </div>
         </div>
