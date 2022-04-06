@@ -109,6 +109,7 @@ export default function Room(props) {
   useEffect(() => {
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
+      console.log('roomUpdated', roomUpdated)
       const updatedRoomData = {
         id: roomUpdated.id,
         host: roomUpdated.host.id,
@@ -116,7 +117,9 @@ export default function Room(props) {
           return user.id
         }),
         isShown: roomUpdated.isShown,
+        timer: roomUpdated.timer,
       }
+      const now = Date.now()
       setRoom(updatedRoomData)
     }
   }, [roomSubscription])
@@ -151,6 +154,9 @@ export default function Room(props) {
         roomId={props.roomId}
         playerName={getUserById(userId)?.name}
         playersOnline={users.length}
+        roomData={room}
+        updateRoom={updateRoom}
+        isHost={userId == room.host}
       />
 
       {!getUserById(userId)?.card ? (
@@ -272,6 +278,7 @@ export async function getServerSideProps({ params, locale }) {
       return user.id
     }),
     isShown: roomInfo.isShown,
+    timer: roomInfo.timer,
   }
 
   const users = roomInfo.users

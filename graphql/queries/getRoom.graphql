@@ -13,5 +13,10 @@ query getRoom($roomsId: ID) {
       room
     }
     isShown
+    timer {
+      timestamp
+      duration
+    }
+
   }
 }

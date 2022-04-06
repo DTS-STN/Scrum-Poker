@@ -82,11 +82,16 @@ export default function Home(props) {
         throw 'Oops! Something went wrong'
       }
 
+      const timerData = getUserListRes.data.rooms[0].timer
       const updateRoomRes = await updateRoom({
         variables: {
           updateRoomId: roomCode.value,
           updateRoomUsers: userListID,
           isShown: false,
+          timer: {
+            timestamp: timerData.timestamp,
+            duration: timerData.duration,
+          },
         },
       }).catch((e) => {
         throw 'Oops! Something went wrong'

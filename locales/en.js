@@ -31,6 +31,7 @@ export default {
   playersOnline: 'Players Online:',
   copy: 'Copy',
   copied: 'Copied!',
+  timer: 'Timer:',
 
   // Header
   title: 'home',
