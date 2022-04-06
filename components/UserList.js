@@ -15,35 +15,23 @@ export default function UserList(props) {
 
   const displayPlayers = props.userList.map((player) => (
     <li className="w-full" key={player.id}>
-      {props.currPlayer?.id === player.id ? (
-        // Current player.
-        <Player
-          playerName={player.name}
-          selectedCard={getSelectedCard(player.card)}
-          imgAlt="selectedCard"
-          data-testid="current-player"
-          host={player.id === props.host}
-          t={props.t}
-          showBoot={props.showBoot}
-        />
-      ) : (
-        // Other players.
-        // We need to set the cards of others with subscriptions.
-        <Player
-          playerName={player.name}
-          selectedCard={
-            player.card
-              ? props.isShown
-                ? getSelectedCard(player.card)
-                : hiddenCard
-              : null
-          }
-          imgAlt="blankCard"
-          data-testid="other-players"
-          host={player.id === props.host}
-          showBoot={props.showBoot}
-        />
-      )}
+      <Player
+        playerName={player.name}
+        selectedCard={
+          props.currPlayer?.id === player.id
+            ? getSelectedCard(player.card)
+            : player.card
+            ? props.isShown
+              ? getSelectedCard(player.card)
+              : hiddenCard
+            : null
+        }
+        imgAlt="blankCard"
+        data-testid="other-players"
+        host={player.id === props.host}
+        showBoot={props.showBoot}
+        t={props.t}
+      />
     </li>
   ))
   return (
