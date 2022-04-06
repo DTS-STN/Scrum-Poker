@@ -82,9 +82,4 @@ UserList.propTypes = {
    * Identifier for room host
    */
   host: PropTypes.string,
-
-  /**
-   * show boot options
-   */
-  showBoot: PropTypes.bool,
 }
