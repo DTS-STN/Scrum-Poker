@@ -42,11 +42,11 @@ export default function Player(props) {
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
-                alt={'props.t.hostCrown'}
+                alt={props.t.hostCrown}
                 width={15}
                 height={10}
                 data-for="host"
-                data-tip={'props.t.hostCrown'}
+                data-tip={props.t.hostCrown}
                 aria-controls="host"
               />
               <ReactTooltip
@@ -65,8 +65,7 @@ export default function Player(props) {
           {props.showBoot ? (
             <button
               onClick={() => console.log(`Boot Player: ${props.playerName}`)}
-              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700
-              }`}
+              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700`}
             >
               <Image
                 src="/rubberBoot.svg"
