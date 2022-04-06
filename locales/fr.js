@@ -37,6 +37,10 @@ export default {
   copied: 'Copié !',
   hostCrown: 'Propriétaire de la chambre',
 
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
+
   // Error messages
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',

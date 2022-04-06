@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
+import ChatRoom from '../../components/ChatRoom'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
@@ -39,6 +40,22 @@ export default function Room(props) {
       return user.id === userId
     })
   }
+
+  const exampleMessages = [
+    {
+      id: '1',
+      name: 'Yoda',
+      message: 'You must unlearn what you have learned',
+    },
+    {
+      id: '2',
+      name: getUserById(userId)?.name,
+      message: 'All right. I’ll give it a try',
+    },
+    { id: '3', name: 'Yoda', message: 'No. Try not.' },
+    { id: '4', name: 'Yoda', message: 'Do… or do not.' },
+    { id: '5', name: 'Yoda', message: 'There is no try' },
+  ]
 
   const handleClear = (e) => {
     e.preventDefault()
@@ -161,98 +178,121 @@ export default function Room(props) {
     }
   }
   return (
-    <div
-      id="homeContent"
-      className="container mx-auto px-6 mt-5 rounded-lg bg-slate-300 p-8"
-    >
-      <RoomInfo
-        id="roomid"
-        t={t}
-        roomId={props.roomId}
-        playerName={getUserById(userId)?.name}
-        playersOnline={users.length}
-      />
+    <div id="homeContent" className="container mx-auto my-5 rounded-lg">
+      {/* Main 'row' */}
+      <div className="flex w-full flex-col space-y-3 lg:space-y-0 lg:flex-row px-2">
+        {/* Left Column */}
+        <div className="w-full lg:w-4/5 px-2 lg:mr-2 border-2 rounded-md">
+          {!getUserById(userId)?.card ? (
+            <h2>Select a card...</h2>
+          ) : (
+            <h2>
+              Value selected:{' '}
+              <span className="font-bold">{getUserById(userId)?.card}</span>
+            </h2>
+          )}
 
-      {!getUserById(userId)?.card ? (
-        <h2>Select a card...</h2>
-      ) : (
-        <h2>
-          Value selected:{' '}
-          <span className="font-bold">{getUserById(userId)?.card}</span>
-        </h2>
-      )}
-      <ul
-        id="cards"
-        className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
-      >
-        {cards.map((card) => {
-          return (
-            <li key={card.id}>
-              <Card
-                src={card.src}
-                id={card.id}
-                alt={card.alt}
-                onClick={(e) => onCardClickHandler(e, card)}
-                onKeyDown={(e) => {
-                  if (e.keyCode === 32 || e.keyCode === 13) {
-                    onCardClickHandler(e, card)
-                  }
-                }}
-                selected={card.value === getUserById(userId)?.card}
-              />
-            </li>
-          )
-        })}
-      </ul>
-      {userId == room.host ? (
-        <div className="flex justify-center">
-          <button
-            type="button"
-            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-            onClick={() =>
-              updateRoom({
-                variables: {
-                  updateRoomId: room.id,
-                  updateRoomUsers: room.userIds,
-                  isShown: true,
-                },
-              })
-            }
-          >
-            {t.showCards}
-          </button>
-          <button
-            type="button"
-            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-            onClick={() =>
-              updateRoom({
-                variables: {
-                  updateRoomId: room.id,
-                  updateRoomUsers: room.userIds,
-                  isShown: false,
-                },
-              })
-            }
-          >
-            {t.hideCards}
-          </button>
-          <button
-            type="button"
-            className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-            onClick={handleClear}
-          >
-            {t.clearCards}
-          </button>
+          {/* Cards box */}
+          <div className="p-2 border rounded ">
+            <ul
+              id="cards"
+              className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+            >
+              {cards.map((card) => {
+                return (
+                  <li key={card.id}>
+                    <Card
+                      src={card.src}
+                      id={card.id}
+                      alt={card.alt}
+                      onClick={(e) => onCardClickHandler(e, card)}
+                      onKeyDown={(e) => {
+                        if (e.keyCode === 32 || e.keyCode === 13) {
+                          onCardClickHandler(e, card)
+                        }
+                      }}
+                      selected={card.value === getUserById(userId)?.card}
+                    />
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          {/* Users List */}
+          {userId == room.host ? (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                onClick={() =>
+                  updateRoom({
+                    variables: {
+                      updateRoomId: room.id,
+                      updateRoomUsers: room.userIds,
+                      isShown: true,
+                    },
+                  })
+                }
+              >
+                {t.showCards}
+              </button>
+              <button
+                type="button"
+                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                onClick={() =>
+                  updateRoom({
+                    variables: {
+                      updateRoomId: room.id,
+                      updateRoomUsers: room.userIds,
+                      isShown: false,
+                    },
+                  })
+                }
+              >
+                {t.hideCards}
+              </button>
+              <button
+                type="button"
+                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                onClick={handleClear}
+              >
+                {t.clearCards}
+              </button>
+            </div>
+          ) : null}
+          {/* User list */}
+          <UserList
+            t={t}
+            userList={users}
+            isShown={room.isShown}
+            currPlayer={getUserById(userId)}
+            host={room.host}
+          />
         </div>
-      ) : null}
-      {/* User list */}
-      <UserList
-        t={t}
-        userList={users}
-        isShown={room.isShown}
-        currPlayer={getUserById(userId)}
-        host={room.host}
-      />
+
+        {/* Right Col */}
+        <div className="w-full lg:pt-0 lg:w-1/5">
+          <div>
+            <RoomInfo
+              id="roomid"
+              t={t}
+              roomId={props.roomId}
+              playerName={getUserById(userId)?.name}
+              playersOnline={users.length}
+            />
+          </div>
+
+          <div>
+            <ChatRoom
+              id="chat"
+              name={getUserById(userId)?.name}
+              messages={exampleMessages}
+              t={t}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
