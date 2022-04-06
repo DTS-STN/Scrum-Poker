@@ -32,6 +32,7 @@ export default function RoomInfo(props) {
           data-testid="blank-card-img"
         />
       </button>
+      {console.log(props.t.leaveImgAlt)}
       <div className="flex border-b-[#26374A] border-b p-1 text-left">
         <div className="flex-initial w-48">{props.t.roomId}</div>
         <div className="flex-initial w-48 text-right">
