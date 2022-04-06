@@ -260,25 +260,13 @@ export default function Room(props) {
             </div>
           ) : null}
           {/* User list */}
-          {userId === room.host ? (
-            <UserList
-              t={t}
-              userList={users}
-              isShown={room.isShown}
-              currPlayer={getUserById(userId)}
-              host={room.host}
-              showBoot={true}
-            />
-          ) : (
-            <UserList
-              t={t}
-              userList={users}
-              isShown={room.isShown}
-              currPlayer={getUserById(userId)}
-              host={room.host}
-              showBoot={false}
-            />
-          )}
+          <UserList
+            t={t}
+            userList={users}
+            isShown={room.isShown}
+            currPlayer={getUserById(userId)}
+            host={room.host}
+          />
         </div>
 
         {/* Right Col */}

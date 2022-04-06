@@ -38,7 +38,7 @@ export default function Player(props) {
           >
             {props.playerName}
           </p>
-          {isMounted && props.host ? (
+          {isMounted && props.isHost ? (
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
@@ -62,12 +62,10 @@ export default function Player(props) {
           )}
         </div>
         <div className="flex">
-          {props.showBoot ? (
+          {props.isUserPlayer === false && props.isPlayerHost ? (
             <button
               onClick={() => console.log(`Boot Player: ${props.playerName}`)}
-              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700 ${
-                props.host ? '' : 'hidden'
-              }`}
+              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700`}
             >
               <Image
                 src="/rubberBoot.svg"
@@ -121,12 +119,15 @@ Player.propTypes = {
   // Alt text of the image
   imgAlt: propTypes.string,
 
-  // Boolean for room host, shows crown next to name if true
-  host: propTypes.bool,
+  // Check for if app User is the Host
+  isHost: propTypes.bool,
 
   //Translated text
   t: propTypes.object,
 
-  // Show boot options
-  showBoot: propTypes.bool,
+  // Check for if Host ID matches Player componenet's ID
+  isPlayerHost: propTypes.bool,
+
+  // Check for if app User ID matches Player componenet's ID
+  isUserPlayer: propTypes.bool,
 }
