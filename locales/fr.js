@@ -36,6 +36,7 @@ export default {
   copy: 'Copier',
   copied: 'Copié !',
   hostCrown: 'Propriétaire de la chambre',
+  leaveImgAlt: 'Quitter la salle',
 
   // Error messages
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",

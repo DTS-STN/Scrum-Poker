@@ -26,7 +26,7 @@ export default function RoomInfo(props) {
       >
         <Image
           src="/leaveRoom.svg"
-          alt={props.imgAlt}
+          alt={props.t.leaveImgAlt}
           width={36}
           height={32}
           data-testid="blank-card-img"

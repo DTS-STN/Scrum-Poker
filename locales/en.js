@@ -33,6 +33,7 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
   hostCrown: 'Room Owner',
+  leaveImgAlt: 'Leave room',
 
   // Error Messages
   noRoomExists: 'No Room exists with this id.',
