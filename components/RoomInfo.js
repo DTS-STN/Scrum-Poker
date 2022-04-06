@@ -18,20 +18,6 @@ export default function RoomInfo(props) {
       className={`h-auto w-auto rounded-md bg-white border-2 `}
       id={props.id}
     >
-      <button
-        onClick={() =>
-          console.log(`Player ${props.playerName} wants out of here!`)
-        }
-        className="bg-red-600 border border-gray-400 flex justify-center items-center rounded-full mt-1 ml-1 h-8 w-12 my-auto hover:bg-red-700"
-      >
-        <Image
-          src="/leaveRoom.svg"
-          alt={props.t.leaveImgAlt}
-          width={36}
-          height={32}
-          data-testid="blank-card-img"
-        />
-      </button>
       <div className="flex border-b-2 p-1 text-left">
         <div className="flex-initial w-48">{props.t.roomId}</div>
         <div className="flex-initial w-48 text-right">
@@ -70,6 +56,22 @@ export default function RoomInfo(props) {
       <div className="flex p-1">
         <div className="flex-1 w-48 ">{props.t.playersOnline}</div>
         <div className="flex-1 w-48 text-right">{props.playersOnline}</div>
+      </div>
+      <div className="flex justify-center pb-1">
+        <button
+          onClick={() =>
+            console.log(`Player ${props.playerName} wants out of here!`)
+          }
+          className="bg-red-600 border border-gray-400 flex justify-center items-center rounded-full mt-1 ml-1 h-8 w-12 my-auto hover:bg-red-700"
+        >
+          <Image
+            src="/leaveRoom.svg"
+            alt={props.t.leaveImgAlt}
+            width={36}
+            height={32}
+            data-testid="blank-card-img"
+          />
+        </button>
       </div>
     </div>
   )
