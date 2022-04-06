@@ -62,7 +62,7 @@ export default function Player(props) {
           )}
         </div>
         <div className="flex">
-          {props.isUserPlayer === false && props.isPlayerHost ? (
+          {props.showBoot ? (
             <button
               onClick={() => console.log(`Boot Player: ${props.playerName}`)}
               className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700
