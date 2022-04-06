@@ -35,6 +35,10 @@ export default {
   hostCrown: 'Room Owner',
   leaveImgAlt: 'Leave room',
 
+  // Chat
+  placeholder: 'Write a message',
+  send: 'Send',
+
   // Error Messages
   noRoomExists: 'No Room exists with this id.',
   noUserExists: 'Create user before joining a room.',

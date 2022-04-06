@@ -38,6 +38,10 @@ export default {
   hostCrown: 'Propriétaire de la chambre',
   leaveImgAlt: 'Quitter la salle',
 
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
+
   // Error messages
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
