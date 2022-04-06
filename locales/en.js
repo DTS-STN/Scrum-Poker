@@ -34,6 +34,10 @@ export default {
   copied: 'Copied!',
   hostCrown: 'Room Owner',
 
+  // Chat
+  placeholder: 'Write a message',
+  send: 'Send',
+
   // Error Messages
   noRoomExists: 'No Room exists with this id.',
   noUserExists: 'Create user before joining a room.',

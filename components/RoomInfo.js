@@ -15,10 +15,10 @@ export default function RoomInfo(props) {
 
   return (
     <div
-      className={`h-auto w-72 my-4 rounded-lg bg-white border border-[#26374A]`}
+      className={`h-auto w-auto rounded-md bg-white border-2 `}
       id={props.id}
     >
-      <div className="flex border-b-[#26374A] border-b p-1 text-left">
+      <div className="flex border-b-2 p-1 text-left">
         <div className="flex-initial w-48">{props.t.roomId}</div>
         <div className="flex-initial w-48 text-right">
           {props.roomId}
