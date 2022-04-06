@@ -38,7 +38,7 @@ export default function Player(props) {
           >
             {props.playerName}
           </p>
-          {isMounted && props.isHost ? (
+          {isMounted && props.host ? (
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
