@@ -38,7 +38,7 @@ export default function Player(props) {
           >
             {props.playerName}
           </p>
-          {isMounted && props.host ? (
+          {isMounted && props.isHost ? (
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
@@ -126,9 +126,6 @@ Player.propTypes = {
   //Translated text
   t: propTypes.object,
 
-  // Check for if Host ID matches Player componenet's ID
-  isPlayerHost: propTypes.bool,
-
-  // Check for if app User ID matches Player componenet's ID
-  isUserPlayer: propTypes.bool,
+  // show Boot options
+  showBoot: propTypes.bool,
 }

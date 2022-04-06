@@ -29,7 +29,7 @@ export default function UserList(props) {
           }
           imgAlt="blankCard"
           data-testid="other-players"
-          host={player.id === props.host}
+          isHost={player.id === props.host}
           showBoot={
             props.currPlayer?.id === props.host &&
             props.currPlayer?.id !== player.id
