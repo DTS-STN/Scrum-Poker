@@ -42,11 +42,11 @@ export default function Player(props) {
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
-                alt={props.t.hostCrown}
+                alt={'props.t.hostCrown'}
                 width={15}
                 height={10}
                 data-for="host"
-                data-tip={props.t.hostCrown}
+                data-tip={'props.t.hostCrown'}
                 aria-controls="host"
               />
               <ReactTooltip
@@ -61,28 +61,47 @@ export default function Player(props) {
             ''
           )}
         </div>
-
-        {props.selectedCard ? (
-          <Card
-            src={props.selectedCard.src}
-            id={props.selectedCard.id}
-            key={props.selectedCard.id}
-            alt={props.selectedCard.alt}
-            className=" "
-            data-testid="selected-card-img"
-          />
-        ) : (
-          <div className=" h-auto w-20 p-2">
-            <Image
-              src="/EmptyCard.svg"
-              alt={props.imgAlt}
-              width={74}
-              height={102}
-              layout="responsive"
-              data-testid="blank-card-img"
+        <div className="flex">
+          {props.showBoot ? (
+            <button
+              onClick={() => console.log(`Boot Player: ${props.playerName}`)}
+              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700 ${
+                props.host ? '' : 'hidden'
+              }`}
+            >
+              <Image
+                src="/rubberBoot.svg"
+                alt={props.imgAlt}
+                width={32}
+                height={24}
+                data-testid="blank-card-img"
+              />
+            </button>
+          ) : (
+            ''
+          )}
+          {props.selectedCard ? (
+            <Card
+              src={props.selectedCard.src}
+              id={props.selectedCard.id}
+              key={props.selectedCard.id}
+              alt={props.selectedCard.alt}
+              className=" "
+              data-testid="selected-card-img"
             />
-          </div>
-        )}
+          ) : (
+            <div className=" h-auto w-20 p-2">
+              <Image
+                src="/EmptyCard.svg"
+                alt={props.imgAlt}
+                width={74}
+                height={102}
+                layout="responsive"
+                data-testid="blank-card-img"
+              />
+            </div>
+          )}
+        </div>
       </div>
       {props.children}
     </div>
@@ -107,4 +126,7 @@ Player.propTypes = {
 
   //Translated text
   t: propTypes.object,
+
+  // Show boot options
+  showBoot: propTypes.bool,
 }

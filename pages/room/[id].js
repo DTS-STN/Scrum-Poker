@@ -218,8 +218,6 @@ export default function Room(props) {
               })}
             </ul>
           </div>
-
-          {/* Users List */}
           {userId == room.host ? (
             <div className="flex justify-center">
               <button
@@ -262,13 +260,25 @@ export default function Room(props) {
             </div>
           ) : null}
           {/* User list */}
-          <UserList
-            t={t}
-            userList={users}
-            isShown={room.isShown}
-            currPlayer={getUserById(userId)}
-            host={room.host}
-          />
+          {userId === room.host ? (
+            <UserList
+              t={t}
+              userList={users}
+              isShown={room.isShown}
+              currPlayer={getUserById(userId)}
+              host={room.host}
+              showBoot={true}
+            />
+          ) : (
+            <UserList
+              t={t}
+              userList={users}
+              isShown={room.isShown}
+              currPlayer={getUserById(userId)}
+              host={room.host}
+              showBoot={false}
+            />
+          )}
         </div>
 
         {/* Right Col */}

@@ -24,6 +24,7 @@ export default function UserList(props) {
           data-testid="current-player"
           host={player.id === props.host}
           t={props.t}
+          showBoot={props.showBoot}
         />
       ) : (
         // Other players.
@@ -40,6 +41,7 @@ export default function UserList(props) {
           imgAlt="blankCard"
           data-testid="other-players"
           host={player.id === props.host}
+          showBoot={props.showBoot}
         />
       )}
     </li>
@@ -87,4 +89,9 @@ UserList.propTypes = {
    * Identifier for room host
    */
   host: PropTypes.string,
+
+  /**
+   * show boot options
+   */
+  showBoot: PropTypes.bool,
 }
