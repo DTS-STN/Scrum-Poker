@@ -20,6 +20,7 @@ export default {
   joinRoomButton: 'Join Room',
   invalidNameError: 'Please enter a name (alphanumeric characters only)',
   roomDoesNotExist: 'Room does not exist',
+  required: ' * ',
 
   // Room
   users: 'Users',

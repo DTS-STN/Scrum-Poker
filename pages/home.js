@@ -239,6 +239,7 @@ export default function Home(props) {
               id="owner"
               label={t.createRoomLabel}
               placeholder={t.createRoomPlaceholder}
+              required={t.required}
             />
             <button
               type="submit"
@@ -266,11 +267,14 @@ export default function Home(props) {
               id="roomCode"
               label={t.joinRoomNumberLabel}
               placeholder={t.joinRoomNumberPlaceholder}
+              required={t.required}
             />
+
             <TextInput
               id="newRoomName"
               label={t.joinRoomNameLabel}
               placeholder={t.joinRoomNamePlaceholder}
+              required={t.required}
             />
             <button
               type="submit"
