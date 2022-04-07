@@ -36,6 +36,7 @@ export default {
   copy: 'Copier',
   copied: 'Copié !',
   hostCrown: 'Propriétaire de la chambre',
+  leaveImgAlt: 'Quitter la salle',
 
   // Chat
   placeholder: 'Écrire un message',

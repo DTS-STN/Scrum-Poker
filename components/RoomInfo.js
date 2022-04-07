@@ -57,6 +57,22 @@ export default function RoomInfo(props) {
         <div className="flex-1 w-48 ">{props.t.playersOnline}</div>
         <div className="flex-1 w-48 text-right">{props.playersOnline}</div>
       </div>
+      <div className="flex justify-center pb-1">
+        <button
+          onClick={() =>
+            console.log(`Player ${props.playerName} wants out of here!`)
+          }
+          className="bg-red-600 border border-gray-400 flex justify-center items-center rounded-full mt-1 ml-1 h-8 w-12 my-auto hover:bg-red-700"
+        >
+          <Image
+            src="/leaveRoom.svg"
+            alt={props.t.leaveImgAlt}
+            width={36}
+            height={32}
+            data-testid="blank-card-img"
+          />
+        </button>
+      </div>
     </div>
   )
 }
