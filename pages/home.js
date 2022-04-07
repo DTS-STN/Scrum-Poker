@@ -220,15 +220,10 @@ export default function Home(props) {
           queryErrorCode ? `sm:mt-6` : ``
         }`}
       >
-        {/* style="text-center p-4 flex flex-col md:w-96 bg-red-200" */}
         <Container className="mx-8 sm:ml-2 sm:mr-2">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.createRoomTitle}
           </h2>
-          {/* You can add a description here if needed */}
-          {/* <h3 className="text-opacity-75 text-black text-xl">
-            {t.createRoomDesc}
-          </h3> */}
           <form
             data-testid="createRoomForm"
             onSubmit={onCreateHandler}
@@ -255,10 +250,6 @@ export default function Home(props) {
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.joinRoomTitle}
           </h2>
-          {/* You can add a description here if needed */}
-          {/* <h3 className="text-opacity-75 text-black text-xl">
-            {t.joinRoomDesc}
-          </h3> */}
           <form
             onSubmit={handleJoinSubmit}
             className="flex flex-col justify-between h-full items-center"
