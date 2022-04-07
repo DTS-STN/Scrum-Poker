@@ -58,10 +58,9 @@ export default function UserList(props) {
     if (userColor == undefined) {
       return false
     }
-    return userColor.includes(userId)
-    // return userColor.includes(userId) ((user) => {
-    //   return user.id ===
-    // })
+    return userColor.find((user) => {
+      return user.id === userId
+    })
   }
 
   // returns user color or a randomColor is the user isn't on the state
