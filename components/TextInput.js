@@ -8,7 +8,9 @@ export default function TextInput(props) {
         className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
       >
         {props.label}
-        <span className="text-red-800 font-body">{props.required}</span>
+        <span className="text-red-800 font-body" aria-hidden="true">
+          {props.required}
+        </span>
       </label>
       <input
         type="text"
