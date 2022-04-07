@@ -10,7 +10,7 @@ export default function Card(props) {
         props.selected
           ? `border-4 border-canadaBlue block rounded-lg focus:ring-0 `
           : props.className
-          ? `h-auto w-20 p-2`
+          ? `h-auto w-14 p-1`
           : `border-1 border-slate-300 block hover:animate-pulsate-fwd`
       }`}
       onClick={props.onClick}

@@ -185,10 +185,10 @@ export default function Room(props) {
         <div className="w-full lg:w-4/5 lg:mr-2 border-2 rounded-md">
           {!getUserById(userId)?.card ? (
             <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
-              Welcome to Scrum Poker Room
+              Welcome to Scrum Poker!
             </h2>
           ) : (
-            <h2>
+            <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
               Value selected:{' '}
               <span className="font-bold">{getUserById(userId)?.card}</span>
             </h2>
