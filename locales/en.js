@@ -19,7 +19,10 @@ export default {
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
   invalidNameError: 'Please enter a name (alphanumeric characters only)',
+  invalidRoomError:
+    'Please enter a room code (alphanumeric characters only). For example K9VW8',
   roomDoesNotExist: 'Room does not exist',
+  required: ' * ',
 
   // Room
   users: 'Users',
@@ -33,6 +36,8 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
   hostCrown: 'Room Owner',
+  leaveImgAlt: 'Leave room Button',
+  leaveRoom: 'Leave Room',
 
   // Chat
   placeholder: 'Write a message',

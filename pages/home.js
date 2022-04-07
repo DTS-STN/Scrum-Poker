@@ -56,18 +56,26 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
     let username = newRoomName.value,
-      userid = Cookies.get('userid')
+      userid = Cookies.get('userid'),
+      room = roomCode.value
 
     try {
       //Check if name is empty
-      if (newRoomName.value.trim() === '') {
+      if (username === '') {
         throw t.invalidNameError
       }
       //Check if name contains special characters
       else if (!/^[a-zA-Z0-9]+$/.test(username)) {
         throw t.invalidNameError
       }
-
+      //Check if room code field is empty
+      if (room === '') {
+        throw t.invalidRoomError
+      }
+      //Check if room code field contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(room)) {
+        throw t.invalidRoomError
+      }
       //If name is valid, create new user
       const addUserRes = await addUser({
         variables: { name: username },
@@ -216,17 +224,14 @@ export default function Home(props) {
       <div
         data-testid="homeContent"
         id="homeContent"
-        className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5  ${
+        className={`container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5 ${
           queryErrorCode ? `sm:mt-6` : ``
         }`}
       >
-        <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <Container className="mx-8 sm:ml-2 sm:mr-2">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.createRoomTitle}
           </h2>
-          <h3 className="text-opacity-75 text-black text-xl">
-            {t.createRoomDesc}
-          </h3>
           <form
             data-testid="createRoomForm"
             onSubmit={onCreateHandler}
@@ -239,6 +244,7 @@ export default function Home(props) {
               id="owner"
               label={t.createRoomLabel}
               placeholder={t.createRoomPlaceholder}
+              required={t.required}
             />
             <button
               type="submit"
@@ -248,13 +254,10 @@ export default function Home(props) {
             </button>
           </form>
         </Container>
-        <Container style="text-center p-4 flex flex-col drop-shadow md:w-96">
+        <Container className="mx-8 sm:ml-2 sm:mr-2">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.joinRoomTitle}
           </h2>
-          <h3 className="text-opacity-75 text-black text-xl">
-            {t.joinRoomDesc}
-          </h3>
           <form
             onSubmit={handleJoinSubmit}
             className="flex flex-col justify-between h-full items-center"
@@ -266,11 +269,14 @@ export default function Home(props) {
               id="roomCode"
               label={t.joinRoomNumberLabel}
               placeholder={t.joinRoomNumberPlaceholder}
+              required={t.required}
             />
+
             <TextInput
               id="newRoomName"
               label={t.joinRoomNameLabel}
               placeholder={t.joinRoomNamePlaceholder}
+              required={t.required}
             />
             <button
               type="submit"

@@ -2,6 +2,7 @@ import { render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import RoomInfo from './RoomInfo'
+import en from '../locales/en'
 
 expect.extend(toHaveNoViolations)
 
@@ -20,6 +21,7 @@ describe('RoomInfo', () => {
         roomId={showRoomInfo.roomId}
         playerName={showRoomInfo.playerName}
         playerOnline={showRoomInfo.playersOnline}
+        t={en}
       />
     )
     expect(primary).toBeTruthy()
@@ -32,6 +34,7 @@ describe('RoomInfo', () => {
         roomId={showRoomInfo.roomId}
         playerName={showRoomInfo.playerName}
         playerOnline={showRoomInfo.playersOnline}
+        t={en}
       />
     )
     const results = await axe(container)

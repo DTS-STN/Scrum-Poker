@@ -11,7 +11,7 @@ export default function Footer(props) {
       <h2 className="sr-only">siteFooter</h2>
       <DateModified text={props.t.dateModified} />
       <div className="w-full">
-        <div className="w-full h-auto bg-footer-parliament-image bg-no-repeat bg-right-bottom bg-[#173451]">
+        <div className="w-full h-auto bg-footer-parliament-image bg-no-repeat bg-right-bottom bg-[#26374A]">
           <div
             className="py-7 container mx-auto px-6"
             role="navigation"

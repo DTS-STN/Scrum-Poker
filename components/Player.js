@@ -19,7 +19,7 @@ export default function Player(props) {
     <div className="flex md:flex-col rounded border border-slate-300 my-2 ">
       <div className=" flex w-full justify-between">
         <div className="flex ">
-          <div className={`flex items-center justify-center rounded-lg p-2  `}>
+          <div className={`flex items-center justify-center rounded-lg p-2`}>
             <span
               className={` bg-slate-300 flex justify-center rounded-full h-12 w-12  ${props.bgColor}`}
             >
@@ -38,7 +38,7 @@ export default function Player(props) {
           >
             {props.playerName}
           </p>
-          {isMounted && props.host ? (
+          {isMounted && props.isHost ? (
             <div className="inline-flex">
               <Image
                 src="/Host_Crown.svg"
@@ -61,28 +61,45 @@ export default function Player(props) {
             ''
           )}
         </div>
-
-        {props.selectedCard ? (
-          <Card
-            src={props.selectedCard.src}
-            id={props.selectedCard.id}
-            key={props.selectedCard.id}
-            alt={props.selectedCard.alt}
-            className=" "
-            data-testid="selected-card-img"
-          />
-        ) : (
-          <div className=" h-auto w-14 p-1.5">
-            <Image
-              src="/EmptyCard.svg"
-              alt={props.imgAlt}
-              width={74}
-              height={102}
-              layout="responsive"
-              data-testid="blank-card-img"
+        <div className="flex">
+          {props.showBoot ? (
+            <button
+              onClick={() => console.log(`Boot Player: ${props.playerName}`)}
+              className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700`}
+            >
+              <Image
+                src="/rubberBoot.svg"
+                alt={props.imgAlt}
+                width={32}
+                height={24}
+                data-testid="blank-card-img"
+              />
+            </button>
+          ) : (
+            ''
+          )}
+          {props.selectedCard ? (
+            <Card
+              src={props.selectedCard.src}
+              id={props.selectedCard.id}
+              key={props.selectedCard.id}
+              alt={props.selectedCard.alt}
+              className=" "
+              data-testid="selected-card-img"
             />
-          </div>
-        )}
+          ) : (
+            <div className=" h-auto w-14 p-1.5">
+              <Image
+                src="/EmptyCard.svg"
+                alt={props.imgAlt}
+                width={74}
+                height={102}
+                layout="responsive"
+                data-testid="blank-card-img"
+              />
+            </div>
+          )}
+        </div>
       </div>
       {props.children}
     </div>
@@ -102,9 +119,12 @@ Player.propTypes = {
   // Alt text of the image
   imgAlt: propTypes.string,
 
-  // Boolean for room host, shows crown next to name if true
-  host: propTypes.bool,
+  // Check for if app User is the Host
+  isHost: propTypes.bool,
 
   //Translated text
   t: propTypes.object,
+
+  // show Boot options
+  showBoot: propTypes.bool,
 }

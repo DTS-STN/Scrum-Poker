@@ -16,8 +16,8 @@ export default function ChatRoom(props) {
       id={props.id}
     >
       {/* Current user */}
-      <div className="flex justify-end w-full h-auto border-b-2 p-1 pr-2 text-[14px]">
-        {props.name}
+      <div className="flex justify-start font-semibold font-body text-slate-700 w-full h-auto border-b-2 p-1 pr-2 text-lg bg-gray-200">
+        Chat Room
       </div>
 
       {/* Message Box  */}

@@ -58,9 +58,10 @@ export default function UserList(props) {
     if (userColor == undefined) {
       return false
     }
-    return userColor.find((user) => {
-      return user.id === userId
-    })
+    return userColor.includes(userId)
+    // return userColor.includes(userId) ((user) => {
+    //   return user.id ===
+    // })
   }
 
   // returns user color or a randomColor is the user isn't on the state
@@ -79,27 +80,20 @@ export default function UserList(props) {
 
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
-  const displayPlayers = props.userList.map((player) => (
-    <li className="w-full" key={player.id}>
-      {props.currPlayer?.id === player.id ? (
-        // Current player.
+  const displayPlayers = props.userList.map((player) => {
+    return (
+      <li className="w-full" key={player.id}>
         <Player
           playerName={player.name}
-          selectedCard={getSelectedCard(player.card)}
-          imgAlt="selectedCard"
-          data-testid="current-player"
-          bgColor="bg-pink-500" //default color for the current player
-          host={player.id === props.host}
-          t={props.t}
-        />
-      ) : (
-        // Other players.
-        // We need to set the cards of others with subscriptions.
-        <Player
-          playerName={player.name}
-          bgColor={getUserColorById(player.id)}
+          bgColor={
+            props.currPlayer?.id === player.id
+              ? 'bg-pink-500'
+              : getUserColorById(player.id)
+          }
           selectedCard={
-            player.card
+            props.currPlayer?.id === player.id
+              ? getSelectedCard(player.card)
+              : player.card
               ? props.isShown
                 ? getSelectedCard(player.card)
                 : hiddenCard
@@ -107,14 +101,18 @@ export default function UserList(props) {
           }
           imgAlt="blankCard"
           data-testid="other-players"
-          host={player.id === props.host}
+          isHost={player.id === props.host}
+          showBoot={
+            props.currPlayer?.id === props.host &&
+            props.currPlayer?.id !== player.id
+          }
           t={props.t}
         />
-      )}
-    </li>
-  ))
+      </li>
+    )
+  })
   return (
-    <div className="rounded border p-2 flex flex-col bg-white mt-2">
+    <div className=" py-2 px-4 flex flex-col mt-2">
       <div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
         <p className="px-2">{props.t.users}</p>
         <p className="px-2">{props.t.card}</p>
