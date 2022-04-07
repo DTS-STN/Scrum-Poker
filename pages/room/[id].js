@@ -218,8 +218,6 @@ export default function Room(props) {
               })}
             </ul>
           </div>
-
-          {/* Users List */}
           {userId == room.host ? (
             <div className="flex justify-center">
               <button
