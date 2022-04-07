@@ -40,7 +40,7 @@ export default function UserList(props) {
     )
   })
   return (
-    <div className="rounded border p-2 flex flex-col bg-white mt-2">
+    <div className=" py-2 px-4 flex flex-col mt-2">
       <div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
         <p className="px-2">{props.t.users}</p>
         <p className="px-2">{props.t.card}</p>

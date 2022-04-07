@@ -23,6 +23,7 @@ export default {
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   roomDoesNotExist: '(FR)Room does not exist',
+  required: ' * ',
 
   // Room
   users: '(FR)Users',
