@@ -5,7 +5,7 @@ import propTypes from 'prop-types'
  */
 export default function DateModified(props) {
   return (
-    <dl id={props.id} className="container mx-auto pl-6">
+    <dl id={props.id} className="container mx-auto pl-6 py-2 sm:pt-8">
       <dt className="inline">{props.text}</dt>
       <dd className="inline">{process.env.NEXT_PUBLIC_BUILD_DATE}</dd>
     </dl>
