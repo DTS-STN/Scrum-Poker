@@ -42,6 +42,12 @@ export default function UserList(props) {
     if (userColor == undefined) {
       setInitialState()
       setUserColor(initialState)
+    } else {
+      // new colors will be assigned as users join
+      if (userColor.length + 1 !== props.userList.length) {
+        setInitialState()
+        setUserColor(initialState)
+      }
     }
   }, [props.userList])
 
@@ -64,6 +70,9 @@ export default function UserList(props) {
         return user.id == userId
       }).color
     } else {
+      console.log(
+        'userId was not found assigning a random color, this should not happen'
+      )
       return randomColor()
     }
   }
