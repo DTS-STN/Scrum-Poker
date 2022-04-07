@@ -34,7 +34,8 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
   hostCrown: 'Room Owner',
-  leaveImgAlt: 'Leave room',
+  leaveImgAlt: 'Leave room Button',
+  leaveRoom: 'Leave Room',
 
   // Chat
   placeholder: 'Write a message',

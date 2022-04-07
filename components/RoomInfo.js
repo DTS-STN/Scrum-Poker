@@ -75,7 +75,7 @@ export default function RoomInfo(props) {
           className="bg-red-700 border border-gray-400 inline-flex justify-center items-center rounded pr-1 mt-1 hover:bg-red-600 active:bg-red-800 focus:bg-red-600"
         >
           <span className="pl-3 text-white font-display font-bold">
-            {props.t.leaveImgAlt}
+            {props.t.leaveRoom}
           </span>
           <Image
             src="/leaveRoom.svg"
