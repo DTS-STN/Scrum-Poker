@@ -196,7 +196,7 @@ export default function Room(props) {
           <div className="p-2 border rounded ">
             <ul
               id="cards"
-              className="grid  grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
             >
               {cards.map((card) => {
                 return (
