@@ -64,7 +64,7 @@ export default function Home(props) {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {
         throw t.invalidNameError
       }
 
@@ -229,15 +229,18 @@ export default function Home(props) {
             onSubmit={onCreateHandler}
             className="flex flex-col justify-between h-full items-center"
           >
-            {createRoomError ? (
-              <ErrorLabel message={createRoomError}></ErrorLabel>
-            ) : undefined}
-            <TextInput
-              id="owner"
-              label={t.createRoomLabel}
-              placeholder={t.createRoomPlaceholder}
-              required={t.required}
-            />
+            <div className=" w-full">
+              {createRoomError ? (
+                <ErrorLabel message={createRoomError}></ErrorLabel>
+              ) : undefined}
+              <TextInput
+                id="owner"
+                label={t.createRoomLabel}
+                placeholder={t.createRoomPlaceholder}
+                required={t.required}
+              />
+            </div>
+
             <button
               type="submit"
               className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
