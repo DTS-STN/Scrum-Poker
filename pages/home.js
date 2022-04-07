@@ -56,18 +56,26 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
     let username = newRoomName.value,
-      userid = Cookies.get('userid')
+      userid = Cookies.get('userid'),
+      room = roomCode.value
 
     try {
       //Check if name is empty
-      if (newRoomName.value.trim() === '') {
+      if (username === '') {
         throw t.invalidNameError
       }
       //Check if name contains special characters
       else if (!/^[a-zA-Z0-9]+$/.test(username)) {
         throw t.invalidNameError
       }
-
+      //Check if room code field is empty
+      if (room === '') {
+        throw t.invalidRoomError
+      }
+      //Check if room code field contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(room)) {
+        throw t.invalidRoomError
+      }
       //If name is valid, create new user
       const addUserRes = await addUser({
         variables: { name: username },
