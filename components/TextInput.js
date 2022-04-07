@@ -15,6 +15,8 @@ export default function TextInput(props) {
       <input
         type="text"
         aria-required="true"
+        aria-describedby="error1"
+        aria-invalid="true"
         id={props.id}
         name={props.id}
         placeholder={props.placeholder}
