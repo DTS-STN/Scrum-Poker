@@ -18,9 +18,11 @@ export default function RoomInfo(props) {
       className={`h-auto w-auto rounded-md bg-white border-2 `}
       id={props.id}
     >
-      <div className="flex border-b-2 p-1 text-left">
-        <div className="flex-initial w-48">{props.t.roomId}</div>
-        <div className="flex-initial w-48 text-right">
+      <div className="flex align-baseline justify-between border-b-2 pl-1 bg-gray-200">
+        <div className="flex-1 font-bold text-lg lg:text-base xl:text-lg font-body text-slate-700 ">
+          {props.t.roomId}
+        </div>
+        <div className="flex flex-nowrap text-right font-bold text-lg lg:text-base lg:my-auto xl:text-lg font-body text-slate-700 ">
           {props.roomId}
           <button
             data-tip
@@ -50,12 +52,20 @@ export default function RoomInfo(props) {
       </div>
 
       <div className="flex p-1">
-        <div className="flex-1 w-48">{props.t.playerName}</div>
-        <div className="flex-1 w-48 text-right">{props.playerName}</div>
+        <div className="flex-1 w-48 font-semibold font-body text-slate-700">
+          {props.t.playerName}
+        </div>
+        <div className="flex-1 w-48 text-right font-semibold font-body text-slate-700">
+          {props.playerName}
+        </div>
       </div>
       <div className="flex p-1">
-        <div className="flex-1 w-48 ">{props.t.playersOnline}</div>
-        <div className="flex-1 w-48 text-right">{props.playersOnline}</div>
+        <div className="flex-1 w-48 font-semibold font-body text-slate-700">
+          {props.t.playersOnline}
+        </div>
+        <div className="flex-1 w-48 text-right font-semibold font-body text-slate-700">
+          {props.playersOnline}
+        </div>
       </div>
     </div>
   )
