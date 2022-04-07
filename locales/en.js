@@ -19,6 +19,7 @@ export default {
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
   invalidNameError: 'Please enter a name (alphanumeric characters only)',
+  roomDoesNotExist: 'Room does not exist',
 
   // Room
   users: 'Users',
@@ -32,6 +33,10 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
   hostCrown: 'Room Owner',
+
+  // Chat
+  placeholder: 'Write a message',
+  send: 'Send',
 
   // Error Messages
   noRoomExists: 'No Room exists with this id.',

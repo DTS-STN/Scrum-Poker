@@ -98,7 +98,7 @@ export default function Home(props) {
           userListID.push(userid)
         }
       } else {
-        throw t.genericError
+        throw t.roomDoesNotExist
       }
 
       const updateRoomRes = await updateRoom({

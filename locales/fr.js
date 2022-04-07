@@ -22,6 +22,8 @@ export default {
   joinRoomButton: 'Rejoignez la salle',
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
+  roomDoesNotExist: '(FR)Room does not exist',
+
   // Room
   users: '(FR)Users',
   card: '(FR)Card',
@@ -34,6 +36,10 @@ export default {
   copy: 'Copier',
   copied: 'Copié !',
   hostCrown: 'Propriétaire de la chambre',
+
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
 
   // Error messages
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
