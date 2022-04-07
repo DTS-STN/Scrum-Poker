@@ -18,7 +18,7 @@ export default function RoomInfo(props) {
       className={`h-auto w-auto rounded-md bg-white border-2 `}
       id={props.id}
     >
-      <div className="flex align-baseline justify-between border-b-2 pl-1 bg-gray-200">
+      <div className="flex align-baseline justify-between border-b-2 pl-1 bg-gray-200 py-0.5 pr-0.5">
         <div className="flex-1 font-bold text-lg lg:text-base xl:text-lg font-body text-slate-700 ">
           {props.t.roomId}
         </div>
@@ -29,7 +29,7 @@ export default function RoomInfo(props) {
             data-for="copy"
             data-event="click"
             type="button"
-            className="w-auto px-2 pt-1 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
+            className="w-auto px-2 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
           >
             <Image src="/copy.svg" alt={props.t.copy} width={11} height={11} />
           </button>
@@ -72,8 +72,11 @@ export default function RoomInfo(props) {
           onClick={() =>
             console.log(`Player ${props.playerName} wants out of here!`)
           }
-          className="bg-red-600 border border-gray-400 flex justify-center items-center rounded-full mt-1 ml-1 h-8 w-12 my-auto hover:bg-red-700"
+          className="bg-red-700 border border-gray-400 inline-flex justify-center items-center rounded pr-1 mt-1 hover:bg-red-600 active:bg-red-800 focus:bg-red-600"
         >
+          <span className="pl-3 text-white font-display font-bold">
+            {props.t.leaveRoom}
+          </span>
           <Image
             src="/leaveRoom.svg"
             alt={props.t.leaveImgAlt}
