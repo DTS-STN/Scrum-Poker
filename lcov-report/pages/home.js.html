@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.23% </span>
+                <span class="strong">19.1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/84</span>
+                <span class='fraction'>17/89</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">13.15% </span>
+                <span class="strong">11.9% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/38</span>
+                <span class='fraction'>5/42</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.73% </span>
+                <span class="strong">19.54% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/82</span>
+                <span class='fraction'>17/87</span>
             </div>
         
             
@@ -382,7 +382,12 @@
 <a name='L317'></a><a href='#L317'>317</a>
 <a name='L318'></a><a href='#L318'>318</a>
 <a name='L319'></a><a href='#L319'>319</a>
-<a name='L320'></a><a href='#L320'>320</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L320'></a><a href='#L320'>320</a>
+<a name='L321'></a><a href='#L321'>321</a>
+<a name='L322'></a><a href='#L322'>322</a>
+<a name='L323'></a><a href='#L323'>323</a>
+<a name='L324'></a><a href='#L324'>324</a>
+<a name='L325'></a><a href='#L325'>325</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -441,16 +446,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -593,9 +606,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -759,18 +769,26 @@ export default function Home(props) {
     //prevent default behaviour of form
 <span class="cstat-no" title="statement not covered" >    e.preventDefault()</span>
     let username = <span class="cstat-no" title="statement not covered" >newRoomName.value,</span>
-      userid = <span class="cstat-no" title="statement not covered" >Cookies.get('userid')</span>
+      userid = <span class="cstat-no" title="statement not covered" >Cookies.get('userid'),</span>
+      room = <span class="cstat-no" title="statement not covered" >roomCode.value</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
       //Check if name is empty
-<span class="cstat-no" title="statement not covered" >      if (newRoomName.value.trim() === '') {</span>
+<span class="cstat-no" title="statement not covered" >      if (username === '') {</span>
 <span class="cstat-no" title="statement not covered" >        throw t.invalidNameError</span>
       }
       //Check if name contains special characters
-      else <span class="cstat-no" title="statement not covered" >if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {</span>
+      else <span class="cstat-no" title="statement not covered" >if (!/^[a-zA-Z0-9]+$/.test(username)) {</span>
 <span class="cstat-no" title="statement not covered" >        throw t.invalidNameError</span>
       }
-&nbsp;
+      //Check if room code field is empty
+<span class="cstat-no" title="statement not covered" >      if (room === '') {</span>
+<span class="cstat-no" title="statement not covered" >        throw t.invalidRoomError</span>
+      }
+      //Check if room code field contains special characters
+      else <span class="cstat-no" title="statement not covered" >if (!/^[a-zA-Z0-9]+$/.test(room)) {</span>
+<span class="cstat-no" title="statement not covered" >        throw t.invalidRoomError</span>
+      }
       //If name is valid, create new user
       const addUserRes = <span class="cstat-no" title="statement not covered" >await addUser({</span>
         variables: { name: username },
@@ -932,18 +950,15 @@ export default function Home(props) {
             onSubmit={onCreateHandler}
             className="flex flex-col justify-between h-full items-center"
           &gt;
-            &lt;div className=" w-full"&gt;
-              {createRoomError ? (
-<span class="branch-0 cbranch-no" title="branch not covered" >                &lt;ErrorLabel message={createRoomError}&gt;&lt;/ErrorLabel&gt;</span>
-              ) : undefined}
-              &lt;TextInput
-                id="owner"
-                label={t.createRoomLabel}
-                placeholder={t.createRoomPlaceholder}
-                required={t.required}
-              /&gt;
-            &lt;/div&gt;
-&nbsp;
+            {createRoomError ? (
+<span class="branch-0 cbranch-no" title="branch not covered" >              &lt;ErrorLabel message={createRoomError}&gt;&lt;/ErrorLabel&gt;</span>
+            ) : undefined}
+            &lt;TextInput
+              id="owner"
+              label={t.createRoomLabel}
+              placeholder={t.createRoomPlaceholder}
+              required={t.required}
+            /&gt;
             &lt;button
               type="submit"
               className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
@@ -1027,7 +1042,7 @@ Home.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Apr 07 2022 19:35:41 GMT+0000 (Coordinated Universal Time)
+                at Thu Apr 07 2022 20:48:45 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
