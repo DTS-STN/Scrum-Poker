@@ -20,10 +20,6 @@ export default {
   joinRoomNameLabel: 'Entrez votre nom',
   joinRoomNamePlaceholder: 'Votre nom',
   joinRoomButton: 'Rejoignez la salle',
-  invalidNameError:
-    'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
-  invalidRoomError: '(FR) Room Characters are wrong',
-  roomDoesNotExist: '(FR)Room does not exist',
   required: ' * ',
 
   // Room
@@ -50,6 +46,10 @@ export default {
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
   notRoomMember: "Vous n'êtes pas membre de cette pièce",
   genericError: 'Oups ! Quelque chose a mal tourné.',
+  invalidNameError:
+    'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
+  invalidRoomError: '(FR) Room Characters are wrong',
+  roomDoesNotExist: '(FR)Room does not exist',
 
   // Header
   title: 'accueil',
