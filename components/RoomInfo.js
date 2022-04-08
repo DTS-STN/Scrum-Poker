@@ -66,6 +66,8 @@ const TimerContent = React.memo((props) => {
   }
 })
 
+TimerContent.displayName = 'TimerContent'
+
 const TimerButton = ({ buttonText, buttonType, handleStartTimerClick }) => {
   return (
     <button
