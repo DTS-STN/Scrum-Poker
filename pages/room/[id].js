@@ -212,7 +212,7 @@ export default function Room(props) {
         copiedRoomUserIds.splice(index, 1)
         try {
           // remove user from room
-          const test = await updateRoom({
+          await updateRoom({
             variables: {
               updateRoomId: room.id,
               updateRoomUsers: copiedRoomUserIds,
