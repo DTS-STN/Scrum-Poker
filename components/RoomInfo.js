@@ -159,8 +159,6 @@ export default function RoomInfo(props) {
     reset: props.t.reset,
   }
 
-  console.log('props.t', props.t)
-
   return (
     <div
       className={`h-auto w-auto rounded-md bg-white border-2 `}
