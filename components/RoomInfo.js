@@ -8,50 +8,57 @@ import React, { useEffect, useState } from 'react'
  */
 
 const BUTTON_NAME = {
-  START: 'Start',
-  RESET: 'Reset',
+  START: { name: 'start', type: 1 },
+  RESET: { name: 'reset', type: 2 },
 }
 
-const durationArray = [
-  { value: 0.5, description: '30 seconds' },
-  { value: 1, description: '1 minute' },
-  { value: 2, description: '2 minutes' },
-]
+const TimerSelect = (props) => {
+  const durationArray = [
+    { value: 0.5, description: `30 ${props.timerLabels.seconds}` },
+    { value: 1, description: `1 ${props.timerLabels.minute}` },
+    { value: 2, description: `2 ${props.timerLabels.minutes}` },
+  ]
 
-const TimerSelect = (props) => (
-  <div className="w-auto mx-1 px-1 border rounded border border-slate-500">
-    <select
-      name="duration"
-      id="duration-select"
-      onChange={(e) => props.setDuration(parseFloat(e.target.value))}
-    >
-      {durationArray.map((duration, index) => (
-        <option value={duration.value} key={index}>
-          {duration.description}
-        </option>
-      ))}
-    </select>
-  </div>
-)
+  return (
+    <div className="w-auto mx-1 px-1 border rounded border border-slate-500">
+      <select
+        name="duration"
+        id="duration-select"
+        onChange={(e) => props.setDuration(parseFloat(e.target.value))}
+      >
+        {durationArray.map((duration, index) => (
+          <option value={duration.value} key={index}>
+            {duration.description}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
 
 // define timer content for different scenarios
 const TimerContent = React.memo((props) => {
   // content on host screen when timestamp is not set
   if (props.isHost && props.timestamp === null) {
-    return <TimerSelect setDuration={props.setDuration} />
+    return (
+      <TimerSelect
+        setDuration={props.setDuration}
+        timerLabels={props.timerLabels}
+      />
+    )
   } else if (props.timestamp && Date.now() - Number(props.timestamp) >= 1000) {
     const difference = Math.ceil(Date.now() - Number(props.timestamp))
     return (
       <CountdownTimer
         duration={props.duration - difference}
-        setButtonName={props.setButtonName}
+        timeIsUpText={props.timerLabels.timeIsUp}
       />
     )
   } else if (props.timestamp && Date.now() - Number(props.timestamp) < 1000) {
     return (
       <CountdownTimer
         duration={props.duration}
-        setButtonName={props.setButtonName}
+        timeIsUpText={props.timerLabels.timeIsUp}
       />
     )
   } else {
@@ -59,21 +66,23 @@ const TimerContent = React.memo((props) => {
   }
 })
 
-const TimerButton = ({ buttonName, handleStartTimerClick }) => {
+const TimerButton = ({ buttonText, buttonType, handleStartTimerClick }) => {
   return (
     <button
       type="button"
-      className="w-auto px-2 sm:text-base font-bold md:w-auto md:mt-0 sm:w-32 sm:mx-auto font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
-      onClick={() => handleStartTimerClick(buttonName)}
+      className="w-auto px-2 ml-1 sm:text-base font-bold md:w-auto md:mt-0 sm:w-32 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
+      onClick={() => handleStartTimerClick(buttonType)}
     >
-      {buttonName}
+      {buttonText}
     </button>
   )
 }
 
 const TimerSection = (props) => {
   const setDuration = React.useCallback(props.setDuration, [])
-  const setButtonName = React.useCallback(props.setButtonName, [])
+  const setButton = React.useCallback(props.setButton, [])
+  const buttonText = props.timerLabels[props.currentButton.name]
+
   return (
     <>
       <TimerContent
@@ -81,11 +90,13 @@ const TimerSection = (props) => {
         duration={props.duration}
         setDuration={setDuration}
         isHost={props.isHost}
-        setButtonName={setButtonName}
+        setButton={setButton}
+        timerLabels={props.timerLabels}
       />
       {props.isHost && (
         <TimerButton
-          buttonName={props.buttonName}
+          buttonText={buttonText}
+          buttonType={props.currentButton.type}
           handleStartTimerClick={props.handleStartTimerClick}
         />
       )}
@@ -97,24 +108,24 @@ export default function RoomInfo(props) {
   //Since we are using SSR, the below code is necessary to make sure the component is mounted before showing the tooltip
   const [isMounted, setIsMounted] = useState(false)
   const [duration, setDuration] = useState(0.5)
-  const [buttonName, setButtonName] = useState(BUTTON_NAME.START)
+  const [currentButton, setButton] = useState(BUTTON_NAME.START)
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  const handleStartTimerClick = (action) => {
+  const handleStartTimerClick = (type) => {
     let timestamp = null
     let timerDuration = null
-    if (action === BUTTON_NAME.START) {
+    if (type === BUTTON_NAME.START.type) {
       timestamp = Date.now().toString()
       timerDuration = Number(duration)
-      setButtonName(BUTTON_NAME.RESET)
-    } else if (action === BUTTON_NAME.RESET || action === BUTTON_NAME.STOP) {
+      setButton(BUTTON_NAME.RESET)
+    } else if (type === BUTTON_NAME.RESET.type) {
       timestamp = null
       timerDuration = null
       setDuration(0.5)
-      setButtonName(BUTTON_NAME.START)
+      setButton(BUTTON_NAME.START)
     }
 
     //Update the timer of the room
@@ -137,6 +148,17 @@ export default function RoomInfo(props) {
   const timestamp = props.roomData.timer?.timestamp
     ? Number(props.roomData.timer.timestamp)
     : null
+  const timerLabels = {
+    seconds: props.t.seconds,
+    minute: props.t.minute,
+    minutes: props.t.minutes,
+    timeIsUp: props.t.timeIsUp,
+    start: props.t.start,
+    reset: props.t.reset,
+  }
+
+  console.log('props.t', props.t)
+
   return (
     <div
       className={`h-auto w-auto rounded-md bg-white border-2 `}
@@ -201,8 +223,9 @@ export default function RoomInfo(props) {
           setDuration={setDuration}
           isHost={props.isHost}
           timestamp={timestamp}
-          buttonName={buttonName}
-          setButtonName={setButtonName}
+          currentButton={currentButton}
+          setButton={setButton}
+          timerLabels={timerLabels}
         />
       </div>
       <div className="flex justify-center pb-1">

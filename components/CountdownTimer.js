@@ -2,11 +2,11 @@ import React from 'react'
 import Countdown from 'react-countdown'
 
 // Renderer callback with condition
-const renderer = ({ minutes, seconds, completed }) => {
+const renderer = ({ minutes, seconds, completed, props }) => {
   if (completed) {
     return (
       <span className="w-auto px-2 rounded border border-[#F35568] text-[16px]">
-        Time is up
+        {props.timeIsUpText}
       </span>
     )
   }
@@ -30,7 +30,13 @@ const renderer = ({ minutes, seconds, completed }) => {
 }
 
 const CountdownTimer = (props) => {
-  return <Countdown date={Date.now() + props.duration} renderer={renderer} />
+  return (
+    <Countdown
+      date={Date.now() + props.duration}
+      renderer={renderer}
+      timeIsUpText={props.timeIsUpText}
+    />
+  )
 }
 
 export default CountdownTimer
