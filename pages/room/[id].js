@@ -190,7 +190,11 @@ export default function Room(props) {
           ) : (
             <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
               Value selected:{' '}
-              <span className="font-bold">{getUserById(userId)?.card}</span>
+              <span className="font-bold">
+                {getUserById(userId)?.card === 100
+                  ? '∞'
+                  : getUserById(userId)?.card}
+              </span>
             </h2>
           )}
 
