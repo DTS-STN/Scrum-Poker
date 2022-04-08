@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649424736114" clover="3.2.0">
-  <project timestamp="1649424736114" name="All files">
+<coverage generated="1649427809687" clover="3.2.0">
+  <project timestamp="1649427809688" name="All files">
     <metrics statements="222" coveredstatements="67" conditionals="132" coveredconditionals="49" methods="67" coveredmethods="26" elements="421" coveredelements="142" complexity="0" loc="222" ncloc="222" packages="4" files="20" classes="20"/>
     <package name="components">
       <metrics statements="53" coveredstatements="41" conditionals="56" coveredconditionals="40" methods="27" coveredmethods="17"/>
@@ -198,9 +198,9 @@
         <line num="213" count="0" type="stmt"/>
         <line num="216" count="0" type="stmt"/>
         <line num="219" count="1" type="stmt"/>
-        <line num="300" count="1" type="stmt"/>
-        <line num="314" count="1" type="stmt"/>
-        <line num="318" count="1" type="stmt"/>
+        <line num="313" count="1" type="stmt"/>
+        <line num="327" count="1" type="stmt"/>
+        <line num="331" count="1" type="stmt"/>
       </file>
       <file name="index.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/index.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
