@@ -15,7 +15,7 @@ export default function TextInput(props) {
       <input
         type="text"
         aria-required="true"
-        aria-describedby="error1"
+        aria-describedby={props.errorId}
         aria-invalid="true"
         id={props.id}
         name={props.id}
@@ -44,4 +44,7 @@ TextInput.propTypes = {
 
   //required
   required: propTypes.string,
+
+  // error id
+  errorId: propTypes.string,
 }

@@ -219,7 +219,11 @@ export default function Home(props) {
   return (
     <>
       {queryErrorCode ? (
-        <ErrorLabel message={errorCodeMsg} className="pb-4"></ErrorLabel>
+        <ErrorLabel
+          errorId="errorCodeMsg"
+          message={errorCodeMsg}
+          className="pb-4"
+        ></ErrorLabel>
       ) : undefined}
       <div
         data-testid="homeContent"
@@ -239,13 +243,17 @@ export default function Home(props) {
           >
             <div className=" w-full">
               {createRoomError ? (
-                <ErrorLabel message={createRoomError}></ErrorLabel>
+                <ErrorLabel
+                  errorId="createRoomError"
+                  message={createRoomError}
+                ></ErrorLabel>
               ) : undefined}
               <TextInput
                 id="owner"
                 label={t.createRoomLabel}
                 placeholder={t.createRoomPlaceholder}
                 required={t.required}
+                errorId="createRoomError"
               />
             </div>
 
@@ -266,13 +274,17 @@ export default function Home(props) {
             className="flex flex-col justify-between h-full items-center"
           >
             {joinRoomError ? (
-              <ErrorLabel message={joinRoomError}></ErrorLabel>
+              <ErrorLabel
+                errorId="joinRoomError"
+                message={joinRoomError}
+              ></ErrorLabel>
             ) : undefined}
             <TextInput
               id="roomCode"
               label={t.joinRoomNumberLabel}
               placeholder={t.joinRoomNumberPlaceholder}
               required={t.required}
+              errorId="joinRoomError"
             />
 
             <TextInput
@@ -280,6 +292,7 @@ export default function Home(props) {
               label={t.joinRoomNameLabel}
               placeholder={t.joinRoomNamePlaceholder}
               required={t.required}
+              errorId="joinRoomError"
             />
             <button
               type="submit"
