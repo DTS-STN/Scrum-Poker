@@ -56,18 +56,26 @@ export default function Home(props) {
     //prevent default behaviour of form
     e.preventDefault()
     let username = newRoomName.value,
-      userid = Cookies.get('userid')
+      userid = Cookies.get('userid'),
+      room = roomCode.value
 
     try {
       //Check if name is empty
-      if (newRoomName.value.trim() === '') {
+      if (username === '') {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {
         throw t.invalidNameError
       }
-
+      //Check if room code field is empty
+      if (room === '') {
+        throw t.invalidRoomError
+      }
+      //Check if room code field contains special characters
+      else if (!/^[a-zA-Z0-9]+$/.test(room)) {
+        throw t.invalidRoomError
+      }
       //If name is valid, create new user
       const addUserRes = await addUser({
         variables: { name: username },
@@ -211,7 +219,13 @@ export default function Home(props) {
   return (
     <>
       {queryErrorCode ? (
-        <ErrorLabel message={errorCodeMsg} className="pb-4"></ErrorLabel>
+        <div className="container mx-auto">
+          <ErrorLabel
+            errorId="errorCodeMsg"
+            message={errorCodeMsg}
+            className="pb-4"
+          ></ErrorLabel>
+        </div>
       ) : undefined}
       <div
         data-testid="homeContent"
@@ -220,28 +234,31 @@ export default function Home(props) {
           queryErrorCode ? `sm:mt-6` : ``
         }`}
       >
-        {/* style="text-center p-4 flex flex-col md:w-96 bg-red-200" */}
         <Container className="mx-8 sm:ml-2 sm:mr-2">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.createRoomTitle}
           </h2>
-          {/* You can add a description here if needed */}
-          {/* <h3 className="text-opacity-75 text-black text-xl">
-            {t.createRoomDesc}
-          </h3> */}
           <form
             data-testid="createRoomForm"
             onSubmit={onCreateHandler}
             className="flex flex-col justify-between h-full items-center"
           >
-            {createRoomError ? (
-              <ErrorLabel message={createRoomError}></ErrorLabel>
-            ) : undefined}
-            <TextInput
-              id="owner"
-              label={t.createRoomLabel}
-              placeholder={t.createRoomPlaceholder}
-            />
+            <div className=" w-full">
+              {createRoomError ? (
+                <ErrorLabel
+                  errorId="createRoomError"
+                  message={createRoomError}
+                ></ErrorLabel>
+              ) : undefined}
+              <TextInput
+                id="owner"
+                label={t.createRoomLabel}
+                placeholder={t.createRoomPlaceholder}
+                required={t.required}
+                errorId="createRoomError"
+              />
+            </div>
+
             <button
               type="submit"
               className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
@@ -254,26 +271,30 @@ export default function Home(props) {
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.joinRoomTitle}
           </h2>
-          {/* You can add a description here if needed */}
-          {/* <h3 className="text-opacity-75 text-black text-xl">
-            {t.joinRoomDesc}
-          </h3> */}
           <form
             onSubmit={handleJoinSubmit}
             className="flex flex-col justify-between h-full items-center"
           >
             {joinRoomError ? (
-              <ErrorLabel message={joinRoomError}></ErrorLabel>
+              <ErrorLabel
+                errorId="joinRoomError"
+                message={joinRoomError}
+              ></ErrorLabel>
             ) : undefined}
             <TextInput
               id="roomCode"
               label={t.joinRoomNumberLabel}
               placeholder={t.joinRoomNumberPlaceholder}
+              required={t.required}
+              errorId="joinRoomError"
             />
+
             <TextInput
               id="newRoomName"
               label={t.joinRoomNameLabel}
               placeholder={t.joinRoomNamePlaceholder}
+              required={t.required}
+              errorId="joinRoomError"
             />
             <button
               type="submit"

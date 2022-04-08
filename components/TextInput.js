@@ -8,13 +8,19 @@ export default function TextInput(props) {
         className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
       >
         {props.label}
+        <span className="text-red-800 font-body" aria-hidden="true">
+          {props.required}
+        </span>
       </label>
       <input
         type="text"
+        aria-required="true"
+        aria-describedby={props.errorId}
+        aria-invalid="true"
         id={props.id}
         name={props.id}
         placeholder={props.placeholder}
-        className="appearance-none border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
+        className="appearance-none rounded-b-lg border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
       />
     </div>
   )
@@ -35,4 +41,10 @@ TextInput.propTypes = {
 
   // Placeholder Text
   placeholder: propTypes.string,
+
+  //required
+  required: propTypes.string,
+
+  // error id
+  errorId: propTypes.string,
 }

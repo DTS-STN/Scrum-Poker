@@ -18,8 +18,7 @@ export default {
   joinRoomNameLabel: 'Enter your name',
   joinRoomNamePlaceholder: 'Your name',
   joinRoomButton: 'Join Room',
-  invalidNameError: 'Please enter a name (alphanumeric characters only)',
-  roomDoesNotExist: 'Room does not exist',
+  required: ' * ',
 
   // Room
   users: 'Users',
@@ -33,17 +32,23 @@ export default {
   copy: 'Copy',
   copied: 'Copied!',
   hostCrown: 'Room Owner',
-  leaveImgAlt: 'Leave room',
+  leaveImgAlt: 'Leave room Button',
+  leaveRoom: 'Leave Room',
 
   // Chat
   placeholder: 'Write a message',
   send: 'Send',
 
   // Error Messages
-  noRoomExists: 'No Room exists with this id.',
-  noUserExists: 'Create user before joining a room.',
-  notRoomMember: 'You are not member of this room.',
+  noRoomExists: 'Sorry! No Room exists with this id.',
+  noUserExists:
+    'Please create a user by entering in your name before joining a room.',
+  notRoomMember: 'Sorry! You are not a member of this room.',
   genericError: 'Oops! something went wrong.',
+  invalidNameError: 'Please enter your name (alphanumeric characters only)',
+  invalidRoomError:
+    'Please enter a room code (alphanumeric characters only). For example K9VW8',
+  roomDoesNotExist: 'Sorry! This room does not exist',
 
   // Header
   title: 'home',

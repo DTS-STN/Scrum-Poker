@@ -90,7 +90,7 @@ export default function Room(props) {
       updateRoom({
         variables: {
           updateRoomId: room.id,
-          users: room.userIds,
+          updateRoomUsers: room.userIds,
           isShown: false,
         },
       })
@@ -245,21 +245,32 @@ export default function Room(props) {
       {/* Main 'row' */}
       <div className="flex w-full flex-col space-y-3 lg:space-y-0 lg:flex-row px-2">
         {/* Left Column */}
-        <div className="w-full lg:w-4/5 px-2 lg:mr-2 border-2 rounded-md">
+        <div className="w-full lg:w-4/5 lg:mr-2 border-2 rounded-md">
           {!getUserById(userId)?.card ? (
-            <h2>Select a card...</h2>
+            <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
+              Welcome to Scrum Poker!
+            </h2>
           ) : (
-            <h2>
+            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
               Value selected:{' '}
-              <span className="font-bold">{getUserById(userId)?.card}</span>
+              <span className="font-bold px-1">
+                {getUserById(userId)?.card === 100 ? (
+                  <span className="inline-block font-bold text-3xl -translate-y-1">
+                    {' '}
+                    ∞{' '}
+                  </span>
+                ) : (
+                  getUserById(userId)?.card
+                )}
+              </span>
             </h2>
           )}
 
           {/* Cards box */}
-          <div className="p-2 border rounded ">
+          <div className="p-4 pb-1">
             <ul
               id="cards"
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+              className="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2"
             >
               {cards.map((card) => {
                 return (
@@ -283,36 +294,39 @@ export default function Room(props) {
           </div>
           {userId == room.host ? (
             <div className="flex justify-center">
-              <button
-                type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                onClick={() =>
-                  updateRoom({
-                    variables: {
-                      updateRoomId: room.id,
-                      updateRoomUsers: room.userIds,
-                      isShown: true,
-                    },
-                  })
-                }
-              >
-                {t.showCards}
-              </button>
-              <button
-                type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                onClick={() =>
-                  updateRoom({
-                    variables: {
-                      updateRoomId: room.id,
-                      updateRoomUsers: room.userIds,
-                      isShown: false,
-                    },
-                  })
-                }
-              >
-                {t.hideCards}
-              </button>
+              {!room.isShown ? (
+                <button
+                  type="button"
+                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  onClick={() =>
+                    updateRoom({
+                      variables: {
+                        updateRoomId: room.id,
+                        updateRoomUsers: room.userIds,
+                        isShown: true,
+                      },
+                    })
+                  }
+                >
+                  {t.showCards}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  onClick={() =>
+                    updateRoom({
+                      variables: {
+                        updateRoomId: room.id,
+                        updateRoomUsers: room.userIds,
+                        isShown: false,
+                      },
+                    })
+                  }
+                >
+                  {t.hideCards}
+                </button>
+              )}
               <button
                 type="button"
                 className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
