@@ -65,7 +65,7 @@ export default function Home(props) {
         throw t.invalidNameError
       }
       //Check if name contains special characters
-      else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      else if (!/^([A-Za-z0-9\s\-\'?])+$/.test(username)) {
         throw t.invalidNameError
       }
       //Check if room code field is empty
@@ -224,7 +224,11 @@ export default function Home(props) {
   return (
     <>
       {queryErrorCode ? (
-        <ErrorLabel message={errorCodeMsg} className="pb-4"></ErrorLabel>
+        <ErrorLabel
+          errorId="errorCodeMsg"
+          message={errorCodeMsg}
+          className="pb-4"
+        ></ErrorLabel>
       ) : undefined}
       <div
         data-testid="homeContent"
@@ -242,15 +246,22 @@ export default function Home(props) {
             onSubmit={onCreateHandler}
             className="flex flex-col justify-between h-full items-center"
           >
-            {createRoomError ? (
-              <ErrorLabel message={createRoomError}></ErrorLabel>
-            ) : undefined}
-            <TextInput
-              id="owner"
-              label={t.createRoomLabel}
-              placeholder={t.createRoomPlaceholder}
-              required={t.required}
-            />
+            <div className=" w-full">
+              {createRoomError ? (
+                <ErrorLabel
+                  errorId="createRoomError"
+                  message={createRoomError}
+                ></ErrorLabel>
+              ) : undefined}
+              <TextInput
+                id="owner"
+                label={t.createRoomLabel}
+                placeholder={t.createRoomPlaceholder}
+                required={t.required}
+                errorId="createRoomError"
+              />
+            </div>
+
             <button
               type="submit"
               className="w-max font-display text-white bg-[#318000] hover:bg-[#1D4D00] active:bg-[#102900] py-3 px-5 rounded mt-12 focus:drop-shadow focus:ring-2 focus:ring-gray-600 border border-[#458259] text-[22px] leading-8 [text-shadow:1px_2px_0px_#333]"
@@ -268,13 +279,17 @@ export default function Home(props) {
             className="flex flex-col justify-between h-full items-center"
           >
             {joinRoomError ? (
-              <ErrorLabel message={joinRoomError}></ErrorLabel>
+              <ErrorLabel
+                errorId="joinRoomError"
+                message={joinRoomError}
+              ></ErrorLabel>
             ) : undefined}
             <TextInput
               id="roomCode"
               label={t.joinRoomNumberLabel}
               placeholder={t.joinRoomNumberPlaceholder}
               required={t.required}
+              errorId="joinRoomError"
             />
 
             <TextInput
@@ -282,6 +297,7 @@ export default function Home(props) {
               label={t.joinRoomNameLabel}
               placeholder={t.joinRoomNamePlaceholder}
               required={t.required}
+              errorId="joinRoomError"
             />
             <button
               type="submit"
