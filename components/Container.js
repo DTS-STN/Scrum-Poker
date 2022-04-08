@@ -6,7 +6,7 @@ import propTypes from 'prop-types'
 export default function Container(props) {
   return (
     <div
-      className={`rounded border border-gray-400 shadow-md shadow-gray-900/50 ${props.style}`}
+      className={`rounded border border-gray-400 shadow-md shadow-gray-900/50 text-center p-4 flex flex-col sm:w-96  ${props.className}`}
     >
       {props.children}
     </div>
@@ -14,10 +14,10 @@ export default function Container(props) {
 }
 
 Container.defaultProps = {
-  style: '',
+  className: '',
 }
 
 Container.propTypes = {
   // style for teh container
-  style: propTypes.string,
+  className: propTypes.string,
 }

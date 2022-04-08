@@ -202,6 +202,7 @@ object Build_Production: BuildType({
     triggers {
         vcs {
             branchFilter = """
+                    +:*
                     -:refs/heads/main
                  """.trimIndent()
         }

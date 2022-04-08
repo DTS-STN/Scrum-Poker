@@ -22,6 +22,10 @@ export default {
   joinRoomButton: 'Rejoignez la salle',
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
+  invalidRoomError: '(FR) Room Characters are wrong',
+  roomDoesNotExist: '(FR)Room does not exist',
+  required: ' * ',
+
   // Room
   users: '(FR)Users',
   card: '(FR)Card',
@@ -34,6 +38,19 @@ export default {
   copy: 'Copier',
   copied: 'Copié !',
   timer: '(FR)Timer',
+  hostCrown: 'Propriétaire de la chambre',
+  leaveImgAlt: 'Bouton "quitter la pièce',
+  leaveRoom: 'Quitter la salle',
+
+  // Chat
+  placeholder: 'Écrire un message',
+  send: 'Envoyer',
+
+  // Error messages
+  noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
+  noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
+  notRoomMember: "Vous n'êtes pas membre de cette pièce",
+  genericError: 'Oups ! Quelque chose a mal tourné.',
 
   // Header
   title: 'accueil',
