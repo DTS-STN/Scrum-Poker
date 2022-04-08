@@ -109,7 +109,6 @@ export default function Room(props) {
   useEffect(() => {
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
-      console.log('roomUpdated', roomUpdated)
       const updatedRoomData = {
         id: roomUpdated.id,
         host: roomUpdated.host.id,
