@@ -219,11 +219,13 @@ export default function Home(props) {
   return (
     <>
       {queryErrorCode ? (
-        <ErrorLabel
-          errorId="errorCodeMsg"
-          message={errorCodeMsg}
-          className="pb-4"
-        ></ErrorLabel>
+        <div className="container mx-auto">
+          <ErrorLabel
+            errorId="errorCodeMsg"
+            message={errorCodeMsg}
+            className="pb-4"
+          ></ErrorLabel>
+        </div>
       ) : undefined}
       <div
         data-testid="homeContent"
