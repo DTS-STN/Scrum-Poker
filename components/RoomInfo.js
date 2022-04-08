@@ -121,8 +121,9 @@ export default function RoomInfo(props) {
   }, [])
 
   useEffect(() => {
-    if (props.roomData.timer.timestamp === null) {
+    if (props.roomData.timer?.timestamp === null) {
       setButton(BUTTON_NAME.START)
+      setDuration(0.5)
     }
   }, [props.roomData.timer])
 
