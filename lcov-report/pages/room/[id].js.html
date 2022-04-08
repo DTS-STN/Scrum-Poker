@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/34</span>
+                <span class='fraction'>0/30</span>
             </div>
         
             
@@ -421,19 +421,7 @@
 <a name='L356'></a><a href='#L356'>356</a>
 <a name='L357'></a><a href='#L357'>357</a>
 <a name='L358'></a><a href='#L358'>358</a>
-<a name='L359'></a><a href='#L359'>359</a>
-<a name='L360'></a><a href='#L360'>360</a>
-<a name='L361'></a><a href='#L361'>361</a>
-<a name='L362'></a><a href='#L362'>362</a>
-<a name='L363'></a><a href='#L363'>363</a>
-<a name='L364'></a><a href='#L364'>364</a>
-<a name='L365'></a><a href='#L365'>365</a>
-<a name='L366'></a><a href='#L366'>366</a>
-<a name='L367'></a><a href='#L367'>367</a>
-<a name='L368'></a><a href='#L368'>368</a>
-<a name='L369'></a><a href='#L369'>369</a>
-<a name='L370'></a><a href='#L370'>370</a>
-<a name='L371'></a><a href='#L371'>371</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L359'></a><a href='#L359'>359</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -636,15 +624,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -655,7 +634,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -686,9 +664,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -884,7 +860,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
 <span class="cstat-no" title="statement not covered" >      updateRoom({</span>
         variables: {
           updateRoomId: room.id,
-          updateRoomUsers: room.userIds,
+          users: room.userIds,
           isShown: false,
         },
       })
@@ -993,18 +969,9 @@ export default function <span class="fstat-no" title="function not covered" >Roo
               Welcome to Scrum Poker!
             &lt;/h2&gt;
           ) : (
-            &lt;h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700"&gt;
+            &lt;h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700"&gt;
               Value selected:{' '}
-              &lt;span className="font-bold px-1"&gt;
-                {getUserById(userId)?.card === 100 ? (
-                  &lt;span className="inline-block font-bold text-3xl -translate-y-1"&gt;
-                    {' '}
-                    ∞{' '}
-                  &lt;/span&gt;
-                ) : (
-                  getUserById(userId)?.card
-                )}
-              &lt;/span&gt;
+              &lt;span className="font-bold"&gt;{getUserById(userId)?.card}&lt;/span&gt;
             &lt;/h2&gt;
           )}
 &nbsp;
@@ -1012,7 +979,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
           &lt;div className="p-4 pb-1"&gt;
             &lt;ul
               id="cards"
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+              className="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2"
             &gt;
               {cards.map(<span class="fstat-no" title="function not covered" >(c</span>ard) =&gt; {
 <span class="cstat-no" title="statement not covered" >                return (</span>
@@ -1036,39 +1003,36 @@ export default function <span class="fstat-no" title="function not covered" >Roo
           &lt;/div&gt;
           {userId == room.host ? (
             &lt;div className="flex justify-center"&gt;
-              {!room.isShown ? (
-                &lt;button
-                  type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                  onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt;
-<span class="cstat-no" title="statement not covered" >                    updateRoom({</span>
-                      variables: {
-                        updateRoomId: room.id,
-                        updateRoomUsers: room.userIds,
-                        isShown: true,
-                      },
-                    })
-                  }
-                &gt;
-                  {t.showCards}
-                &lt;/button&gt;
-              ) : (
-                &lt;button
-                  type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                  onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt;
-<span class="cstat-no" title="statement not covered" >                    updateRoom({</span>
-                      variables: {
-                        updateRoomId: room.id,
-                        updateRoomUsers: room.userIds,
-                        isShown: false,
-                      },
-                    })
-                  }
-                &gt;
-                  {t.hideCards}
-                &lt;/button&gt;
-              )}
+              &lt;button
+                type="button"
+                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt;
+<span class="cstat-no" title="statement not covered" >                  updateRoom({</span>
+                    variables: {
+                      updateRoomId: room.id,
+                      updateRoomUsers: room.userIds,
+                      isShown: true,
+                    },
+                  })
+                }
+              &gt;
+                {t.showCards}
+              &lt;/button&gt;
+              &lt;button
+                type="button"
+                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt;
+<span class="cstat-no" title="statement not covered" >                  updateRoom({</span>
+                    variables: {
+                      updateRoomId: room.id,
+                      updateRoomUsers: room.userIds,
+                      isShown: false,
+                    },
+                  })
+                }
+              &gt;
+                {t.hideCards}
+              &lt;/button&gt;
               &lt;button
                 type="button"
                 className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
@@ -1180,7 +1144,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Fri Apr 08 2022 15:24:07 GMT+0000 (Coordinated Universal Time)
+                at Fri Apr 08 2022 15:35:07 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
