@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import PropTypes, { number } from 'prop-types'
 import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
@@ -81,6 +81,10 @@ export default function Room(props) {
           updateRoomId: room.id,
           updateRoomUsers: room.userIds,
           isShown: false,
+          timer: {
+            timestamp: null,
+            duration: null,
+          },
         },
       })
     } catch (e) {
@@ -243,6 +247,10 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: true,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                       },
                     })
                   }
@@ -259,6 +267,10 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: false,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                       },
                     })
                   }

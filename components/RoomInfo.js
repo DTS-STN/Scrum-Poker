@@ -64,7 +64,11 @@ const TimerContent = React.memo((props) => {
       />
     )
   } else {
-    return ''
+    return (
+      <span className="w-16 px-2 text-center rounded border border-black-300 text-[16px] bg-slate-100">
+        {'00:00'}
+      </span>
+    )
   }
 })
 
@@ -115,6 +119,12 @@ export default function RoomInfo(props) {
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (props.roomData.timer.timestamp === null) {
+      setButton(BUTTON_NAME.START)
+    }
+  }, [props.roomData.timer])
 
   const handleStartTimerClick = (type) => {
     let timestamp = null
