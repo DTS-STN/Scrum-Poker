@@ -36,8 +36,9 @@ const TimerSelect = (props) => {
   )
 }
 
-// define timer content for different scenarios
+//define timer content for different scenarios
 const TimerContent = React.memo((props) => {
+  // eslint-disable-line
   // content on host screen when timestamp is not set
   if (props.isHost && props.timestamp === null) {
     return (
@@ -65,8 +66,6 @@ const TimerContent = React.memo((props) => {
     return ''
   }
 })
-
-TimerContent.displayName = 'TimerContent'
 
 const TimerButton = ({ buttonText, buttonType, handleStartTimerClick }) => {
   return (
