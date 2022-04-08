@@ -10,6 +10,7 @@ import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
+import DELETE_USER from '../../graphql/mutations/deleteUser.graphql'
 import { useRouter } from 'next/router'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
@@ -32,6 +33,7 @@ export default function Room(props) {
   const router = useRouter()
   const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM)
+  const [deleteUser] = useMutation(DELETE_USER)
   const [room, setRoom] = useState(props.room)
   const [users, setUsers] = useState(props.users)
   const [userId, setUserId] = useState(null)
@@ -39,6 +41,15 @@ export default function Room(props) {
     return users.find((user) => {
       return user.id === userId
     })
+  }
+  const removeUserById = (userId) => {
+    const index = users.findIndex((user) => user.id === userId)
+    if (index > -1) {
+      let newUsersArray = [...users]
+      newUsersArray.splice(index, 1)
+      setUsers(newUsersArray)
+    }
+    return null
   }
 
   const exampleMessages = [
@@ -146,6 +157,16 @@ export default function Room(props) {
   useEffect(() => {
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
+      // check to see if a user was deleted
+      users.forEach((user1) => {
+        const foundUser = roomUpdated.users.findIndex(
+          (user2) => user2.id === user1.id
+        )
+        if (foundUser === -1) {
+          // a user was not found in the new list of users, delete the user from the UserList component.
+          removeUserById(user1.id)
+        }
+      })
       const updatedRoomData = {
         id: roomUpdated.id,
         host: roomUpdated.host.id,
@@ -175,6 +196,48 @@ export default function Room(props) {
       })
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  const leaveRoomClick = async () => {
+    if (userId === room.host) {
+      console.log(
+        "Popup to ask 'are you sure ou want to destroy the room' and redirect all users home."
+      )
+    } else {
+      // Player wishes to leave
+      const index = room.userIds.indexOf(userId)
+      if (index > -1) {
+        let copiedRoomUserIds = [...room.userIds]
+        copiedRoomUserIds.splice(index, 1)
+        try {
+          // remove user from room
+          const test = await updateRoom({
+            variables: {
+              updateRoomId: room.id,
+              updateRoomUsers: copiedRoomUserIds,
+              isShown: room.isShown,
+            },
+          }).catch((e) => {
+            throw e
+          })
+          // remove user from backend
+          deleteUser({
+            variables: {
+              deleteUserId: userId,
+            },
+          }).catch((e) => {
+            throw e
+          })
+
+          // navigate user to home page
+          router.push({
+            pathname: `/home`,
+          })
+        } catch (e) {
+          console.log(e)
+        }
+      }
     }
   }
   return (
@@ -278,6 +341,7 @@ export default function Room(props) {
               roomId={props.roomId}
               playerName={getUserById(userId)?.name}
               playersOnline={users.length}
+              onClick={leaveRoomClick}
             />
           </div>
 
