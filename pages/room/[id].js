@@ -79,7 +79,7 @@ export default function Room(props) {
       updateRoom({
         variables: {
           updateRoomId: room.id,
-          users: room.userIds,
+          updateRoomUsers: room.userIds,
           isShown: false,
         },
       })
@@ -190,9 +190,18 @@ export default function Room(props) {
               Welcome to Scrum Poker!
             </h2>
           ) : (
-            <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
+            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
               Value selected:{' '}
-              <span className="font-bold">{getUserById(userId)?.card}</span>
+              <span className="font-bold px-1">
+                {getUserById(userId)?.card === 100 ? (
+                  <span className="inline-block font-bold text-3xl -translate-y-1">
+                    {' '}
+                    ∞{' '}
+                  </span>
+                ) : (
+                  getUserById(userId)?.card
+                )}
+              </span>
             </h2>
           )}
 
@@ -224,36 +233,39 @@ export default function Room(props) {
           </div>
           {userId == room.host ? (
             <div className="flex justify-center">
-              <button
-                type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                onClick={() =>
-                  updateRoom({
-                    variables: {
-                      updateRoomId: room.id,
-                      updateRoomUsers: room.userIds,
-                      isShown: true,
-                    },
-                  })
-                }
-              >
-                {t.showCards}
-              </button>
-              <button
-                type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
-                onClick={() =>
-                  updateRoom({
-                    variables: {
-                      updateRoomId: room.id,
-                      updateRoomUsers: room.userIds,
-                      isShown: false,
-                    },
-                  })
-                }
-              >
-                {t.hideCards}
-              </button>
+              {!room.isShown ? (
+                <button
+                  type="button"
+                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  onClick={() =>
+                    updateRoom({
+                      variables: {
+                        updateRoomId: room.id,
+                        updateRoomUsers: room.userIds,
+                        isShown: true,
+                      },
+                    })
+                  }
+                >
+                  {t.showCards}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  onClick={() =>
+                    updateRoom({
+                      variables: {
+                        updateRoomId: room.id,
+                        updateRoomUsers: room.userIds,
+                        isShown: false,
+                      },
+                    })
+                  }
+                >
+                  {t.hideCards}
+                </button>
+              )}
               <button
                 type="button"
                 className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
