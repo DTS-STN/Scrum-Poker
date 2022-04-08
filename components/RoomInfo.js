@@ -93,7 +93,7 @@ export default function RoomInfo(props) {
 RoomInfo.defaultProps = {
   id: 'RoomInfo',
   playerName: 'My Name',
-  playersOnline: '3',
+  playersOnline: 3,
   roomId: '2f3h9',
   t: {
     roomId: 'Room Id:',
