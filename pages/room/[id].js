@@ -188,12 +188,17 @@ export default function Room(props) {
               Welcome to Scrum Poker!
             </h2>
           ) : (
-            <h2 className="border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-center text-lg text-slate-700">
+            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
               Value selected:{' '}
-              <span className="font-bold">
-                {getUserById(userId)?.card === 100
-                  ? '∞'
-                  : getUserById(userId)?.card}
+              <span className="font-bold px-1">
+                {getUserById(userId)?.card === 100 ? (
+                  <span className="inline-block font-bold text-3xl -translate-y-1">
+                    {' '}
+                    ∞{' '}
+                  </span>
+                ) : (
+                  getUserById(userId)?.card
+                )}
               </span>
             </h2>
           )}
