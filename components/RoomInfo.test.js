@@ -13,6 +13,29 @@ const showRoomInfo = {
   playersOnline: 99,
 }
 
+const roomData = {
+  id: 'room',
+  isShown: false,
+  users: [
+    {
+      id: '44343',
+    },
+    {
+      id: '88354',
+    },
+    {
+      id: '15065',
+    },
+    {
+      id: '36664',
+    },
+  ],
+  timer: {
+    duration: null,
+    timestamp: null,
+  },
+}
+
 describe('RoomInfo', () => {
   it('renders RoomInfo', () => {
     const primary = render(
@@ -21,6 +44,9 @@ describe('RoomInfo', () => {
         roomId={showRoomInfo.roomId}
         playerName={showRoomInfo.playerName}
         playerOnline={showRoomInfo.playersOnline}
+        roomData={roomData}
+        isHost={true}
+        updateRoom={() => {}}
         t={en}
       />
     )
@@ -34,6 +60,9 @@ describe('RoomInfo', () => {
         roomId={showRoomInfo.roomId}
         playerName={showRoomInfo.playerName}
         playerOnline={showRoomInfo.playersOnline}
+        roomData={roomData}
+        isHost={true}
+        updateRoom={() => {}}
         t={en}
       />
     )
