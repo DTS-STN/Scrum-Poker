@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.56% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/107</span>
+                <span class='fraction'>21/105</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.15% </span>
+                <span class="strong">20.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/104</span>
+                <span class='fraction'>21/102</span>
             </div>
         
             
@@ -468,48 +468,7 @@
 <a name='L403'></a><a href='#L403'>403</a>
 <a name='L404'></a><a href='#L404'>404</a>
 <a name='L405'></a><a href='#L405'>405</a>
-<a name='L406'></a><a href='#L406'>406</a>
-<a name='L407'></a><a href='#L407'>407</a>
-<a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a>
-<a name='L411'></a><a href='#L411'>411</a>
-<a name='L412'></a><a href='#L412'>412</a>
-<a name='L413'></a><a href='#L413'>413</a>
-<a name='L414'></a><a href='#L414'>414</a>
-<a name='L415'></a><a href='#L415'>415</a>
-<a name='L416'></a><a href='#L416'>416</a>
-<a name='L417'></a><a href='#L417'>417</a>
-<a name='L418'></a><a href='#L418'>418</a>
-<a name='L419'></a><a href='#L419'>419</a>
-<a name='L420'></a><a href='#L420'>420</a>
-<a name='L421'></a><a href='#L421'>421</a>
-<a name='L422'></a><a href='#L422'>422</a>
-<a name='L423'></a><a href='#L423'>423</a>
-<a name='L424'></a><a href='#L424'>424</a>
-<a name='L425'></a><a href='#L425'>425</a>
-<a name='L426'></a><a href='#L426'>426</a>
-<a name='L427'></a><a href='#L427'>427</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L406'></a><a href='#L406'>406</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -578,7 +537,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -933,27 +891,7 @@ import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState, useRef, useReducer } from 'react'
 import Cookies from 'js-cookie'
-&nbsp;
-export const cards = [
-  { id: 'card-0', src: '/Card_0.svg', alt: 'Card image', value: 0 },
-  { id: 'card-0.5', src: '/Card_0.5.svg', alt: 'Card image', value: 1000 },
-  { id: 'card-1', src: '/Card_1.svg', value: 1 },
-  { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
-  { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
-  { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
-  { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
-  { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
-  { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-  { id: 'card-8', src: '/Card_40.svg', alt: 'Card image', value: 40 },
-  { id: 'card-9', src: '/Card_100.svg', alt: 'Card image', value: 100 },
-  {
-    id: 'card-10',
-    src: '/Card_questionMark.svg',
-    alt: 'Card image',
-    value: 1001,
-  },
-  { id: 'card-11', src: '/Card_infinity.svg', alt: 'Card image', value: 1002 },
-]
+import { cards } from '../utils/cards'
 &nbsp;
 export default function Home(props) {
   /* istanbul ignore next */
@@ -1005,7 +943,6 @@ export default function Home(props) {
 <span class="cstat-no" title="statement not covered" >      cardList.current.push(card.value)</span>
     }
 <span class="cstat-no" title="statement not covered" >    forceUpdate()</span>
-<span class="cstat-no" title="statement not covered" >    console.log(cardList.current)</span>
   }
 &nbsp;
   const handleJoinSubmit = <span class="fstat-no" title="function not covered" >as</span>ync (e) =&gt; {
@@ -1230,9 +1167,9 @@ export default function Home(props) {
                 htmlFor="cardSelector"
                 className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
               &gt;
-                Select your cards{' '}
+                {t.selectCards}{' '}
                 &lt;span className="text-red-800 font-body" aria-hidden="true"&gt;
-                  *
+                  {t.required}
                 &lt;/span&gt;
               &lt;/label&gt;
               &lt;ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x"&gt;
@@ -1348,7 +1285,7 @@ Home.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Apr 11 2022 19:10:19 GMT+0000 (Coordinated Universal Time)
+                at Mon Apr 11 2022 19:25:09 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
