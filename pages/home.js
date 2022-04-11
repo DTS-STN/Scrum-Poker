@@ -16,27 +16,7 @@ import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useState, useRef, useReducer } from 'react'
 import Cookies from 'js-cookie'
-
-export const cards = [
-  { id: 'card-0', src: '/Card_0.svg', alt: 'Card image', value: 0 },
-  { id: 'card-0.5', src: '/Card_0.5.svg', alt: 'Card image', value: 1000 },
-  { id: 'card-1', src: '/Card_1.svg', value: 1 },
-  { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
-  { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
-  { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
-  { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
-  { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
-  { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-  { id: 'card-8', src: '/Card_40.svg', alt: 'Card image', value: 40 },
-  { id: 'card-9', src: '/Card_100.svg', alt: 'Card image', value: 100 },
-  {
-    id: 'card-10',
-    src: '/Card_questionMark.svg',
-    alt: 'Card image',
-    value: 1001,
-  },
-  { id: 'card-11', src: '/Card_infinity.svg', alt: 'Card image', value: 1002 },
-]
+import { cards } from '../utils/cards'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -88,7 +68,6 @@ export default function Home(props) {
       cardList.current.push(card.value)
     }
     forceUpdate()
-    console.log(cardList.current)
   }
 
   const handleJoinSubmit = async (e) => {
@@ -313,9 +292,9 @@ export default function Home(props) {
                 htmlFor="cardSelector"
                 className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
               >
-                Select your cards{' '}
+                {t.selectCards}{' '}
                 <span className="text-red-800 font-body" aria-hidden="true">
-                  *
+                  {t.required}
                 </span>
               </label>
               <ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x">
