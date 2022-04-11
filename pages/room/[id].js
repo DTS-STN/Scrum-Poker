@@ -165,6 +165,14 @@ export default function Room(props) {
         if (foundUser === -1) {
           // a user was not found in the new list of users, delete the user from the UserList component.
           removeUserById(user1.id)
+
+          // Check to see if the player that left is you.
+          if (userId === user1.id) {
+            // navigate user to home page
+            router.push({
+              pathname: `/home`,
+            })
+          }
         }
       })
       const updatedRoomData = {
@@ -199,45 +207,48 @@ export default function Room(props) {
     }
   }
 
+  const removeOnePlayer = async (playerId) => {
+    let playerIdToRemove = playerId || userId
+    const index = room.userIds.indexOf(playerIdToRemove)
+
+    if (index > -1) {
+      let copiedRoomUserIds = [...room.userIds]
+      copiedRoomUserIds.splice(index, 1)
+      console.log(copiedRoomUserIds)
+      try {
+        // remove user from room
+        await updateRoom({
+          variables: {
+            updateRoomId: room.id,
+            updateRoomUsers: copiedRoomUserIds,
+            isShown: room.isShown,
+          },
+        }).catch((e) => {
+          throw e
+        })
+        // remove user from backend
+        deleteUser({
+          variables: {
+            deleteUserId: playerIdToRemove,
+          },
+        }).catch((e) => {
+          throw e
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  }
+
+  const destroyRoom = () => {}
+
   const leaveRoomClick = async () => {
     if (userId === room.host) {
       console.log(
         "Popup to ask 'are you sure ou want to destroy the room' and redirect all users home."
       )
     } else {
-      // Player wishes to leave
-      const index = room.userIds.indexOf(userId)
-      if (index > -1) {
-        let copiedRoomUserIds = [...room.userIds]
-        copiedRoomUserIds.splice(index, 1)
-        try {
-          // remove user from room
-          await updateRoom({
-            variables: {
-              updateRoomId: room.id,
-              updateRoomUsers: copiedRoomUserIds,
-              isShown: room.isShown,
-            },
-          }).catch((e) => {
-            throw e
-          })
-          // remove user from backend
-          deleteUser({
-            variables: {
-              deleteUserId: userId,
-            },
-          }).catch((e) => {
-            throw e
-          })
-
-          // navigate user to home page
-          router.push({
-            pathname: `/home`,
-          })
-        } catch (e) {
-          console.log(e)
-        }
-      }
+      removeOnePlayer()
     }
   }
   return (
@@ -343,6 +354,7 @@ export default function Room(props) {
             isShown={room.isShown}
             currPlayer={getUserById(userId)}
             host={room.host}
+            onBootClick={removeOnePlayer}
           />
         </div>
 
