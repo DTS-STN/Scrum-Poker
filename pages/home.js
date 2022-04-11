@@ -288,15 +288,12 @@ export default function Home(props) {
               ></ErrorLabel>
             ) : undefined}
             <div className="mt-6 w-full">
-              <label
-                htmlFor="cardSelector"
-                className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
-              >
+              <div className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300">
                 {t.selectCards}{' '}
                 <span className="text-red-800 font-body" aria-hidden="true">
                   {t.required}
                 </span>
-              </label>
+              </div>
               <ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x">
                 {cards.map((card) => {
                   return (
