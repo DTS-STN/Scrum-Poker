@@ -1,6 +1,11 @@
+import { PossibleFragmentSpreadsRule } from 'graphql'
 import propTypes from 'prop-types'
+import { ErrorLabel } from './ErrorLabel'
 
 export default function TextInput(props) {
+  const boxstyle =
+    'appearance-none rounded-b-lg border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600'
+
   return (
     <div className="mt-6 w-full">
       <label
@@ -13,15 +18,25 @@ export default function TextInput(props) {
         </span>
       </label>
       <input
+        {...props.register(props.id)}
         type="text"
-        aria-required="true"
-        aria-describedby={props.errorId}
-        aria-invalid="true"
         id={props.id}
         name={props.id}
         placeholder={props.placeholder}
-        className="appearance-none rounded-b-lg border-gray-300 border-b border-x w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
+        aria-required="true"
+        aria-describedby={props.errors?.message}
+        aria-invalid={props.errors ? 'true' : 'false'}
+        className={`form-control ${
+          props.errors ? 'is-invalid ' + boxstyle : boxstyle
+        }`}
       />
+
+      <ErrorLabel
+        hidden={!props.errors}
+        className="invalid-feedback"
+        errorId={props.id}
+        message={props.errors?.message ?? ''}
+      ></ErrorLabel>
     </div>
   )
 }
@@ -46,5 +61,5 @@ TextInput.propTypes = {
   required: propTypes.string,
 
   // error id
-  errorId: propTypes.string,
+  errors: propTypes.object,
 }
