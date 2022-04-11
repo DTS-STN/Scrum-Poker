@@ -32,13 +32,15 @@ export default function UserList(props) {
 
   function setInitialState() {
     props.userList.map((player) => {
-      if (props.currPlayer?.id !== player.id) {
+      if (props.currPlayerId !== player.id) {
         initialState.push({ id: player.id, color: randomColor() })
       }
     })
   }
 
   useEffect(() => {
+    console.log('useeffect currPlayer object = ', props.currPlayer)
+
     if (userColor == undefined) {
       setInitialState()
       setUserColor(initialState)
@@ -80,17 +82,21 @@ export default function UserList(props) {
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
   const displayPlayers = props.userList.map((player) => {
+    console.log(' displayPlayers userList =', props.userList)
+    console.log(' displayPlayers currPlayer object = ', props.currPlayer)
+    console.log(' displayPlayers currPlayerId = ', props.currPlayerId)
+
     return (
       <li className="w-full" key={player.id}>
         <Player
           playerName={player.name}
           bgColor={
-            props.currPlayer?.id === player.id
+            props.currPlayerId === player.id
               ? 'bg-pink-500'
               : getUserColorById(player.id)
           }
           selectedCard={
-            props.currPlayer?.id === player.id
+            props.currPlayerId === player.id
               ? getSelectedCard(player.card)
               : player.card
               ? props.isShown
@@ -102,8 +108,8 @@ export default function UserList(props) {
           data-testid="other-players"
           isHost={player.id === props.host}
           showBoot={
-            props.currPlayer?.id === props.host &&
-            props.currPlayer?.id !== player.id
+            props.currPlayerId === props.host &&
+            props.currPlayerId !== player.id
           }
           t={props.t}
         />
@@ -133,6 +139,10 @@ UserList.propTypes = {
       player: PropTypes.object,
     })
   ).isRequired,
+  /**
+   * current player Id
+   */
+  currPlayerId: PropTypes.string,
   /**
    * current player
    */

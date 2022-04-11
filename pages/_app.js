@@ -4,6 +4,8 @@ import { ApolloProvider } from '@apollo/client'
 import client from '../graphql/client'
 import Layout from '../components/Layout'
 
+import UserIdProvider from '../context/userIdContext'
+
 function MyApp({ Component, pageProps }) {
   /* istanbul ignore next */
   if (Component.getLayout) {
@@ -13,13 +15,15 @@ function MyApp({ Component, pageProps }) {
   /* istanbul ignore next */
   return (
     <ApolloProvider client={client}>
-      <Layout
-        locale={pageProps.locale}
-        meta={pageProps.meta}
-        langToggleLink={pageProps.langToggleLink}
-      >
-        <Component {...pageProps} />
-      </Layout>
+      <UserIdProvider>
+        <Layout
+          locale={pageProps.locale}
+          meta={pageProps.meta}
+          langToggleLink={pageProps.langToggleLink}
+        >
+          <Component {...pageProps} />
+        </Layout>
+      </UserIdProvider>
     </ApolloProvider>
   )
 }

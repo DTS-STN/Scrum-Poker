@@ -13,8 +13,10 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import { ErrorLabel } from '../components/ErrorLabel'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Cookies from 'js-cookie'
+
+import { UserIdContext } from '../context/userIdContext'
 
 export default function Home(props) {
   /* istanbul ignore next */
@@ -22,6 +24,8 @@ export default function Home(props) {
 
   const [createRoomError, setCreateRoomError] = useState(undefined)
   const [joinRoomError, setJoinRoomError] = useState(undefined)
+
+  const { setGlobalUserId } = useContext(UserIdContext)
 
   const router = useRouter()
 
@@ -55,6 +59,7 @@ export default function Home(props) {
   const handleJoinSubmit = async (e) => {
     //prevent default behaviour of form
     e.preventDefault()
+
     let username = newRoomName.value,
       userid = Cookies.get('userid'),
       room = roomCode.value
@@ -76,6 +81,7 @@ export default function Home(props) {
       else if (!/^[a-zA-Z0-9]+$/.test(room)) {
         throw t.invalidRoomError
       }
+
       //If name is valid, create new user
       const addUserRes = await addUser({
         variables: { name: username },
@@ -85,6 +91,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
+        setGlobalUserId(userid)
         Cookies.set('userid', `${userid}`)
       } else {
         throw t.genericError
@@ -175,6 +182,7 @@ export default function Home(props) {
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
+        setGlobalUserId(userid)
         Cookies.set('userid', `${userid}`)
       } else {
         throw t.genericError
