@@ -55,20 +55,25 @@ export default function JoinRoom(props) {
 
     try {
       //If name is valid, create new user
-      const addUserRes = await addUser({ variables: { name: username } })
+      const addUserRes = await addUser({
+        variables: { name: username },
+      }).catch((e) => {
+        throw 314
+      })
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw t.genericError
+        throw 315
       }
 
       //Get List of Users
       const getUserListRes = await getRoomUsers({
         variables: { roomsId: room },
+      }).catch((e) => {
+        throw 316
       })
-
       let userListID = []
       if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
@@ -78,24 +83,22 @@ export default function JoinRoom(props) {
           userListID.push(userid)
         }
       } else {
-        return {
-          redirect: {
-            permanent: false,
-            destination: '/home?errorCode=308',
-          },
-        }
+        throw 317
       }
 
+      //updating room
       const updateRoomRes = await updateRoom({
         variables: {
           updateRoomId: room,
           updateRoomUsers: userListID,
           isShown: false,
         },
+      }).catch((e) => {
+        throw 318
       })
+      if (!updateRoomRes.data.updateRoom.success) throw 319
 
-      if (!updateRoomRes.data.updateRoom.success) throw t.genericError
-
+      //updating user
       const updateUserRes = await updatedUser({
         variables: {
           userInput: {
@@ -105,28 +108,35 @@ export default function JoinRoom(props) {
             room: room,
           },
         },
+      }).catch((e) => {
+        throw 320
       })
+
+      //pushing to room if all went well
       if (updateUserRes.data.updateUser.success) {
         router.push({
-          pathname: `/room/${roomCode.value}`,
+          pathname: `/room/${room}`,
         })
-      } else {
-        throw t.genericError
       }
+      if (!updateUserRes.data.updateUser.success) throw 321
     } catch (e) {
       console.log(e)
-      throw t.genericError
+      router.push({
+        pathname: `/home`,
+        query: `errorcode=${e}`,
+      })
     }
   }
 
   return (
     <form
+      id="joinRoom"
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col justify-between h-full items-center"
     >
       <Container className="mx-8 sm:ml-2 sm:mr-2">
         <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.createRoomTitle}
+          {t.joinRoomTitle}
         </h2>
         <TextInput
           register={register}

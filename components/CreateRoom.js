@@ -54,12 +54,14 @@ export default function CreateRoom(props) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw t.genericError
+        throw 312
       }
+      //adding room
       const addRoomRes = await addRoom({
         variables: { userid: userid },
       })
-      if (!addRoomRes.data.addRoom.success) throw t.genericError
+      if (!addRoomRes.data.addRoom.success) throw 313
+
       const updateUserRes = await updatedUser({
         variables: {
           userInput: {
@@ -70,19 +72,25 @@ export default function CreateRoom(props) {
           },
         },
       })
+      //redirecting to room
       if (updateUserRes.data.updateUser.success) {
+        console.log('pushing to: /room/' + room)
         router.push({
           pathname: `/room/${addRoomRes.data.addRoom.id}`,
         })
       }
     } catch (e) {
       console.log(e)
-      throw t.genericError
+      router.push({
+        pathname: `/home`,
+        query: `errorcode=${e}`,
+      })
     }
   }
 
   return (
     <form
+      id="createRoom"
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col justify-between h-full items-center"
     >

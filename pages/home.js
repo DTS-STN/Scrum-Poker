@@ -13,7 +13,7 @@ export default function Home(props) {
   const router = useRouter()
   const queryErrorCode = router.query.errorcode
 
-  let errorCodeMsg = ''
+  let errorCodeMsg = t.queryErrorCode
   if (queryErrorCode)
     switch (queryErrorCode) {
       case '308':
@@ -22,7 +22,37 @@ export default function Home(props) {
       case '309':
         errorCodeMsg = t.noUserExists
         break
-      case '310':
+      case '311':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '312':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '313':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '314':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '315':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '316':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '317':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '318':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '319':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '320':
+        errorCodeMsg = t.notRoomMember
+        break
+      case '321':
         errorCodeMsg = t.notRoomMember
         break
       default:
@@ -33,7 +63,7 @@ export default function Home(props) {
 
   return (
     <div>
-      {router.query.errorcode && (
+      {queryErrorCode && (
         <div className="container mx-auto">
           <ErrorLabel
             errorId="errorCodeMsg"

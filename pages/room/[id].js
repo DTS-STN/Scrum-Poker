@@ -95,7 +95,7 @@ export default function Room(props) {
     if (!currCookie) {
       router.push({
         pathname: `/home`,
-        query: `errorCode=309`,
+        query: `errorcode=309`,
       })
     } else {
       // Check if userID cookie is in the room.
@@ -103,7 +103,7 @@ export default function Room(props) {
       if (!userIsInRoom) {
         router.push({
           pathname: `/home`,
-          query: `errorCode=310`,
+          query: `errorcode=311`,
         })
       }
 
@@ -342,7 +342,7 @@ export async function getServerSideProps({ params, locale }) {
     return {
       redirect: {
         permanent: false,
-        destination: '/home?errorCode=308',
+        destination: '/home?errorcode=308',
       },
     }
   }
