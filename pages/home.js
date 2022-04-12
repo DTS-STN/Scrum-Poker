@@ -31,7 +31,7 @@ export default function Home(props) {
   return (
     <div>
       {code && (
-        <div className="container mx-auto">
+        <div className="container mx-auto sm:flex sm:justify-center sm:gap-x-5">
           <ErrorLabel
             message={msg}
             className="pb-4"
