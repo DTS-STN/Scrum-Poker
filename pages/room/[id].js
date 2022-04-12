@@ -81,6 +81,7 @@ export default function Room(props) {
           updateRoomId: room.id,
           updateRoomUsers: room.userIds,
           isShown: false,
+          cards: room.cards,
           timer: {
             timestamp: null,
             duration: null,
@@ -158,8 +159,12 @@ export default function Room(props) {
         }),
         isShown: roomUpdated.isShown,
         timer: roomUpdated.timer,
+        cards: roomUpdated.cards,
       }
       const now = Date.now()
+
+      console.loe('updatedRoomData', updatedRoomData)
+
       setRoom(updatedRoomData)
     }
   }, [roomSubscription])
@@ -247,6 +252,7 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: true,
+                        cards: room.cards,
                         timer: {
                           timestamp: room.timer.timestamp,
                           duration: room.timer.duration,
@@ -267,6 +273,7 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: false,
+                        cards: room.cards,
                         timer: {
                           timestamp: room.timer.timestamp,
                           duration: room.timer.duration,
