@@ -6,6 +6,7 @@ import '@testing-library/jest-dom'
 import Home from '../../pages/home'
 import GET_ROOMS_QUERY from '../../graphql/queries/getRoom.graphql'
 import { MockedProvider } from '@apollo/client/testing'
+import { UserIdContext } from '../../context/userIdContext'
 
 import { getStaticProps } from '../../pages/home'
 
@@ -15,6 +16,8 @@ import { useRouter } from 'next/router'
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
+
+const contextValues = { globalUserId: jest.fn(), setGlobalUserId: jest.fn() }
 
 describe('Home page', () => {
   const mockRoomData = {
@@ -44,7 +47,9 @@ describe('Home page', () => {
   it('should render the page successfully', async () => {
     render(
       <MockedProvider addTypename={false} mocks={[mockRoomData]}>
-        <Home locale="en" />
+        <UserIdContext.Provider value={contextValues}>
+          <Home locale="en" />
+        </UserIdContext.Provider>
       </MockedProvider>
     )
     await new Promise((resolve) => setTimeout(resolve, 0))
