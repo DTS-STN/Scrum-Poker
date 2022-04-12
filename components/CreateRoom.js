@@ -15,13 +15,11 @@ import ADD_USER from '../graphql/mutations/addUser.graphql'
 import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import Cookies from 'js-cookie'
 
 export default function CreateRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-  const [createRoomError, setCreateRoomError] = useState(undefined)
   const router = useRouter()
 
   //Load GraphQL Data
@@ -35,6 +33,7 @@ export default function CreateRoom(props) {
       .required(t.invalidNameError)
       .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError),
   })
+
   const formOptions = { resolver: yupResolver(validationSchema) }
 
   // get functions to build form with useForm() hook
@@ -48,15 +47,9 @@ export default function CreateRoom(props) {
     let username = data.owner
     let userid = Cookies.get('userid')
 
-    setCreateRoomError(e)
-
     try {
       //If name is valid, create new room
-      const addUserRes = await addUser({
-        variables: { name: username },
-      }).catch((e) => {
-        throw t.genericError
-      })
+      const addUserRes = await addUser({ variables: { name: username } })
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
@@ -65,12 +58,8 @@ export default function CreateRoom(props) {
       }
       const addRoomRes = await addRoom({
         variables: { userid: userid },
-      }).catch((e) => {
-        throw t.genericError
       })
-
       if (!addRoomRes.data.addRoom.success) throw t.genericError
-
       const updateUserRes = await updatedUser({
         variables: {
           userInput: {
@@ -80,23 +69,15 @@ export default function CreateRoom(props) {
             room: addRoomRes.data.addRoom.id,
           },
         },
-      }).catch((e) => {
-        throw t.genericError
       })
-
       if (updateUserRes.data.updateUser.success) {
-        router
-          .push({
-            pathname: `/room/${addRoomRes.data.addRoom.id}`,
-          })
-          .catch((e) => {
-            throw t.genericError
-          })
-      } else {
-        throw t.genericError
+        router.push({
+          pathname: `/room/${addRoomRes.data.addRoom.id}`,
+        })
       }
     } catch (e) {
-      setCreateRoomError(e)
+      console.log(e)
+      throw t.genericError
     }
   }
 
