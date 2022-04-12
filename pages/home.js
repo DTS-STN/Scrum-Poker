@@ -116,6 +116,7 @@ export default function Home(props) {
       })
 
       let userListID = []
+      let roomTimer, roomCards, roomIsShown
       if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
           userListID.push(Number(user.id))
@@ -123,6 +124,9 @@ export default function Home(props) {
         if (!userListID.includes(userid)) {
           userListID.push(userid)
         }
+        roomTimer = getUserListRes.data.rooms[0].timer
+        roomCards = getUserListRes.data.rooms[0].cards
+        roomIsShown = getUserListRes.data.rooms[0].isShown
       } else {
         throw t.roomDoesNotExist
       }
@@ -131,7 +135,9 @@ export default function Home(props) {
         variables: {
           updateRoomId: roomCode.value,
           updateRoomUsers: userListID,
-          isShown: false,
+          isShown: roomIsShown,
+          timer: roomTimer,
+          cards: roomCards,
         },
       }).catch((e) => {
         throw t.genericError
