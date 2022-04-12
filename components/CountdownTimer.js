@@ -5,27 +5,29 @@ import Countdown from 'react-countdown'
 const renderer = ({ minutes, seconds, completed, props }) => {
   if (completed) {
     return (
-      <span className="w-auto px-2 rounded border border-[#F35568] text-[16px]">
+      <span className="w-auto px-2 rounded border-2 border-[#F35568] text-[16px]">
         {props.timeIsUpText}
       </span>
     )
   }
 
-  let borderColor = '[#FFF]'
+  let borderColor = '#AAA'
   if (minutes === 0 && seconds <= 30 && seconds > 10) {
-    borderColor = '[#FFC923]'
+    borderColor = '#FFC923'
   } else if (minutes === 0 && seconds <= 10) {
-    borderColor = '[#F35568]'
+    borderColor = '#F35568'
   }
 
-  const className = `w-16 px-2 text-center rounded border border-${borderColor} text-[16px]`
+  const className = `w-16 px-2 text-center rounded border-2 text-[16px]`
   const displayMinute = minutes < 10 ? `0${minutes}` : minutes
   const displaySeconds = seconds < 10 ? `0${seconds}` : seconds
   // Render a countdown
   return (
-    <span className={className}>
-      {displayMinute}:{displaySeconds}
-    </span>
+    <>
+      <span className={className} style={{ borderColor }}>
+        {displayMinute}:{displaySeconds}
+      </span>
+    </>
   )
 }
 
