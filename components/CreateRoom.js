@@ -103,7 +103,7 @@ export default function CreateRoom(props) {
         },
       })
       if (!updateUserRes.data.updateUser.success) {
-        triggerError(t.saveUserFail)
+        throw t.saveUserFail
       }
       //redirecting to room
       if (updateUserRes.data.updateUser.success) {
