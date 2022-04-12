@@ -74,7 +74,6 @@ export default function CreateRoom(props) {
   async function onSubmit(data) {
     let username = data.owner
     let userid = Cookies.get('userid')
-    setHasError(false)
 
     try {
       //Check if card list is empty
