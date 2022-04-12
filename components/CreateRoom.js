@@ -25,7 +25,8 @@ export default function CreateRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
 
-  //useRef doesn't notify the browser when mutating the current ref, so forceUpdate allows us to trigger a re-render instead of using useState and having a delay
+  //useRef doesn't notify the browser when mutating the current ref, so forceUpdate
+  //allows us to trigger a re - render instead of using useState and having a delay
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const cardList = useRef([0, 1, 2, 3, 5, 8, 13, 20, 1001, 1002])
 
