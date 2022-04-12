@@ -8,6 +8,7 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 import FormButton from './FormButton'
+import { ErrorLabel } from '../components/ErrorLabel'
 
 import { useMutation } from '@apollo/client'
 import ADD_ROOM from '../graphql/mutations/addRoom.graphql'
@@ -16,6 +17,7 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import { useState } from 'react'
 
 export default function CreateRoom(props) {
   /* istanbul ignore next */
@@ -40,28 +42,35 @@ export default function CreateRoom(props) {
   const { register, handleSubmit, formState } = useForm(formOptions)
   const { errors } = formState
 
+  //error handling stuff
+  const [msg, setMsg] = useState('')
+  const [hasError, setHasError] = useState(false)
+
   //************************************* */
   //SUBMIT FORM BUSINESS LOGIC
   //************************************* */
   async function onSubmit(data) {
     let username = data.owner
     let userid = Cookies.get('userid')
+    setHasError(false)
 
     try {
-      //If name is valid, create new room
+      //adding new user
       const addUserRes = await addUser({ variables: { name: username } })
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw 312
+        triggerError(t.saveUserFail)
       }
       //adding room
       const addRoomRes = await addRoom({
         variables: { userid: userid },
       })
-      if (!addRoomRes.data.addRoom.success) throw 313
-
+      if (!addRoomRes.data.addRoom.success) {
+        triggerError(t.saveRoomFail)
+      }
+      //updating users
       const updateUserRes = await updatedUser({
         variables: {
           userInput: {
@@ -72,6 +81,9 @@ export default function CreateRoom(props) {
           },
         },
       })
+      if (!updateUserRes.data.updatedUser.success) {
+        triggerError(t.saveUserFail)
+      }
       //redirecting to room
       if (updateUserRes.data.updateUser.success) {
         router.push({
@@ -80,11 +92,17 @@ export default function CreateRoom(props) {
       }
     } catch (e) {
       console.log(e)
-      router.push({
-        pathname: `/home`,
-        query: `errorcode=${e}`,
-      })
+      triggerError(t.genericErrorCreate)
     }
+  }
+
+  //builds our error and pushes home
+  function triggerError(msg) {
+    setHasError(true)
+    setMsg(msg)
+    router.push({
+      pathname: `/home`,
+    })
   }
 
   return (
@@ -94,6 +112,15 @@ export default function CreateRoom(props) {
       className="flex flex-col justify-between h-full items-center"
     >
       <Container className="mx-8 sm:ml-2 sm:mr-2">
+        {hasError && (
+          <div className="container mx-auto">
+            <ErrorLabel
+              message={msg}
+              className="pb-4"
+              hidden={false}
+            ></ErrorLabel>
+          </div>
+        )}
         <h2 className="text-opacity-75 text-black font-bold text-2xl">
           {t.createRoomTitle}
         </h2>

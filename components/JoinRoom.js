@@ -8,6 +8,7 @@ import fr from '../locales/fr'
 import Container from '../components/Container'
 import TextInput from '../components/TextInput'
 import FormButton from './FormButton'
+import { ErrorLabel } from '../components/ErrorLabel'
 
 import { useMutation, useLazyQuery } from '@apollo/client'
 import ADD_USER from '../graphql/mutations/addUser.graphql'
@@ -17,6 +18,7 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import { useState } from 'react'
 
 export default function JoinRoom(props) {
   /* istanbul ignore next */
@@ -45,6 +47,10 @@ export default function JoinRoom(props) {
   const { register, handleSubmit, formState } = useForm(formOptions)
   const { errors } = formState
 
+  //error handling stuff
+  const [msg, setMsg] = useState('')
+  const [hasError, setHasError] = useState(false)
+
   //************************************* */
   //SUBMIT FORM BUSINESS LOGIC
   //************************************* */
@@ -54,25 +60,25 @@ export default function JoinRoom(props) {
       room = data.room
 
     try {
-      //If name is valid, create new user
+      //create new user
       const addUserRes = await addUser({
         variables: { name: username },
       }).catch((e) => {
-        throw 314
+        triggerError(t.saveUserFail)
       })
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        throw 315
+        triggerError(t.saveUserFail)
       }
 
       //Get List of Users
       const getUserListRes = await getRoomUsers({
         variables: { roomsId: room },
       }).catch((e) => {
-        throw 316
+        triggerError(t.genericErrorJoin)
       })
       let userListID = []
       if (getUserListRes.data.rooms[0]) {
@@ -83,7 +89,7 @@ export default function JoinRoom(props) {
           userListID.push(userid)
         }
       } else {
-        throw 317
+        triggerError(t.genericErrorJoin)
       }
 
       //updating room
@@ -93,10 +99,10 @@ export default function JoinRoom(props) {
           updateRoomUsers: userListID,
           isShown: false,
         },
-      }).catch((e) => {
-        throw 318
       })
-      if (!updateRoomRes.data.updateRoom.success) throw 319
+      if (!updateRoomRes.data.updateRoom.success) {
+        triggerError(t.saveRoomFail)
+      }
 
       //updating user
       const updateUserRes = await updatedUser({
@@ -109,7 +115,7 @@ export default function JoinRoom(props) {
           },
         },
       }).catch((e) => {
-        throw 320
+        triggerError(t.saveUserFail)
       })
 
       //pushing to room if all went well
@@ -118,14 +124,22 @@ export default function JoinRoom(props) {
           pathname: `/room/${room}`,
         })
       }
-      if (!updateUserRes.data.updateUser.success) throw 321
+      if (!updateUserRes.data.updateUser.success) {
+        triggerError(t.saveUserFail)
+      }
     } catch (e) {
       console.log(e)
-      router.push({
-        pathname: `/home`,
-        query: `errorcode=${e}`,
-      })
+      triggerError(t.genericErrorJoin)
     }
+  }
+
+  //builds our error and pushes home
+  function triggerError(msg) {
+    setHasError(true)
+    setMsg(msg)
+    router.push({
+      pathname: `/home`,
+    })
   }
 
   return (
@@ -135,6 +149,15 @@ export default function JoinRoom(props) {
       className="flex flex-col justify-between h-full items-center"
     >
       <Container className="mx-8 sm:ml-2 sm:mr-2">
+        {hasError && (
+          <div className="container mx-auto">
+            <ErrorLabel
+              message={msg}
+              className="pb-4"
+              hidden={false}
+            ></ErrorLabel>
+          </div>
+        )}
         <h2 className="text-opacity-75 text-black font-bold text-2xl">
           {t.joinRoomTitle}
         </h2>

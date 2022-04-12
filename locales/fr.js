@@ -42,10 +42,19 @@ export default {
   send: 'Envoyer',
 
   // Error messages
+  saveUserFail:
+    '(FR) There was an error saving the user.  Please try again later.',
+  saveRoomFail:
+    '(FR) There was an error creating the room.  Please try again later.',
+
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
   notRoomMember: "Vous n'êtes pas membre de cette pièce",
   genericError: 'Oups ! Quelque chose a mal tourné.',
+  genericErrorCreate:
+    '(FR) Something went wrong creating a room.  Please try again later.',
+  genericErrorJoin:
+    '(FR) Something went wrong joining a room.  Please try again later.',
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   invalidRoomError: '(FR) Room Characters are wrong',

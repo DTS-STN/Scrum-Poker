@@ -1,4 +1,3 @@
-import { PossibleFragmentSpreadsRule } from 'graphql'
 import propTypes from 'prop-types'
 import { ErrorLabel } from './ErrorLabel'
 
