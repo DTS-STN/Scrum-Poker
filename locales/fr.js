@@ -60,11 +60,11 @@ export default {
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   invalidRoomError: '(FR) Room Characters are wrong',
-  roomDoesNotExist: '(FR)Room does not exist',
+  roomDoesNotExist: '(FR) Room does not exist',
 
   // Header
   title: 'accueil',
-  scrumPoker: 'Scrum Poker',
+  scrumPoker: '(FR) Scrum Poker',
   //
 
   // Nav

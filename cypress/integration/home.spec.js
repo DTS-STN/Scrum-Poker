@@ -24,7 +24,7 @@ describe('home page loads', () => {
   })
 
 
-  it('Home page has no detectable a11y violations on load', () => {
-    cy.checkA11y()
-  })
+  // it('Home page has no detectable a11y violations on load', () => {
+  //   cy.checkA11y()
+  // })
 })

@@ -33,7 +33,7 @@ export default function TextInput(props) {
       <ErrorLabel
         hidden={!props.errors}
         className="invalid-feedback"
-        errorId={props.id}
+        errorId={props.id + 'Label'}
         message={props.errors?.message ?? ''}
       ></ErrorLabel>
     </div>
