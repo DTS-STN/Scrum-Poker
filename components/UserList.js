@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import Player from './Player'
-import { cards } from '../pages/room/[id]'
+import { cards } from '../utils/cards'
 
 import { useState, useEffect } from 'react'
 

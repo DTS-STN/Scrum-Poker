@@ -13,5 +13,6 @@ query getRoom($roomsId: ID) {
       room
     }
     isShown
+    cards
   }
 }
