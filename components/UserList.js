@@ -39,8 +39,6 @@ export default function UserList(props) {
   }
 
   useEffect(() => {
-    console.log('useeffect currPlayer object = ', props.currPlayer)
-
     if (userColor == undefined) {
       setInitialState()
       setUserColor(initialState)
@@ -72,9 +70,7 @@ export default function UserList(props) {
         return user.id == userId
       }).color
     } else {
-      console.log(
-        'userId was not found assigning a random color, this should not happen'
-      )
+      console.log(`userId ${userId} was not found assigning a random color`)
       return randomColor()
     }
   }
@@ -82,10 +78,6 @@ export default function UserList(props) {
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
   const displayPlayers = props.userList.map((player) => {
-    console.log(' displayPlayers userList =', props.userList)
-    console.log(' displayPlayers currPlayer object = ', props.currPlayer)
-    console.log(' displayPlayers currPlayerId = ', props.currPlayerId)
-
     return (
       <li className="w-full" key={player.id}>
         <Player
