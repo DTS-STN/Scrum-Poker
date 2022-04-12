@@ -1,4 +1,4 @@
-mutation addRoom($userid: ID!, $cards: [Int] ) {
+mutation addRoom($userid: ID!, $cards: [Int]) {
   addRoom(userid: $userid, cards: $cards) {
     success
     message

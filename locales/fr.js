@@ -7,6 +7,7 @@ export default {
 
   // Home
   createRoomTitle: 'Créer une pièce',
+  createRoomNameLabel: '(FR) Enter your name',
   createRoomDesc:
     'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
   createRoomLabel: 'Entrez votre nom',
@@ -43,10 +44,21 @@ export default {
   send: 'Envoyer',
 
   // Error messages
+  max20: '(FR) No more than 20 characters.',
+  max5: '(FR) No more than 5 characters.',
+  saveUserFail:
+    '(FR) There was an error saving the user.  Please try again later.',
+  saveRoomFail:
+    '(FR) There was an error creating the room.  Please try again later.',
+
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
   notRoomMember: "Vous n'êtes pas membre de cette pièce",
   genericError: 'Oups ! Quelque chose a mal tourné.',
+  genericErrorCreate:
+    '(FR) Something went wrong creating a room.  Please try again later.',
+  genericErrorJoin:
+    '(FR) Something went wrong joining a room.  Please try again later.',
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   invalidRoomError: '(FR) Room Characters are wrong',
@@ -55,7 +67,7 @@ export default {
 
   // Header
   title: 'accueil',
-  scrumPoker: 'Scrum Poker',
+  scrumPoker: '(FR) Scrum Poker',
   //
 
   // Nav
