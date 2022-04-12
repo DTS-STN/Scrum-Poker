@@ -33,7 +33,7 @@ export default function CreateRoom(props) {
   const validationSchema = Yup.object().shape({
     owner: Yup.string()
       .required(t.invalidNameError)
-      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError)
+      .matches(/^([A-Za-z0-9\s\-\'?])+$/, t.invalidNameError)
       .max(20, t.max20),
   })
 
@@ -62,14 +62,14 @@ export default function CreateRoom(props) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        triggerError(t.saveUserFail)
+        throw t.saveUserFail
       }
       //adding room
       const addRoomRes = await addRoom({
         variables: { userid: userid },
       })
       if (!addRoomRes.data.addRoom.success) {
-        triggerError(t.saveRoomFail)
+        throw t.saveRoomFail
       }
       //updating users
       const updateUserRes = await updatedUser({
@@ -93,7 +93,7 @@ export default function CreateRoom(props) {
       }
     } catch (e) {
       console.log(e)
-      triggerError(t.genericErrorCreate)
+      triggerError(e)
     }
   }
 
@@ -104,6 +104,7 @@ export default function CreateRoom(props) {
     router.push({
       pathname: `/home`,
     })
+    return
   }
 
   return (
@@ -113,6 +114,9 @@ export default function CreateRoom(props) {
       className="flex flex-col justify-between h-full items-center"
     >
       <Container className="mx-8 sm:ml-2 sm:mr-2">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.createRoomTitle}
+        </h2>
         {hasError && (
           <div className="container mx-auto">
             <ErrorLabel
@@ -122,13 +126,10 @@ export default function CreateRoom(props) {
             ></ErrorLabel>
           </div>
         )}
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.createRoomTitle}
-        </h2>
         <TextInput
           register={register}
           id="owner"
-          label={t.createRoomTitle}
+          label={t.createRoomNameLabel}
           placeholder={t.createRoomPlaceholder}
           required={t.required}
           errors={errors.owner}

@@ -7,6 +7,7 @@ export default {
 
   // Home
   createRoomTitle: 'Créer une pièce',
+  createRoomNameLabel: '(FR) Enter your name',
   createRoomDesc:
     'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
   createRoomLabel: 'Entrez votre nom',

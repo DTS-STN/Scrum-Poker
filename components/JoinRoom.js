@@ -39,7 +39,7 @@ export default function JoinRoom(props) {
       .max(5, t.max5),
     name: Yup.string()
       .required(t.invalidNameError)
-      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError)
+      .matches(/^([A-Za-z0-9\s\-\'?])+$/, t.invalidNameError)
       .max(20, t.max20),
   })
 
@@ -66,21 +66,23 @@ export default function JoinRoom(props) {
       const addUserRes = await addUser({
         variables: { name: username },
       }).catch((e) => {
-        triggerError(t.saveUserFail)
+        console.log(e)
+        throw t.saveUserFail
       })
 
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
       } else {
-        triggerError(t.saveUserFail)
+        throw t.saveUserFail
       }
 
       //Get List of Users
       const getUserListRes = await getRoomUsers({
         variables: { roomsId: room },
       }).catch((e) => {
-        triggerError(t.genericErrorJoin)
+        console.log(e)
+        throw t.genericErrorJoin
       })
       let userListID = []
       if (getUserListRes.data.rooms[0]) {
@@ -91,7 +93,7 @@ export default function JoinRoom(props) {
           userListID.push(userid)
         }
       } else {
-        triggerError(t.genericErrorJoin)
+        throw t.genericErrorJoin
       }
 
       //updating room
@@ -103,7 +105,7 @@ export default function JoinRoom(props) {
         },
       })
       if (!updateRoomRes.data.updateRoom.success) {
-        triggerError(t.saveRoomFail)
+        throw t.saveRoomFail
       }
 
       //updating user
@@ -117,7 +119,8 @@ export default function JoinRoom(props) {
           },
         },
       }).catch((e) => {
-        triggerError(t.saveUserFail)
+        console.log(e)
+        throw t.saveUserFail
       })
 
       //pushing to room if all went well
@@ -127,11 +130,11 @@ export default function JoinRoom(props) {
         })
       }
       if (!updateUserRes.data.updateUser.success) {
-        triggerError(t.saveUserFail)
+        throw t.saveUserFail
       }
     } catch (e) {
       console.log(e)
-      triggerError(t.genericErrorJoin)
+      triggerError(e)
     }
   }
 
@@ -151,6 +154,9 @@ export default function JoinRoom(props) {
       className="flex flex-col justify-between h-full items-center"
     >
       <Container className="mx-8 sm:ml-2 sm:mr-2">
+        <h2 className="text-opacity-75 text-black font-bold text-2xl">
+          {t.joinRoomTitle}
+        </h2>
         {hasError && (
           <div className="container mx-auto">
             <ErrorLabel
@@ -160,9 +166,6 @@ export default function JoinRoom(props) {
             ></ErrorLabel>
           </div>
         )}
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.joinRoomTitle}
-        </h2>
         <TextInput
           register={register}
           id="room"

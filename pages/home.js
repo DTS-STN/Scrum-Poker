@@ -31,19 +31,12 @@ export default function Home(props) {
   return (
     <div>
       <div className="container gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5">
-        {code && (
-          <ErrorLabel
-            message={msg}
-            className="pb-4"
-            hidden={false}
-          ></ErrorLabel>
-        )}
+        {code && <ErrorLabel message={msg} className="pb-4" hidden={false} />}
       </div>
-      <br />
       <div
         data-testid="homeContent"
         id="homeContent"
-        className="container grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
+        className="container mt-3 grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
       >
         <CreateRoom locale={props.locale} />
         <JoinRoom locale={props.locale} />

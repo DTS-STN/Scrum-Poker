@@ -7,6 +7,7 @@ export default {
 
   // Home
   createRoomTitle: 'Create a Room',
+  createRoomNameLabel: 'Enter your name',
   createRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
   createRoomLabel: 'Enter your name',
   createRoomPlaceholder: 'Your name',
