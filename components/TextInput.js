@@ -7,6 +7,12 @@ export default function TextInput(props) {
 
   return (
     <div className="mt-6 w-full">
+      <ErrorLabel
+        hidden={!props.errors}
+        className="invalid-feedback"
+        errorId={props.id + 'Label'}
+        message={props.errors?.message ?? ''}
+      ></ErrorLabel>
       <label
         htmlFor={props.id}
         className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300"
@@ -29,13 +35,6 @@ export default function TextInput(props) {
           props.errors ? 'is-invalid ' + boxstyle : boxstyle
         }`}
       />
-
-      <ErrorLabel
-        hidden={!props.errors}
-        className="invalid-feedback"
-        errorId={props.id + 'Label'}
-        message={props.errors?.message ?? ''}
-      ></ErrorLabel>
     </div>
   )
 }
