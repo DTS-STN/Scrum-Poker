@@ -205,7 +205,7 @@ export default function Room(props) {
         throw e
       })
     } catch (e) {
-      console.log(e)
+      throw e
     }
   }
 
@@ -236,7 +236,7 @@ export default function Room(props) {
           throw e
         })
       } catch (e) {
-        console.log(e)
+        throw e
       }
     }
   }
