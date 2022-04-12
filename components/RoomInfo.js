@@ -41,6 +41,7 @@ const TimerSelect = (props) => {
 // eslint-disable-next-line
 const TimerContent = React.memo((props) => {
   // content on host screen when timestamp is not set
+  console.log('props.isHost && props.timestamp', props.isHost, props.timestamp)
   if (props.isHost && props.timestamp === null) {
     return (
       <TimerSelect
@@ -151,6 +152,7 @@ export default function RoomInfo(props) {
           timestamp: timestamp ? timestamp.toString() : timestamp,
           duration: timerDuration,
         },
+        cards: props.roomData.cards,
       },
     })
   }

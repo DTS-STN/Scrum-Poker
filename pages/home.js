@@ -210,7 +210,7 @@ export default function Home(props) {
       }
 
       const addRoomRes = await addRoom({
-        variables: { userid: userid },
+        variables: { userid: userid, cards: cardList.current },
       }).catch((e) => {
         throw t.genericError
       })
