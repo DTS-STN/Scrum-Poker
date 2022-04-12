@@ -74,7 +74,6 @@ export default function CreateRoom(props) {
       })
       //redirecting to room
       if (updateUserRes.data.updateUser.success) {
-        console.log('pushing to: /room/' + room)
         router.push({
           pathname: `/room/${addRoomRes.data.addRoom.id}`,
         })

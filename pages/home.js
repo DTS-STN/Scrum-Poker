@@ -59,8 +59,6 @@ export default function Home(props) {
         errorCodeMsg = t.genericError
     }
 
-  console.log(errorCodeMsg)
-
   return (
     <div>
       {queryErrorCode && (
