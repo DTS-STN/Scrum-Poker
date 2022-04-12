@@ -31,7 +31,14 @@ export default function Home(props) {
   return (
     <div>
       <div className="container gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5">
-        {code && <ErrorLabel message={msg} className="pb-4" hidden={false} />}
+        {code && (
+          <ErrorLabel
+            message={msg}
+            className="pb-4"
+            hidden={false}
+            serverError={true}
+          />
+        )}
       </div>
       <div
         data-testid="homeContent"

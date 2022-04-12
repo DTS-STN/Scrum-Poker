@@ -69,7 +69,6 @@ export default function JoinRoom(props) {
         console.log(e)
         throw t.saveUserFail
       })
-
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
@@ -82,7 +81,7 @@ export default function JoinRoom(props) {
         variables: { roomsId: room },
       }).catch((e) => {
         console.log(e)
-        throw t.genericErrorJoin
+        throw t.noRoomExists
       })
       let userListID = []
       if (getUserListRes.data.rooms[0]) {
@@ -93,7 +92,7 @@ export default function JoinRoom(props) {
           userListID.push(userid)
         }
       } else {
-        throw t.genericErrorJoin
+        throw t.noRoomExists
       }
 
       //updating room
@@ -163,6 +162,7 @@ export default function JoinRoom(props) {
               message={msg}
               className="pb-4"
               hidden={false}
+              serverError={true}
             ></ErrorLabel>
           </div>
         )}

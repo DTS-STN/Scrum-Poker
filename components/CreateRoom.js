@@ -148,6 +148,7 @@ export default function CreateRoom(props) {
               message={msg}
               className="pb-4"
               hidden={false}
+              serverError={true}
             ></ErrorLabel>
           </div>
         )}
