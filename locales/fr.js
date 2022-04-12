@@ -21,6 +21,7 @@ export default {
   joinRoomNamePlaceholder: 'Votre nom',
   joinRoomButton: 'Rejoignez la salle',
   required: ' * ',
+  selectCards: 'Sélectionnez vos cartes',
 
   // Room
   users: '(FR)Users',
@@ -50,6 +51,7 @@ export default {
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
   invalidRoomError: '(FR) Room Characters are wrong',
   roomDoesNotExist: '(FR)Room does not exist',
+  emptyCardList: 'Vous devez sélectionner au moins une carte !',
 
   // Header
   title: 'accueil',
