@@ -114,6 +114,8 @@ export default function Home(props) {
           updateRoomId: roomCode.value,
           updateRoomUsers: userListID,
           isShown: false,
+          timer: null,
+          cards: [1, 2, 3, 5, 8, 13, 20, 100],
         },
       }).catch((e) => {
         throw t.genericError
