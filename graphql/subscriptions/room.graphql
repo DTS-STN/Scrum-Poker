@@ -13,5 +13,6 @@ subscription RoomSubscription($room: ID!) {
         timestamp
         duration
     }
+    cards 
   }
 }
