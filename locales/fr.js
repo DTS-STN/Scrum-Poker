@@ -22,6 +22,7 @@ export default {
   joinRoomNamePlaceholder: 'Votre nom',
   joinRoomButton: 'Rejoignez la salle',
   required: ' * ',
+  selectCards: 'Sélectionnez vos cartes',
 
   // Room
   users: '(FR)Users',
