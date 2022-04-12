@@ -161,7 +161,7 @@ export default function CreateRoom(props) {
           errors={errors.owner}
         />
         <div className="mt-6 w-full">
-          <div className="block rounded-t-lg border-t border-l border-r border-gray-300 px-3 py-2 bg-gray-300">
+          <div className="block rounded-t-lg border-t border-l border-r font-semibold border-gray-300 px-3 py-2 bg-gray-300">
             {t.selectCards}{' '}
             <span className="text-red-800 font-body" aria-hidden="true">
               {t.required}
