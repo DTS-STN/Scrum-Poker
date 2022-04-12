@@ -76,6 +76,10 @@ export default function CreateRoom(props) {
     setHasError(false)
 
     try {
+      //Check if card list is empty
+      if (cardList.current.length === 0) {
+        throw t.emptyCardList
+      }
       //adding new user
       const addUserRes = await addUser({ variables: { name: username } })
       if (addUserRes.data.addUser.success) {
