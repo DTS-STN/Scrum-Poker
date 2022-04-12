@@ -90,7 +90,7 @@ export default function CreateRoom(props) {
       }
       //adding room
       const addRoomRes = await addRoom({
-        variables: { userid: userid },
+        variables: { userid: userid, cards: cardList.current },
       })
       if (!addRoomRes.data.addRoom.success) {
         throw t.saveRoomFail
