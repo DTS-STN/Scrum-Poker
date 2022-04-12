@@ -34,6 +34,9 @@ export default {
   hostCrown: 'Room Owner',
   leaveImgAlt: 'Leave room Button',
   leaveRoom: 'Leave Room',
+  destroyRoom: 'Leaving this room will boot everyone out. Are you sure?',
+  yes: 'Yes',
+  no: 'No',
 
   // Chat
   placeholder: 'Write a message',

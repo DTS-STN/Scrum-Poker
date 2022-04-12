@@ -16,6 +16,8 @@ import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
 import Cookies from 'js-cookie'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 export const cards = [
   { id: 'card-1', src: '/Card_1.svg', value: 1 },
@@ -158,16 +160,16 @@ export default function Room(props) {
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
       // check to see if a user was deleted
-      users.forEach((user1) => {
+      users.forEach((oldUser) => {
         const foundUser = roomUpdated.users.findIndex(
-          (user2) => user2.id === user1.id
+          (newUser) => newUser.id === oldUser.id
         )
         if (foundUser === -1) {
           // a user was not found in the new list of users, delete the user from the UserList component.
-          removeUserById(user1.id)
+          removeUserById(oldUser.id)
 
           // Check to see if the player that left is you.
-          if (userId === user1.id) {
+          if (userId === oldUser.id) {
             // navigate user to home page
             router.push({
               pathname: `/home`,
@@ -207,14 +209,13 @@ export default function Room(props) {
     }
   }
 
-  const removeOnePlayer = async (playerId) => {
+  const onBootClick = async (playerId) => {
     let playerIdToRemove = playerId || userId
     const index = room.userIds.indexOf(playerIdToRemove)
 
     if (index > -1) {
       let copiedRoomUserIds = [...room.userIds]
       copiedRoomUserIds.splice(index, 1)
-      console.log(copiedRoomUserIds)
       try {
         // remove user from room
         await updateRoom({
@@ -240,15 +241,40 @@ export default function Room(props) {
     }
   }
 
-  const destroyRoom = () => {}
+  const destroyRoom = () => {
+    console.log('yes is clicked!')
+  }
 
   const leaveRoomClick = async () => {
     if (userId === room.host) {
-      console.log(
-        "Popup to ask 'are you sure ou want to destroy the room' and redirect all users home."
-      )
+      confirmAlert({
+        customUI: ({ onClose }) => (
+          <div className="bg-white rounded p-6 border-2">
+            <h1 className="text-lg font-bold">{t.destroyRoom}</h1>
+            <div className="flex justify-around mt-4">
+              <button
+                onClick={() => {
+                  destroyRoom()
+                  onClose()
+                }}
+                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
+              >
+                {t.yes}
+              </button>
+              <button
+                onClick={onClose}
+                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
+              >
+                {t.no}
+              </button>
+            </div>
+          </div>
+        ),
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+      })
     } else {
-      removeOnePlayer()
+      onBootClick()
     }
   }
   return (
@@ -354,7 +380,7 @@ export default function Room(props) {
             isShown={room.isShown}
             currPlayer={getUserById(userId)}
             host={room.host}
-            onBootClick={removeOnePlayer}
+            onBootClick={onBootClick}
           />
         </div>
 
