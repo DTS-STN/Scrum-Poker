@@ -7,6 +7,7 @@ export default {
 
   // Home
   createRoomTitle: 'Create a Room',
+  createRoomNameLabel: 'Enter your name',
   createRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
   createRoomLabel: 'Enter your name',
   createRoomPlaceholder: 'Your name',
@@ -41,11 +42,22 @@ export default {
   send: 'Send',
 
   // Error Messages
+  max20: 'No more than 20 characters.',
+  max5: 'No more than 5 characters.',
+  saveUserFail:
+    'There was an error creating or updating the user.  Please try again later.',
+  saveRoomFail:
+    'There was an error creating or updating the room.  Please try again later.',
+
   noRoomExists: 'Sorry! No Room exists with this id.',
   noUserExists:
     'Please create a user by entering in your name before joining a room.',
   notRoomMember: 'Sorry! You are not a member of this room.',
-  genericError: 'Oops! something went wrong.',
+  genericError: 'Something went wrong.  Please try again later.',
+  genericErrorCreate:
+    'Something went wrong creating a room.  Please try again later.',
+  genericErrorJoin:
+    'Something went wrong joining a room.  Please try again later.',
   invalidNameError: 'Please enter your name (alphanumeric characters only)',
   invalidRoomError:
     'Please enter a room code (alphanumeric characters only). For example K9VW8',

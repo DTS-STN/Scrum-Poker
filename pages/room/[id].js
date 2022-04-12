@@ -18,16 +18,7 @@ import Cookies from 'js-cookie'
 
 import { UserIdContext } from '../../context/userIdContext'
 
-export const cards = [
-  { id: 'card-1', src: '/Card_1.svg', value: 1 },
-  { id: 'card-2', src: '/Card_2.svg', alt: 'Card image', value: 2 },
-  { id: 'card-3', src: '/Card_3.svg', alt: 'Card image', value: 3 },
-  { id: 'card-4', src: '/Card_5.svg', alt: 'Card image', value: 5 },
-  { id: 'card-5', src: '/Card_8.svg', alt: 'Card image', value: 8 },
-  { id: 'card-6', src: '/Card_13.svg', alt: 'Card image', value: 13 },
-  { id: 'card-7', src: '/Card_20.svg', alt: 'Card image', value: 20 },
-  { id: 'card-8', src: '/Card_infinity.svg', alt: 'Card image', value: 100 },
-]
+import { cards } from '../../utils/cards'
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
@@ -45,6 +36,10 @@ export default function Room(props) {
       return user.id === userId
     })
   }
+
+  const filteredCards = cards.filter((card) =>
+    props.room.cards.includes(card.value)
+  )
 
   const exampleMessages = [
     {
@@ -86,6 +81,7 @@ export default function Room(props) {
           updateRoomId: room.id,
           updateRoomUsers: room.userIds,
           isShown: false,
+          cards: room.cards,
         },
       })
     } catch (e) {
@@ -100,7 +96,7 @@ export default function Room(props) {
     if (!currCookie) {
       router.push({
         pathname: `/home`,
-        query: `errorCode=309`,
+        query: `errorcode=309`,
       })
     } else {
       // Check if userID cookie is in the room.
@@ -108,7 +104,7 @@ export default function Room(props) {
       if (!userIsInRoom) {
         router.push({
           pathname: `/home`,
-          query: `errorCode=310`,
+          query: `errorcode=310`,
         })
       }
 
@@ -158,6 +154,7 @@ export default function Room(props) {
           return user.id
         }),
         isShown: roomUpdated.isShown,
+        cards: roomUpdated.cards,
       }
       setRoom(updatedRoomData)
     }
@@ -196,7 +193,11 @@ export default function Room(props) {
             <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
               Value selected:{' '}
               <span className="font-bold px-1">
-                {getUserById(userId)?.card === 100 ? (
+                {getUserById(userId)?.card === 1000 ? (
+                  <span className="inline-block font-bold"> 0.5 </span>
+                ) : getUserById(userId)?.card === 1001 ? (
+                  <span className="inline-block font-bold"> ? </span>
+                ) : getUserById(userId)?.card === 1002 ? (
                   <span className="inline-block font-bold text-3xl -translate-y-1">
                     {' '}
                     ∞{' '}
@@ -214,7 +215,7 @@ export default function Room(props) {
               id="cards"
               className="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2"
             >
-              {cards.map((card) => {
+              {filteredCards.map((card) => {
                 return (
                   <li key={card.id}>
                     <Card
@@ -246,6 +247,7 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: true,
+                        cards: room.cards,
                       },
                     })
                   }
@@ -262,6 +264,7 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: false,
+                        cards: room.cards,
                       },
                     })
                   }
@@ -279,10 +282,6 @@ export default function Room(props) {
             </div>
           ) : null}
           {/* User list */}
-
-          {console.log(' userId state = ', userId)}
-          {console.log(' globalUserId state = ', globalUserId)}
-
           <UserList
             t={t}
             userList={users}
@@ -352,7 +351,7 @@ export async function getServerSideProps({ params, locale }) {
     return {
       redirect: {
         permanent: false,
-        destination: '/home?errorCode=308',
+        destination: '/home?errorcode=308',
       },
     }
   }
@@ -364,12 +363,10 @@ export async function getServerSideProps({ params, locale }) {
       return user.id
     }),
     isShown: roomInfo.isShown,
+    cards: roomInfo.cards,
   }
 
   const users = roomInfo.users
-
-  console.log('room id props', params)
-  console.log('props room users ', roomInfo.users)
 
   return {
     props: { roomId, meta, locale, langToggleLink, room, users },

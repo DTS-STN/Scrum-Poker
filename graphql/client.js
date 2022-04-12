@@ -51,7 +51,9 @@ const link = isClient
 
 const client = new ApolloClient({
   link: link,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
   defaultOptions: defaultOptions,
 })
 
