@@ -4,15 +4,42 @@ import fr from '../locales/fr'
 
 import CreateRoom from '../components/CreateRoom'
 import JoinRoom from '../components/JoinRoom'
+import { ErrorLabel } from '../components/ErrorLabel'
 import { useRouter } from 'next/router'
 
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
   const router = useRouter()
+  const code = router.query.errorcode
+  let msg = ''
+  if (code)
+    switch (code) {
+      case '308':
+        msg = t.noRoomExists
+        break
+      case '309':
+        msg = t.noUserExists
+        break
+      case '310':
+        msg = t.notRoomMember
+        break
+      default:
+        errorCodeMsg = t.genericError
+    }
 
   return (
     <div>
+      <div className="container gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5">
+        {code && (
+          <ErrorLabel
+            message={msg}
+            className="pb-4"
+            hidden={false}
+          ></ErrorLabel>
+        )}
+      </div>
+      <br />
       <div
         data-testid="homeContent"
         id="homeContent"

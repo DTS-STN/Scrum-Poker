@@ -40,6 +40,8 @@ export default {
   send: 'Send',
 
   // Error Messages
+  max20: 'No more than 20 characters.',
+  max5: '(FR) No more than 5 characters.',
   saveUserFail:
     'There was an error creating or updating the user.  Please try again later.',
   saveRoomFail:

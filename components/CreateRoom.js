@@ -33,7 +33,8 @@ export default function CreateRoom(props) {
   const validationSchema = Yup.object().shape({
     owner: Yup.string()
       .required(t.invalidNameError)
-      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError),
+      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError)
+      .max(20, t.max20),
   })
 
   const formOptions = { resolver: yupResolver(validationSchema) }
@@ -81,7 +82,7 @@ export default function CreateRoom(props) {
           },
         },
       })
-      if (!updateUserRes.data.updatedUser.success) {
+      if (!updateUserRes.data.updateUser.success) {
         triggerError(t.saveUserFail)
       }
       //redirecting to room

@@ -42,6 +42,8 @@ export default {
   send: 'Envoyer',
 
   // Error messages
+  max20: '(FR) No more than 20 characters.',
+  max5: '(FR) No more than 5 characters.',
   saveUserFail:
     '(FR) There was an error saving the user.  Please try again later.',
   saveRoomFail:

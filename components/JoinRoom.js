@@ -35,10 +35,12 @@ export default function JoinRoom(props) {
   const validationSchema = Yup.object().shape({
     room: Yup.string()
       .required(t.invalidRoomError)
-      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidRoomError),
+      .matches(/^[a-zA-Z0-9]*$/gm, t.invalidRoomError)
+      .max(5, t.max5),
     name: Yup.string()
       .required(t.invalidNameError)
-      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError),
+      .matches(/^[\w]+([-_\s]{1}[a-z0-9]+)*$/i, t.invalidNameError)
+      .max(20, t.max20),
   })
 
   const formOptions = { resolver: yupResolver(validationSchema) }

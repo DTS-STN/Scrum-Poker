@@ -103,7 +103,7 @@ export default function Room(props) {
       if (!userIsInRoom) {
         router.push({
           pathname: `/home`,
-          query: `errorcode=311`,
+          query: `errorcode=310`,
         })
       }
 
