@@ -7,8 +7,6 @@ import JoinRoom from '../components/JoinRoom'
 import { ErrorLabel } from '../components/ErrorLabel'
 import { useRouter } from 'next/router'
 
-import { UserIdContext } from '../context/userIdContext'
-
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
