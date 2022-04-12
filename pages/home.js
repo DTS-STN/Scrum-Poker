@@ -25,7 +25,7 @@ export default function Home(props) {
         msg = t.notRoomMember
         break
       default:
-        errorCodeMsg = t.genericError
+        msg = t.genericError
     }
 
   return (
