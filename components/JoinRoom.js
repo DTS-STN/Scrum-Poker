@@ -89,7 +89,10 @@ export default function JoinRoom(props) {
         console.log(e)
         throw t.noRoomExists
       })
+
       let userListID = []
+      let roomTimer, roomCards, roomIsShown
+
       if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
           userListID.push(Number(user.id))
@@ -97,6 +100,9 @@ export default function JoinRoom(props) {
         if (!userListID.includes(userid)) {
           userListID.push(userid)
         }
+        roomTimer = getUserListRes.data.rooms[0].timer
+        roomCards = getUserListRes.data.rooms[0].cards
+        roomIsShown = getUserListRes.data.rooms[0].isShown
       } else {
         throw t.noRoomExists
       }
@@ -106,7 +112,9 @@ export default function JoinRoom(props) {
         variables: {
           updateRoomId: room,
           updateRoomUsers: userListID,
-          isShown: false,
+          isShown: roomIsShown,
+          timer: roomTimer,
+          cards: roomCards,
         },
       })
       if (!updateRoomRes.data.updateRoom.success) {
