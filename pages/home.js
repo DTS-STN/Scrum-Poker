@@ -33,7 +33,7 @@ export default function Home(props) {
     }
 
   return (
-    <div className="flex">
+    <div className="flex flex-col">
       {code && (
         <div className="container mx-auto sm:flex sm:justify-center sm:gap-x-5">
           <ErrorLabel
