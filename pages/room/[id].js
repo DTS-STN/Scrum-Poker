@@ -256,7 +256,7 @@ export default function Room(props) {
     }
   }
   return (
-    <div id="homeContent" className="container mx-auto my-5 rounded-lg">
+    <div id="homeContent" className="container mx-auto my-5 rounded-lg ">
       {/* Main 'row' */}
       <div className="flex w-full flex-col space-y-3 lg:space-y-0 lg:flex-row px-2">
         {/* Left Column */}
@@ -266,7 +266,7 @@ export default function Room(props) {
               Welcome to Scrum Poker!
             </h2>
           ) : (
-            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
+            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700 ">
               Value selected:{' '}
               <span className="font-bold px-1">
                 <span
@@ -279,31 +279,36 @@ export default function Room(props) {
           )}
 
           {/* Cards box */}
-          <div className="p-4 pb-1">
-            <ul
-              id="cards"
-              className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
-            >
-              {filteredCards.map((card) => {
-                return (
-                  <li key={card.id}>
-                    <Card
-                      src={card.src}
-                      id={card.id}
-                      alt={card.alt}
-                      onClick={(e) => onCardClickHandler(e, card)}
-                      onKeyDown={(e) => {
-                        if (e.keyCode === 32 || e.keyCode === 13) {
-                          onCardClickHandler(e, card)
-                        }
-                      }}
-                      selected={card.value === getUserById(userId)?.card}
-                    />
-                  </li>
-                )
-              })}
-            </ul>
+          <div>
+            <div className="p-4 pb-1 flex mx-auto flex-row ">
+              <ul
+                id="cards"
+                // className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
+                className="flex flex-wrap gap-2 mx-auto items-center justify-center "
+              >
+                {filteredCards.map((card) => {
+                  return (
+                    <li className="h-auto w-20" key={card.id}>
+                      <Card
+                        src={card.src}
+                        id={card.id}
+                        alt={card.alt}
+                        onClick={(e) => onCardClickHandler(e, card)}
+                        onKeyDown={(e) => {
+                          if (e.keyCode === 32 || e.keyCode === 13) {
+                            onCardClickHandler(e, card)
+                          }
+                        }}
+                        selected={card.value === getUserById(userId)?.card}
+                      />
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
+
+          {/* end of cards */}
           {userId == room.host ? (
             <div className="flex justify-center">
               {!room.isShown ? (
