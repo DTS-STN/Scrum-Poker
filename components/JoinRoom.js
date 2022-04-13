@@ -167,7 +167,7 @@ export default function JoinRoom(props) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex-1 flex-col mx-auto h-full items-center"
       >
-        <Container className="flex-1 h-full justify-between mx-auto w-full xl:w-[32rem] ">
+        <Container className="flex-1 justify-between h-full mx-auto w-full xl:w-[32rem] ">
           <div>
             {/* //tittle */}
             <h2 className="text-opacity-75 text-black font-bold text-2xl">

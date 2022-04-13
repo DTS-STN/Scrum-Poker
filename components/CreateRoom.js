@@ -143,7 +143,7 @@ export default function CreateRoom(props) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-between items-center w-full"
       >
-        <Container className="flex-1 h-auto w-full xl:w-[32rem] justify-between mx-8 sm:ml-2 sm:mr-2 ">
+        <Container className="flex-1 justify-between h-auto w-full xl:w-[32rem]">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.createRoomTitle}
           </h2>

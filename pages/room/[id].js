@@ -282,7 +282,7 @@ export default function Room(props) {
           <div className="p-4 pb-1">
             <ul
               id="cards"
-              className="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-2"
+              className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
             >
               {filteredCards.map((card) => {
                 return (
