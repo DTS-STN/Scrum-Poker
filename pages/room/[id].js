@@ -161,10 +161,6 @@ export default function Room(props) {
         timer: roomUpdated.timer,
         cards: roomUpdated.cards,
       }
-      const now = Date.now()
-
-      console.log('updatedRoomData', updatedRoomData)
-
       setRoom(updatedRoomData)
     }
   }, [roomSubscription])
