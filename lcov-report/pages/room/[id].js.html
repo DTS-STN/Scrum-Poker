@@ -515,7 +515,24 @@
 <a name='L450'></a><a href='#L450'>450</a>
 <a name='L451'></a><a href='#L451'>451</a>
 <a name='L452'></a><a href='#L452'>452</a>
-<a name='L453'></a><a href='#L453'>453</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L453'></a><a href='#L453'>453</a>
+<a name='L454'></a><a href='#L454'>454</a>
+<a name='L455'></a><a href='#L455'>455</a>
+<a name='L456'></a><a href='#L456'>456</a>
+<a name='L457'></a><a href='#L457'>457</a>
+<a name='L458'></a><a href='#L458'>458</a>
+<a name='L459'></a><a href='#L459'>459</a>
+<a name='L460'></a><a href='#L460'>460</a>
+<a name='L461'></a><a href='#L461'>461</a>
+<a name='L462'></a><a href='#L462'>462</a>
+<a name='L463'></a><a href='#L463'>463</a>
+<a name='L464'></a><a href='#L464'>464</a>
+<a name='L465'></a><a href='#L465'>465</a>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -614,6 +631,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -702,6 +723,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -829,6 +851,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -845,7 +870,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -907,6 +936,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -949,6 +982,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1062,6 +1096,10 @@ export default function <span class="fstat-no" title="function not covered" >Roo
           updateRoomUsers: room.userIds,
           isShown: false,
           cards: room.cards,
+          timer: {
+            timestamp: null,
+            duration: null,
+          },
         },
       })
     } catch (e) {
@@ -1152,6 +1190,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
 <span class="cstat-no" title="statement not covered" >          return user.id</span>
         }),
         isShown: roomUpdated.isShown,
+        timer: roomUpdated.timer,
         cards: roomUpdated.cards,
       }
 <span class="cstat-no" title="statement not covered" >      setRoom(updatedRoomData)</span>
@@ -1285,6 +1324,10 @@ export default function <span class="fstat-no" title="function not covered" >Roo
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: true,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                         cards: room.cards,
                       },
                     })
@@ -1302,6 +1345,10 @@ export default function <span class="fstat-no" title="function not covered" >Roo
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: false,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                         cards: room.cards,
                       },
                     })
@@ -1340,6 +1387,9 @@ export default function <span class="fstat-no" title="function not covered" >Roo
               roomId={props.roomId}
               playerName={getUserById(userId)?.name}
               playersOnline={users.length}
+              roomData={room}
+              updateRoom={updateRoom}
+              isHost={userId == room.host}
               onClick={leaveRoomClick}
             /&gt;
           &lt;/div&gt;
@@ -1403,6 +1453,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
 <span class="cstat-no" title="statement not covered" >      return user.id</span>
     }),
     isShown: roomInfo.isShown,
+    timer: roomInfo.timer,
     cards: roomInfo.cards,
   }
 &nbsp;
@@ -1426,7 +1477,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 13 2022 14:47:12 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 13 2022 14:49:08 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
