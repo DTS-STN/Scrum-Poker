@@ -32,7 +32,7 @@ export default function CreateRoom(props) {
   //useRef doesn't notify the browser when mutating the current ref, so forceUpdate
   //allows us to trigger a re - render instead of using useState and having a delay
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
-  const cardList = useRef([0, 1, 2, 3, 5, 8, 13, 20, 1001, 1002])
+  const cardList = useRef([-1, 2, 3, 4, 5, 6, 7, 8, 11, 12])
 
   const router = useRouter()
 
