@@ -9,5 +9,10 @@ subscription RoomSubscription($room: ID!) {
         id
     }
     isShown
+    timer {
+        timestamp
+        duration
+    }
+    cards 
   }
 }
