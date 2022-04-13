@@ -16,8 +16,6 @@ import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
 import Cookies from 'js-cookie'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
 
 export const cards = [
   { id: 'card-1', src: '/Card_1.svg', value: 1 },
@@ -241,38 +239,9 @@ export default function Room(props) {
     }
   }
 
-  const destroyRoom = () => {
-    console.log('yes is clicked!')
-  }
-
   const leaveRoomClick = async () => {
     if (userId === room.host) {
-      confirmAlert({
-        customUI: ({ onClose }) => (
-          <div className="bg-white rounded p-6 border-2">
-            <h1 className="text-lg font-bold">{t.destroyRoom}</h1>
-            <div className="flex justify-around mt-4">
-              <button
-                onClick={() => {
-                  destroyRoom()
-                  onClose()
-                }}
-                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
-              >
-                {t.yes}
-              </button>
-              <button
-                onClick={onClose}
-                className="font-display rounded focus:ring-1 focus:ring-black focus:ring-offset-2 py-2 px-10 whitespace-pre bg-[#173451] text-white text-center border border-[#173451] active:bg-[#21303F] hover:bg-#245C81 grid place-items-center"
-              >
-                {t.no}
-              </button>
-            </div>
-          </div>
-        ),
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-      })
+      console.log('Owner trying to leave room. To be implemented.')
     } else {
       onBootClick()
     }

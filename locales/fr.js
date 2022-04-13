@@ -36,9 +36,6 @@ export default {
   hostCrown: 'Propriétaire de la chambre',
   leaveImgAlt: 'Bouton "quitter la pièce',
   leaveRoom: 'Quitter la salle',
-  destroyRoom: 'Quitter cette pièce fera sortir tout le monde. Vous êtes sûr ?',
-  yes: 'Oui',
-  no: 'Non',
 
   // Chat
   placeholder: 'Écrire un message',
