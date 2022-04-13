@@ -33,7 +33,7 @@ export default function Home(props) {
     }
 
   return (
-    <div>
+    <div className="  justify-center  flex-col ">
       {code && (
         <div className="container mx-auto sm:flex sm:justify-center sm:gap-x-5">
           <ErrorLabel
@@ -47,7 +47,7 @@ export default function Home(props) {
       <div
         data-testid="homeContent"
         id="homeContent"
-        className="container mt-3 grid grid-cols-1 gap-y-5 mx-auto sm:flex sm:justify-center sm:gap-x-5"
+        className="container mx-auto flex flex-col md:flex-row  md:space-x-2 "
       >
         <CreateRoom locale={props.locale} />
         <JoinRoom locale={props.locale} />

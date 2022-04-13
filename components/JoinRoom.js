@@ -161,46 +161,53 @@ export default function JoinRoom(props) {
   }
 
   return (
-    <form
-      id="joinRoom"
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-between h-full items-center"
-    >
-      <Container className="mx-8 sm:ml-2 sm:mr-2">
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.joinRoomTitle}
-        </h2>
-        {hasError && (
-          <div className="container mx-auto">
-            <ErrorLabel
-              message={msg}
-              className="pb-4"
-              hidden={false}
-              serverError={true}
-            ></ErrorLabel>
+    <div className="container w-full p-2">
+      <form
+        id="joinRoom"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex-1 flex-col mx-auto h-full items-center"
+      >
+        <Container className="flex-1 h-full justify-between mx-auto w-full xl:w-[32rem] ">
+          <div>
+            {/* //tittle */}
+            <h2 className="text-opacity-75 text-black font-bold text-2xl">
+              {t.joinRoomTitle}
+            </h2>
+            {hasError && (
+              <div className="container mx-auto">
+                <ErrorLabel
+                  message={msg}
+                  className="pb-4"
+                  hidden={false}
+                  serverError={true}
+                ></ErrorLabel>
+              </div>
+            )}
+            <TextInput
+              register={register}
+              id="room"
+              label={t.joinRoomNumberLabel}
+              placeholder={t.joinRoomNumberPlaceholder}
+              required={t.required}
+              errors={errors.room}
+            />
+            <TextInput
+              register={register}
+              id="name"
+              label={t.joinRoomNameLabel}
+              placeholder={t.joinRoomNamePlaceholder}
+              required={t.required}
+              errors={errors.name}
+            />
+            {/* end of input */}
           </div>
-        )}
-        <TextInput
-          register={register}
-          id="room"
-          label={t.joinRoomNumberLabel}
-          placeholder={t.joinRoomNumberPlaceholder}
-          required={t.required}
-          errors={errors.room}
-        />
-        <TextInput
-          register={register}
-          id="name"
-          label={t.joinRoomNameLabel}
-          placeholder={t.joinRoomNamePlaceholder}
-          required={t.required}
-          errors={errors.name}
-        />
-        <div className="justify-center flex">
-          <FormButton text={t.joinRoomButton} />
-        </div>
-      </Container>
-    </form>
+
+          <div className="justify-center flex">
+            <FormButton text={t.joinRoomButton} />
+          </div>
+        </Container>
+      </form>
+    </div>
   )
 }
 
