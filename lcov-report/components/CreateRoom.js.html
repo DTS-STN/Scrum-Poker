@@ -271,7 +271,9 @@
 <a name='L206'></a><a href='#L206'>206</a>
 <a name='L207'></a><a href='#L207'>207</a>
 <a name='L208'></a><a href='#L208'>208</a>
-<a name='L209'></a><a href='#L209'>209</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L209'></a><a href='#L209'>209</a>
+<a name='L210'></a><a href='#L210'>210</a>
+<a name='L211'></a><a href='#L211'>211</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -410,6 +412,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -457,6 +460,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -618,69 +622,71 @@ export default function CreateRoom(props) {
   }
 &nbsp;
   return (
-    &lt;form
-      id="createRoom"
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-between h-full items-center"
-    &gt;
-      &lt;Container className="mx-8 sm:ml-2 sm:mr-2"&gt;
-        &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
-          {t.createRoomTitle}
-        &lt;/h2&gt;
-        {hasError &amp;&amp; (
-<span class="branch-1 cbranch-no" title="branch not covered" >          &lt;div className="container mx-auto"&gt;</span>
-            &lt;ErrorLabel
-              message={msg}
-              className="pb-4"
-              hidden={false}
-              serverError={true}
-            &gt;&lt;/ErrorLabel&gt;
+    &lt;div className="container  w-full p-2"&gt;
+      &lt;form
+        id="createRoom"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col justify-between items-center w-full"
+      &gt;
+        &lt;Container className="flex-1 h-auto w-full xl:w-[32rem] justify-between mx-8 sm:ml-2 sm:mr-2 "&gt;
+          &lt;h2 className="text-opacity-75 text-black font-bold text-2xl"&gt;
+            {t.createRoomTitle}
+          &lt;/h2&gt;
+          {hasError &amp;&amp; (
+<span class="branch-1 cbranch-no" title="branch not covered" >            &lt;div className="container mx-auto"&gt;</span>
+              &lt;ErrorLabel
+                message={msg}
+                className="pb-4"
+                hidden={false}
+                serverError={true}
+              &gt;&lt;/ErrorLabel&gt;
+            &lt;/div&gt;
+          )}
+          &lt;TextInput
+            register={register}
+            id="owner"
+            label={t.createRoomNameLabel}
+            placeholder={t.createRoomPlaceholder}
+            required={t.required}
+            errors={errors.owner}
+          /&gt;
+          &lt;div className="mt-6 w-full"&gt;
+            &lt;div className="block rounded-t-lg border-t border-l border-r font-semibold border-gray-300 px-3 py-2 bg-gray-300"&gt;
+              {t.selectCards}{' '}
+              &lt;span className="text-red-800 font-body" aria-hidden="true"&gt;
+                {t.required}
+              &lt;/span&gt;
+            &lt;/div&gt;
+            &lt;ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x"&gt;
+              {cards.map((card) =&gt; {
+                return (
+                  &lt;li className="px-1 pb-1" key={card.id}&gt;
+                    &lt;label htmlFor={card.id}&gt;
+                      &lt;Card
+                        src={card.src}
+                        id={card.id}
+                        alt={card.alt}
+                        onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onCardClickHandler(e, card)}</span>
+                        onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >                          if (e.keyCode === 32 || e.keyCode === 13) {</span>
+<span class="cstat-no" title="statement not covered" >                            onCardClickHandler(e, card)</span>
+                          }
+                        }}
+                        homePage
+                        selected={cardList.current.includes(card.value)}
+                      /&gt;
+                    &lt;/label&gt;
+                  &lt;/li&gt;
+                )
+              })}
+            &lt;/ul&gt;
           &lt;/div&gt;
-        )}
-        &lt;TextInput
-          register={register}
-          id="owner"
-          label={t.createRoomNameLabel}
-          placeholder={t.createRoomPlaceholder}
-          required={t.required}
-          errors={errors.owner}
-        /&gt;
-        &lt;div className="mt-6 w-full"&gt;
-          &lt;div className="block rounded-t-lg border-t border-l border-r font-semibold border-gray-300 px-3 py-2 bg-gray-300"&gt;
-            {t.selectCards}{' '}
-            &lt;span className="text-red-800 font-body" aria-hidden="true"&gt;
-              {t.required}
-            &lt;/span&gt;
+          &lt;div className="justify-center flex-auto"&gt;
+            &lt;FormButton text={t.createRoomButton} /&gt;
           &lt;/div&gt;
-          &lt;ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x"&gt;
-            {cards.map((card) =&gt; {
-              return (
-                &lt;li className="px-1 pb-1" key={card.id}&gt;
-                  &lt;label htmlFor={card.id}&gt;
-                    &lt;Card
-                      src={card.src}
-                      id={card.id}
-                      alt={card.alt}
-                      onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onCardClickHandler(e, card)}</span>
-                      onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >                        if (e.keyCode === 32 || e.keyCode === 13) {</span>
-<span class="cstat-no" title="statement not covered" >                          onCardClickHandler(e, card)</span>
-                        }
-                      }}
-                      homePage
-                      selected={cardList.current.includes(card.value)}
-                    /&gt;
-                  &lt;/label&gt;
-                &lt;/li&gt;
-              )
-            })}
-          &lt;/ul&gt;
-        &lt;/div&gt;
-        &lt;div className="justify-center flex-auto"&gt;
-          &lt;FormButton text={t.createRoomButton} /&gt;
-        &lt;/div&gt;
-      &lt;/Container&gt;
-    &lt;/form&gt;
+        &lt;/Container&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
   )
 }
 &nbsp;
@@ -694,7 +700,7 @@ CreateRoom.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 13 2022 15:06:02 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 13 2022 15:15:10 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
