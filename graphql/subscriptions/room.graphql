@@ -9,5 +9,6 @@ subscription RoomSubscription($room: ID!) {
         id
     }
     isShown
+    cards
   }
 }
