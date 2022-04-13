@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649869739689" clover="3.2.0">
-  <project timestamp="1649869739689" name="All files">
+<coverage generated="1649870250496" clover="3.2.0">
+  <project timestamp="1649870250496" name="All files">
     <metrics statements="377" coveredstatements="133" conditionals="211" coveredconditionals="80" methods="99" coveredmethods="38" elements="687" coveredelements="251" complexity="0" loc="377" ncloc="377" packages="4" files="24" classes="24"/>
     <package name="components">
       <metrics statements="246" coveredstatements="116" conditionals="155" coveredconditionals="74" methods="62" coveredmethods="29"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
         <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
-        <line num="7" count="16" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
         <line num="36" count="3" type="stmt"/>
         <line num="43" count="3" type="stmt"/>
       </file>
@@ -90,7 +90,7 @@
         <line num="133" count="0" type="stmt"/>
         <line num="136" count="0" type="stmt"/>
         <line num="139" count="1" type="stmt"/>
-        <line num="177" count="13" type="stmt"/>
+        <line num="177" count="12" type="stmt"/>
         <line num="184" count="0" type="stmt"/>
         <line num="186" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="187" count="0" type="stmt"/>
