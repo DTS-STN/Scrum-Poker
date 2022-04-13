@@ -32,7 +32,7 @@ export default function UserList(props) {
 
   function setInitialState() {
     props.userList.map((player) => {
-      if (props.currPlayer?.id !== player.id) {
+      if (props.currPlayerId !== player.id) {
         initialState.push({ id: player.id, color: randomColor() })
       }
     })
@@ -70,9 +70,7 @@ export default function UserList(props) {
         return user.id == userId
       }).color
     } else {
-      console.log(
-        'userId was not found assigning a random color, this should not happen'
-      )
+      console.log(`userId ${userId} was not found assigning a random color`)
       return randomColor()
     }
   }
@@ -85,12 +83,12 @@ export default function UserList(props) {
         <Player
           playerName={player.name}
           bgColor={
-            props.currPlayer?.id === player.id
+            props.currPlayerId === player.id
               ? 'bg-pink-500'
               : getUserColorById(player.id)
           }
           selectedCard={
-            props.currPlayer?.id === player.id
+            props.currPlayerId === player.id
               ? getSelectedCard(player.card)
               : player.card
               ? props.isShown
@@ -102,8 +100,8 @@ export default function UserList(props) {
           data-testid="other-players"
           isHost={player.id === props.host}
           showBoot={
-            props.currPlayer?.id === props.host &&
-            props.currPlayer?.id !== player.id
+            props.currPlayerId === props.host &&
+            props.currPlayerId !== player.id
           }
           t={props.t}
         />
@@ -133,6 +131,10 @@ UserList.propTypes = {
       player: PropTypes.object,
     })
   ).isRequired,
+  /**
+   * current player Id
+   */
+  currPlayerId: PropTypes.string,
   /**
    * current player
    */

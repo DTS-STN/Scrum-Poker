@@ -1,5 +1,5 @@
-import PropTypes, { number } from 'prop-types'
-import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { useState, useEffect, useContext } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
 import ChatRoom from '../../components/ChatRoom'
@@ -15,6 +15,9 @@ import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
 import Cookies from 'js-cookie'
+
+import { UserIdContext } from '../../context/userIdContext'
+
 import { cards } from '../../utils/cards'
 
 export default function Room(props) {
@@ -25,6 +28,9 @@ export default function Room(props) {
   const [room, setRoom] = useState(props.room)
   const [users, setUsers] = useState(props.users)
   const [userId, setUserId] = useState(null)
+
+  const { globalUserId } = useContext(UserIdContext)
+
   const getUserById = (userId) => {
     return users.find((user) => {
       return user.id === userId
@@ -297,6 +303,7 @@ export default function Room(props) {
             t={t}
             userList={users}
             isShown={room.isShown}
+            currPlayerId={globalUserId}
             currPlayer={getUserById(userId)}
             host={room.host}
           />
@@ -368,6 +375,7 @@ export async function getServerSideProps({ params, locale }) {
       },
     }
   }
+
   const room = {
     id: roomInfo.id,
     host: roomInfo.host.id,

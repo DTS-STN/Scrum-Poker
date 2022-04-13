@@ -10,9 +10,13 @@ import { useRouter } from 'next/router'
 export default function Home(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
   const router = useRouter()
+
   const code = router.query.errorcode
+
   let msg = ''
+
   if (code)
     switch (code) {
       case '308':
