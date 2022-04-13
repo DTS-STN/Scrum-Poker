@@ -137,69 +137,71 @@ export default function CreateRoom(props) {
   }
 
   return (
-    <form
-      id="createRoom"
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col justify-between h-full items-center"
-    >
-      <Container className="mx-8 sm:ml-2 sm:mr-2">
-        <h2 className="text-opacity-75 text-black font-bold text-2xl">
-          {t.createRoomTitle}
-        </h2>
-        {hasError && (
-          <div className="container mx-auto">
-            <ErrorLabel
-              message={msg}
-              className="pb-4"
-              hidden={false}
-              serverError={true}
-            ></ErrorLabel>
+    <div className="container  w-full p-2">
+      <form
+        id="createRoom"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col justify-between items-center w-full"
+      >
+        <Container className="flex-1 h-auto w-full xl:w-[32rem] justify-between mx-8 sm:ml-2 sm:mr-2 ">
+          <h2 className="text-opacity-75 text-black font-bold text-2xl">
+            {t.createRoomTitle}
+          </h2>
+          {hasError && (
+            <div className="container mx-auto">
+              <ErrorLabel
+                message={msg}
+                className="pb-4"
+                hidden={false}
+                serverError={true}
+              ></ErrorLabel>
+            </div>
+          )}
+          <TextInput
+            register={register}
+            id="owner"
+            label={t.createRoomNameLabel}
+            placeholder={t.createRoomPlaceholder}
+            required={t.required}
+            errors={errors.owner}
+          />
+          <div className="mt-6 w-full">
+            <div className="block rounded-t-lg border-t border-l border-r font-semibold border-gray-300 px-3 py-2 bg-gray-300">
+              {t.selectCards}{' '}
+              <span className="text-red-800 font-body" aria-hidden="true">
+                {t.required}
+              </span>
+            </div>
+            <ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x">
+              {cards.map((card) => {
+                return (
+                  <li className="px-1 pb-1" key={card.id}>
+                    <label htmlFor={card.id}>
+                      <Card
+                        src={card.src}
+                        id={card.id}
+                        alt={card.alt}
+                        onClick={(e) => onCardClickHandler(e, card)}
+                        onKeyDown={(e) => {
+                          if (e.keyCode === 32 || e.keyCode === 13) {
+                            onCardClickHandler(e, card)
+                          }
+                        }}
+                        homePage
+                        selected={cardList.current.includes(card.value)}
+                      />
+                    </label>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
-        )}
-        <TextInput
-          register={register}
-          id="owner"
-          label={t.createRoomNameLabel}
-          placeholder={t.createRoomPlaceholder}
-          required={t.required}
-          errors={errors.owner}
-        />
-        <div className="mt-6 w-full">
-          <div className="block rounded-t-lg border-t border-l border-r font-semibold border-gray-300 px-3 py-2 bg-gray-300">
-            {t.selectCards}{' '}
-            <span className="text-red-800 font-body" aria-hidden="true">
-              {t.required}
-            </span>
+          <div className="justify-center flex-auto">
+            <FormButton text={t.createRoomButton} />
           </div>
-          <ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x">
-            {cards.map((card) => {
-              return (
-                <li className="px-1 pb-1" key={card.id}>
-                  <label htmlFor={card.id}>
-                    <Card
-                      src={card.src}
-                      id={card.id}
-                      alt={card.alt}
-                      onClick={(e) => onCardClickHandler(e, card)}
-                      onKeyDown={(e) => {
-                        if (e.keyCode === 32 || e.keyCode === 13) {
-                          onCardClickHandler(e, card)
-                        }
-                      }}
-                      homePage
-                      selected={cardList.current.includes(card.value)}
-                    />
-                  </label>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div className="justify-center flex-auto">
-          <FormButton text={t.createRoomButton} />
-        </div>
-      </Container>
-    </form>
+        </Container>
+      </form>
+    </div>
   )
 }
 
