@@ -18,11 +18,16 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+
+import { UserIdContext } from '../context/userIdContext'
 
 export default function JoinRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  const { setGlobalUserId } = useContext(UserIdContext)
+
   const router = useRouter()
 
   //Load GraphQL Data
@@ -71,6 +76,7 @@ export default function JoinRoom(props) {
       })
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
+        setGlobalUserId(userid)
         Cookies.set('userid', `${userid}`)
       } else {
         throw t.saveUserFail
@@ -83,7 +89,10 @@ export default function JoinRoom(props) {
         console.log(e)
         throw t.noRoomExists
       })
+
       let userListID = []
+      let roomTimer, roomCards, roomIsShown
+
       if (getUserListRes.data.rooms[0]) {
         getUserListRes.data.rooms[0].users.forEach((user) => {
           userListID.push(Number(user.id))
@@ -91,6 +100,9 @@ export default function JoinRoom(props) {
         if (!userListID.includes(userid)) {
           userListID.push(userid)
         }
+        roomTimer = getUserListRes.data.rooms[0].timer
+        roomCards = getUserListRes.data.rooms[0].cards
+        roomIsShown = getUserListRes.data.rooms[0].isShown
       } else {
         throw t.noRoomExists
       }
@@ -100,7 +112,9 @@ export default function JoinRoom(props) {
         variables: {
           updateRoomId: room,
           updateRoomUsers: userListID,
-          isShown: false,
+          isShown: roomIsShown,
+          timer: roomTimer,
+          cards: roomCards,
         },
       })
       if (!updateRoomRes.data.updateRoom.success) {

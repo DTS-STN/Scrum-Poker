@@ -17,13 +17,17 @@ import ADD_USER from '../graphql/mutations/addUser.graphql'
 import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
-import { useState, useRef, useReducer } from 'react'
+import { useState, useRef, useReducer, useContext } from 'react'
 import Cookies from 'js-cookie'
 import { cards } from '../utils/cards'
+
+import { UserIdContext } from '../context/userIdContext'
 
 export default function CreateRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
+
+  const { setGlobalUserId } = useContext(UserIdContext)
 
   //useRef doesn't notify the browser when mutating the current ref, so forceUpdate
   //allows us to trigger a re - render instead of using useState and having a delay
@@ -84,6 +88,7 @@ export default function CreateRoom(props) {
       const addUserRes = await addUser({ variables: { name: username } })
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
+        setGlobalUserId(userid)
         Cookies.set('userid', `${userid}`)
       } else {
         throw t.saveUserFail
