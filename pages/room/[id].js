@@ -93,6 +93,10 @@ export default function Room(props) {
           updateRoomUsers: room.userIds,
           isShown: false,
           cards: room.cards,
+          timer: {
+            timestamp: null,
+            duration: null,
+          },
         },
       })
     } catch (e) {
@@ -183,6 +187,7 @@ export default function Room(props) {
           return user.id
         }),
         isShown: roomUpdated.isShown,
+        timer: roomUpdated.timer,
         cards: roomUpdated.cards,
       }
       setRoom(updatedRoomData)
@@ -318,6 +323,10 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: true,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                         cards: room.cards,
                       },
                     })
@@ -335,6 +344,10 @@ export default function Room(props) {
                         updateRoomId: room.id,
                         updateRoomUsers: room.userIds,
                         isShown: false,
+                        timer: {
+                          timestamp: room.timer.timestamp,
+                          duration: room.timer.duration,
+                        },
                         cards: room.cards,
                       },
                     })
@@ -373,6 +386,9 @@ export default function Room(props) {
               roomId={props.roomId}
               playerName={getUserById(userId)?.name}
               playersOnline={users.length}
+              roomData={room}
+              updateRoom={updateRoom}
+              isHost={userId == room.host}
               onClick={leaveRoomClick}
             />
           </div>
@@ -436,6 +452,7 @@ export async function getServerSideProps({ params, locale }) {
       return user.id
     }),
     isShown: roomInfo.isShown,
+    timer: roomInfo.timer,
     cards: roomInfo.cards,
   }
 
