@@ -69,9 +69,7 @@ export default function RoomInfo(props) {
       </div>
       <div className="flex justify-center pb-1">
         <button
-          onClick={() =>
-            console.log(`Player ${props.playerName} wants out of here!`)
-          }
+          onClick={props.onClick}
           className="bg-red-700 border border-gray-400 inline-flex justify-center items-center rounded pr-1 mt-1 hover:bg-red-600 active:bg-red-800 focus:bg-red-600"
         >
           <span className="pl-3 text-white font-display font-bold">
@@ -118,4 +116,7 @@ RoomInfo.propTypes = {
 
   // translations for labels
   t: propTypes.object,
+
+  // onClick event
+  onClick: propTypes.func,
 }

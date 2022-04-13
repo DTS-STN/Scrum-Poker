@@ -64,7 +64,7 @@ export default function Player(props) {
         <div className="flex">
           {props.showBoot ? (
             <button
-              onClick={() => console.log(`Boot Player: ${props.playerName}`)}
+              onClick={() => props.onBootClick(props.playerId)}
               className={`bg-red-600 border border-gray-400 flex justify-center items-center rounded-full h-10 w-10 my-auto mr-2 hover:bg-red-700`}
             >
               <Image
@@ -127,4 +127,10 @@ Player.propTypes = {
 
   // show Boot options
   showBoot: propTypes.bool,
+
+  // player Id
+  playerId: propTypes.string,
+
+  // onBootClick callback
+  onBootClick: propTypes.func,
 }
