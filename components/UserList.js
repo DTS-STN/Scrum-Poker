@@ -81,6 +81,7 @@ export default function UserList(props) {
     return (
       <li className="w-full" key={player.id}>
         <Player
+          playerId={player.id}
           playerName={player.name}
           bgColor={
             props.currPlayerId === player.id
@@ -104,6 +105,7 @@ export default function UserList(props) {
             props.currPlayerId !== player.id
           }
           t={props.t}
+          onBootClick={props.onBootClick}
         />
       </li>
     )
@@ -155,4 +157,9 @@ UserList.propTypes = {
    * Identifier for room host
    */
   host: PropTypes.string,
+
+  /**
+   * onBootClick function
+   */
+  onBootClick: PropTypes.func,
 }
