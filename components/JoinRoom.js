@@ -101,6 +101,8 @@ export default function JoinRoom(props) {
           updateRoomId: room,
           updateRoomUsers: userListID,
           isShown: false,
+          timer: getUserListRes.data.rooms[0].timer,
+          cards: getUserListRes.data.rooms[0].cards,
         },
       })
       if (!updateRoomRes.data.updateRoom.success) {
