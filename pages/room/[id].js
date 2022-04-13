@@ -228,6 +228,8 @@ export default function Room(props) {
             updateRoomId: room.id,
             updateRoomUsers: copiedRoomUserIds,
             isShown: room.isShown,
+            timer: room.timer,
+            cards: room.cards,
           },
         }).catch((e) => {
           throw e
