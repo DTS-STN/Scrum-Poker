@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/14</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/14</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,37 +111,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,8 +155,8 @@
 import Countdown from 'react-countdown'
 &nbsp;
 // Renderer callback with condition
-const renderer = <span class="fstat-no" title="function not covered" >({</span> minutes, seconds, completed, props }) =&gt; {
-<span class="cstat-no" title="statement not covered" >  if (completed) {</span>
+const renderer = ({ minutes, seconds, completed, props }) =&gt; {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (completed) {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;span className="w-auto px-2 rounded border-2 border-[#F35568] text-[16px]"&gt;
         {props.timeIsUpText}
@@ -164,18 +164,18 @@ const renderer = <span class="fstat-no" title="function not covered" >({</span> 
     )
   }
 &nbsp;
-  let borderColor = <span class="cstat-no" title="statement not covered" >'#AAA'</span>
-<span class="cstat-no" title="statement not covered" >  if (minutes === 0 &amp;&amp; seconds &lt;= 30 &amp;&amp; seconds &gt; 10) {</span>
+  let borderColor = '#AAA'
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (minutes === 0 &amp;&amp; seconds &lt;= 30 &amp;&amp; seconds &gt; 10) {
 <span class="cstat-no" title="statement not covered" >    borderColor = '#FFC923'</span>
-  } else <span class="cstat-no" title="statement not covered" >if (minutes === 0 &amp;&amp; seconds &lt;= 10) {</span>
-<span class="cstat-no" title="statement not covered" >    borderColor = '#F35568'</span>
+  } else <span class="missing-if-branch" title="else path not taken" >E</span>if (minutes === 0 &amp;&amp; seconds &lt;= 10) {
+    borderColor = '#F35568'
   }
 &nbsp;
-  const className = <span class="cstat-no" title="statement not covered" >`w-16 px-2 text-center rounded border-2 text-[16px]`</span>
-  const displayMinute = <span class="cstat-no" title="statement not covered" >minutes &lt; 10 ? `0${minutes}` : minutes</span>
-  const displaySeconds = <span class="cstat-no" title="statement not covered" >seconds &lt; 10 ? `0${seconds}` : seconds</span>
+  const className = `w-16 px-2 text-center rounded border-2 text-[16px]`
+  const displayMinute = minutes &lt; 10 ? `0${minutes}` : <span class="branch-1 cbranch-no" title="branch not covered" >minutes</span>
+  const displaySeconds = seconds &lt; 10 ? <span class="branch-0 cbranch-no" title="branch not covered" >`0${seconds}` </span>: seconds
   // Render a countdown
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;&gt;
       &lt;span className={className} style={{ borderColor }}&gt;
         {displayMinute}:{displaySeconds}
@@ -184,8 +184,8 @@ const renderer = <span class="fstat-no" title="function not covered" >({</span> 
   )
 }
 &nbsp;
-const CountdownTimer = <span class="fstat-no" title="function not covered" >(p</span>rops) =&gt; {
-<span class="cstat-no" title="statement not covered" >  return (</span>
+const CountdownTimer = (props) =&gt; {
+  return (
     &lt;Countdown
       date={Date.now() + props.duration}
       renderer={renderer}
@@ -202,7 +202,7 @@ export default CountdownTimer
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 13 2022 14:21:22 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 13 2022 14:45:12 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
