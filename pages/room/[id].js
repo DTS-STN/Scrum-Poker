@@ -18,7 +18,7 @@ import Cookies from 'js-cookie'
 
 import { UserIdContext } from '../../context/userIdContext'
 
-import { cards } from '../../utils/cards'
+import { cards, getCardByValue } from '../../utils/cards'
 
 export default function Room(props) {
   const t = props.locale === 'en' ? en : fr
@@ -193,18 +193,11 @@ export default function Room(props) {
             <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
               Value selected:{' '}
               <span className="font-bold px-1">
-                {getUserById(userId)?.card === 1000 ? (
-                  <span className="inline-block font-bold"> 0.5 </span>
-                ) : getUserById(userId)?.card === 1001 ? (
-                  <span className="inline-block font-bold"> ? </span>
-                ) : getUserById(userId)?.card === 1002 ? (
-                  <span className="inline-block font-bold text-3xl -translate-y-1">
-                    {' '}
-                    ∞{' '}
-                  </span>
-                ) : (
-                  getUserById(userId)?.card
-                )}
+                <span
+                  className={getCardByValue(getUserById(userId)?.card).style}
+                >
+                  {getCardByValue(getUserById(userId)?.card).text}
+                </span>
               </span>
             </h2>
           )}
