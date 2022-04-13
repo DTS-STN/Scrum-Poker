@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649866313842" clover="3.2.0">
-  <project timestamp="1649866313843" name="All files">
-    <metrics statements="377" coveredstatements="133" conditionals="217" coveredconditionals="80" methods="99" coveredmethods="38" elements="693" coveredelements="251" complexity="0" loc="377" ncloc="377" packages="4" files="24" classes="24"/>
+<coverage generated="1649866360444" clover="3.2.0">
+  <project timestamp="1649866360444" name="All files">
+    <metrics statements="377" coveredstatements="133" conditionals="211" coveredconditionals="80" methods="99" coveredmethods="38" elements="687" coveredelements="251" complexity="0" loc="377" ncloc="377" packages="4" files="24" classes="24"/>
     <package name="components">
       <metrics statements="246" coveredstatements="116" conditionals="155" coveredconditionals="74" methods="62" coveredmethods="29"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
@@ -352,9 +352,9 @@
       </file>
     </package>
     <package name="pages.room">
-      <metrics statements="106" coveredstatements="0" conditionals="50" coveredconditionals="0" methods="28" coveredmethods="0"/>
+      <metrics statements="106" coveredstatements="0" conditionals="44" coveredconditionals="0" methods="28" coveredmethods="0"/>
       <file name="[id].js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/pages/room/[id].js">
-        <metrics statements="106" coveredstatements="0" conditionals="50" coveredconditionals="0" methods="28" coveredmethods="0"/>
+        <metrics statements="106" coveredstatements="0" conditionals="44" coveredconditionals="0" methods="28" coveredmethods="0"/>
         <line num="25" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
@@ -443,24 +443,24 @@
         <line num="253" count="0" type="stmt"/>
         <line num="255" count="0" type="stmt"/>
         <line num="258" count="0" type="stmt"/>
-        <line num="295" count="0" type="stmt"/>
-        <line num="301" count="0" type="stmt"/>
-        <line num="303" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="304" count="0" type="stmt"/>
-        <line num="321" count="0" type="stmt"/>
-        <line num="342" count="0" type="stmt"/>
-        <line num="411" count="0" type="stmt"/>
-        <line num="414" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="417" count="0" type="stmt"/>
+        <line num="288" count="0" type="stmt"/>
+        <line num="294" count="0" type="stmt"/>
+        <line num="296" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="297" count="0" type="stmt"/>
+        <line num="314" count="0" type="stmt"/>
+        <line num="335" count="0" type="stmt"/>
+        <line num="404" count="0" type="stmt"/>
+        <line num="407" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="410" count="0" type="stmt"/>
+        <line num="426" count="0" type="stmt"/>
+        <line num="430" count="0" type="stmt"/>
+        <line num="432" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="433" count="0" type="stmt"/>
-        <line num="437" count="0" type="stmt"/>
-        <line num="439" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="440" count="0" type="stmt"/>
-        <line num="448" count="0" type="stmt"/>
+        <line num="441" count="0" type="stmt"/>
+        <line num="445" count="0" type="stmt"/>
         <line num="452" count="0" type="stmt"/>
+        <line num="454" count="0" type="stmt"/>
         <line num="459" count="0" type="stmt"/>
-        <line num="461" count="0" type="stmt"/>
-        <line num="466" count="0" type="stmt"/>
       </file>
     </package>
   </project>
