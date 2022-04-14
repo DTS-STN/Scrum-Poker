@@ -14,14 +14,9 @@ export default function UserList(props) {
 
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
-  console.log('userList list of users ', props.userList)
-
   const displayPlayers = props.userList.map((player) => {
     return (
       <li className="w-full" key={player.id}>
-        {console.log(
-          props.currPlayer?.id === player.id ? 'bg-pink-500' : player.color
-        )}
         <Player
           playerId={player.id}
           playerName={player.name}
