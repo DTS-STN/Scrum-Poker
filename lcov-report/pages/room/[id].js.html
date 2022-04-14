@@ -527,13 +527,7 @@
 <a name='L462'></a><a href='#L462'>462</a>
 <a name='L463'></a><a href='#L463'>463</a>
 <a name='L464'></a><a href='#L464'>464</a>
-<a name='L465'></a><a href='#L465'>465</a>
-<a name='L466'></a><a href='#L466'>466</a>
-<a name='L467'></a><a href='#L467'>467</a>
-<a name='L468'></a><a href='#L468'>468</a>
-<a name='L469'></a><a href='#L469'>469</a>
-<a name='L470'></a><a href='#L470'>470</a>
-<a name='L471'></a><a href='#L471'>471</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L465'></a><a href='#L465'>465</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -820,8 +814,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -832,7 +824,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -849,8 +840,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -873,7 +862,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1007,7 +995,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
-// import ChatRoom from '../../components/ChatRoom'
+import ChatRoom from '../../components/ChatRoom'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
@@ -1261,7 +1249,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
     }
   }
 <span class="cstat-no" title="statement not covered" >  return (</span>
-    &lt;div id="homeContent" className="container mx-auto my-5 rounded-lg "&gt;
+    &lt;div id="homeContent" className="container mx-auto my-5 rounded-lg"&gt;
       {/* Main 'row' */}
       &lt;div className="flex w-full flex-col space-y-3 lg:space-y-0 lg:flex-row px-2"&gt;
         {/* Left Column */}
@@ -1271,7 +1259,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
               Welcome to Scrum Poker!
             &lt;/h2&gt;
           ) : (
-            &lt;h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700 "&gt;
+            &lt;h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700"&gt;
               Value selected:{' '}
               &lt;span className="font-bold px-1"&gt;
                 &lt;span
@@ -1284,36 +1272,31 @@ export default function <span class="fstat-no" title="function not covered" >Roo
           )}
 &nbsp;
           {/* Cards box */}
-          &lt;div&gt;
-            &lt;div className="p-4 pb-1 flex mx-auto flex-row "&gt;
-              &lt;ul
-                id="cards"
-                // className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
-                className="flex flex-wrap gap-2 mx-auto items-center justify-center "
-              &gt;
-                {filteredCards.map(<span class="fstat-no" title="function not covered" >(c</span>ard) =&gt; {
-<span class="cstat-no" title="statement not covered" >                  return (</span>
-                    &lt;li className="h-auto w-20" key={card.id}&gt;
-                      &lt;Card
-                        src={card.src}
-                        id={card.id}
-                        alt={card.alt}
-                        onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onCardClickHandler(e, card)}</span>
-                        onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
-<span class="cstat-no" title="statement not covered" >                          if (e.keyCode === 32 || e.keyCode === 13) {</span>
-<span class="cstat-no" title="statement not covered" >                            onCardClickHandler(e, card)</span>
-                          }
-                        }}
-                        selected={card.value === getUserById(userId)?.card}
-                      /&gt;
-                    &lt;/li&gt;
-                  )
-                })}
-              &lt;/ul&gt;
-            &lt;/div&gt;
+          &lt;div className="p-4 pb-1"&gt;
+            &lt;ul
+              id="cards"
+              className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
+            &gt;
+              {filteredCards.map(<span class="fstat-no" title="function not covered" >(c</span>ard) =&gt; {
+<span class="cstat-no" title="statement not covered" >                return (</span>
+                  &lt;li key={card.id}&gt;
+                    &lt;Card
+                      src={card.src}
+                      id={card.id}
+                      alt={card.alt}
+                      onClick={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; <span class="cstat-no" title="statement not covered" >onCardClickHandler(e, card)}</span>
+                      onKeyDown={<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >                        if (e.keyCode === 32 || e.keyCode === 13) {</span>
+<span class="cstat-no" title="statement not covered" >                          onCardClickHandler(e, card)</span>
+                        }
+                      }}
+                      selected={card.value === getUserById(userId)?.card}
+                    /&gt;
+                  &lt;/li&gt;
+                )
+              })}
+            &lt;/ul&gt;
           &lt;/div&gt;
-&nbsp;
-          {/* end of cards */}
           {userId == room.host ? (
             &lt;div className="flex justify-center"&gt;
               {!room.isShown ? (
@@ -1396,15 +1379,14 @@ export default function <span class="fstat-no" title="function not covered" >Roo
             /&gt;
           &lt;/div&gt;
 &nbsp;
-          {/* uncomment to show the chat room */}
-          {/* &lt;div&gt;
+          &lt;div&gt;
             &lt;ChatRoom
               id="chat"
               name={getUserById(userId)?.name}
               messages={exampleMessages}
               t={t}
             /&gt;
-          &lt;/div&gt; */}
+          &lt;/div&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1480,7 +1462,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Apr 14 2022 14:24:01 GMT+0000 (Coordinated Universal Time)
+                at Thu Apr 14 2022 14:24:38 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
