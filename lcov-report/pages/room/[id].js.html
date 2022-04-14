@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/108</span>
+                <span class='fraction'>0/109</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/44</span>
+                <span class='fraction'>0/46</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/107</span>
+                <span class='fraction'>0/108</span>
             </div>
         
             
@@ -528,7 +528,12 @@
 <a name='L463'></a><a href='#L463'>463</a>
 <a name='L464'></a><a href='#L464'>464</a>
 <a name='L465'></a><a href='#L465'>465</a>
-<a name='L466'></a><a href='#L466'>466</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L466'></a><a href='#L466'>466</a>
+<a name='L467'></a><a href='#L467'>467</a>
+<a name='L468'></a><a href='#L468'>468</a>
+<a name='L469'></a><a href='#L469'>469</a>
+<a name='L470'></a><a href='#L470'>470</a>
+<a name='L471'></a><a href='#L471'>471</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -655,7 +660,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -711,6 +715,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -745,9 +750,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1026,7 +1036,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
   const [users, setUsers] = <span class="cstat-no" title="statement not covered" >useState(props.users)</span>
   const [userId, setUserId] = <span class="cstat-no" title="statement not covered" >useState(null)</span>
 &nbsp;
-  const { globalUserId, setGlobalUserId } = <span class="cstat-no" title="statement not covered" >useContext(UserIdContext)</span>
+  const { globalUserId } = <span class="cstat-no" title="statement not covered" >useContext(UserIdContext)</span>
 &nbsp;
   const getUserById = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(u</span>serId) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return users.find(<span class="fstat-no" title="function not covered" >(u</span>ser) =&gt; {</span>
@@ -1120,7 +1130,6 @@ export default function <span class="fstat-no" title="function not covered" >Roo
 &nbsp;
       // User is in this room.
 <span class="cstat-no" title="statement not covered" >      setUserId(currCookie)</span>
-<span class="cstat-no" title="statement not covered" >      setGlobalUserId(currCookie)</span>
     }
   }, [])
 &nbsp;
@@ -1172,6 +1181,7 @@ export default function <span class="fstat-no" title="function not covered" >Roo
             // navigate user to home page
 <span class="cstat-no" title="statement not covered" >            router.push({</span>
               pathname: `/home`,
+              query: `errorcode=311`,
             })
           }
         }
@@ -1214,6 +1224,11 @@ export default function <span class="fstat-no" title="function not covered" >Roo
     let playerIdToRemove = <span class="cstat-no" title="statement not covered" >playerId || userId</span>
     const index = <span class="cstat-no" title="statement not covered" >room.userIds.indexOf(playerIdToRemove)</span>
 &nbsp;
+<span class="cstat-no" title="statement not covered" >    if (globalUserId === playerId) {</span>
+<span class="cstat-no" title="statement not covered" >      router.push({</span>
+        pathname: `/home?errorcode=308`,
+      })
+    }
 <span class="cstat-no" title="statement not covered" >    if (index &gt; -1) {</span>
       let copiedRoomUserIds = <span class="cstat-no" title="statement not covered" >[...room.userIds]</span>
 <span class="cstat-no" title="statement not covered" >      copiedRoomUserIds.splice(index, 1)</span>
@@ -1465,7 +1480,7 @@ export async function <span class="fstat-no" title="function not covered" >getSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Apr 14 2022 15:24:54 GMT+0000 (Coordinated Universal Time)
+                at Thu Apr 14 2022 16:25:29 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
