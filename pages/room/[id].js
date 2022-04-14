@@ -34,7 +34,6 @@ export default function Room(props) {
   const { globalUserId, setGlobalUserId } = useContext(UserIdContext)
 
   const getUserById = (userId) => {
-    console.log('userId', userId)
     return users.find((user) => {
       return user.id === userId
     })

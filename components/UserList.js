@@ -78,7 +78,6 @@ export default function UserList(props) {
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
 
   const displayPlayers = props.userList.map((player) => {
-    console.log('props.currPlayerId', props.currPlayerId)
     return (
       <li className="w-full" key={player.id}>
         <Player
