@@ -31,7 +31,7 @@ export default function Room(props) {
   const [users, setUsers] = useState(props.users)
   const [userId, setUserId] = useState(null)
 
-  const { globalUserId } = useContext(UserIdContext)
+  const { globalUserId, setGlobalUserId } = useContext(UserIdContext)
 
   const getUserById = (userId) => {
     return users.find((user) => {
@@ -125,6 +125,7 @@ export default function Room(props) {
 
       // User is in this room.
       setUserId(currCookie)
+      setGlobalUserId(currCookie)
     }
   }, [])
 
