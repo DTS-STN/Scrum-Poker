@@ -31,9 +31,10 @@ export default function Room(props) {
   const [users, setUsers] = useState(props.users)
   const [userId, setUserId] = useState(null)
 
-  const { globalUserId } = useContext(UserIdContext)
+  const { globalUserId, setGlobalUserId } = useContext(UserIdContext)
 
   const getUserById = (userId) => {
+    console.log('userId', userId)
     return users.find((user) => {
       return user.id === userId
     })
@@ -107,6 +108,7 @@ export default function Room(props) {
 
   useEffect(() => {
     const currCookie = Cookies.get('userid')
+    console.log('curCookie', currCookie)
     // Check if browser has userid cookie.
     if (!currCookie) {
       router.push({
@@ -125,6 +127,7 @@ export default function Room(props) {
 
       // User is in this room.
       setUserId(currCookie)
+      setGlobalUserId(currCookie)
     }
   }, [])
 
