@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useState, useEffect, useContext } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
-import ChatRoom from '../../components/ChatRoom'
+// import ChatRoom from '../../components/ChatRoom'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
@@ -263,7 +263,7 @@ export default function Room(props) {
     }
   }
   return (
-    <div id="homeContent" className="container mx-auto my-5 rounded-lg">
+    <div id="homeContent" className="container mx-auto my-5 rounded-lg ">
       {/* Main 'row' */}
       <div className="flex w-full flex-col space-y-3 lg:space-y-0 lg:flex-row px-2">
         {/* Left Column */}
@@ -273,7 +273,7 @@ export default function Room(props) {
               Welcome to Scrum Poker!
             </h2>
           ) : (
-            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700">
+            <h2 className="flex justify-center border-b-2 p-2 bg-gray-200 mx-auto font-semibold font-body text-lg text-slate-700 ">
               Value selected:{' '}
               <span className="font-bold px-1">
                 <span
@@ -286,37 +286,41 @@ export default function Room(props) {
           )}
 
           {/* Cards box */}
-          <div className="p-4 pb-1">
-            <ul
-              id="cards"
-              className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
-            >
-              {filteredCards.map((card) => {
-                return (
-                  <li key={card.id}>
-                    <Card
-                      src={card.src}
-                      id={card.id}
-                      alt={card.alt}
-                      onClick={(e) => onCardClickHandler(e, card)}
-                      onKeyDown={(e) => {
-                        if (e.keyCode === 32 || e.keyCode === 13) {
-                          onCardClickHandler(e, card)
-                        }
-                      }}
-                      selected={card.value === getUserById(userId)?.card}
-                    />
-                  </li>
-                )
-              })}
-            </ul>
+          <div>
+            <div className="p-4 pb-1 flex mx-auto flex-row ">
+              <ul
+                id="cards"
+                className="flex flex-wrap gap-2 mx-auto items-center justify-center "
+              >
+                {filteredCards.map((card) => {
+                  return (
+                    <li className="h-auto w-20" key={card.id}>
+                      <Card
+                        src={card.src}
+                        id={card.id}
+                        alt={card.alt}
+                        onClick={(e) => onCardClickHandler(e, card)}
+                        onKeyDown={(e) => {
+                          if (e.keyCode === 32 || e.keyCode === 13) {
+                            onCardClickHandler(e, card)
+                          }
+                        }}
+                        selected={card.value === getUserById(userId)?.card}
+                      />
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
+
+          {/* end of cards */}
           {userId == room.host ? (
-            <div className="flex justify-center">
+            <div className="flex justify-center p-1">
               {!room.isShown ? (
                 <button
                   type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                   onClick={() =>
                     updateRoom({
                       variables: {
@@ -337,7 +341,7 @@ export default function Room(props) {
               ) : (
                 <button
                   type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                   onClick={() =>
                     updateRoom({
                       variables: {
@@ -358,7 +362,7 @@ export default function Room(props) {
               )}
               <button
                 type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                 onClick={handleClear}
               >
                 {t.clearCards}
@@ -393,14 +397,15 @@ export default function Room(props) {
             />
           </div>
 
-          <div>
+          {/* uncomment to show the chat room */}
+          {/* <div>
             <ChatRoom
               id="chat"
               name={getUserById(userId)?.name}
               messages={exampleMessages}
               t={t}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -113,8 +113,8 @@ export default function UserList(props) {
     )
   })
   return (
-    <div className=" py-2 px-4 flex flex-col mt-2">
-      <div className="flex justify-between border-b-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
+    <div className=" py-2 px-4 flex flex-col">
+      <div className="flex justify-between border-b-2 mb-2 border-slate-300 p-2 text-lg font-display font-semibold text-slate-700 tracking-wide">
         <p className="px-2">{props.t.users}</p>
         {props.isShown == true ? (
           <div className="ml-auto pt-px">
@@ -157,7 +157,7 @@ export default function UserList(props) {
         )}
         <p className="px-2">{props.t.card}</p>
       </div>
-      <ul className="flex flex-col " data-testid="cardList">
+      <ul className="flex flex-col space-y-1" data-testid="cardList">
         {props.userList ? displayPlayers : ''}
       </ul>
       {props.children}
