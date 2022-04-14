@@ -1,5 +1,5 @@
-mutation addUser($name: String!) {
-  addUser(name: $name) {
+mutation addUser($name: String!, $color: String!) {
+  addUser(name: $name, color: $color) {
     success
     message
     id

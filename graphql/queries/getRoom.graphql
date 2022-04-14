@@ -11,6 +11,7 @@ query getRoom($roomsId: ID) {
       name
       card
       room
+      color
     }
     isShown
     cards

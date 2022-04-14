@@ -4,5 +4,6 @@ subscription UserSubscription($room: ID!) {
     name
     card
     room
+    color
   }
 }
