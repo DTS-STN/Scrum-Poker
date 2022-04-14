@@ -70,6 +70,7 @@ export default {
     'Please enter a room code (alphanumeric characters only). For example K9VW8',
   roomDoesNotExist: 'Sorry! This room does not exist',
   emptyCardList: 'You must select at least one card!',
+  removedFromRoom: 'You have been removed from the room.',
 
   // Header
   title: 'home',
