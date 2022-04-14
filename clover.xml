@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1649956001804" clover="3.2.0">
-  <project timestamp="1649956001804" name="All files">
-    <metrics statements="381" coveredstatements="133" conditionals="214" coveredconditionals="80" methods="99" coveredmethods="38" elements="694" coveredelements="251" complexity="0" loc="381" ncloc="381" packages="4" files="24" classes="24"/>
+<coverage generated="1649956298560" clover="3.2.0">
+  <project timestamp="1649956298560" name="All files">
+    <metrics statements="381" coveredstatements="133" conditionals="216" coveredconditionals="80" methods="99" coveredmethods="38" elements="696" coveredelements="251" complexity="0" loc="381" ncloc="381" packages="4" files="24" classes="24"/>
     <package name="components">
-      <metrics statements="246" coveredstatements="116" conditionals="155" coveredconditionals="74" methods="62" coveredmethods="29"/>
+      <metrics statements="246" coveredstatements="116" conditionals="157" coveredconditionals="74" methods="62" coveredmethods="29"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
         <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="7" count="15" type="stmt"/>
@@ -269,37 +269,37 @@
         <line num="54" count="1" type="stmt"/>
       </file>
       <file name="UserList.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/UserList.js">
-        <metrics statements="30" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="30" coveredstatements="0" conditionals="24" coveredconditionals="0" methods="12" coveredmethods="0"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="59" count="0" type="stmt"/>
+        <line num="44" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="68" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="127" count="0" type="stmt"/>
+        <line num="82" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
+        <line num="168" count="0" type="stmt"/>
       </file>
     </package>
     <package name="pages">
