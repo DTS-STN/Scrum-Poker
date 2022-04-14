@@ -107,7 +107,6 @@ export default function Room(props) {
 
   useEffect(() => {
     const currCookie = Cookies.get('userid')
-    console.log('curCookie', currCookie)
     // Check if browser has userid cookie.
     if (!currCookie) {
       router.push({
