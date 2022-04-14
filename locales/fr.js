@@ -43,6 +43,8 @@ export default {
   minutes: '(FR)minutes',
   timeIsUp: '(FR)Time is up',
   hostCrown: 'Propriétaire de la chambre',
+  eyeShown: '(FR)Cards are being shown',
+  eyeHidden: '(FR)Cards are being hidden',
   leaveImgAlt: 'Bouton "quitter la pièce',
   leaveRoom: 'Quitter la salle',
 
