@@ -283,7 +283,6 @@ export default function Room(props) {
             <div className="p-4 pb-1 flex mx-auto flex-row ">
               <ul
                 id="cards"
-                // className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2"
                 className="flex flex-wrap gap-2 mx-auto items-center justify-center "
               >
                 {filteredCards.map((card) => {
@@ -310,11 +309,11 @@ export default function Room(props) {
 
           {/* end of cards */}
           {userId == room.host ? (
-            <div className="flex justify-center">
+            <div className="flex justify-center p-1">
               {!room.isShown ? (
                 <button
                   type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                   onClick={() =>
                     updateRoom({
                       variables: {
@@ -335,7 +334,7 @@ export default function Room(props) {
               ) : (
                 <button
                   type="button"
-                  className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                  className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                   onClick={() =>
                     updateRoom({
                       variables: {
@@ -356,7 +355,7 @@ export default function Room(props) {
               )}
               <button
                 type="button"
-                className="w-1/5 m-5 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] py-2 px-2 rounded border border-[#091C2D] text-[16px] leading-8"
+                className="w-1/6 m-2 font-display text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] p-2 rounded border border-[#091C2D] text-[16px]"
                 onClick={handleClear}
               >
                 {t.clearCards}

@@ -20,7 +20,7 @@ const TimerSelect = (props) => {
   ]
 
   return (
-    <div className="w-auto mx-1 px-1 border rounded border border-slate-500">
+    <div className="w-auto mx-1 px-1 border rounded border-slate-500">
       <select
         aria-label="duration-select"
         name="duration"
