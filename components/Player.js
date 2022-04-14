@@ -16,7 +16,7 @@ export default function Player(props) {
   }, [])
 
   return (
-    <div className="flex md:flex-col rounded border border-slate-300 my-2 ">
+    <div className="flex md:flex-col rounded border border-slate-300">
       <div className=" flex w-full justify-between">
         <div className="flex ">
           <div className={`flex items-center justify-center rounded-lg p-2`}>
