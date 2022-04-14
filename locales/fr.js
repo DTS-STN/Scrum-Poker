@@ -71,6 +71,7 @@ export default {
   invalidRoomError: '(FR) Room Characters are wrong',
   roomDoesNotExist: '(FR)Room does not exist',
   emptyCardList: 'Vous devez sélectionner au moins une carte !',
+  removedFromRoom: 'Vous avez été retiré de la pièce.',
 
   // Header
   title: 'accueil',

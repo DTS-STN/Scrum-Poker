@@ -28,6 +28,9 @@ export default function Home(props) {
       case '310':
         msg = t.notRoomMember
         break
+      case '311':
+        msg = t.removedFromRoom
+        break
       default:
         msg = t.genericError
     }
