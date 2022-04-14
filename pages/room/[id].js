@@ -391,14 +391,15 @@ export default function Room(props) {
             />
           </div>
 
-          <div>
+          {/* uncomment to show the chat room */}
+          {/* <div>
             <ChatRoom
               id="chat"
               name={getUserById(userId)?.name}
               messages={exampleMessages}
               t={t}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
