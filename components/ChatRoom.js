@@ -26,7 +26,7 @@ export default function ChatRoom(props) {
       // TODO: validate message for special characters.
 
       // Add the message
-      console.log('name :', name, ' roomId :', roomId, ' content :', content)
+
       const addMessageResponse = await addMessage({
         variables: { name: name, roomId: roomId, content: content },
       }).catch((e) => {
@@ -42,11 +42,19 @@ export default function ChatRoom(props) {
       }
     } catch (e) {
       console.log(e)
-      //triggerError(e)
+      triggerError(e)
     }
   }
 
-  console.log('chatroom', props.messages)
+  //builds our error and pushes home
+  function triggerError(msg) {
+    setHasError(true)
+    setMsg(msg)
+    router.push({
+      pathname: `/home`,
+    })
+    return
+  }
 
   //
   return (
