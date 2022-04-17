@@ -8,6 +8,7 @@ import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
+import MESSAGE_SUBSCRIPTION from '../../graphql/subscriptions/message.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
 import DELETE_USER from '../../graphql/mutations/deleteUser.graphql'
@@ -27,6 +28,7 @@ export default function Room(props) {
   const [deleteUser] = useMutation(DELETE_USER)
   const [room, setRoom] = useState(props.room)
   const [users, setUsers] = useState(props.users)
+  const [messages, setMessages] = useState([])
   const [userId, setUserId] = useState(null)
 
   const getUserById = (userId) => {
@@ -47,22 +49,6 @@ export default function Room(props) {
   const filteredCards = cards.filter((card) =>
     props.room.cards.includes(card.value)
   )
-
-  const exampleMessages = [
-    {
-      id: '1',
-      name: 'Yoda',
-      message: 'You must unlearn what you have learned',
-    },
-    {
-      id: '2',
-      name: getUserById(userId)?.name,
-      message: 'All right. I’ll give it a try',
-    },
-    { id: '3', name: 'Yoda', message: 'No. Try not.' },
-    { id: '4', name: 'Yoda', message: 'Do… or do not.' },
-    { id: '5', name: 'Yoda', message: 'There is no try' },
-  ]
 
   const handleClear = (e) => {
     e.preventDefault()
@@ -190,6 +176,24 @@ export default function Room(props) {
       setRoom(updatedRoomData)
     }
   }, [roomSubscription])
+
+  // Message subscription
+  const messageSubscription = useSubscription(MESSAGE_SUBSCRIPTION, {
+    variables: { roomId: props.roomId },
+  })
+
+  // Updated messages
+  useEffect(() => {
+    if (messageSubscription.loading) {
+      //Do nothing
+    }
+    if (messageSubscription.error) {
+      //TODO: Handle error
+    }
+    if (messageSubscription.data) {
+      setMessages(messageSubscription.data.roomMessages)
+    }
+  }, [messageSubscription])
 
   const onCardClickHandler = async (e, card) => {
     const updatedUserData = {
@@ -392,8 +396,9 @@ export default function Room(props) {
           <div>
             <ChatRoom
               id="chat"
+              roomId={props.roomId}
               name={getUserById(userId)?.name}
-              messages={exampleMessages}
+              messages={messages}
               t={t}
             />
           </div>

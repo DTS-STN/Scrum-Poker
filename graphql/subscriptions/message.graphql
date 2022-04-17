@@ -1,0 +1,9 @@
+subscription RoomMessages($roomId: ID!) {
+  roomMessages(roomId: $roomId) {
+    id
+    name
+    content
+    edited
+    roomId
+  }
+}

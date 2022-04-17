@@ -15,8 +15,6 @@ export default function Player(props) {
     setIsMounted(true)
   }, [])
 
-  console.log('Player ', props.playerName, ' color is = ', props.bgColor)
-
   return (
     <div className="flex md:flex-col rounded border border-slate-300 my-2 ">
       <div className=" flex w-full justify-between">

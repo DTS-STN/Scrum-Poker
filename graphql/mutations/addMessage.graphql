@@ -1,0 +1,7 @@
+mutation addMessage($roomId: ID!, $name: String!, $content: String!) {
+  addMessage(roomId: $roomId, name: $name, content: $content) {
+    id
+    success
+    message
+  }
+}
