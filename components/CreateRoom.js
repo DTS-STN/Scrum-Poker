@@ -30,7 +30,7 @@ export default function CreateRoom(props) {
   //useRef doesn't notify the browser when mutating the current ref, so forceUpdate
   //allows us to trigger a re - render instead of using useState and having a delay
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
-  const cardList = useRef([0, 1, 2, 3, 5, 8, 13, 20, 1001, 1002])
+  const cardList = useRef([2, 3, 4, 5, 6, 7, 8, 11])
 
   const router = useRouter()
 
@@ -150,7 +150,7 @@ export default function CreateRoom(props) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col justify-between items-center w-full"
       >
-        <Container className="flex-1 h-auto w-full xl:w-[32rem] justify-between mx-8 sm:ml-2 sm:mr-2 ">
+        <Container className="flex-1 justify-between h-auto w-full xl:w-[32rem]">
           <h2 className="text-opacity-75 text-black font-bold text-2xl">
             {t.createRoomTitle}
           </h2>

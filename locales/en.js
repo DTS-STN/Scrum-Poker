@@ -41,6 +41,8 @@ export default {
   minutes: 'minutes',
   timeIsUp: 'Time is up',
   hostCrown: 'Room Owner',
+  eyeShown: 'Cards are being shown',
+  eyeHidden: 'Cards are being hidden',
   leaveImgAlt: 'Leave room Button',
   leaveRoom: 'Leave Room',
 
@@ -71,6 +73,7 @@ export default {
   roomDoesNotExist: 'Sorry! This room does not exist',
   emptyCardList: 'You must select at least one card!',
   addMessageFail: 'Add Message fail',
+  removedFromRoom: 'You have been removed from the room.',
 
   // Header
   title: 'home',

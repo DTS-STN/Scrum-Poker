@@ -28,12 +28,15 @@ export default function Home(props) {
       case '310':
         msg = t.notRoomMember
         break
+      case '311':
+        msg = t.removedFromRoom
+        break
       default:
         msg = t.genericError
     }
 
   return (
-    <div className="  justify-center  flex-col ">
+    <div className="flex flex-col">
       {code && (
         <div className="container mx-auto sm:flex sm:justify-center sm:gap-x-5">
           <ErrorLabel
@@ -47,7 +50,7 @@ export default function Home(props) {
       <div
         data-testid="homeContent"
         id="homeContent"
-        className="container mx-auto flex flex-col md:flex-row  md:space-x-2 "
+        className="container mx-auto flex flex-col md:flex-row xl:w-auto xl:space-x-6"
       >
         <CreateRoom locale={props.locale} />
         <JoinRoom locale={props.locale} />

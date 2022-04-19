@@ -43,6 +43,8 @@ export default {
   minutes: '(FR)minutes',
   timeIsUp: '(FR)Time is up',
   hostCrown: 'Propriétaire de la chambre',
+  eyeShown: '(FR)Cards are being shown',
+  eyeHidden: '(FR)Cards are being hidden',
   leaveImgAlt: 'Bouton "quitter la pièce',
   leaveRoom: 'Quitter la salle',
 
@@ -72,6 +74,7 @@ export default {
   roomDoesNotExist: '(FR)Room does not exist',
   emptyCardList: 'Vous devez sélectionner au moins une carte !',
   addMessageFail: 'FR - Add Message fail',
+  removedFromRoom: 'Vous avez été retiré de la pièce.',
 
   // Header
   title: 'accueil',
