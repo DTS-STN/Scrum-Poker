@@ -108,7 +108,6 @@ export default function Room(props) {
 
       // User is in this room.
       setUserId(currCookie)
-      setGlobalUserId(currCookie)
     }
   }, [])
 
@@ -221,11 +220,12 @@ export default function Room(props) {
     let playerIdToRemove = playerId || userId
     const index = room.userIds.indexOf(playerIdToRemove)
 
-    if (globalUserId === playerId) {
-      router.push({
-        pathname: `/home?errorcode=308`,
-      })
-    }
+    // if (globalUserId === playerId) {
+    //   router.push({
+    //     pathname: `/home?errorcode=308`,
+    //   })
+    // }
+
     if (index > -1) {
       let copiedRoomUserIds = [...room.userIds]
       copiedRoomUserIds.splice(index, 1)
