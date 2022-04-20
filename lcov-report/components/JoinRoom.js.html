@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.92% </span>
+                <span class="strong">23.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/54</span>
+                <span class='fraction'>13/56</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">12.5% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/7</span>
+                <span class='fraction'>1/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25.92% </span>
+                <span class="strong">23.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/54</span>
+                <span class='fraction'>13/56</span>
             </div>
         
             
@@ -279,7 +279,12 @@
 <a name='L214'></a><a href='#L214'>214</a>
 <a name='L215'></a><a href='#L215'>215</a>
 <a name='L216'></a><a href='#L216'>216</a>
-<a name='L217'></a><a href='#L217'>217</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L217'></a><a href='#L217'>217</a>
+<a name='L218'></a><a href='#L218'>218</a>
+<a name='L219'></a><a href='#L219'>219</a>
+<a name='L220'></a><a href='#L220'>220</a>
+<a name='L221'></a><a href='#L221'>221</a>
+<a name='L222'></a><a href='#L222'>222</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -309,8 +314,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -327,6 +330,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -346,16 +355,17 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -515,15 +525,13 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 &nbsp;
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 &nbsp;
-import { UserIdContext } from '../context/userIdContext'
+import colorArray from '../utils/colors'
 &nbsp;
 export default function JoinRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-&nbsp;
-  const { setGlobalUserId } = useContext(UserIdContext)
 &nbsp;
   const router = useRouter()
 &nbsp;
@@ -545,6 +553,12 @@ export default function JoinRoom(props) {
       .max(20, t.max20),
   })
 &nbsp;
+  function <span class="fstat-no" title="function not covered" >randomColor(</span>) {
+    const idx = <span class="cstat-no" title="statement not covered" >Math.floor(Math.random() * colorArray.length)</span>
+<span class="cstat-no" title="statement not covered" >    console.log(' JoinRoom random color = ', colorArray[idx])</span>
+<span class="cstat-no" title="statement not covered" >    return colorArray[idx]</span>
+  }
+&nbsp;
   const formOptions = { resolver: yupResolver(validationSchema) }
 &nbsp;
   // get functions to build form with useForm() hook
@@ -561,19 +575,20 @@ export default function JoinRoom(props) {
   async function <span class="fstat-no" title="function not covered" >onSubmit(</span>data) {
     let username = <span class="cstat-no" title="statement not covered" >data.name,</span>
       userid = <span class="cstat-no" title="statement not covered" >Cookies.get('userid'),</span>
-      room = <span class="cstat-no" title="statement not covered" >data.room</span>
+      room = <span class="cstat-no" title="statement not covered" >data.room,</span>
+      color = <span class="cstat-no" title="statement not covered" >randomColor()</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
       //create new user
       const addUserRes = <span class="cstat-no" title="statement not covered" >await addUser({</span>
-        variables: { name: username },
+        variables: { name: username, color: color },
       }).catch(<span class="fstat-no" title="function not covered" >(e</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >        console.log(e)</span>
 <span class="cstat-no" title="statement not covered" >        throw t.saveUserFail</span>
       })
+&nbsp;
 <span class="cstat-no" title="statement not covered" >      if (addUserRes.data.addUser.success) {</span>
 <span class="cstat-no" title="statement not covered" >        userid = addUserRes.data.addUser.id</span>
-<span class="cstat-no" title="statement not covered" >        setGlobalUserId(userid)</span>
 <span class="cstat-no" title="statement not covered" >        Cookies.set('userid', `${userid}`)</span>
       } else {
 <span class="cstat-no" title="statement not covered" >        throw t.saveUserFail</span>
@@ -718,7 +733,7 @@ JoinRoom.propTypes = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Wed Apr 20 2022 14:27:22 GMT+0000 (Coordinated Universal Time)
+                at Wed Apr 20 2022 18:07:16 GMT+0000 (Coordinated Universal Time)
             </div>
         <script src="../prettify.js"></script>
         <script>
