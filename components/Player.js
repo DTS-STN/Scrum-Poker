@@ -20,8 +20,8 @@ export default function Player(props) {
       <div className=" flex w-full justify-between">
         <div className="flex ">
           <div className={`flex items-center justify-center rounded-lg p-2`}>
-            <span
-              className={` bg-slate-300 flex justify-center rounded-full h-12 w-12  ${props.bgColor}`}
+            <div
+              className={`bg-slate-300 ${props.bgColor} flex justify-center rounded-full h-12 w-12`}
             >
               <span
                 className="m-auto font-bold text-xl font-body"
@@ -29,7 +29,7 @@ export default function Player(props) {
               >
                 {props.playerName.charAt(0).toUpperCase()}
               </span>
-            </span>
+            </div>
           </div>
 
           <p

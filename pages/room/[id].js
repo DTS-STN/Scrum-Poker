@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import Card from '../../components/Card'
 import RoomInfo from '../../components/RoomInfo'
-// import ChatRoom from '../../components/ChatRoom'
+import ChatRoom from '../../components/ChatRoom'
 import UserList from '../../components/UserList'
 import { useSubscription, useMutation } from '@apollo/client'
 import GET_ROOM from '../../graphql/queries/getRoom.graphql'
 import USER_SUBSCRIPTION from '../../graphql/subscriptions/user.graphql'
 import ROOM_SUBSCRIPTION from '../../graphql/subscriptions/room.graphql'
+import MESSAGE_SUBSCRIPTION from '../../graphql/subscriptions/message.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
 import DELETE_USER from '../../graphql/mutations/deleteUser.graphql'
@@ -16,8 +17,6 @@ import en from '../../locales/en'
 import fr from '../../locales/fr'
 import client from '../../graphql/client.js'
 import Cookies from 'js-cookie'
-
-import { UserIdContext } from '../../context/userIdContext'
 
 import { cards, getCardByValue } from '../../utils/cards'
 
@@ -29,9 +28,8 @@ export default function Room(props) {
   const [deleteUser] = useMutation(DELETE_USER)
   const [room, setRoom] = useState(props.room)
   const [users, setUsers] = useState(props.users)
+  const [messages, setMessages] = useState([])
   const [userId, setUserId] = useState(null)
-
-  const { globalUserId, setGlobalUserId } = useContext(UserIdContext)
 
   const getUserById = (userId) => {
     return users.find((user) => {
@@ -52,22 +50,6 @@ export default function Room(props) {
     props.room.cards.includes(card.value)
   )
 
-  const exampleMessages = [
-    {
-      id: '1',
-      name: 'Yoda',
-      message: 'You must unlearn what you have learned',
-    },
-    {
-      id: '2',
-      name: getUserById(userId)?.name,
-      message: 'All right. I’ll give it a try',
-    },
-    { id: '3', name: 'Yoda', message: 'No. Try not.' },
-    { id: '4', name: 'Yoda', message: 'Do… or do not.' },
-    { id: '5', name: 'Yoda', message: 'There is no try' },
-  ]
-
   const handleClear = (e) => {
     e.preventDefault()
 
@@ -81,6 +63,7 @@ export default function Room(props) {
               name: user.name,
               card: null,
               room: user.room,
+              color: user.color,
             },
           },
         })
@@ -125,7 +108,6 @@ export default function Room(props) {
 
       // User is in this room.
       setUserId(currCookie)
-      setGlobalUserId(currCookie)
     }
   }, [])
 
@@ -196,6 +178,24 @@ export default function Room(props) {
     }
   }, [roomSubscription])
 
+  // Message subscription
+  const messageSubscription = useSubscription(MESSAGE_SUBSCRIPTION, {
+    variables: { roomId: props.roomId },
+  })
+
+  // Updated messages
+  useEffect(() => {
+    if (messageSubscription.loading) {
+      //Do nothing
+    }
+    if (messageSubscription.error) {
+      //TODO: Handle error
+    }
+    if (messageSubscription.data) {
+      setMessages(messageSubscription.data.roomMessages)
+    }
+  }, [messageSubscription])
+
   const onCardClickHandler = async (e, card) => {
     const updatedUserData = {
       id: Number(getUserById(userId).id),
@@ -220,11 +220,12 @@ export default function Room(props) {
     let playerIdToRemove = playerId || userId
     const index = room.userIds.indexOf(playerIdToRemove)
 
-    if (globalUserId === playerId) {
-      router.push({
-        pathname: `/home?errorcode=308`,
-      })
-    }
+    // if (globalUserId === playerId) {
+    //   router.push({
+    //     pathname: `/home?errorcode=308`,
+    //   })
+    // }
+
     if (index > -1) {
       let copiedRoomUserIds = [...room.userIds]
       copiedRoomUserIds.splice(index, 1)
@@ -374,7 +375,6 @@ export default function Room(props) {
             t={t}
             userList={users}
             isShown={room.isShown}
-            currPlayerId={globalUserId}
             currPlayer={getUserById(userId)}
             host={room.host}
             onBootClick={onBootClick}
@@ -398,14 +398,15 @@ export default function Room(props) {
           </div>
 
           {/* uncomment to show the chat room */}
-          {/* <div>
+          <div>
             <ChatRoom
               id="chat"
+              roomId={props.roomId}
               name={getUserById(userId)?.name}
-              messages={exampleMessages}
+              messages={messages}
               t={t}
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

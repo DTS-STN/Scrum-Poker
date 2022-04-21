@@ -18,15 +18,13 @@ import UPDATE_USER from '../graphql/mutations/updateUser.graphql'
 
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 
-import { UserIdContext } from '../context/userIdContext'
+import colorArray from '../utils/colors'
 
 export default function JoinRoom(props) {
   /* istanbul ignore next */
   const t = props.locale === 'en' ? en : fr
-
-  const { setGlobalUserId } = useContext(UserIdContext)
 
   const router = useRouter()
 
@@ -48,6 +46,12 @@ export default function JoinRoom(props) {
       .max(20, t.max20),
   })
 
+  function randomColor() {
+    const idx = Math.floor(Math.random() * colorArray.length)
+    console.log(' JoinRoom random color = ', colorArray[idx])
+    return colorArray[idx]
+  }
+
   const formOptions = { resolver: yupResolver(validationSchema) }
 
   // get functions to build form with useForm() hook
@@ -64,19 +68,20 @@ export default function JoinRoom(props) {
   async function onSubmit(data) {
     let username = data.name,
       userid = Cookies.get('userid'),
-      room = data.room
+      room = data.room,
+      color = randomColor()
 
     try {
       //create new user
       const addUserRes = await addUser({
-        variables: { name: username },
+        variables: { name: username, color: color },
       }).catch((e) => {
         console.log(e)
         throw t.saveUserFail
       })
+
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
-        setGlobalUserId(userid)
         Cookies.set('userid', `${userid}`)
       } else {
         throw t.saveUserFail
