@@ -52,7 +52,7 @@ jobs:
       - name: Deploy Coverage Report 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
-          TARGET_FOLDER: ${{ steps.extract_branch.outputs.branch }}/coverage
+          TARGET-FOLDER: ${{ steps.extract_branch.outputs.branch }}/coverage
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: coverage
 
