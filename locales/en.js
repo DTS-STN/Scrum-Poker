@@ -20,6 +20,7 @@ export default {
   selectCards: 'Select your cards',
 
   // Room
+  welcome: 'Welcome to Scrum Poker!',
   users: 'Users',
   card: 'Card',
   showCards: 'Show',
@@ -44,6 +45,7 @@ export default {
   leaveRoom: 'Leave Room',
 
   // Chat
+  chatroom: 'Chat Room',
   placeholder: 'Write a message',
   send: 'Send',
 
