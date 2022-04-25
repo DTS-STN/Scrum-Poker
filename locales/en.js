@@ -8,12 +8,9 @@ export default {
   // Home
   createRoomTitle: 'Create a Room',
   createRoomNameLabel: 'Enter your name',
-  createRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
-  createRoomLabel: 'Enter your name',
   createRoomPlaceholder: 'Your name',
   createRoomButton: 'Create Room',
   joinRoomTitle: 'Join a Room',
-  joinRoomDesc: 'Body - The quick brown fox jumps over the lazy dog',
   joinRoomNumberLabel: 'Enter room code',
   joinRoomNumberPlaceholder: 'Room code',
   joinRoomNameLabel: 'Enter your name',
@@ -60,19 +57,20 @@ export default {
 
   noRoomExists: 'Sorry! No Room exists with this id.',
   noUserExists:
-    'Please create a user by entering in your name before joining a room.',
+    'Please create a user by entering your name before joining a room.',
   notRoomMember: 'Sorry! You are not a member of this room.',
   genericError: 'Something went wrong.  Please try again later.',
   genericErrorCreate:
     'Something went wrong creating a room.  Please try again later.',
   genericErrorJoin:
     'Something went wrong joining a room.  Please try again later.',
-  invalidNameError: 'Please enter your name (alphanumeric characters only)',
+  invalidNameError:
+    'Please enter your name (alphanumeric characters and spaces only)',
   invalidRoomError:
     'Please enter a room code (alphanumeric characters only). For example K9VW8',
   roomDoesNotExist: 'Sorry! This room does not exist',
   emptyCardList: 'You must select at least one card!',
-  addMessageFail: 'Add Message fail',
+  addMessageFail: 'Something went wrong when adding a message.',
   removedFromRoom: 'You have been removed from the room.',
 
   // Header
