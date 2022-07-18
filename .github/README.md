@@ -33,7 +33,23 @@ This project uses
 
 ## Getting Started
 
-First, run the development server:
+First, run the scrum-poker-server:
+
+You can find it here:
+
+- [Scrum Poker Server](https://github.com/DTS-STN/scrum-poker-server)
+
+Then set up you .env file:
+
+Take the api address of the Scrum Poker server and add it to your .env file<br />
+For example:
+
+```bash
+NEXT_PUBLIC_GRAPHQL_HTTP = "http://localhost:4000/graphql"
+NEXT_PUBLIC_GRAPHQL_WS = "ws://localhost:4000/graphql"
+```
+
+Finally, run the development server:
 
 ```bash
 npm run dev
