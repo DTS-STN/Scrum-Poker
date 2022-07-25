@@ -20,12 +20,11 @@ export default function Player(props) {
       <div className=" flex w-full justify-between">
         <div className="flex ">
           <div className={`flex items-center justify-center rounded-lg p-2`}>
+            if(props.bgColor != undefined) {}
             <div
-              className={`bg-slate-300 ${
-                props.bgColor[0] == '#' ? '' : props.bgColor
-              } flex justify-center rounded-full h-12 w-12`}
+              className={`bg-slate-300 flex justify-center rounded-full h-12 w-12`}
               style={{
-                backgroundColor: props.bgColor[0] == '#' ? props.bgColor : '',
+                backgroundColor: props.bgColor,
               }}
             >
               <span
