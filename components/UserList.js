@@ -15,8 +15,11 @@ export default function UserList(props) {
   }
 
   const getSelectedCard = (value) => cards.find((card) => card.value === value)
+  const userList = props.isShown
+    ? props.userList.sort((player1, player2) => player1.card - player2.card)
+    : props.userList
 
-  const displayPlayers = props.userList.map((player) => {
+  const displayPlayers = userList.map((player) => {
     return (
       <li className="w-full" key={player.id}>
         <Player
