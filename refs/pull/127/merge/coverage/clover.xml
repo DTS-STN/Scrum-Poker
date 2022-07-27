@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1658767179309" clover="3.2.0">
-  <project timestamp="1658767179309" name="All files">
-    <metrics statements="382" coveredstatements="133" conditionals="214" coveredconditionals="80" methods="96" coveredmethods="38" elements="692" coveredelements="251" complexity="0" loc="382" ncloc="382" packages="4" files="24" classes="24"/>
+<coverage generated="1658944460187" clover="3.2.0">
+  <project timestamp="1658944460187" name="All files">
+    <metrics statements="382" coveredstatements="133" conditionals="222" coveredconditionals="82" methods="96" coveredmethods="38" elements="700" coveredelements="253" complexity="0" loc="382" ncloc="382" packages="4" files="24" classes="24"/>
     <package name="components">
-      <metrics statements="244" coveredstatements="116" conditionals="151" coveredconditionals="74" methods="58" coveredmethods="29"/>
+      <metrics statements="244" coveredstatements="116" conditionals="159" coveredconditionals="76" methods="58" coveredmethods="29"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
         <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="7" count="15" type="stmt"/>
@@ -214,13 +214,13 @@
         <line num="7" count="9" type="stmt"/>
       </file>
       <file name="Player.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Player.js">
-        <metrics statements="6" coveredstatements="5" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="2"/>
+        <metrics statements="6" coveredstatements="5" conditionals="16" coveredconditionals="7" methods="3" coveredmethods="2"/>
         <line num="12" count="8" type="stmt"/>
         <line num="14" count="8" type="stmt"/>
         <line num="15" count="4" type="stmt"/>
         <line num="18" count="8" type="stmt"/>
-        <line num="71" count="0" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
       </file>
       <file name="RoomInfo.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/RoomInfo.js">
         <metrics statements="53" coveredstatements="31" conditionals="28" coveredconditionals="10" methods="13" coveredmethods="8"/>
