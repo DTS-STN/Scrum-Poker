@@ -28,7 +28,7 @@ export default {
   showCards: 'Show',
   hideCards: 'Hide',
   clearCards: 'Clear',
-  roomId: 'Room Id:',
+  roomId: 'Room Code:',
   playerName: "Player's Name:",
   playersOnline: 'Players Online:',
   copy: 'Copy',
