@@ -267,7 +267,7 @@ RoomInfo.defaultProps = {
   playersOnline: 3,
   roomId: '2f3h9',
   t: {
-    roomId: 'Room Id:',
+    roomId: 'Room Code:',
     playerName: 'Player&apos;s Name:',
     playersOnline: 'Players Online:',
     copy: 'Copy',
