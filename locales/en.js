@@ -47,6 +47,7 @@ export default {
   leaveRoom: 'Leave Room',
 
   // Chat
+  chatTitle: 'Chat room',
   placeholder: 'Write a message',
   send: 'Send',
 

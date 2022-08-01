@@ -49,6 +49,7 @@ export default {
   leaveRoom: 'Quitter la salle',
 
   // Chat
+  chatTitle: 'Salle de discussion',
   placeholder: 'Écrire un message',
   send: 'Envoyer',
 
