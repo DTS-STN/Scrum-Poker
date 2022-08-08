@@ -7,12 +7,14 @@ export default function Card(props) {
   return (
     <div
       className={`hover:cursor-pointer h-auto w-auto ${
-        props.homePage ? `rounded ` : `rounded-lg `
-      } focus:ring focus:ring-gray-600 ${
+        props.homePage
+          ? `rounded `
+          : `rounded-lg focus:ring focus:ring-gray-600`
+      } ${
         props.selected
           ? props.homePage
             ? `border-2 border-canadaBlue block rounded focus:ring-0 `
-            : `border-4 border-canadaBlue block rounded-lg focus:ring-0 `
+            : `border-4 border-canadaBlue block rounded focus:ring-0 `
           : props.className
           ? `h-auto w-14 p-1`
           : `border-1 border-slate-300 block hover:animate-pulsate-fwd`
