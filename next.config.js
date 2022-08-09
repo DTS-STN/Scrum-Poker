@@ -74,7 +74,6 @@ module.exports = {
   i18n: {
     locales: ['en', 'fr'],
     defaultLocale: 'en',
-    localDetection: true,
   },
   //
   // rewrites setup
