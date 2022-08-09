@@ -7,15 +7,10 @@ export default {
 
   // Home
   createRoomTitle: 'Créer une pièce',
-  createRoomNameLabel: '(FR) Enter your name',
-  createRoomDesc:
-    'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
-  createRoomLabel: 'Entrez votre nom',
+  createRoomNameLabel: 'Entrez votre nom',
   createRoomPlaceholder: 'Votre nom',
   createRoomButton: 'Créer une pièce',
   joinRoomTitle: 'Rejoindre une salle',
-  joinRoomDesc:
-    'Corps - Le renard brun et rapide saute par-dessus le chien paresseux.',
   joinRoomNumberLabel: 'Entrez le code de la chambre',
   joinRoomNumberPlaceholder: 'Code de la chambre',
   joinRoomNameLabel: 'Entrez votre nom',
@@ -25,60 +20,62 @@ export default {
   selectCards: 'Sélectionnez vos cartes',
 
   // Room
-  users: '(FR)Users',
-  card: '(FR)Card',
+  welcome: 'Bienvenue à Scrum Poker!',
+  users: 'Utilisateurs',
+  card: 'Carte',
   showCards: 'Dévoiler',
   hideCards: 'Cacher',
   clearCards: 'Effacer',
-  roomId: "Pièce d'identité :",
+  roomId: 'Code de la chambre :',
   playerName: 'Nom du joueur :',
   playersOnline: 'Joueurs en ligne :',
   copy: 'Copier',
   copied: 'Copié !',
-  timer: '(FR)Timer',
-  start: '(FR)Start',
-  reset: '(FR)Reset',
-  seconds: '(FR)seconds',
-  minute: '(FR)minute',
-  minutes: '(FR)minutes',
-  timeIsUp: '(FR)Time is up',
+  timer: 'Minuterie',
+  start: 'Démarrer',
+  reset: 'Réinitialiser',
+  seconds: 'secondes',
+  minute: 'minute',
+  minutes: 'minutes',
+  timeIsUp: 'Temps écoulé',
   hostCrown: 'Propriétaire de la chambre',
-  eyeShown: '(FR)Cards are being shown',
-  eyeHidden: '(FR)Cards are being hidden',
-  leaveImgAlt: 'Bouton "quitter la pièce',
+  eyeShown: 'Les cartes sont montrées',
+  eyeHidden: 'Les cartes sont cachées',
+  leaveImgAlt: 'Bouton « quitter la pièce »',
   leaveRoom: 'Quitter la salle',
 
   // Chat
+  chatroom: 'Salle de Discussion',
   placeholder: 'Écrire un message',
   send: 'Envoyer',
 
   // Error messages
-  max20: '(FR) No more than 20 characters.',
-  max5: '(FR) No more than 5 characters.',
+  max20: 'Pas plus de 20 caractères.',
+  max5: 'Pas plus de 5 caractères.',
   saveUserFail:
-    '(FR) There was an error saving the user.  Please try again later.',
+    " Une erreur s'est produite lors de l'enregistrement de l'utilisateur.  Veuillez réessayer plus tard.",
   saveRoomFail:
-    '(FR) There was an error creating the room.  Please try again later.',
+    "Une erreur s'est produite lors de la création de la chambre.  Veuillez réessayer plus tard.",
 
   noRoomExists: "Aucune pièce n'existe avec cet identifiant.",
   noUserExists: 'Créer un utilisateur avant de rejoindre une salle.',
   notRoomMember: "Vous n'êtes pas membre de cette pièce",
   genericError: 'Oups ! Quelque chose a mal tourné.',
   genericErrorCreate:
-    '(FR) Something went wrong creating a room.  Please try again later.',
+    "Un problème est survenu lors de la création d'une pièce.  Veuillez réessayer plus tard.",
   genericErrorJoin:
-    '(FR) Something went wrong joining a room.  Please try again later.',
+    "Quelque chose s'est mal passé en rejoignant une chambre.  Veuillez réessayer plus tard.",
   invalidNameError:
     'Veuillez entrer un nom (uniquement des caractères alphanumériques)',
-  invalidRoomError: '(FR) Room Characters are wrong',
-  roomDoesNotExist: '(FR)Room does not exist',
+  invalidRoomError: 'Les caractères de la pièce sont faux',
+  roomDoesNotExist: "La pièce n'existe pas",
   emptyCardList: 'Vous devez sélectionner au moins une carte !',
-  addMessageFail: 'FR - Add Message fail',
+  addMessageFail: "L'ajout d'un message échoue",
   removedFromRoom: 'Vous avez été retiré de la pièce.',
 
   // Header
   title: 'accueil',
-  scrumPoker: '(FR) Scrum Poker',
+  scrumPoker: 'Scrum Poker',
   //
 
   // Nav
