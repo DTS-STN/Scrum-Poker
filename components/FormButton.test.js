@@ -12,8 +12,8 @@ describe('Button', () => {
   })
 
   it('has no a11y violations', async () => {
-    const { formButton } = render(<FormButton text="Test" />)
-    const results = await axe(formButton)
+    const { container } = render(<FormButton text="Test" />)
+    const results = await axe(container)
     expect(results).toHaveNoViolations()
   })
 })
