@@ -97,6 +97,7 @@ export default function CreateRoom(props) {
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
+        console.debug('Create room', userid, cardList)
       } else {
         throw t.saveUserFail
       }
