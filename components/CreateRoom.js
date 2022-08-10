@@ -97,7 +97,6 @@ export default function CreateRoom(props) {
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
-        console.debug('Create room', userid, cardList)
       } else {
         throw t.saveUserFail
       }
@@ -127,6 +126,12 @@ export default function CreateRoom(props) {
         router.push({
           pathname: `/room/${addRoomRes.data.addRoom.id}`,
         })
+        console.log(
+          'Create room',
+          'Room id: ' + addRoomRes.data.addRoom.id,
+          'Username: ' + username,
+          'Card list: ' + JSON.stringify(cardList)
+        )
       }
     } catch (e) {
       console.log(e)
