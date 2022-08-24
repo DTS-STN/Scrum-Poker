@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import en from '../locales/en'
 import fr from '../locales/fr'
+import fs from 'fs'
 
 import CreateRoom from '../components/CreateRoom'
 import JoinRoom from '../components/JoinRoom'
@@ -52,7 +53,7 @@ export default function Home(props) {
         id="homeContent"
         className="container mx-auto flex flex-col md:flex-row xl:w-auto xl:space-x-6"
       >
-        <CreateRoom locale={props.locale} />
+        <CreateRoom locale={props.locale} cardPacks={props.cardPacks} />
         <JoinRoom locale={props.locale} />
       </div>
     </div>
@@ -77,8 +78,17 @@ export async function getStaticProps({ locale }) {
       keywords: '',
     },
   }
+
+  function getDirectories(path) {
+    return fs.readdirSync(path).filter(function (file) {
+      return fs.statSync(path + '/' + file).isDirectory()
+    })
+  }
+
+  const cardPacks = getDirectories('./public/card_packs/')
+
   return {
-    props: { locale, langToggleLink, meta },
+    props: { locale, langToggleLink, meta, cardPacks },
   }
 }
 

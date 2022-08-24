@@ -46,7 +46,7 @@ export default function Room(props) {
     return null
   }
 
-  const filteredCards = cards.filter((card) =>
+  const filteredCards = cards('Hearts').filter((card) =>
     props.room.cards.includes(card.value)
   )
 
@@ -278,9 +278,11 @@ export default function Room(props) {
               Value selected:{' '}
               <span className="font-bold px-1">
                 <span
-                  className={getCardByValue(getUserById(userId)?.card).style}
+                  className={
+                    getCardByValue(getUserById(userId)?.card, 'DTS').style
+                  }
                 >
-                  {getCardByValue(getUserById(userId)?.card).text}
+                  {getCardByValue(getUserById(userId)?.card, 'DTS').text}
                 </span>
               </span>
             </h2>

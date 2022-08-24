@@ -14,7 +14,8 @@ export default function UserList(props) {
     value: 'hidden',
   }
 
-  const getSelectedCard = (value) => cards.find((card) => card.value === value)
+  const getSelectedCard = (value) =>
+    cards('DTS').find((card) => card.value === value)
   const userList = props.isShown
     ? props.userList.sort((player1, player2) => player1.card - player2.card)
     : props.userList

@@ -32,6 +32,8 @@ export default function CreateRoom(props) {
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const cardList = useRef([2, 3, 4, 5, 6, 7, 8, 11])
 
+  const [cardPack, setCardPack] = useState('DTS')
+
   const router = useRouter()
 
   //Load GraphQL Data
@@ -178,9 +180,18 @@ export default function CreateRoom(props) {
               <span className="text-red-800 font-body" aria-hidden="true">
                 {t.required}
               </span>
+              <select
+                name="cars"
+                id="cars"
+                onChange={(ev) => setCardPack(ev.target.value)}
+              >
+                {props.cardPacks.map((pack) => (
+                  <option value={pack}>{pack}</option>
+                ))}
+              </select>
             </div>
             <ul className="pt-2 grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 rounded-b-lg border-gray-300 border-b border-x">
-              {cards.map((card) => {
+              {cards(cardPack).map((card) => {
                 return (
                   <li className="px-1 pb-1" key={card.id}>
                     <label htmlFor={card.id}>
