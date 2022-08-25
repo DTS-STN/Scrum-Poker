@@ -12,6 +12,7 @@ import MESSAGE_SUBSCRIPTION from '../../graphql/subscriptions/message.graphql'
 import UPDATE_USER from '../../graphql/mutations/updateUser.graphql'
 import UPDATE_ROOM from '../../graphql/mutations/updateRoom.graphql'
 import DELETE_USER from '../../graphql/mutations/deleteUser.graphql'
+import DELETE_ROOM from '../../graphql/mutations/deleteRoom.graphql'
 import { useRouter } from 'next/router'
 import en from '../../locales/en'
 import fr from '../../locales/fr'
@@ -26,6 +27,7 @@ export default function Room(props) {
   const [updatedUser] = useMutation(UPDATE_USER)
   const [updateRoom] = useMutation(UPDATE_ROOM)
   const [deleteUser] = useMutation(DELETE_USER)
+  const [deleteRoom] = useMutation(DELETE_ROOM)
   const [room, setRoom] = useState(props.room)
   const [users, setUsers] = useState(props.users)
   const [messages, setMessages] = useState([])
@@ -258,7 +260,16 @@ export default function Room(props) {
 
   const leaveRoomClick = async () => {
     if (userId === room.host) {
-      console.log('Owner trying to leave room. To be implemented.')
+      // Remove room from backend
+      deleteRoom({
+        variables: {
+          deleteRoomId: room.id,
+        },
+      })
+      // Go back to home page
+      router.push({
+        pathname: `/home`,
+      })
     } else {
       onBootClick()
     }

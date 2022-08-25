@@ -1,0 +1,6 @@
+mutation deleteRoom($deleteRoomId: ID!) {
+  deleteRoom(id: $deleteRoomId) {
+    success
+    message
+  }
+}
