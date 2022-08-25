@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1661453437021" clover="3.2.0">
-  <project timestamp="1661453437021" name="All files">
-    <metrics statements="386" coveredstatements="133" conditionals="230" coveredconditionals="87" methods="96" coveredmethods="38" elements="712" coveredelements="258" complexity="0" loc="386" ncloc="386" packages="4" files="24" classes="24"/>
+<coverage generated="1661454552279" clover="3.2.0">
+  <project timestamp="1661454552279" name="All files">
+    <metrics statements="386" coveredstatements="133" conditionals="224" coveredconditionals="82" methods="96" coveredmethods="38" elements="706" coveredelements="253" complexity="0" loc="386" ncloc="386" packages="4" files="24" classes="24"/>
     <package name="components">
-      <metrics statements="248" coveredstatements="116" conditionals="167" coveredconditionals="81" methods="58" coveredmethods="29"/>
+      <metrics statements="248" coveredstatements="116" conditionals="161" coveredconditionals="76" methods="58" coveredmethods="29"/>
       <file name="Card.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/Card.js">
         <metrics statements="3" coveredstatements="3" conditionals="8" coveredconditionals="7" methods="1" coveredmethods="1"/>
         <line num="7" count="15" type="stmt"/>
@@ -11,7 +11,7 @@
         <line num="45" count="3" type="stmt"/>
       </file>
       <file name="ChatRoom.js" path="/home/runner/work/Scrum-Poker/Scrum-Poker/components/ChatRoom.js">
-        <metrics statements="25" coveredstatements="6" conditionals="16" coveredconditionals="11" methods="5" coveredmethods="2"/>
+        <metrics statements="25" coveredstatements="6" conditionals="10" coveredconditionals="6" methods="5" coveredmethods="2"/>
         <line num="13" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
