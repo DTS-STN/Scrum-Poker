@@ -27,6 +27,10 @@ export default function ChatRoom(props) {
 
       // Add the message
 
+      if (!content.trim()) {
+        return
+      }
+
       const addMessageResponse = await addMessage({
         variables: { name: name, roomId: roomId, content: content },
       }).catch((e) => {
@@ -79,13 +83,13 @@ export default function ChatRoom(props) {
               key={message.id}
             >
               <div
-                className={` ${
+                className={`overflow-x-auto break-words ${
                   message.name !== props.name
                     ? 'py-1 px-1 border rounded-md bg-[#335075] text-white'
                     : 'py-1 px-1 border rounded-md bg-gray-200'
                 }`}
               >
-                <div className="text-[10px]">
+                <div className="text-[12px] font-semibold mb-1">
                   {message.name !== props.name ? message.name : ''}
                 </div>
                 <div className="text-[12px]">{message.content}</div>
@@ -103,7 +107,7 @@ export default function ChatRoom(props) {
               type="text"
               id="message"
               name={props.id}
-              aria-label={props.t.placeHolder}
+              aria-label={props.t.placeholder}
               placeholder={props.t.placeholder}
               className="appearance-none rounded-md border-gray-400 border w-full my-2 p-1 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
             />
