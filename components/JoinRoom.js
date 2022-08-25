@@ -83,6 +83,7 @@ export default function JoinRoom(props) {
       if (addUserRes.data.addUser.success) {
         userid = addUserRes.data.addUser.id
         Cookies.set('userid', `${userid}`)
+        console.log('Join room', 'Username: ' + username, 'Room id: ' + room)
       } else {
         throw t.saveUserFail
       }

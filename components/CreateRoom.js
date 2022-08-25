@@ -126,6 +126,12 @@ export default function CreateRoom(props) {
         router.push({
           pathname: `/room/${addRoomRes.data.addRoom.id}`,
         })
+        console.log(
+          'Create room',
+          'Room id: ' + addRoomRes.data.addRoom.id,
+          'Username: ' + username,
+          'Card list: ' + JSON.stringify(cardList)
+        )
       }
     } catch (e) {
       console.log(e)
