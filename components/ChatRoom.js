@@ -73,7 +73,7 @@ export default function ChatRoom(props) {
 
       {/* Message Box  */}
       <div className="relative flex flex-col-reverse w-full overflow-y-auto max-h-96 min-h-[24rem] border-b-2 p-1 text-left ">
-        <ul className="w-full space-y-1">
+        <ul className="space-y-1 w-full">
           {props.messages.map((message) => (
             <li
               className={`flex w-auto pt-0.5
