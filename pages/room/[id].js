@@ -73,7 +73,7 @@ export default function Room(props) {
       updateRoom({
         variables: {
           updateRoomId: room.id,
-          updateRoomUsers: room.userIds,
+          updateRoomUsers: room.users,
           isShown: false,
           cards: room.cards,
           timer: {
@@ -143,6 +143,7 @@ export default function Room(props) {
     variables: { room: props.roomId },
   })
   useEffect(() => {
+    console.log(roomSubscription)
     if (roomSubscription.data) {
       const { roomUpdated } = roomSubscription.data
       // check to see if a user was deleted
@@ -167,7 +168,7 @@ export default function Room(props) {
       const updatedRoomData = {
         id: roomUpdated.id,
         host: roomUpdated.host.id,
-        userIds: roomUpdated.users.map((user) => {
+        users: roomUpdated.users.map((user) => {
           return user.id
         }),
         isShown: roomUpdated.isShown,
@@ -217,8 +218,9 @@ export default function Room(props) {
   }
 
   const onBootClick = async (playerId) => {
+    console.log(room)
     let playerIdToRemove = playerId || userId
-    const index = room.userIds.indexOf(playerIdToRemove)
+    const index = room.users.indexOf(playerIdToRemove)
 
     // if (globalUserId === playerId) {
     //   router.push({
@@ -227,7 +229,7 @@ export default function Room(props) {
     // }
 
     if (index > -1) {
-      let copiedRoomUserIds = [...room.userIds]
+      let copiedRoomUserIds = [...room.users]
       copiedRoomUserIds.splice(index, 1)
       try {
         // remove user from room
@@ -326,7 +328,7 @@ export default function Room(props) {
                     updateRoom({
                       variables: {
                         updateRoomId: room.id,
-                        updateRoomUsers: room.userIds,
+                        updateRoomUsers: room.users,
                         isShown: true,
                         timer: {
                           timestamp: room.timer.timestamp,
@@ -454,7 +456,7 @@ export async function getServerSideProps({ params, locale }) {
   const room = {
     id: roomInfo.id,
     host: roomInfo.host.id,
-    userIds: roomInfo.users.map((user) => {
+    users: roomInfo.users.map((user) => {
       return user.id
     }),
     isShown: roomInfo.isShown,
