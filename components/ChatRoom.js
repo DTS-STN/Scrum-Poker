@@ -109,6 +109,7 @@ export default function ChatRoom(props) {
               name={props.id}
               aria-label={props.t.placeholder}
               placeholder={props.t.placeholder}
+              autoComplete="off"
               className="appearance-none rounded-md border-gray-400 border w-full my-2 p-1 text-gray-700 leading-tight focus:outline-none focus:drop-shadow focus:ring-2 focus:ring-inset focus:ring-gray-600"
             />
           </div>
