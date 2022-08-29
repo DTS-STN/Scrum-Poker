@@ -26,6 +26,7 @@ const TimerSelect = (props) => {
         name="duration"
         id="duration-select"
         onChange={(e) => props.setDuration(parseFloat(e.target.value))}
+        defaultValue={props.duration / 60 / 1000}
       >
         {durationArray.map((duration, index) => (
           <option value={duration.value} key={index}>
@@ -44,6 +45,7 @@ const TimerContent = React.memo((props) => {
   if (props.isHost && props.timestamp === null) {
     return (
       <TimerSelect
+        duration={props.duration}
         setDuration={props.setDuration}
         timerLabels={props.timerLabels}
       />
@@ -76,7 +78,7 @@ const TimerButton = ({ buttonText, buttonType, handleStartTimerClick }) => {
   return (
     <button
       type="button"
-      className="w-auto px-2 ml-1 sm:text-base font-bold md:w-auto md:mt-0 sm:w-32 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
+      className="w-auto px-2 sm:text-base font-bold md:w-auto md:mt-0 sm:w-32 font-display ml-2 text-white bg-[#26374A] hover:bg-[#1C578A] active:bg-[#16446C] focus:bg-[#1C578A] rounded border border-[#091C2D] text-[12px]"
       onClick={() => handleStartTimerClick(buttonType)}
     >
       {buttonText}
@@ -123,7 +125,7 @@ export default function RoomInfo(props) {
   useEffect(() => {
     if (props.roomData.timer?.timestamp === null) {
       setButton(BUTTON_NAME.START)
-      setDuration(0.5)
+      setDuration(duration)
     }
   }, [props.roomData.timer])
 
@@ -136,8 +138,7 @@ export default function RoomInfo(props) {
       setButton(BUTTON_NAME.RESET)
     } else if (type === BUTTON_NAME.RESET.type) {
       timestamp = null
-      timerDuration = null
-      setDuration(0.5)
+      timerDuration = Number(duration)
       setButton(BUTTON_NAME.START)
     }
 
@@ -145,7 +146,7 @@ export default function RoomInfo(props) {
     props.updateRoom({
       variables: {
         updateRoomId: props.roomData.id,
-        updateRoomUsers: props.roomData.userIds,
+        updateRoomUsers: props.roomData.users,
         isShown: props.roomData.isShown,
         timer: {
           timestamp: timestamp ? timestamp.toString() : timestamp,
